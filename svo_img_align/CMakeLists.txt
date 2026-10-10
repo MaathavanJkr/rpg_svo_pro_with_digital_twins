@@ -1,8 +1,8 @@
+cmake_minimum_required(VERSION 3.16)
 project(svo_img_align)
-cmake_minimum_required(VERSION 2.8.3)
 
-find_package(catkin_simple)
-catkin_simple()
+find_package(ament_cmake_auto REQUIRED)
+ament_auto_find_build_dependencies()
 
 include(SvoSetup)
 
@@ -16,8 +16,7 @@ set(SOURCES_CPU
   src/sparse_img_align.cpp
   )
 
-cs_add_library(${PROJECT_NAME} ${SOURCES_CPU} ${HEADERS_CPU})
-target_link_libraries(${PROJECT_NAME} ${LINK_LIBS})
+ament_auto_add_library(${PROJECT_NAME} SHARED ${SOURCES_CPU} ${HEADERS_CPU})
+target_link_libraries(${PROJECT_NAME} ${SVO_SYSTEM_LIBRARIES})
 
-cs_install()
-cs_export()
+ament_auto_package()

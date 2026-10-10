@@ -141,14 +141,14 @@ class ParameterBlock
    * @param localParameterizationPtr The local parameterisation object to use.
    */
   virtual void setLocalParameterizationPtr(
-      const ceres::LocalParameterization* localParameterizationPtr)
+      const ceres::Manifold* localParameterizationPtr)
   {
     local_parameterization_ptr_ = localParameterizationPtr;
   }
   /**
    * @brief The local parameterisation object to use.
    */
-  virtual const ceres::LocalParameterization* localParameterizationPtr() const
+  virtual const ceres::Manifold* localParameterizationPtr() const
   {
     return local_parameterization_ptr_;
   }
@@ -162,7 +162,7 @@ class ParameterBlock
   /// @brief Whether or not this should be optimised at all (ceres::problem::setFixed)
   bool fixed_;
   /// @brief The local parameterisation object to use.
-  const ceres::LocalParameterization* local_parameterization_ptr_;
+  const ceres::Manifold* local_parameterization_ptr_;
 };
 
 }  // namespace ceres_backend

@@ -1,5 +1,6 @@
-#!/usr/bin/env python
-import rospy
+#!/usr/bin/env python3
+import rclpy
+from rclpy.node import Node
 import numpy as np
 import pickle
 import joblib
@@ -33,12 +34,12 @@ class GPSNoiseModelLoader:
         raise ValueError("Height out of range for the available models.")
 
 
-class HeightErrorNode:
+class HeightErrorNode(Node):
     def __init__(self):
-        rospy.init_node('height_error_estimator')
+        super().__init__('height_error_estimator')
 
-        config_path = rospy.get_param('~config_path')
-        folder = rospy.get_param("gps_noise_model_folder")
+        config_path = self.declare_parameter('config_path', '').value
+        folder = self.declare_parameter('gps_noise_model_folder', '').value
 
         with open(config_path, 'r') as config_file:
             config = yaml.safe_load(config_file)
@@ -57,15 +58,19 @@ class HeightErrorNode:
         self.n_sat_gp_classifier = joblib.load(self.n_sat_model_path)
         self.n_sat_scaler = joblib.load(self.n_sat_scaler_path)
 
-        self.error_publisher = rospy.Publisher(self.pseudorange_error_topic, DoubleArrayMsg, queue_size=1)
-        self.nsat_publisher = rospy.Publisher(self.number_of_satellite_topic, IntMsg, queue_size=1)
-        self.ground_truth_subscriber = rospy.Subscriber(self.ground_truth_topic, PoseStamped, self.ground_truth_callback)
+        self.error_publisher = self.create_publisher(DoubleArrayMsg, self.pseudorange_error_topic, 1)
+        self.nsat_publisher = self.create_publisher(IntMsg, self.number_of_satellite_topic, 1)
+        self.ground_truth_subscriber = self.create_subscription(
+            PoseStamped, self.ground_truth_topic, self.ground_truth_callback, 10)
 
-        self.last_time_called = rospy.Time.now().to_sec()
+        self.last_time_called = self.now_sec()
         self.callback_interval = 0.5 
 
+    def now_sec(self) -> float:
+        return self.get_clock().now().nanoseconds * 1e-9
+
     def ground_truth_callback(self, msg: PoseStamped):
-        current_time = rospy.Time.now().to_sec()
+        current_time = self.now_sec()
         if current_time - self.last_time_called < self.callback_interval:
             return
         self.last_time_called = current_time
@@ -93,21 +98,29 @@ class HeightErrorNode:
 
     def publish_errors(self, errors):
         error_msg = DoubleArrayMsg(
-            header=Header(stamp=rospy.Time.now(), frame_id='error_frame'),
-            data=errors
+            header=Header(stamp=self.get_clock().now().to_msg(), frame_id='error_frame'),
+            data=[float(e) for e in errors]
         )
         self.error_publisher.publish(error_msg)
 
     def publish_nsat(self, nsat: int):
         nsat_msg = IntMsg(
-            header=Header(stamp=rospy.Time.now(), frame_id='nsat_frame'),
-            data=Int32(data=nsat)
+            header=Header(stamp=self.get_clock().now().to_msg(), frame_id='nsat_frame'),
+            data=Int32(data=int(nsat))
         )
         self.nsat_publisher.publish(nsat_msg)
 
-if __name__ == '__main__':
+def main():
+    rclpy.init()
+    node = HeightErrorNode()
     try:
-        HeightErrorNode()
-        rospy.spin()
-    except rospy.ROSInterruptException:
+        rclpy.spin(node)
+    except KeyboardInterrupt:
         pass
+    finally:
+        node.destroy_node()
+        rclpy.try_shutdown()
+
+
+if __name__ == '__main__':
+    main()

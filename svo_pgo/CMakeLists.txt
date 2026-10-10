@@ -1,10 +1,11 @@
+cmake_minimum_required(VERSION 3.16)
 project(svo_pgo)
-cmake_minimum_required(VERSION 2.8.3)
 
-find_package(catkin_simple REQUIRED)
-catkin_simple()
+find_package(ament_cmake_auto REQUIRED)
+ament_auto_find_build_dependencies()
 
 include(SvoSetup)
+find_package(Ceres REQUIRED)
 
 set(HEADERS
   include/svo/pgo/pgo.h
@@ -14,11 +15,12 @@ set(SOURCES
   src/pgo.cpp
   )
 
-#add_executable(svo_online_loopclosing ${SOURCES} ${HEADERS})
-cs_add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+ament_auto_add_library(${PROJECT_NAME} SHARED ${SOURCES} ${HEADERS})
+target_link_libraries(${PROJECT_NAME} Ceres::ceres ${SVO_SYSTEM_LIBRARIES})
 
-cs_add_executable(test_pgo test/test.cpp)
-target_link_libraries(test_pgo ${PROJECT_NAME})
+if(BUILD_TESTING)
+  add_executable(test_pgo test/test.cpp)
+  target_link_libraries(test_pgo ${PROJECT_NAME})
+endif()
 
-cs_install()
-cs_export()
+ament_auto_package()

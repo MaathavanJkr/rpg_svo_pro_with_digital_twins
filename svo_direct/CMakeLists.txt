@@ -1,9 +1,8 @@
+cmake_minimum_required(VERSION 3.16)
 project(svo_direct)
-cmake_minimum_required(VERSION 2.8.3)
 
-find_package(catkin_simple REQUIRED)
-catkin_simple(ALL_DEPS_REQUIRED)
-find_package(OpenCV REQUIRED)
+find_package(ament_cmake_auto REQUIRED)
+ament_auto_find_build_dependencies()
 
 include(SvoSetup)
 
@@ -32,34 +31,30 @@ set(SOURCES
   src/elder_zucker.cpp
   )
 
-cs_add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS})
-target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBRARIES})
-
-cs_add_executable(svo_test_patch_score test/test_patch_score.cpp)
-target_link_libraries(svo_test_patch_score ${PROJECT_NAME})
-
-cs_add_executable(svo_test_edgelet_direction test/test_edgelet_direction.cpp)
-target_link_libraries(svo_test_edgelet_direction ${PROJECT_NAME})
-
-cs_add_executable(svo_test_edgelet_extraction test/test_edgelet_extraction.cpp)
-target_link_libraries(svo_test_edgelet_extraction ${PROJECT_NAME})
-
-cs_add_executable(svo_test_feature_alignment test/test_feature_alignment.cpp)
-target_link_libraries(svo_test_feature_alignment ${PROJECT_NAME})
+ament_auto_add_library(${PROJECT_NAME} SHARED ${SOURCES} ${HEADERS})
+target_link_libraries(${PROJECT_NAME} ${SVO_SYSTEM_LIBRARIES})
 
 ################################################################################
-###
-### GTEST
-###
+# TESTS
+if(BUILD_TESTING)
+  find_package(ament_cmake_gtest REQUIRED)
+  find_package(ament_index_cpp REQUIRED)
 
-catkin_add_gtest(${PROJECT_NAME}-test-depth-estimation
-  test/test_depth_estimation.cpp
-  test/test_utils.h
-)
-target_link_libraries(${PROJECT_NAME}-test-depth-estimation ${PROJECT_NAME} pthread)
+  foreach(test_name svo_test_patch_score svo_test_edgelet_direction
+          svo_test_edgelet_extraction svo_test_feature_alignment)
+    string(REPLACE "svo_test_" "test/test_" test_src ${test_name})
+    add_executable(${test_name} ${test_src}.cpp)
+    target_link_libraries(${test_name} ${PROJECT_NAME} ament_index_cpp::ament_index_cpp)
+  endforeach()
 
+  ament_add_gtest(${PROJECT_NAME}-test-depth-estimation
+    test/test_depth_estimation.cpp
+    test/test_utils.h
+  )
+  target_link_libraries(${PROJECT_NAME}-test-depth-estimation ${PROJECT_NAME}
+    ament_index_cpp::ament_index_cpp pthread)
+  svo_link_test_deps(${PROJECT_NAME}-test-depth-estimation)
+endif()
 
 ################################################################################
-cs_install()
-cs_export()
-
+ament_auto_package()

@@ -1,8 +1,7 @@
 import numpy as np
-import rosbag
+from vikit_py.rosbag_utils import BagReader, BagWriter, stamp_to_sec, sec_to_stamp  # ROS 2 bags (ROS 1: rosbag/rospy)
 from geometry_msgs.msg import PointStamped, PoseStamped
 import matplotlib.pyplot as plt
-import rospy 
 from mpl_toolkits.mplot3d import Axes3D
 import open3d as o3d
 
@@ -27,12 +26,12 @@ def read_trajectory(bag, topic_2):
     orientations = []
     for topic, msg, t in bag.read_messages(topics=[topic_2]):
         if topic == '/ENU_gps':
-            timestamps.append(msg.header.stamp.to_sec())
+            timestamps.append(stamp_to_sec(msg.header.stamp))
             points.append(np.array([msg.pose.position.x, msg.pose.position.y, msg.pose.position.z]))
         elif topic == '/col_T_enu_b':
-            if(msg.header.stamp.to_sec() >25100):
+            if(stamp_to_sec(msg.header.stamp) >25100):
                 break
-            timestamps.append(msg.header.stamp.to_sec())
+            timestamps.append(stamp_to_sec(msg.header.stamp))
             orientations.append(np.array([msg.pose.orientation.x, msg.pose.orientation.y, msg.pose.orientation.z, msg.pose.orientation.w]))
             points.append(np.array([msg.pose.position.x, msg.pose.position.y, msg.pose.position.z]))
     return np.array(timestamps), np.array(points), np.array(orientations)
@@ -141,7 +140,7 @@ if __name__ == "__main__":
     topic_raw_gps = '/gps'
     output_bag_file = "/home/roxane/PaperData/RW/Dataset/Flight4.bag" #/home/roxane/elios3_2706/EL300825315585_01645_214_1flight/Bags/Flight4_v2.bag" #'/home/roxane/SVO_MR_DATA/Oerlikon/elios4.bag' # ¼/home/roxane/SVO_MR_DATA/Oerlikon/VINS_Fusion/elios2.bag' #/home/roxane/SVO_MR_DATA/Oerlikon/VINS_Fusion/elios2.bag' #/home/roxane/ros_ws/src/svo_mr_utility/Elios3Utiityv2/Data/flight_data_vins_TA__.bag'
 
-    bag = rosbag.Bag(bag_file)
+    bag = BagReader(bag_file)
     
     timestamps1, points1, _ = read_trajectory(bag, topic1)
     timestamps2, points2, orientations2 = read_trajectory(bag, topic2)
@@ -160,7 +159,7 @@ if __name__ == "__main__":
     # plt.show()
 
     #write back to bag file
-    with rosbag.Bag(output_bag_file, 'w') as outbag:
+    with BagWriter(output_bag_file) as outbag:
 
         for p, time in zip(points1, timestamps1):
             e,n,u = p
@@ -175,19 +174,19 @@ if __name__ == "__main__":
             # if (time+best_offset < 140):
             #     continue
 
-            pose_msg.header.stamp = rospy.Time.from_sec(time + best_offset)
+            pose_msg.header.stamp = sec_to_stamp(time + best_offset)
             pose_msg.header.frame_id = 'world'
             pose_msg.pose.position.x = e
             pose_msg.pose.position.y = n
             pose_msg.pose.position.z = u
             pose_msg.pose.orientation.w = 1
 
-            outbag.write('/ENU_GPS_t0', pose_msg, rospy.Time.from_sec(time + best_offset))
+            outbag.write('/ENU_GPS_t0', pose_msg, sec_to_stamp(time + best_offset))
 
         for point, orientation, time in zip(points2, orientations2, timestamps2):
             e,n,u = point
             pose_msg = PoseStamped()
-            pose_msg.header.stamp = rospy.Time.from_sec(time)
+            pose_msg.header.stamp = sec_to_stamp(time)
             pose_msg.header.frame_id = 'world'
             pose_msg.pose.position.x = e
             pose_msg.pose.position.y = n
@@ -198,19 +197,19 @@ if __name__ == "__main__":
             pose_msg.pose.orientation.z = orientation[2]
 
 
-            outbag.write('/ENU_Lidar_VIO_t0', pose_msg, rospy.Time.from_sec(time))
+            outbag.write('/ENU_Lidar_VIO_t0', pose_msg, sec_to_stamp(time))
 
-        with rosbag.Bag(bag_file, 'r') as bag:
+        with BagReader(bag_file) as bag:
             for topic, msg, t in bag.read_messages():
                 if(topic == '/ENU_gps' or topic == '/ENU_lidar_vio'):
                     continue
 
                 if(topic == '/gps_t'):
-                    if (msg.header.stamp.to_sec() + best_offset <= 120):
+                    if (stamp_to_sec(msg.header.stamp) + best_offset <= 120):
                         continue
             
-                    t = rospy.Time.from_sec(msg.header.stamp.to_sec() + best_offset)
-                    if (t.to_sec() > timestamps2[-1]):
+                    t = sec_to_stamp(stamp_to_sec(msg.header.stamp) + best_offset)
+                    if (stamp_to_sec(t) > timestamps2[-1]):
                         continue
 
                     msg.header.stamp = t
@@ -218,7 +217,7 @@ if __name__ == "__main__":
                     continue
 
                 outbag.write(topic, msg, t)
-                print(t.to_sec())
+                print(stamp_to_sec(t))
 
 
     bag.close()

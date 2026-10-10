@@ -57,15 +57,14 @@ bool PoseLocalParameterization::Plus(const double* x, const double* delta,
 }
 
 // Computes the minimal difference between a variable x and a perturbed variable x_plus_delta.
-bool PoseLocalParameterization::Minus(const double* x,
-                                      const double* x_plus_delta,
-                                      double* delta) const
+bool PoseLocalParameterization::Minus(const double* y, const double* x,
+                                      double* y_minus_x) const
 {
-  return minus(x, x_plus_delta, delta);
+  return minus(x, y, y_minus_x);
 }
 
 // Computes the Jacobian from minimal space to naively overparameterised space as used by ceres.
-bool PoseLocalParameterization::ComputeLiftJacobian(const double* x,
+bool PoseLocalParameterization::MinusJacobian(const double* x,
                                                     double* jacobian) const
 {
   return liftJacobian(x, jacobian);
@@ -185,7 +184,7 @@ bool PoseLocalParameterization::liftJacobian(const double* x,
 }
 
 // The jacobian of Plus(x, delta) w.r.t delta at delta = 0.
-bool PoseLocalParameterization::ComputeJacobian(const double* x,
+bool PoseLocalParameterization::PlusJacobian(const double* x,
                                                 double* jacobian) const
 {
   return plusJacobian(x, jacobian);

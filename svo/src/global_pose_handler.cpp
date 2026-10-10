@@ -6,6 +6,7 @@
 
 #include <numeric>
 
+#include <svo/common/logging.h>
 #include <vikit/math_utils.h>
 #include <vikit/csv_utils.h>
 #include <vikit/timer.h>
@@ -492,7 +493,7 @@ bool GlobalPoseHandler::alignFrames() {
     if(!estimateTransformation(T_w_vio_)){
       return false;
     } else {
-      ROS_INFO_STREAM("World to local transform estimated! Global measurements can now be added to the optimization");
+      SVO_INFO_STREAM("World to local transform estimated! Global measurements can now be added to the optimization");
       return true;
     }
   }

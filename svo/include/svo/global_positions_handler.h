@@ -12,9 +12,6 @@
 
 #include <fstream>
 
-#include <ros/ros.h>
-#include <geometry_msgs/PoseStamped.h>
-#include <tf/transform_broadcaster.h>
 
 
 // for the gps 

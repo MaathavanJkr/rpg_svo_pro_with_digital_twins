@@ -1,6 +1,5 @@
 #include <svo_ros/svo_interface.h>
 
-#include <ros/callback_queue.h>
 
 #include <svo_ros/svo_factory.h>
 #include <svo_ros/visualizer.h>
@@ -21,10 +20,9 @@
 #include <message_filters/synchronizer.h>
 #include <message_filters/sync_policies/exact_time.h>
 #include <message_filters/sync_policies/approximate_time.h>
-#include <image_transport/subscriber_filter.h>
-#include <image_transport/image_transport.h>
-#include <sensor_msgs/image_encodings.h>
-#include <cv_bridge/cv_bridge.h>
+#include <image_transport/image_transport.hpp>
+#include <sensor_msgs/image_encodings.hpp>
+#include <cv_bridge/cv_bridge.hpp>
 #include <vikit/params_helper.h>
 #include <vikit/timer.h>
 #include <svo_ros/ceres_backend_factory.h>
@@ -37,12 +35,6 @@
 #include <GeographicLib/Geocentric.hpp>
 #include <GeographicLib/LocalCartesian.hpp>
 
-#ifdef SVO_USE_GTSAM_BACKEND
-#include <svo_ros/backend_factory.h>
-#include <svo/backend/backend_interface.h>
-#include <svo/backend/backend_optimizer.h>
-#endif
-
 #ifdef SVO_LOOP_CLOSING
 #include <svo/online_loopclosing/loop_closing.h>
 #endif
@@ -53,12 +45,24 @@
 
 namespace svo {
 
+namespace {
+
+int64_t toNSec(const builtin_interfaces::msg::Time& stamp)
+{
+  return rclcpp::Time(stamp).nanoseconds();
+}
+
+double toSec(const builtin_interfaces::msg::Time& stamp)
+{
+  return rclcpp::Time(stamp).seconds();
+}
+
+} // namespace
+
 SvoInterface::SvoInterface(
     const PipelineType& pipeline_type,
-    const ros::NodeHandle& nh,
-    const ros::NodeHandle& private_nh)
-  : nh_(nh)
-  , pnh_(private_nh)
+    const rclcpp::Node::SharedPtr& node)
+  : pnh_(node)
   , pipeline_type_(pipeline_type)
   , set_initial_attitude_from_gravity_(
       vk::param<bool>(pnh_, "set_initial_attitude_from_gravity", true))
@@ -146,15 +150,6 @@ SvoInterface::SvoInterface(
     }
 
   }
-#ifdef SVO_USE_GTSAM_BACKEND
-  if(vk::param<bool>(pnh_, "use_backend", false))
-  {
-    backend_interface_ = svo::backend_factory::makeBackend(pnh_);
-    ceres_backend_publisher_.reset(new CeresBackendPublisher(svo_->options_.trace_dir, pnh_));
-    svo_->setBundleAdjuster(backend_interface_);
-    backend_interface_->imu_handler_ = imu_handler_;
-  }
-#endif
   if(vk::param<bool>(pnh_, "runlc", false))
   {
     LOG(FATAL) << "Loop closure is not supported in this version of SVO!";
@@ -232,6 +227,7 @@ void SvoInterface::processImageBundle(
       {
         svo_->setBundleAdjuster(ceres_backend_interface_);
         ceres_backend_interface_->setImu(imu_handler_);
+        std::lock_guard<std::mutex> lock(ros_entities_mutex_);
         ceres_backend_interface_->makePublisher(pnh_, ceres_backend_publisher_);
       }
       else
@@ -335,21 +331,6 @@ void SvoInterface::publishResults(
       LOG(FATAL) << "Unknown stage";
       break;
   }
-
-#ifdef SVO_USE_GTSAM_BACKEND
-  if(svo_->stage() == Stage::kTracking && backend_interface_)
-  {
-    if(svo_->getLastFrames()->isKeyframe())
-    {
-      std::lock_guard<std::mutex> estimate_lock(backend_interface_->optimizer_->estimate_mut_);
-      const gtsam::Values& state = backend_interface_->optimizer_->estimate_;
-      // ceres_backend_publisher_->visualizeFrames(state);
-      if(backend_interface_->options_.add_imu_factors)
-        ceres_backend_publisher_->visualizeVelocity(state);
-      ceres_backend_publisher_->visualizePoints(state);
-    }
-  }
-#endif
 }
 
 bool SvoInterface::setImuPrior(const int64_t timestamp_nanoseconds)
@@ -403,7 +384,7 @@ bool SvoInterface::setImuPrior(const int64_t timestamp_nanoseconds)
   return true;
 }
 
-void SvoInterface::monoCallback(const sensor_msgs::ImageConstPtr& msg)
+void SvoInterface::monoCallback(const sensor_msgs::msg::Image::ConstSharedPtr& msg)
 {
   if(idle_) {
     return;
@@ -417,23 +398,24 @@ void SvoInterface::monoCallback(const sensor_msgs::ImageConstPtr& msg)
   }
   catch (cv_bridge::Exception& e)
   {
-    ROS_ERROR("cv_bridge exception: %s", e.what());
+    RCLCPP_ERROR(pnh_->get_logger(), "cv_bridge exception: %s", e.what());
   }
 
   std::vector<cv::Mat> images;
   images.push_back(image.clone());
 
-  if(!setImuPrior(msg->header.stamp.toNSec()))
+  const int64_t stamp_ns = toNSec(msg->header.stamp);
+  if(!setImuPrior(stamp_ns))
   {
     VLOG(0) << "Could not align gravity! Attempting again in next iteration.";
     return;
   }
 
-  imageCallbackPreprocessing(msg->header.stamp.toNSec()); // does nothing for now 
+  imageCallbackPreprocessing(stamp_ns); // does nothing for now
 
-  processImageBundle(images, msg->header.stamp.toNSec());
+  processImageBundle(images, stamp_ns);
 
-  publishResults(images, msg->header.stamp.toNSec());
+  publishResults(images, stamp_ns);
 
   if(svo_->stage() == Stage::kPaused && automatic_reinitialization_)
     svo_->start();
@@ -442,8 +424,8 @@ void SvoInterface::monoCallback(const sensor_msgs::ImageConstPtr& msg)
 }
 
 void SvoInterface::stereoCallback(
-    const sensor_msgs::ImageConstPtr& msg0,
-    const sensor_msgs::ImageConstPtr& msg1)
+    const sensor_msgs::msg::Image::ConstSharedPtr& msg0,
+    const sensor_msgs::msg::Image::ConstSharedPtr& msg1)
 {
   if(idle_)
     return;
@@ -453,19 +435,20 @@ void SvoInterface::stereoCallback(
     img0 = cv_bridge::toCvShare(msg0, "mono8")->image;
     img1 = cv_bridge::toCvShare(msg1, "mono8")->image;
   } catch (cv_bridge::Exception& e) {
-    ROS_ERROR("cv_bridge exception: %s", e.what());
+    RCLCPP_ERROR(pnh_->get_logger(), "cv_bridge exception: %s", e.what());
   }
 
-  if(!setImuPrior(msg0->header.stamp.toNSec()))
+  const int64_t stamp_ns = toNSec(msg0->header.stamp);
+  if(!setImuPrior(stamp_ns))
   {
     VLOG(3) << "Could not align gravity! Attempting again in next iteration.";
     return;
   }
 
-  imageCallbackPreprocessing(msg0->header.stamp.toNSec()); //does nothing 
+  imageCallbackPreprocessing(stamp_ns); //does nothing
 
-  processImageBundle({img0, img1}, msg0->header.stamp.toNSec());
-  publishResults({img0, img1}, msg0->header.stamp.toNSec());
+  processImageBundle({img0, img1}, stamp_ns);
+  publishResults({img0, img1}, stamp_ns);
 
   if(svo_->stage() == Stage::kPaused && automatic_reinitialization_) {
     std::cout << "(re)start of svo" << std::endl;
@@ -475,13 +458,13 @@ void SvoInterface::stereoCallback(
   imageCallbackPostprocessing(); // does nothing 
 }
 
-void SvoInterface::imuCallback(const sensor_msgs::ImuConstPtr& msg)
+void SvoInterface::imuCallback(const sensor_msgs::msg::Imu::ConstSharedPtr& msg)
 {
   const Eigen::Vector3d omega_imu(
         msg->angular_velocity.x, msg->angular_velocity.y, msg->angular_velocity.z);
   const Eigen::Vector3d lin_acc_imu(
         msg->linear_acceleration.x, msg->linear_acceleration.y, msg->linear_acceleration.z);
-  const ImuMeasurement m(msg->header.stamp.toSec(), omega_imu, lin_acc_imu);
+  const ImuMeasurement m(toSec(msg->header.stamp), omega_imu, lin_acc_imu);
   if(imu_handler_){
     imu_handler_->addImuMeasurement(m);
   }
@@ -489,11 +472,11 @@ void SvoInterface::imuCallback(const sensor_msgs::ImuConstPtr& msg)
     SVO_ERROR_STREAM("SvoNode has no ImuHandler");
 }
 
-void SvoInterface::globalpositionsCallback(const geometry_msgs::PoseStampedConstPtr& msg)
+void SvoInterface::globalpositionsCallback(const geometry_msgs::msg::PoseStamped::ConstSharedPtr& msg)
 {
   // Recieved in WORLD frame
   const Eigen::Vector3d position(msg->pose.position.x, msg->pose.position.y, msg->pose.position.z);
-  const GpMeasurement m(msg->header.stamp.toSec(), position);
+  const GpMeasurement m(toSec(msg->header.stamp), position);
 
   if((globalpositions_handler_))
   {
@@ -553,7 +536,7 @@ void SvoInterface::globalpositionsCallback(const geometry_msgs::PoseStampedConst
     SVO_ERROR_STREAM("SvoNode has no Global Position Handler");
 }
 
-void SvoInterface::globalposeCallback(const geometry_msgs::PoseWithCovarianceStampedPtr& msg)
+void SvoInterface::globalposeCallback(const geometry_msgs::msg::PoseWithCovarianceStamped::ConstSharedPtr& msg)
 {  
   if(globalpose_handler_)
   {
@@ -565,7 +548,7 @@ void SvoInterface::globalposeCallback(const geometry_msgs::PoseWithCovarianceSta
         for (int j = 0; j < 6; ++j) 
             information(i, j) = msg->pose.covariance[i * 6 + j];
     }
-    const GposeMeasurement m(msg->header.stamp.toSec(), position, orientation, information);
+    const GposeMeasurement m(toSec(msg->header.stamp), position, orientation, information);
 
     if(globalpose_handler_->readInitialPose())
     {
@@ -582,7 +565,7 @@ void SvoInterface::globalposeCallback(const geometry_msgs::PoseWithCovarianceSta
         } else {
 
           // Get svo estimation in local frame
-          double t_mr = msg->header.stamp.toSec();
+          double t_mr = toSec(msg->header.stamp);
           Transformation svo_T_LB; 
           if(ceres_backend_interface_->getPoseAtKFatTimestamp(t_mr, &svo_T_LB)) {
             GposeMeasurement m_vio(t_mr, svo_T_LB.getPosition(), Eigen::Quaterniond::Identity());
@@ -607,7 +590,7 @@ void SvoInterface::globalposeCallback(const geometry_msgs::PoseWithCovarianceSta
 
 }
 
-void SvoInterface::inputKeyCallback(const std_msgs::StringConstPtr& key_input)
+void SvoInterface::inputKeyCallback(const std_msgs::msg::String::ConstSharedPtr& key_input)
 {
   std::string remote_input = key_input->data;
   char input = remote_input.c_str()[0];
@@ -670,94 +653,127 @@ void SvoInterface::subscribeImage()
 
 void SvoInterface::subscribeRemoteKey()
 {
+  std::lock_guard<std::mutex> lock(ros_entities_mutex_);
   std::string remote_key_topic = vk::param<std::string>(pnh_, "remote_key_topic", "svo/remote_key");
-  sub_remote_key_ =
-      nh_.subscribe(remote_key_topic, 5, &svo::SvoInterface::inputKeyCallback, this);
+  sub_remote_key_ = pnh_->create_subscription<std_msgs::msg::String>(
+      remote_key_topic, 5,
+      std::bind(&svo::SvoInterface::inputKeyCallback, this, std::placeholders::_1));
+}
+
+void SvoInterface::spinCallbackGroup(const rclcpp::CallbackGroup::SharedPtr& group)
+{
+  rclcpp::executors::SingleThreadedExecutor executor;
+  executor.add_callback_group(group, pnh_->get_node_base_interface());
+  while(rclcpp::ok() && !quit_)
+  {
+    executor.spin_once(std::chrono::milliseconds(100));
+  }
 }
 
 void SvoInterface::imuLoop() // callback to read all new imu measurements 
 {
   SVO_INFO_STREAM("SvoNode: Started IMU loop.");
-  ros::NodeHandle nh;
-  ros::CallbackQueue queue;
-  nh.setCallbackQueue(&queue);
-  std::string imu_topic = vk::param<std::string>(pnh_, "imu_topic", "/kingfisher/agiros_pilot/sensors/clean_imu");
-  ros::Subscriber sub_imu = nh.subscribe(imu_topic, 10, &svo::SvoInterface::imuCallback, this);
-
-  while(ros::ok() && !quit_)
+  rclcpp::CallbackGroup::SharedPtr group;
+  rclcpp::Subscription<sensor_msgs::msg::Imu>::SharedPtr sub_imu;
   {
-    queue.callAvailable(ros::WallDuration(0.1));
+    std::lock_guard<std::mutex> lock(ros_entities_mutex_);
+    group = pnh_->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
+    rclcpp::SubscriptionOptions options;
+    options.callback_group = group;
+    std::string imu_topic = vk::param<std::string>(pnh_, "imu_topic", "/kingfisher/agiros_pilot/sensors/clean_imu");
+    // Large queue: IMU messages are cheap and must not be dropped.
+    sub_imu = pnh_->create_subscription<sensor_msgs::msg::Imu>(
+        imu_topic, rclcpp::QoS(1000),
+        std::bind(&svo::SvoInterface::imuCallback, this, std::placeholders::_1), options);
   }
+  spinCallbackGroup(group);
 }
 
 void SvoInterface::globalpositionsLoop() // callback to read all new gp measurements 
 {
   SVO_INFO_STREAM("SvoNode: Started Global Positions loop.");
-  ros::NodeHandle nh;
-  ros::CallbackQueue queue;
-  nh.setCallbackQueue(&queue);
-  std::string gp_topic = vk::param<std::string>(pnh_, "gp_topic", "/gps") ; 
-  ros::Subscriber sub_gp = nh.subscribe(gp_topic, 5, &svo::SvoInterface::globalpositionsCallback, this);
-  while(ros::ok() && !quit_)
+  rclcpp::CallbackGroup::SharedPtr group;
+  rclcpp::Subscription<geometry_msgs::msg::PoseStamped>::SharedPtr sub_gp;
   {
-    queue.callAvailable(ros::WallDuration(0.1));
+    std::lock_guard<std::mutex> lock(ros_entities_mutex_);
+    group = pnh_->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
+    rclcpp::SubscriptionOptions options;
+    options.callback_group = group;
+    std::string gp_topic = vk::param<std::string>(pnh_, "gp_topic", "/gps") ; 
+    sub_gp = pnh_->create_subscription<geometry_msgs::msg::PoseStamped>(
+        gp_topic, 5,
+        std::bind(&svo::SvoInterface::globalpositionsCallback, this, std::placeholders::_1), options);
   }
+  spinCallbackGroup(group);
 }
 
 void SvoInterface::globalposeLoop() // callback to read all new gp measurements 
 {
-  SVO_INFO_STREAM("SvoNode: Started Global Positions loop.");
-  ros::NodeHandle nh;
-  ros::CallbackQueue queue;
-  nh.setCallbackQueue(&queue);
-  std::string gpose_topic = vk::param<std::string>(pnh_, "map_alignement_T_w_b", "/mr");
-  ros::Subscriber sub_gp = nh.subscribe(gpose_topic, 5, &svo::SvoInterface::globalposeCallback, this);
-  while(ros::ok() && !quit_)
+  SVO_INFO_STREAM("SvoNode: Started Global Pose loop.");
+  rclcpp::CallbackGroup::SharedPtr group;
+  rclcpp::Subscription<geometry_msgs::msg::PoseWithCovarianceStamped>::SharedPtr sub_gpose;
   {
-    queue.callAvailable(ros::WallDuration(0.1));
+    std::lock_guard<std::mutex> lock(ros_entities_mutex_);
+    group = pnh_->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
+    rclcpp::SubscriptionOptions options;
+    options.callback_group = group;
+    std::string gpose_topic = vk::param<std::string>(pnh_, "map_alignement_T_w_b", "/mr");
+    sub_gpose = pnh_->create_subscription<geometry_msgs::msg::PoseWithCovarianceStamped>(
+        gpose_topic, 5,
+        std::bind(&svo::SvoInterface::globalposeCallback, this, std::placeholders::_1), options);
   }
+  spinCallbackGroup(group);
 }
 
 void SvoInterface::monoLoop()
 {
   SVO_INFO_STREAM("SvoNode: Started Image loop.");
 
-  ros::NodeHandle nh;
-  ros::CallbackQueue queue;
-  nh.setCallbackQueue(&queue);
-
-  image_transport::ImageTransport it(nh);
-  std::string image_topic = vk::param<std::string>(pnh_, "cam0_topic", "/img_0");
-  image_transport::Subscriber it_sub = it.subscribe(image_topic, 5, &svo::SvoInterface::monoCallback, this);
-
-  while(ros::ok() && !quit_)
+  rclcpp::CallbackGroup::SharedPtr group;
+  image_transport::Subscriber it_sub;
   {
-    queue.callAvailable(ros::WallDuration(0.1));
+    std::lock_guard<std::mutex> lock(ros_entities_mutex_);
+    group = pnh_->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
+    rclcpp::SubscriptionOptions options;
+    options.callback_group = group;
+    rmw_qos_profile_t qos = rmw_qos_profile_default;
+    qos.depth = 5;
+    std::string image_topic = vk::param<std::string>(pnh_, "cam0_topic", "/img_0");
+    it_sub = image_transport::create_subscription(
+        pnh_.get(), image_topic,
+        std::bind(&svo::SvoInterface::monoCallback, this, std::placeholders::_1),
+        "raw", qos, options);
   }
+  spinCallbackGroup(group);
 }
 
 void SvoInterface::stereoLoop()
 {
-  typedef message_filters::sync_policies::ExactTime<sensor_msgs::Image, sensor_msgs::Image> ExactPolicy;
+  typedef message_filters::sync_policies::ExactTime<sensor_msgs::msg::Image, sensor_msgs::msg::Image> ExactPolicy;
   typedef message_filters::Synchronizer<ExactPolicy> ExactSync;
 
-  ros::NodeHandle nh(nh_, "image_thread");
-  ros::CallbackQueue queue;
-  nh.setCallbackQueue(&queue);
-
-  // subscribe to cam msgs
-  std::string cam0_topic(vk::param<std::string>(pnh_, "cam0_topic", "/img0"));
-  std::string cam1_topic(vk::param<std::string>(pnh_, "cam1_topic", "/img1"));
-  image_transport::ImageTransport it(nh);
-  image_transport::SubscriberFilter sub0(it, cam0_topic, 1, std::string("raw"));
-  image_transport::SubscriberFilter sub1(it, cam1_topic, 1, std::string("raw"));
-  ExactSync sync_sub(ExactPolicy(5), sub0, sub1);
-  sync_sub.registerCallback(boost::bind(&svo::SvoInterface::stereoCallback, this, _1, _2));
-
-  while(ros::ok() && !quit_)
+  rclcpp::CallbackGroup::SharedPtr group;
+  message_filters::Subscriber<sensor_msgs::msg::Image> sub0;
+  message_filters::Subscriber<sensor_msgs::msg::Image> sub1;
   {
-    queue.callAvailable(ros::WallDuration(0.1));
+    std::lock_guard<std::mutex> lock(ros_entities_mutex_);
+    group = pnh_->create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
+    rclcpp::SubscriptionOptions options;
+    options.callback_group = group;
+    rmw_qos_profile_t qos = rmw_qos_profile_default;
+    qos.depth = 1;
+
+    // subscribe to cam msgs
+    std::string cam0_topic(vk::param<std::string>(pnh_, "cam0_topic", "/img0"));
+    std::string cam1_topic(vk::param<std::string>(pnh_, "cam1_topic", "/img1"));
+    sub0.subscribe(pnh_.get(), cam0_topic, qos, options);
+    sub1.subscribe(pnh_.get(), cam1_topic, qos, options);
   }
+  ExactSync sync_sub(ExactPolicy(5), sub0, sub1);
+  sync_sub.registerCallback(std::bind(&svo::SvoInterface::stereoCallback, this,
+                                      std::placeholders::_1, std::placeholders::_2));
+
+  spinCallbackGroup(group);
 }
 
 } // namespace svo

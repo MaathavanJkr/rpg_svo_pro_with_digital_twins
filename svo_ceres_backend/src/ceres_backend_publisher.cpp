@@ -1,13 +1,6 @@
 #include "svo/ceres_backend_publisher.hpp"
 
-#include <geometry_msgs/PoseWithCovarianceStamped.h>
-#include <svo_msgs/PoseWithCloud.h>
-
-#include <geometry_msgs/PoseStamped.h>
-#include <visualization_msgs/Marker.h>
-
-#include <vikit/output_helper.h>
-#include <vikit/params_helper.h>
+#include <pcl_conversions/pcl_conversions.h>
 
 namespace
 {
@@ -30,19 +23,20 @@ void normalizeVector(const std::vector<T>& in, std::vector<float>* out)
 namespace svo
 {
 CeresBackendPublisher::CeresBackendPublisher(
-    const ros::NodeHandle& nh_private,
+    const rclcpp::Node::SharedPtr& nh_private,
     const std::shared_ptr<ceres_backend::Map>& map_ptr)
   : pnh_(nh_private)
   , map_ptr_(map_ptr)
 {
-  pub_vio_imu_pose_ = pnh_.advertise<geometry_msgs::PoseWithCovarianceStamped>("vio_backend_pose_imu", 10);
-  pub_vio_imu_pose_viz_ =  pnh_.advertise<geometry_msgs::PoseStamped>("vio_backend_pose_imu_viz", 10);
-  pub_vio_points_ = pnh_.advertise<PointCloud>("vio_backend_points", 10);
-  pub_w_imu_pose_ = pnh_.advertise<geometry_msgs::PoseWithCovarianceStamped>("w_backend_pose_imu", 10);
-  pub_w_imu_pose_viz_ =  pnh_.advertise<geometry_msgs::PoseStamped>("w_backend_pose_imu_viz", 10);
-  pub_w_points_ = pnh_.advertise<PointCloud>("w_backend_points", 10);
+  // Topics live in the node's namespace (the ROS 1 private namespace "~", e.g. /svo/...).
+  pub_vio_imu_pose_ = pnh_->create_publisher<geometry_msgs::msg::PoseWithCovarianceStamped>("~/vio_backend_pose_imu", 10);
+  pub_vio_imu_pose_viz_ = pnh_->create_publisher<geometry_msgs::msg::PoseStamped>("~/vio_backend_pose_imu_viz", 10);
+  pub_vio_points_ = pnh_->create_publisher<sensor_msgs::msg::PointCloud2>("~/vio_backend_points", 10);
+  pub_w_imu_pose_ = pnh_->create_publisher<geometry_msgs::msg::PoseWithCovarianceStamped>("~/w_backend_pose_imu", 10);
+  pub_w_imu_pose_viz_ = pnh_->create_publisher<geometry_msgs::msg::PoseStamped>("~/w_backend_pose_imu_viz", 10);
+  pub_w_points_ = pnh_->create_publisher<sensor_msgs::msg::PointCloud2>("~/w_backend_points", 10);
 
-  pub_w_pose_points_ = pnh_.advertise<svo_msgs::PoseWithCloud>("w_backend_pose_points", 1);
+  pub_w_pose_points_ = pnh_->create_publisher<svo_msgs::msg::PoseWithCloud>("~/w_backend_pose_points", 1);
 }
 
 void CeresBackendPublisher::publish(const ViNodeState& state,
@@ -68,11 +62,11 @@ void CeresBackendPublisher::publishImuPose(const ViNodeState& state,
     state_frame_id_ = BundleId(seq);
   }
 
-  size_t w_n_pose_sub = pub_w_imu_pose_.getNumSubscribers();
-  size_t w_n_pose_viz_sub = pub_w_imu_pose_viz_.getNumSubscribers();
+  size_t w_n_pose_sub = pub_w_imu_pose_->get_subscription_count();
+  size_t w_n_pose_viz_sub = pub_w_imu_pose_viz_->get_subscription_count();
 
-  size_t vio_n_pose_sub = pub_vio_imu_pose_.getNumSubscribers();
-  size_t vio_n_pose_viz_sub = pub_vio_imu_pose_viz_.getNumSubscribers();
+  size_t vio_n_pose_sub = pub_vio_imu_pose_->get_subscription_count();
+  size_t vio_n_pose_viz_sub = pub_vio_imu_pose_viz_->get_subscription_count();
   if (w_n_pose_sub == 0 && w_n_pose_viz_sub == 0 && vio_n_pose_sub == 0 && vio_n_pose_viz_sub == 0)
   {
     return;
@@ -92,44 +86,43 @@ void CeresBackendPublisher::publishImuPose(const ViNodeState& state,
   Eigen::Quaterniond w_q_temp = T_world_temp.getRotation().toImplementation();
   Eigen::Vector3d w_p_temp = T_world_temp.getPosition();
 
-  ros::Time time = ros::Time().fromNSec(timestamp);
+  const rclcpp::Time time(timestamp);
 
   if (vio_n_pose_sub > 0)
   {
-    geometry_msgs::PoseWithCovarianceStamped msg_pose = makePoseWithCovarianceMsg(vio_q, vio_p, time, seq, kVIOFrame);
-    pub_vio_imu_pose_.publish(msg_pose);
+    geometry_msgs::msg::PoseWithCovarianceStamped msg_pose = makePoseWithCovarianceMsg(vio_q, vio_p, time, seq, kVIOFrame);
+    pub_vio_imu_pose_->publish(msg_pose);
   }
 
   if (vio_n_pose_viz_sub > 0)
   {
-    geometry_msgs::PoseStamped msg_pose = makePoseMsg(vio_q, vio_p, time, seq, kVIOFrame);
-    pub_vio_imu_pose_viz_.publish(msg_pose);
+    geometry_msgs::msg::PoseStamped msg_pose = makePoseMsg(vio_q, vio_p, time, seq, kVIOFrame);
+    pub_vio_imu_pose_viz_->publish(msg_pose);
   }
 
   if(transform_world_vio_initialized) {
     if (w_n_pose_sub > 0)
     {
-      geometry_msgs::PoseWithCovarianceStamped msg_pose = makePoseWithCovarianceMsg(w_q, w_p, time, seq, kWorldFrame);
-      pub_w_imu_pose_.publish(msg_pose);
+      geometry_msgs::msg::PoseWithCovarianceStamped msg_pose = makePoseWithCovarianceMsg(w_q, w_p, time, seq, kWorldFrame);
+      pub_w_imu_pose_->publish(msg_pose);
     }
 
     if (w_n_pose_viz_sub > 0)
     {
-      geometry_msgs::PoseStamped msg_pose = makePoseMsg(w_q, w_p, time, seq, kWorldFrame);
-      pub_w_imu_pose_viz_.publish(msg_pose);
+      geometry_msgs::msg::PoseStamped msg_pose = makePoseMsg(w_q, w_p, time, seq, kWorldFrame);
+      pub_w_imu_pose_viz_->publish(msg_pose);
     }
   }
 
 }
 
-geometry_msgs::PoseWithCovarianceStamped CeresBackendPublisher::makePoseWithCovarianceMsg(
+geometry_msgs::msg::PoseWithCovarianceStamped CeresBackendPublisher::makePoseWithCovarianceMsg(
     const Eigen::Quaterniond& q,
     const Eigen::Vector3d& p,
-    const ros::Time& time,
-    int32_t seq, const std::string& frame_id)
+    const rclcpp::Time& time,
+    int32_t /*seq*/, const std::string& frame_id)
 {
-  geometry_msgs::PoseWithCovarianceStamped msg_pose; //(      new geometry_msgs::PoseWithCovarianceStamped);
-  msg_pose.header.seq = seq;
+  geometry_msgs::msg::PoseWithCovarianceStamped msg_pose;
   msg_pose.header.stamp = time;
   msg_pose.header.frame_id = frame_id;
   msg_pose.pose.pose.position.x = p[0];
@@ -144,13 +137,12 @@ geometry_msgs::PoseWithCovarianceStamped CeresBackendPublisher::makePoseWithCova
   return msg_pose;
 }
 
-geometry_msgs::PoseStamped CeresBackendPublisher::makePoseMsg(const Eigen::Quaterniond& q,
+geometry_msgs::msg::PoseStamped CeresBackendPublisher::makePoseMsg(const Eigen::Quaterniond& q,
     const Eigen::Vector3d& p,
-    const ros::Time& time,
-    int32_t seq, const std::string& frame_id) 
+    const rclcpp::Time& time,
+    int32_t /*seq*/, const std::string& frame_id)
 {
-    geometry_msgs::PoseStamped msg_pose; //(new geometry_msgs::PoseStamped);
-    msg_pose.header.seq = seq;
+    geometry_msgs::msg::PoseStamped msg_pose;
     msg_pose.header.stamp = time;
     msg_pose.header.frame_id = frame_id;
     msg_pose.pose.position.x = p[0];
@@ -168,7 +160,11 @@ geometry_msgs::PoseStamped CeresBackendPublisher::makePoseMsg(const Eigen::Quate
 void CeresBackendPublisher::publishBackendLandmarks( 
     const ViNodeState& state, const int64_t timestamp, bool last_f_is_KF, const int32_t seq) 
 {
-  if ((pub_vio_points_.getNumSubscribers() == 0) && (pub_w_points_.getNumSubscribers() == 0))
+  // Note: the registration node only listens to w_backend_pose_points, so it must be
+  // taken into account here (in ROS 1 this only worked when e.g. RViz subscribed to the points).
+  if ((pub_vio_points_->get_subscription_count() == 0) &&
+      (pub_w_points_->get_subscription_count() == 0) &&
+      (pub_w_pose_points_->get_subscription_count() == 0))
   {
     return;
   }
@@ -201,9 +197,8 @@ void CeresBackendPublisher::publishBackendLandmarks(
 
   // point clound to publish
   PointCloud pc;
-  ros::Time pub_time;
-  pub_time.fromNSec(timestamp);
-  pcl_conversions::toPCL(pub_time, pc.header.stamp);
+  const rclcpp::Time pub_time(timestamp);
+  pc.header.stamp = static_cast<uint64_t>(timestamp / 1000);  // PCL stamps are in microseconds
   pc.header.frame_id = kVIOFrame;
   pc.reserve(n_pts);
   for(size_t i = 0; i < landmark_pointers.size(); i++)
@@ -216,12 +211,14 @@ void CeresBackendPublisher::publishBackendLandmarks(
     pt.z = p[2];
     pc.push_back(pt);
   }
-  pub_vio_points_.publish(pc);
+  sensor_msgs::msg::PointCloud2 vio_points_msg;
+  pcl::toROSMsg(pc, vio_points_msg);
+  pub_vio_points_->publish(vio_points_msg);
 
   if(transform_world_vio_initialized && last_f_is_KF) {
     pc.clear();
     pc.header.frame_id = kWorldFrame;
-    pcl_conversions::toPCL(pub_time, pc.header.stamp);
+    pc.header.stamp = static_cast<uint64_t>(timestamp / 1000);
     pc.reserve(n_pts);
 
     for(size_t i = 0; i < landmark_pointers.size(); i++)
@@ -238,10 +235,12 @@ void CeresBackendPublisher::publishBackendLandmarks(
       pc.push_back(pt);
 
     }
-    pub_w_points_.publish(pc);
+    sensor_msgs::msg::PointCloud2 w_points_msg;
+    pcl::toROSMsg(pc, w_points_msg);
+    pub_w_points_->publish(w_points_msg);
 
     // Custom pose + pointcloud message encapsuling everything the registration needs
-    svo_msgs::PoseWithCloud msg_pose_lm;
+    svo_msgs::msg::PoseWithCloud msg_pose_lm;
     msg_pose_lm.header.stamp = pub_time ; 
     msg_pose_lm.header.frame_id = kWorldFrame;
     msg_pose_lm.initial_refinement = T_w_vio_Refined;
@@ -261,9 +260,9 @@ void CeresBackendPublisher::publishBackendLandmarks(
     Transformation T_world = T_w_vio_ * T_vio;
     Eigen::Quaterniond w_q = T_world.getRotation().toImplementation();
     Eigen::Vector3d w_p = T_world.getPosition();
-    geometry_msgs::PoseStamped msg_pose = makePoseMsg(w_q, w_p, pub_time, seq, kWorldFrame);
+    geometry_msgs::msg::PoseStamped msg_pose = makePoseMsg(w_q, w_p, pub_time, seq, kWorldFrame);
     msg_pose_lm.pose = msg_pose;
-    pub_w_pose_points_.publish(msg_pose_lm);
+    pub_w_pose_points_->publish(msg_pose_lm);
 
 
   }

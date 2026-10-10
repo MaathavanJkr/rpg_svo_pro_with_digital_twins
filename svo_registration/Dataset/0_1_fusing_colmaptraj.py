@@ -37,11 +37,11 @@
 # #     return traj
 
 # def save_to_rosbag(file_path, traj1, traj2, combined_traj):
-#     bag = rosbag.Bag(file_path, 'w')
+#     bag = BagWriter(file_path)
 #     try:
 #         for _, row in traj1.iterrows():
 #             pose = PoseStamped()
-#             pose.header.stamp = rospy.Time.from_sec(row['timestamp'])
+#             pose.header.stamp = sec_to_stamp(row['timestamp'])
 #             pose.pose.position.x = row['tx']
 #             pose.pose.position.y = row['ty']
 #             pose.pose.position.z = row['tz']
@@ -53,7 +53,7 @@
         
 #         for _, row in traj2.iterrows():
 #             pose = PoseStamped()
-#             pose.header.stamp = rospy.Time.from_sec(row['timestamp'])
+#             pose.header.stamp = sec_to_stamp(row['timestamp'])
 #             pose.pose.position.x = row['tx']
 #             pose.pose.position.y = row['ty']
 #             pose.pose.position.z = row['tz']
@@ -65,7 +65,7 @@
         
 #         for _, row in combined_traj.iterrows():
 #             pose = PoseStamped()
-#             pose.header.stamp = rospy.Time.from_sec(row['timestamp'])
+#             pose.header.stamp = sec_to_stamp(row['timestamp'])
 #             pose.pose.position.x = row['tx']
 #             pose.pose.position.y = row['ty']
 #             pose.pose.position.z = row['tz']
@@ -102,9 +102,8 @@
 import pandas as pd
 import numpy as np
 from scipy.spatial.transform import Rotation as R
-import rosbag
+from vikit_py.rosbag_utils import BagReader, BagWriter, stamp_to_sec, sec_to_stamp  # ROS 2 bags (ROS 1: rosbag/rospy)
 from geometry_msgs.msg import PoseStamped
-import rospy
 
 def load_trajectory(file_path):
     df = pd.read_csv(file_path, sep=" ", comment='#', header=None, names=["timestamp", "tx", "ty", "tz", "qx", "qy", "qz", "qw"])
@@ -136,11 +135,11 @@ def apply_transformation(traj, scale, translation, rotation):
     return traj
 
 def save_to_rosbag(file_path, traj1, traj2, combined_traj):
-    bag = rosbag.Bag(file_path, 'w')
+    bag = BagWriter(file_path)
     try:
         for _, row in traj1.iterrows():
             pose = PoseStamped()
-            pose.header.stamp = rospy.Time.from_sec(row['timestamp'])
+            pose.header.stamp = sec_to_stamp(row['timestamp'])
             pose.pose.position.x = row['tx']
             pose.pose.position.y = row['ty']
             pose.pose.position.z = row['tz']
@@ -152,7 +151,7 @@ def save_to_rosbag(file_path, traj1, traj2, combined_traj):
         
         for _, row in traj2.iterrows():
             pose = PoseStamped()
-            pose.header.stamp = rospy.Time.from_sec(row['timestamp'])
+            pose.header.stamp = sec_to_stamp(row['timestamp'])
             pose.pose.position.x = row['tx']
             pose.pose.position.y = row['ty']
             pose.pose.position.z = row['tz']
@@ -164,7 +163,7 @@ def save_to_rosbag(file_path, traj1, traj2, combined_traj):
         
         for _, row in combined_traj.iterrows():
             pose = PoseStamped()
-            pose.header.stamp = rospy.Time.from_sec(row['timestamp'])
+            pose.header.stamp = sec_to_stamp(row['timestamp'])
             pose.pose.position.x = row['tx']
             pose.pose.position.y = row['ty']
             pose.pose.position.z = row['tz']

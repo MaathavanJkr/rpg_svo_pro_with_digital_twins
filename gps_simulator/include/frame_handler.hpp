@@ -1,7 +1,6 @@
 #ifndef FRAME_HANDLER_HPP
 #define FRAME_HANDLER_HPP
 
-#include <ros/ros.h>
 
 
 #include "constellation.hpp"
@@ -15,8 +14,6 @@
 #include <GeographicLib/UTMUPS.hpp>
 #include <GeographicLib/Geocentric.hpp>
 #include <limits>
-#include <geometry_msgs/PoseStamped.h>         
-#include <geometry_msgs/PointStamped.h>         
 #include <GeographicLib/LocalCartesian.hpp>
 #include <yaml-cpp/yaml.h>
 

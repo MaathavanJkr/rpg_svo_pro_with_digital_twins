@@ -1,9 +1,14 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import argparse
 import os
-import rospkg
 import shutil
+
+
+def benchmarking_dir():
+    """svo_benchmarking source folder (ROS 1: rospkg.RosPack().get_path('svo_benchmarking'))."""
+    return os.environ.get('SVO_BENCHMARKING_DIR', os.path.dirname(
+        os.path.dirname(os.path.realpath(__file__))))
 
 
 if __name__ == '__main__':
@@ -21,8 +26,7 @@ if __name__ == '__main__':
                         action='store_true')
     args = parser.parse_args()
 
-    results_top = os.path.join(rospkg.RosPack().get_path(
-        'svo_benchmarking'), 'results')
+    results_top = os.path.join(benchmarking_dir(), 'results')
     print("Top directory for results is {0}".format(results_top))
 
     results_from = os.path.join(results_top, args.results_dir)

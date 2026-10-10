@@ -10,7 +10,7 @@ def get_num_monte_carlo(trace_dir):
     exp_param_fn = os.path.join(trace_dir, "experiment.yaml")
     assert os.path.exists(exp_param_fn),\
         "{0} does not exist".format(exp_param_fn)
-    exp_params = yaml.load(open(exp_param_fn, 'r'))
+    exp_params = yaml.safe_load(open(exp_param_fn, 'r'))
     assert 'num_monte_carlo_runs' in exp_params
     return exp_params['num_monte_carlo_runs']
 

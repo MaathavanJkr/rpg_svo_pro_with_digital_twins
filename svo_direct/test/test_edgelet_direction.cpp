@@ -1,8 +1,8 @@
 #include <gflags/gflags.h>
-#include <ros/package.h>
 
 // svo
 #include <svo/test_utils/synthetic_dataset.h>
+#include <svo/test_utils/test_utils.h>
 #include <svo/common/frame.h>
 #include <svo/common/camera.h>
 #include <svo/direct/matcher.h>
@@ -20,7 +20,7 @@ using namespace svo;
 void test()
 {
   // Load dataset.
-  std::string dataset_dir = ros::package::getPath("rpg_datasets")+"/rpg_urban_pinhole";
+  std::string dataset_dir = svo::test_utils::getRpgDatasetsDir()+"/rpg_urban_pinhole";
   svo::test_utils::SyntheticDataset dataset(dataset_dir, 0, 0);
 
   // Load detector.

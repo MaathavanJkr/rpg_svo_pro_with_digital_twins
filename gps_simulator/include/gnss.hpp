@@ -1,7 +1,8 @@
 #ifndef GPS_SIM_HPP
 #define GPS_SIM_HPP
 
-#include <ros/ros.h>
+#include <mutex>
+#include <rclcpp/rclcpp.hpp>
 #include "constellation.hpp"
 #include <Eigen/Dense>
 #include <vector>
@@ -11,8 +12,8 @@
 #include <fstream>
 #include <string>
 #include <limits>
-#include <geometry_msgs/PoseStamped.h>         
-#include <geometry_msgs/PointStamped.h>         
+#include <geometry_msgs/msg/pose_stamped.hpp>
+#include <geometry_msgs/msg/point_stamped.hpp>
 #include <GeographicLib/LocalCartesian.hpp>
 #include <yaml-cpp/yaml.h>
 #include <thread>
@@ -22,7 +23,7 @@ class Emitter;
 
 class GNSS {
 public:
-    GNSS(const std::string& constallation_config_fn, const std::string& reciever_config_fn, ros::NodeHandle& nh) ;
+    GNSS(const std::string& constallation_config_fn, const std::string& reciever_config_fn, const rclcpp::Node::SharedPtr& nh) ;
 
     ~GNSS();
 
@@ -37,11 +38,11 @@ public:
     Eigen::Vector3d linearization_Point;
 
 private:
-    ros::NodeHandle nh_; 
+    rclcpp::Node::SharedPtr nh_;
     
     Eigen::Vector3d Initial_ECEF;
-    ros::Subscriber receiver_enu_gt_sub;
-    ros::Publisher ecef_receiver_gt_pub;
+    rclcpp::Subscription<geometry_msgs::msg::PoseStamped>::SharedPtr receiver_enu_gt_sub;
+    rclcpp::Publisher<geometry_msgs::msg::PointStamped>::SharedPtr ecef_receiver_gt_pub;
 
     std::thread processing_thread;
     std::mutex emitters_mtx; 
@@ -50,7 +51,7 @@ private:
 
     void EphemerisLoop();
 
-    void groundtruthCallback(const geometry_msgs::PoseStamped::ConstPtr& msg);   
+    void groundtruthCallback(const geometry_msgs::msg::PoseStamped::ConstSharedPtr& msg);   
 
 };
 

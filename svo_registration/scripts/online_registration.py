@@ -1,63 +1,67 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import argparse
-import rospy
+import sys
+import rclpy
+from rclpy.executors import ExternalShutdownException
+from rclpy.node import Node
+from rclpy.utilities import remove_ros_args
+from rclpy.qos import QoSProfile, DurabilityPolicy
 import open3d as o3d
 import numpy as np
 from sensor_msgs.msg import PointCloud2
-from sensor_msgs import point_cloud2
+from sensor_msgs_py import point_cloud2
 from std_msgs.msg import Header
 from geometry_msgs.msg import PoseWithCovarianceStamped
 import transforms3d as t3d
-import tf.transformations
 import math
 from threading import Lock
-import threading
 import yaml
 from svo_msgs.msg import PoseWithCloud
-from std_srvs.srv import Empty, EmptyResponse
+from std_srvs.srv import Empty
 
 DEFAULT_VOXEL_SIZE = 0.1
 WORLD_FRAME_ID = "world"
 
-class CityMapRegistrator:
+class CityMapRegistrator(Node):
 
     def __init__(self, config_file, reference_map):
+        super().__init__('map_registration_node')
         self.lock = Lock()
         print(f"READING FROM {reference_map}")
         self.load_config(config_file,reference_map)
         self.init_ros_nodes()
-        self.republish_service = rospy.Service('/visualize_city_twin', Empty, self.republish_city_twin)
+        self.republish_service = self.create_service(Empty, '/visualize_city_twin', self.republish_city_twin)
         self.registration_estimate = np.eye(4)
 
-    def republish_city_twin(self, request):
-        rospy.loginfo("Re-publishing point clouds on demand.")
+    def republish_city_twin(self, request, response):
+        self.get_logger().info("Re-publishing point clouds on demand.")
         self.publish_city_twin()
-        return EmptyResponse()
+        return response
     
     def publish_city_twin(self):
         point_cloud_msg = self.pc_to_ros_pointcloud2(self.city_twin)
-        point_cloud_msg.header.stamp = rospy.Time.now()
+        point_cloud_msg.header.stamp = self.get_clock().now().to_msg()
         point_cloud_msg.header.frame_id = WORLD_FRAME_ID
         self.city_twin_publisher.publish(point_cloud_msg)
 
     def init_ros_nodes(self):
-        rospy.init_node('map_registration_node', anonymous=True)
-
-        self.w_svo_pose_point_est_sub = rospy.Subscriber("/svo/w_backend_pose_points", PoseWithCloud, self.svo_reg_callback, queue_size=1)
-        self.registered_point_cloud_pub = rospy.Publisher("/svo/w_backend_points_registered", PointCloud2, queue_size=1)
-        self.registration_T_w_b_pub = rospy.Publisher("/svo/w_registrated_pose", PoseWithCovarianceStamped, queue_size=1)
-        self.city_twin_publisher = rospy.Publisher('/city_twin', PointCloud2, queue_size=1, latch=True)
+        self.w_svo_pose_point_est_sub = self.create_subscription(PoseWithCloud, "/svo/w_backend_pose_points", self.svo_reg_callback, 1)
+        self.registered_point_cloud_pub = self.create_publisher(PointCloud2, "/svo/w_backend_points_registered", 1)
+        self.registration_T_w_b_pub = self.create_publisher(PoseWithCovarianceStamped, "/svo/w_registrated_pose", 1)
+        # Transient local durability replaces the ROS 1 latched publisher.
+        latched_qos = QoSProfile(depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL)
+        self.city_twin_publisher = self.create_publisher(PointCloud2, '/city_twin', latched_qos)
 
     def load_config(self, config_file,reference_map):
         try :
             with open(config_file, 'r') as file:
                 config = yaml.safe_load(file)['registration_settings']
         except FileNotFoundError:
-            rospy.logerr(f"Configuration file not found: {config_file}")
-            rospy.signal_shutdown("Shutting down due to missing config file.")
+            self.get_logger().error(f"Configuration file not found: {config_file}")
+            raise SystemExit("Shutting down due to missing config file.")
         except yaml.YAMLError as e:
-            rospy.logerr(f"Error loading YAML configuration: {str(e)}")
-            rospy.signal_shutdown("Shutting down due to YAML error.")
+            self.get_logger().error(f"Error loading YAML configuration: {str(e)}")
+            raise SystemExit("Shutting down due to YAML error.")
     
         self.valid = True
         self.scale_factor_position = config['scale_factor_position']
@@ -76,7 +80,10 @@ class CityMapRegistrator:
         try :
             point_cloud = o3d.io.read_point_cloud(ply_file_path)
         except FileNotFoundError:
-            rospy.logerr(f"Reference map not found: {ply_file_path}")
+            self.get_logger().error(f"Reference map not found: {ply_file_path}")
+        if point_cloud.is_empty():
+            self.get_logger().error(f"Reference map not found or empty: {ply_file_path}")
+            raise SystemExit("Shutting down due to missing reference map.")
 
         points = np.asarray(point_cloud.points)
 
@@ -143,9 +150,9 @@ class CityMapRegistrator:
         rotation_matrix = registration_est[:3, :3]
         translation_vector = registration_est[:3, 3]
         
-        quaternion = tf.transformations.quaternion_from_matrix(
-            np.vstack([np.hstack([rotation_matrix, [[0], [0], [0]]]), [0, 0, 0, 1]])
-        )
+        # transforms3d returns [w, x, y, z]; reorder to [x, y, z, w] (tf.transformations convention).
+        q_wxyz = t3d.quaternions.mat2quat(rotation_matrix)
+        quaternion = np.array([q_wxyz[1], q_wxyz[2], q_wxyz[3], q_wxyz[0]])
         
         norm = np.linalg.norm(quaternion)
         if norm != 1:
@@ -153,7 +160,7 @@ class CityMapRegistrator:
 
         pose_msg.pose.pose.position.x, pose_msg.pose.pose.position.y, pose_msg.pose.pose.position.z = translation_vector
         pose_msg.pose.pose.orientation.x, pose_msg.pose.pose.orientation.y, pose_msg.pose.pose.orientation.z, pose_msg.pose.pose.orientation.w = quaternion
-        pose_msg.pose.covariance = tuple(informations.flatten())
+        pose_msg.pose.covariance = informations.flatten().astype(np.float64)
 
         return pose_msg
     
@@ -178,9 +185,8 @@ class CityMapRegistrator:
         return target_point_cloud
     
     def filter_local_map(self, msg, T_world_body):
-        input_points = np.asarray(
-            list(point_cloud2.read_points(msg.point_cloud, skip_nans=True, field_names=("x", "y", "z")))
-        )
+        input_points = point_cloud2.read_points_numpy(
+            msg.point_cloud, skip_nans=True, field_names=("x", "y", "z")).astype(np.float64)
         min_point, max_point = T_world_body[:3, 3] - self.size_bounding_box, T_world_body[:3, 3] + self.size_bounding_box
         filtered_points = input_points[np.all((input_points >= min_point) & (input_points <= max_point), axis=1)]
 
@@ -249,17 +255,24 @@ class CityMapRegistrator:
 
 if __name__ == '__main__':
 
+    rclpy.init(args=sys.argv)
     parser = argparse.ArgumentParser(description="Node to register local point cloud to the city twin.")
     parser.add_argument('--config-file', type=str) 
     parser.add_argument('--reference-map', type=str) 
     # args = parser.parse_args()
-    args, unknown = parser.parse_known_args()
+    args, unknown = parser.parse_known_args(remove_ros_args(sys.argv)[1:])
 
     processor = CityMapRegistrator(args.config_file, args.reference_map)
-    rospy.loginfo("CityMapRegistrator node started. Waiting for messages...")
+    processor.get_logger().info("CityMapRegistrator node started. Waiting for messages...")
     try:
-        pointcloud_thread = threading.Thread(target=processor.publish_city_twin)
-        pointcloud_thread.start()
-        rospy.spin()
-    except rospy.ROSInterruptException:
-        rospy.loginfo("PointCloudProcessor node shutdown.")
+        processor.publish_city_twin()
+        rclpy.spin(processor)
+    except (KeyboardInterrupt, ExternalShutdownException):
+        pass
+    finally:
+        print("PointCloudProcessor node shutdown.")
+        try:
+            processor.destroy_node()
+            rclpy.try_shutdown()
+        except KeyboardInterrupt:
+            pass

@@ -1,10 +1,9 @@
 run with:
 
-    rosrun rqt_svo rqt_svo
+    ros2 run rqt_svo rqt_svo
 
-or start `rqt` and display the widget.
+or start `rqt` and display the widget (Plugins > Svo).
 
 If it does not work, try this:
 
-    rm ~/.config/ros.org/rqt_gui.ini
-    rqt
+    rqt --force-discover

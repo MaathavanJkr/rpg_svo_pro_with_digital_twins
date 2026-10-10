@@ -8,12 +8,10 @@ From a elios3 bag need to :
 - add GPS ???
 """
 
-import rospy
-import rosbag
+from vikit_py.rosbag_utils import BagReader, BagWriter, stamp_to_sec, sec_to_stamp  # ROS 2 bags (ROS 1: rosbag/rospy)
 from sensor_msgs.msg import CompressedImage, Image
 from cv_bridge import CvBridge
 import cv2
-import rosbag
 import numpy as np
 from sensor_msgs.msg import Imu
 from geometry_msgs.msg import PoseStamped, Point, Quaternion
@@ -36,14 +34,14 @@ output_bag_path = '/home/roxane/elios3_2706/EL300825315585_01644_213_2hand/Calib
 bridge = CvBridge()
 excluded_topics = ['/sensors', '/camera_1', '/camera_0', '/control', '/alert', '/kalman_scan2map_node', '/os_node', '/obc_communication_node', '/communication', '/dvs', '/flight/', '/vio_module/health_telemetry',  '/robot/devices', '/vio/odometry_fast', '/camera_2/camera_state']
 
-with rosbag.Bag(output_bag_path, 'w') as outbag:
-    for topic, msg, t in rosbag.Bag(input_bag_path).read_messages():
+with BagWriter(output_bag_path) as outbag:
+    for topic, msg, t in BagReader(input_bag_path).read_messages():
         if topic == "/camera_2/image_raw/compressed" and msg._type == "sensor_msgs/CompressedImage":
             cv_image = bridge.compressed_imgmsg_to_cv2(msg, desired_encoding="passthrough")
             image_msg = bridge.cv2_to_imgmsg(cv_image, encoding="mono8")
             image_msg.header = msg.header  # Preserve timestamp and frame_id
             outbag.write("/camera_2/image_raw", image_msg, t)
-            print(t.to_sec())
+            print(stamp_to_sec(t))
         elif topic == '/vio/odometry':
             pose_msg = PoseStamped()
             pose_msg.header = msg.header

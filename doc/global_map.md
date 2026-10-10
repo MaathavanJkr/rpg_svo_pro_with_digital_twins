@@ -16,12 +16,12 @@ Note that the global map function is only tested with monocular configuration an
 
 Source the workspace first:
 ```sh
-source ~/svo_ws/devel/setup.bash
+source ~/svo_ws/install/setup.bash
 ```
 Executing
 ```
-roslaunch svo_ros euroc_global_map_mono.launch
-rosbag play MH_03_medium.bag -s 15
+ros2 launch svo_ros euroc_global_map_mono.launch.py
+ros2 bag play MH_03_medium --start-offset 15
 ```
 You should see some visualization as below:
 

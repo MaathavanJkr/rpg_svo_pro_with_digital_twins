@@ -1,8 +1,8 @@
+cmake_minimum_required(VERSION 3.16)
 project(vikit_cameras)
-cmake_minimum_required (VERSION 2.8.3)
 
-find_package(catkin_simple REQUIRED)
-catkin_simple(ALL_DEPS_REQUIRED)
+find_package(ament_cmake_auto REQUIRED)
+ament_auto_find_build_dependencies()
 
 include(SvoSetup)
 
@@ -40,19 +40,17 @@ set(SOURCES
   src/ncamera_yaml_serialization.cpp
   )
 
-cs_add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS})
-target_link_libraries(${PROJECT_NAME} yaml-cpp)
+ament_auto_add_library(${PROJECT_NAME} SHARED ${SOURCES} ${HEADERS})
+target_link_libraries(${PROJECT_NAME} ${SVO_SYSTEM_LIBRARIES})
 
 ################################################################################
 # Tests
-
-catkin_add_gtest(${PROJECT_NAME}_tests
-  test/test_cameras
-)
-target_link_libraries(${PROJECT_NAME}_tests ${PROJECT_NAME})
+if(BUILD_TESTING)
+  find_package(ament_cmake_gtest REQUIRED)
+  ament_add_gtest(${PROJECT_NAME}_tests test/test_cameras.cpp)
+  target_link_libraries(${PROJECT_NAME}_tests ${PROJECT_NAME})
+  svo_link_test_deps(${PROJECT_NAME}_tests)
+endif()
 
 ################################################################################
-# Install
-
-cs_install()
-cs_export()
+ament_auto_package()

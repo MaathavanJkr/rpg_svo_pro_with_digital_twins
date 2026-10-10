@@ -1,12 +1,20 @@
-#!/usr/bin/env python
+from setuptools import setup
 
-from distutils.core import setup
-from catkin_pkg.python_setup import generate_distutils_setup
+package_name = 'svo_benchmarking'
 
-d = generate_distutils_setup(
-    packages=['svo_benchmarking'],
-    package_dir={'': 'src'},
-    install_requires=['rospkg', 'yaml']
-    )
-
-setup(**d)
+setup(
+    name=package_name,
+    version='0.0.0',
+    package_dir={package_name: 'src/svo_ceres_benchmarking'},
+    packages=[package_name],
+    data_files=[
+        ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
+        ('share/' + package_name, ['package.xml']),
+    ],
+    install_requires=['setuptools'],
+    zip_safe=True,
+    maintainer='Zichao Zhang',
+    maintainer_email='zzhang@ifi.uzh.ch',
+    description='svo_benchmarking utils',
+    license='BSD',
+)

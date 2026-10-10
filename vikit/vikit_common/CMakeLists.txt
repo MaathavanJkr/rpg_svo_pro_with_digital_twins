@@ -1,9 +1,8 @@
+cmake_minimum_required(VERSION 3.16)
 project(vikit_common)
-cmake_minimum_required(VERSION 2.8.3)
 
-find_package(catkin_simple REQUIRED)
-catkin_simple(ALL_DEPS_REQUIRED)
-find_package(OpenCV REQUIRED)
+find_package(ament_cmake_auto REQUIRED)
+ament_auto_find_build_dependencies()
 
 include(SvoSetup)
 
@@ -38,24 +37,28 @@ set(SOURCES
   )
 
 # Create vikit shared library
-cs_add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS})
-target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBRARIES})
+ament_auto_add_library(${PROJECT_NAME} SHARED ${SOURCES} ${HEADERS})
+target_link_libraries(${PROJECT_NAME} ${SVO_SYSTEM_LIBRARIES})
+
 ################################################################################
 # Unit tests
-catkin_add_gtest(homography test/test_homography.cpp)
-target_link_libraries(homography gtest ${PROJECT_NAME})
+if(BUILD_TESTING)
+  find_package(ament_cmake_gtest REQUIRED)
+  ament_add_gtest(homography test/test_homography.cpp)
+  target_link_libraries(homography ${PROJECT_NAME})
+  svo_link_test_deps(homography)
 
-catkin_add_gtest(math_utils test/test_math_utils.cpp)
-target_link_libraries(math_utils gtest ${PROJECT_NAME})
+  ament_add_gtest(math_utils test/test_math_utils.cpp)
+  target_link_libraries(math_utils ${PROJECT_NAME})
+  svo_link_test_deps(math_utils)
+
+  # Other tests
+  add_executable(vikit_test_timer test/test_timer.cpp)
+  target_link_libraries(vikit_test_timer ${PROJECT_NAME})
+
+  add_executable(vikit_test_common test/test_common.cpp)
+  target_link_libraries(vikit_test_common ${PROJECT_NAME})
+endif()
 
 ################################################################################
-# Other tests
-cs_add_executable(vikit_test_timer test/test_timer.cpp)
-target_link_libraries(vikit_test_timer ${PROJECT_NAME})
-
-cs_add_executable(vikit_test_common test/test_common.cpp)
-target_link_libraries(vikit_test_common ${PROJECT_NAME})
-
-################################################################################
-cs_install()
-cs_export()
+ament_auto_package()

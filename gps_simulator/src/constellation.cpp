@@ -1,12 +1,12 @@
 #include "constellation.hpp"
 
-Constellation::Constellation(const std::string& filename, ros::NodeHandle& nh) {
+Constellation::Constellation(const std::string& filename, rclcpp::Node* nh) {
     YAML::Node config = YAML::LoadFile(filename);
     int numSatellites = config["sqrt_sa"].size(); // Assuming this represents the number of satellites
 
     for (int i = 0; i < numSatellites; i++) {
         SatelliteParam sat_param(filename, i);
-        satellites.emplace_back(nh, ros::Time::now().toSec(), sat_param);
+        satellites.emplace_back(nh, nh->now().seconds(), sat_param);
     }
 }
 

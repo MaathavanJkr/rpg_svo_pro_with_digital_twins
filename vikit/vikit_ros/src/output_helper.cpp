@@ -10,44 +10,52 @@
 #include <Eigen/SVD>
 #include <glog/logging.h>
 #include <vikit/output_helper.h>
-#include <visualization_msgs/Marker.h>
+#include <geometry_msgs/msg/point.hpp>
+#include <geometry_msgs/msg/transform_stamped.hpp>
 
 namespace vk {
 namespace output_helper {
 
 void publishTfTransform(
     const Transformation& T,
-    const ros::Time& stamp,
+    const rclcpp::Time& stamp,
     const string& frame_id,
     const string& child_frame_id,
-    tf::TransformBroadcaster& br)
+    tf2_ros::TransformBroadcaster& br)
 {
-  tf::Transform transform_msg;
+  geometry_msgs::msg::TransformStamped transform_msg;
   const Eigen::Quaterniond& q = T.getRotation().toImplementation();
-  transform_msg.setOrigin(tf::Vector3(T.getPosition().x(), T.getPosition().y(), T.getPosition().z()));
-  tf::Quaternion tf_q; tf_q.setX(q.x()); tf_q.setY(q.y()); tf_q.setZ(q.z()); tf_q.setW(q.w());
-  transform_msg.setRotation(tf_q);
-  br.sendTransform(tf::StampedTransform(transform_msg, stamp, frame_id, child_frame_id));
+  transform_msg.header.stamp = stamp;
+  transform_msg.header.frame_id = frame_id;
+  transform_msg.child_frame_id = child_frame_id;
+  transform_msg.transform.translation.x = T.getPosition().x();
+  transform_msg.transform.translation.y = T.getPosition().y();
+  transform_msg.transform.translation.z = T.getPosition().z();
+  transform_msg.transform.rotation.x = q.x();
+  transform_msg.transform.rotation.y = q.y();
+  transform_msg.transform.rotation.z = q.z();
+  transform_msg.transform.rotation.w = q.w();
+  br.sendTransform(transform_msg);
 }
 
 void publishPointMarker(
-    ros::Publisher pub,
+    const MarkerPublisher& pub,
     const Vector3d& pos,
     const string& ns,
-    const ros::Time& timestamp,
+    const rclcpp::Time& timestamp,
     int id,
     int action,
     double marker_scale,
     const Vector3d& color,
     const std::string frame_id,
-    ros::Duration lifetime)
+    rclcpp::Duration lifetime)
 {
-  visualization_msgs::Marker msg;
+  visualization_msgs::msg::Marker msg;
   msg.header.frame_id = frame_id;
   msg.header.stamp = timestamp;
   msg.ns = ns;
   msg.id = id;
-  msg.type = visualization_msgs::Marker::CUBE;
+  msg.type = visualization_msgs::msg::Marker::CUBE;
   msg.action = action; // 0 = add/modify
   msg.scale.x = marker_scale;
   msg.scale.y = marker_scale;
@@ -64,28 +72,28 @@ void publishPointMarker(
   msg.pose.orientation.y = 0.0;
   msg.pose.orientation.z = 0.0;
   msg.pose.orientation.w = 1.0;
-  pub.publish(msg);
+  pub->publish(msg);
 }
 
 void
-publishLineMarker(ros::Publisher pub,
+publishLineMarker(const MarkerPublisher& pub,
                   const Vector3d& start,
                   const Vector3d& end,
                   const string& ns,
-                  const ros::Time& timestamp,
+                  const rclcpp::Time& timestamp,
                   int id,
                   int action,
                   double marker_scale,
                   const Vector3d& color,
                   const std::string frame_id,
-                  ros::Duration lifetime)
+                  rclcpp::Duration lifetime)
 {
-  visualization_msgs::Marker msg;
+  visualization_msgs::msg::Marker msg;
   msg.header.frame_id = frame_id;
   msg.header.stamp = timestamp;
   msg.ns = ns;
   msg.id = id;
-  msg.type = visualization_msgs::Marker::LINE_STRIP;
+  msg.type = visualization_msgs::msg::Marker::LINE_STRIP;
   msg.action = action; // 0 = add/modify
   msg.scale.x = marker_scale;
   msg.color.a = 1.0;
@@ -100,29 +108,29 @@ publishLineMarker(ros::Publisher pub,
   msg.points[1].x = end[0];
   msg.points[1].y = end[1];
   msg.points[1].z = end[2];
-  pub.publish(msg);
+  pub->publish(msg);
 }
 
 
 void
-publishArrowMarker(ros::Publisher pub,
+publishArrowMarker(const MarkerPublisher& pub,
                    const Vector3d& pos,
                    const Vector3d& dir,
                    double scale,
                    const string& ns,
-                   const ros::Time& timestamp,
+                   const rclcpp::Time& timestamp,
                    int id,
                    int action,
                    double marker_scale,
                    const Vector3d& color,
                    const std::string frame_id)
 {
-  visualization_msgs::Marker msg;
+  visualization_msgs::msg::Marker msg;
   msg.header.frame_id = frame_id;
   msg.header.stamp = timestamp;
   msg.ns = ns;
   msg.id = id;
-  msg.type = visualization_msgs::Marker::ARROW;
+  msg.type = visualization_msgs::msg::Marker::ARROW;
   msg.action = action; // 0 = add/modify
   msg.scale.x = marker_scale;
   msg.scale.y = marker_scale*0.35;
@@ -138,14 +146,14 @@ publishArrowMarker(ros::Publisher pub,
   msg.points[1].x = pos[0] + scale*dir[0];
   msg.points[1].y = pos[1] + scale*dir[1];
   msg.points[1].z = pos[2] + scale*dir[2];
-  pub.publish(msg);
+  pub->publish(msg);
 }
 
 void
-publishHexacopterMarker(ros::Publisher pub,
+publishHexacopterMarker(const MarkerPublisher& pub,
                         const string& frame_id,
                         const string& ns,
-                        const ros::Time& timestamp,
+                        const rclcpp::Time& timestamp,
                         int id,
                         int action,
                         double marker_scale,
@@ -157,7 +165,7 @@ publishHexacopterMarker(ros::Publisher pub,
    */
   const double sqrt2_2 = sqrt(2) / 2;
 
-  visualization_msgs::Marker marker;
+  visualization_msgs::msg::Marker marker;
 
   // the marker will be displayed in frame_id
   marker.header.frame_id = frame_id;
@@ -167,7 +175,7 @@ publishHexacopterMarker(ros::Publisher pub,
   marker.id = id;
 
   // make rotors
-  marker.type = visualization_msgs::Marker::CYLINDER;
+  marker.type = visualization_msgs::msg::Marker::CYLINDER;
   marker.scale.x = 0.2*marker_scale;
   marker.scale.y = 0.2*marker_scale;
   marker.scale.z = 0.01*marker_scale;
@@ -181,37 +189,37 @@ publishHexacopterMarker(ros::Publisher pub,
   marker.pose.position.x = 0.19*marker_scale;
   marker.pose.position.y = 0.11*marker_scale;
   marker.id--;
-  pub.publish(marker);
+  pub->publish(marker);
 
   marker.pose.position.x = 0.19*marker_scale;
   marker.pose.position.y = -0.11*marker_scale;
   marker.id--;
-  pub.publish(marker);
+  pub->publish(marker);
 
   // left/right
   marker.pose.position.x = 0;
   marker.pose.position.y = 0.22*marker_scale;
   marker.id--;
-  pub.publish(marker);
+  pub->publish(marker);
 
   marker.pose.position.x = 0;
   marker.pose.position.y = -0.22*marker_scale;
   marker.id--;
-  pub.publish(marker);
+  pub->publish(marker);
 
   // back left/right
   marker.pose.position.x = -0.19*marker_scale;
   marker.pose.position.y = 0.11*marker_scale;
   marker.id--;
-  pub.publish(marker);
+  pub->publish(marker);
 
   marker.pose.position.x = -0.19*marker_scale;
   marker.pose.position.y = -0.11*marker_scale;
   marker.id--;
-  pub.publish(marker);
+  pub->publish(marker);
 
   // make arms
-  marker.type = visualization_msgs::Marker::CUBE;
+  marker.type = visualization_msgs::msg::Marker::CUBE;
   marker.scale.x = 0.44*marker_scale;
   marker.scale.y = 0.02*marker_scale;
   marker.scale.z = 0.01*marker_scale;
@@ -229,24 +237,24 @@ publishHexacopterMarker(ros::Publisher pub,
   marker.pose.orientation.w = sqrt2_2;
   marker.pose.orientation.z = sqrt2_2;
   marker.id--;
-  pub.publish(marker);
+  pub->publish(marker);
 
   // 30 deg rotation  0.9659  0  0  0.2588
   marker.pose.orientation.w = 0.9659;
   marker.pose.orientation.z = 0.2588;
   marker.id--;
-  pub.publish(marker);
+  pub->publish(marker);
 
   marker.pose.orientation.w = 0.9659;
   marker.pose.orientation.z = -0.2588;
   marker.id--;
-  pub.publish(marker);
+  pub->publish(marker);
 }
 
-void publishQuadrocopterMarkers(ros::Publisher pub,
+void publishQuadrocopterMarkers(const MarkerPublisher& pub,
                         const string& frame_id,
                         const string& ns,
-                        const ros::Time& timestamp,
+                        const rclcpp::Time& timestamp,
                         int id,
                         int action,
                         double marker_scale,
@@ -258,7 +266,7 @@ void publishQuadrocopterMarkers(ros::Publisher pub,
    */
   const double sqrt2_2 = sqrt(2) / 2;
 
-  visualization_msgs::Marker marker;
+  visualization_msgs::msg::Marker marker;
 
   // the marker will be displayed in frame_id
   marker.header.frame_id = frame_id;
@@ -268,7 +276,7 @@ void publishQuadrocopterMarkers(ros::Publisher pub,
   marker.id = id;
 
   // make rotors
-  marker.type = visualization_msgs::Marker::CYLINDER;
+  marker.type = visualization_msgs::msg::Marker::CYLINDER;
   marker.scale.x = 0.2*marker_scale;
   marker.scale.y = 0.2*marker_scale;
   marker.scale.z = 0.01*marker_scale;
@@ -282,27 +290,27 @@ void publishQuadrocopterMarkers(ros::Publisher pub,
   marker.pose.position.x = 0.22*marker_scale;
   marker.pose.position.y = 0.0;
   marker.id--;
-  pub.publish(marker);
+  pub->publish(marker);
 
   // left/right
   marker.pose.position.x = 0.0;
   marker.pose.position.y = 0.22*marker_scale;
   marker.id--;
-  pub.publish(marker);
+  pub->publish(marker);
 
   marker.pose.position.x = 0.0;
   marker.pose.position.y = -0.22*marker_scale;
   marker.id--;
-  pub.publish(marker);
+  pub->publish(marker);
 
   // back
   marker.pose.position.x = -0.22*marker_scale;
   marker.pose.position.y = 0.0*marker_scale;
   marker.id--;
-  pub.publish(marker);
+  pub->publish(marker);
 
   // make arms
-  marker.type = visualization_msgs::Marker::CUBE;
+  marker.type = visualization_msgs::msg::Marker::CUBE;
   marker.scale.x = 0.44*marker_scale;
   marker.scale.y = 0.02*marker_scale;
   marker.scale.z = 0.01*marker_scale;
@@ -320,20 +328,20 @@ void publishQuadrocopterMarkers(ros::Publisher pub,
   marker.pose.orientation.w = sqrt2_2;
   marker.pose.orientation.z = sqrt2_2;
   marker.id--;
-  pub.publish(marker);
+  pub->publish(marker);
 
   // 0 deg rotation
   marker.pose.orientation.w = 0;
   marker.pose.orientation.z = 1;
   marker.id--;
-  pub.publish(marker);
+  pub->publish(marker);
 }
 
 void
-publishCameraMarker(ros::Publisher pub,
+publishCameraMarker(const MarkerPublisher& pub,
                     const string& frame_id,
                     const string& ns,
-                    const ros::Time& timestamp,
+                    const rclcpp::Time& timestamp,
                     int id, int action,
                     double marker_scale,
                     const Vector3d& color)
@@ -343,7 +351,7 @@ publishCameraMarker(ros::Publisher pub,
    */
   const double sqrt2_2 = sqrt(2) / 2;
 
-  visualization_msgs::Marker marker;
+  visualization_msgs::msg::Marker marker;
 
   // the marker will be displayed in frame_id
   marker.header.frame_id = frame_id;
@@ -359,7 +367,7 @@ publishCameraMarker(ros::Publisher pub,
   marker.pose.position.y = (r_w / 4.0) *marker_scale;
   marker.pose.position.z = z_plane;
 
-  marker.type = visualization_msgs::Marker::CUBE;
+  marker.type = visualization_msgs::msg::Marker::CUBE;
   marker.scale.x = r_w*marker_scale;
   marker.scale.y = 0.04*marker_scale;
   marker.scale.z = 0.04*marker_scale;
@@ -373,10 +381,10 @@ publishCameraMarker(ros::Publisher pub,
   marker.pose.orientation.z = 0;
   marker.pose.orientation.w = 1;
   marker.id--;
-  pub.publish(marker);
+  pub->publish(marker);
   marker.pose.position.y = -(r_w/ 4.0)*marker_scale;
   marker.id--;
-  pub.publish(marker);
+  pub->publish(marker);
 
   marker.scale.x = (r_w/2.0)*marker_scale;
   marker.pose.position.x = (r_w / 2.0) *marker_scale;
@@ -384,10 +392,10 @@ publishCameraMarker(ros::Publisher pub,
   marker.pose.orientation.w = sqrt2_2;
   marker.pose.orientation.z = sqrt2_2;
   marker.id--;
-  pub.publish(marker);
+  pub->publish(marker);
   marker.pose.position.x = -(r_w / 2.0) *marker_scale;
   marker.id--;
-  pub.publish(marker);
+  pub->publish(marker);
 
   // make pyramid edges
   marker.scale.x = (3.0*r_w/4.0)*marker_scale;
@@ -401,7 +409,7 @@ publishCameraMarker(ros::Publisher pub,
   marker.pose.orientation.z = 0.21462883;
   marker.pose.orientation.w = 0.9091823;
   marker.id--;
-  pub.publish(marker);
+  pub->publish(marker);
 
   marker.pose.position.x = -(r_w / 4.0) *marker_scale;
   marker.pose.position.y = (r_w / 8.0) *marker_scale;
@@ -411,7 +419,7 @@ publishCameraMarker(ros::Publisher pub,
   marker.pose.orientation.z = -0.21462883;
   marker.pose.orientation.w = 0.9091823;
   marker.id--;
-  pub.publish(marker);
+  pub->publish(marker);
 
   marker.pose.position.x = -(r_w / 4.0) *marker_scale;
   marker.pose.position.y = -(r_w / 8.0) *marker_scale;
@@ -421,7 +429,7 @@ publishCameraMarker(ros::Publisher pub,
   marker.pose.orientation.z = 0.21462883;
   marker.pose.orientation.w = 0.9091823;
   marker.id--;
-  pub.publish(marker);
+  pub->publish(marker);
 
   marker.pose.position.x = (r_w / 4.0) *marker_scale;
   marker.pose.position.y = -(r_w / 8.0) *marker_scale;
@@ -431,29 +439,29 @@ publishCameraMarker(ros::Publisher pub,
   marker.pose.orientation.z = -0.21462883;
   marker.pose.orientation.w = 0.9091823;
   marker.id--;
-  pub.publish(marker);
+  pub->publish(marker);
 }
 
-void publishFrameMarker(ros::Publisher pub,
+void publishFrameMarker(const MarkerPublisher& pub,
                         const Matrix3d& rot,
                         const Vector3d& pos,
                         const string& ns,
-                        const ros::Time& timestamp,
+                        const rclcpp::Time& timestamp,
                         int id,
                         int action,
                         double marker_scale,
                         const std::string frame_id,
-                        ros::Duration lifetime)
+                        rclcpp::Duration lifetime)
 {
-  visualization_msgs::Marker marker;
+  visualization_msgs::msg::Marker marker;
   marker.header.frame_id = frame_id;
   marker.header.stamp = timestamp;
   marker.ns = ns;
   marker.id = id++;
-  marker.type = visualization_msgs::Marker::ARROW;
+  marker.type = visualization_msgs::msg::Marker::ARROW;
   marker.action = action; // 0 = add/modify
   marker.points.reserve(2);
-  geometry_msgs::Point point;
+  geometry_msgs::msg::Point point;
   point.x = static_cast<float>(pos.x());
   point.y = static_cast<float>(pos.y());
   point.z = static_cast<float>(pos.z());
@@ -469,7 +477,7 @@ void publishFrameMarker(ros::Publisher pub,
   marker.color.g = 0.0;
   marker.color.b = 1.0;
   marker.lifetime = lifetime;
-  pub.publish(marker);
+  pub->publish(marker);
 
   marker.id = id++;
   marker.points.clear();
@@ -485,7 +493,7 @@ void publishFrameMarker(ros::Publisher pub,
   marker.color.g = 0.0;
   marker.color.b = 0.0;
   marker.lifetime = lifetime;
-  pub.publish(marker);
+  pub->publish(marker);
 
   marker.id = id++;
   marker.points.clear();
@@ -501,11 +509,11 @@ void publishFrameMarker(ros::Publisher pub,
   marker.color.g = 1.0;
   marker.color.b = 0.0;
   marker.lifetime = lifetime;
-  pub.publish(marker);
+  pub->publish(marker);
 }
 
 void publishGtsamPoseCovariance(
-    const ros::Publisher& pub,
+    const MarkerPublisher& pub,
     const Eigen::Vector3d& mean,
     const Eigen::Matrix3d& R_W_B, // Body in World-Frame
     const Eigen::Matrix<double, 6, 6>& covariance,
@@ -551,12 +559,12 @@ void publishGtsamPoseCovariance(
   }
   Eigen::Quaterniond q_world(R_W_B * R_body);
 
-  visualization_msgs::Marker m;
+  visualization_msgs::msg::Marker m;
   m.header.frame_id = "world";
-  m.header.stamp = ros::Time();
+  m.header.stamp = rclcpp::Time();
   m.ns = ns;
   m.id = id;
-  m.type = visualization_msgs::Marker::SPHERE;
+  m.type = visualization_msgs::msg::Marker::SPHERE;
   m.action = action; // add/modify
 //  m.scale.x = std::real(lambda_1)*sigma_scale;
 //  m.scale.y = std::real(lambda_2)*sigma_scale;
@@ -575,7 +583,7 @@ void publishGtsamPoseCovariance(
   m.pose.orientation.y = q_world.y();
   m.pose.orientation.z = q_world.z();
   m.pose.orientation.w = q_world.w();
-  pub.publish(m);
+  pub->publish(m);
 }
 
 } // namespace output_helper

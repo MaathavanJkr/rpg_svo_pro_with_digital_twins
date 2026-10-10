@@ -43,6 +43,7 @@
 #include "svo/ceres_backend/estimator.hpp"
 
 #include <svo/common/conversions.h>
+#include <svo/common/logging.h>
 #include <svo/common/point.h>
 
 #include "svo/ceres_backend/ceres_iteration_callback.hpp"
@@ -1216,7 +1217,7 @@ bool Estimator::addStates(const FrameBundleConstPtr &frame_bundle,
                         new ceres::HuberLoss(50.0), // default : square loss. This should be better against outliers.
                         map_ptr_->parameterBlockPtr(LastNKeyframeId(n_meas).asInteger())); 
 
-                ROS_INFO_STREAM("... registrated pose added to the optimization!");
+                SVO_INFO_STREAM("... registrated pose added to the optimization!");
 
                 state_id_to_num_gpose_errors_[LastNKeyframeId(n_meas).asInteger()] += 1;
               }
@@ -1557,7 +1558,7 @@ bool Estimator::addStates(const FrameBundleConstPtr &frame_bundle,
                         new ceres::HuberLoss(50.0), 
                         map_ptr_->parameterBlockPtr(LastNKeyframeId(n_meas).asInteger())); 
 
-                ROS_INFO_STREAM("... registrated pose added to the optimization!");
+                SVO_INFO_STREAM("... registrated pose added to the optimization!");
 
                 state_id_to_num_gpose_errors_[LastNKeyframeId(n_meas).asInteger()] += 1;
               }

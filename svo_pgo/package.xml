@@ -1,23 +1,21 @@
 <?xml version="1.0"?>
-<package format="2">
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
   <name>svo_pgo</name>
   <version>0.0.1</version>
   <description>The pose graph optimisation package</description>
-  <author>Kunal Shrivastava</author>
   <maintainer email="kunalshrivastava.iitr@gmail.com">kunal71091</maintainer>
-
   <license>tbd</license>
+  <author>Kunal Shrivastava</author>
 
-  <buildtool_depend>catkin</buildtool_depend>
-  <buildtool_depend>catkin_simple</buildtool_depend>
+  <buildtool_depend>ament_cmake_auto</buildtool_depend>
 
-  <depend>roscpp</depend>
-  <depend>roslib</depend>
   <depend>svo_cmake</depend>
   <depend>svo_common</depend>
-  <depend>eigen_catkin</depend>
-  <depend>ceres_catkin</depend>
-  <depend>cv_bridge</depend>
-  
+  <depend>eigen</depend>
+  <depend>libceres-dev</depend>
 
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
 </package>

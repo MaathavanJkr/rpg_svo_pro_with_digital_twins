@@ -307,7 +307,7 @@ class Map
    */
   bool setParameterization(
       uint64_t parameter_block_id,
-      ceres::LocalParameterization* local_parameterization);
+      ceres::Manifold* local_parameterization);
 
   /**
    * @brief Set the (local) parameterisation of a parameter block.
@@ -317,7 +317,7 @@ class Map
    */
   bool setParameterization(
       std::shared_ptr<ceres_backend::ParameterBlock> parameter_block,
-      ceres::LocalParameterization* local_parameterization)
+      ceres::Manifold* local_parameterization)
   {
     return setParameterization(parameter_block->id(), local_parameterization);
   }

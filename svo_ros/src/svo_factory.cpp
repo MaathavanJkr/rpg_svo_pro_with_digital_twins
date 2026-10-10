@@ -1,4 +1,4 @@
-#include <ros/package.h>
+#include <ament_index_cpp/get_package_share_directory.hpp>
 
 #include <svo/svo.h>
 #include <svo/common/imu_calibration.h>
@@ -33,12 +33,27 @@
 namespace svo {
 namespace factory {
 
-BaseOptions loadBaseOptions(const ros::NodeHandle& pnh, bool forward_default)
+namespace {
+// Replacement of ros::package::getPath(): the package share directory.
+std::string getPackagePath(const std::string& package)
+{
+  try
+  {
+    return ament_index_cpp::get_package_share_directory(package);
+  }
+  catch (const std::exception&)
+  {
+    return std::string();
+  }
+}
+} // namespace
+
+BaseOptions loadBaseOptions(const rclcpp::Node::SharedPtr& pnh, bool forward_default)
 {
   BaseOptions o;
   o.max_n_kfs = vk::param<int>(pnh, "max_n_kfs", 5);
   o.use_imu = vk::param<bool>(pnh, "use_imu", true);
-  o.trace_dir = vk::param<std::string>(pnh, "trace_dir", ros::package::getPath("svo")+"/trace");
+  o.trace_dir = vk::param<std::string>(pnh, "trace_dir", "/tmp");
   o.quality_min_fts = vk::param<int>(pnh, "quality_min_fts", 50);
   o.quality_max_fts_drop = vk::param<int>(pnh, "quality_max_drop_fts", 40);
   o.relocalization_max_trials = vk::param<int>(pnh, "relocalization_max_trials", 50);
@@ -82,7 +97,7 @@ BaseOptions loadBaseOptions(const ros::NodeHandle& pnh, bool forward_default)
   return o;
 }
 
-DetectorOptions loadDetectorOptions(const ros::NodeHandle& pnh)
+DetectorOptions loadDetectorOptions(const rclcpp::Node::SharedPtr& pnh)
 {
   DetectorOptions o;
   o.cell_size = vk::param<int>(pnh, "grid_size", 35);
@@ -97,7 +112,7 @@ DetectorOptions loadDetectorOptions(const ros::NodeHandle& pnh)
   return o;
 }
 
-DepthFilterOptions loadDepthFilterOptions(const ros::NodeHandle& pnh)
+DepthFilterOptions loadDepthFilterOptions(const rclcpp::Node::SharedPtr& pnh)
 {
   DepthFilterOptions o;
   o.max_search_level = vk::param<int>(pnh, "n_pyr_levels", 3) - 1;
@@ -126,7 +141,7 @@ DepthFilterOptions loadDepthFilterOptions(const ros::NodeHandle& pnh)
   return o;
 }
 
-InitializationOptions loadInitializationOptions(const ros::NodeHandle& pnh)
+InitializationOptions loadInitializationOptions(const rclcpp::Node::SharedPtr& pnh)
 {
   InitializationOptions o;
   o.init_min_features = vk::param<int>(pnh, "init_min_features", 100);
@@ -150,7 +165,7 @@ InitializationOptions loadInitializationOptions(const ros::NodeHandle& pnh)
   return o;
 }
 
-FeatureTrackerOptions loadTrackerOptions(const ros::NodeHandle& pnh)
+FeatureTrackerOptions loadTrackerOptions(const rclcpp::Node::SharedPtr& pnh)
 {
   FeatureTrackerOptions o;
   o.klt_max_level = vk::param<int>(pnh, "klt_max_level", 4);
@@ -158,7 +173,7 @@ FeatureTrackerOptions loadTrackerOptions(const ros::NodeHandle& pnh)
   return o;
 }
 
-ReprojectorOptions loadReprojectorOptions(const ros::NodeHandle& pnh)
+ReprojectorOptions loadReprojectorOptions(const rclcpp::Node::SharedPtr& pnh)
 {
   ReprojectorOptions o;
   o.max_n_kfs = vk::param<int>(pnh, "reprojector_max_n_kfs", 5);
@@ -189,7 +204,7 @@ ReprojectorOptions loadReprojectorOptions(const ros::NodeHandle& pnh)
   return o;
 }
 
-CameraBundle::Ptr loadCameraFromYaml(const ros::NodeHandle& pnh)
+CameraBundle::Ptr loadCameraFromYaml(const rclcpp::Node::SharedPtr& pnh)
 {
   std::string calib_file = vk::param<std::string>(pnh, "calib_file", "Flightmare/Calibration/param_vio_stereo.yaml");
   CameraBundle::Ptr ncam = CameraBundle::loadFromYaml(calib_file);
@@ -199,7 +214,7 @@ CameraBundle::Ptr loadCameraFromYaml(const ros::NodeHandle& pnh)
 }
 
 #ifdef SVO_LOOP_CLOSING
-MapAlignmentOptions loadMapAlignmentOptions(const ros::NodeHandle& pnh)
+MapAlignmentOptions loadMapAlignmentOptions(const rclcpp::Node::SharedPtr& pnh)
 {
   MapAlignmentOptions o;
   o.ransac3d_inlier_percent =
@@ -209,13 +224,13 @@ MapAlignmentOptions loadMapAlignmentOptions(const ros::NodeHandle& pnh)
   return o;
 }
 
-LoopClosureOptions loadLoopClosureOptions(const ros::NodeHandle& pnh)
+LoopClosureOptions loadLoopClosureOptions(const rclcpp::Node::SharedPtr& pnh)
 {
   LoopClosureOptions o;
   o.runlc = vk::param<bool>(pnh, "runlc", false);
   o.voc_name = vk::param<std::string>(pnh, "voc_name", "test");
   std::string default_voc_path =
-      ros::package::getPath("svo_online_loopclosing") + "/vocabularies/";
+      getPackagePath("svo_online_loopclosing") + "/vocabularies/";
   o.voc_path = vk::param<std::string>(pnh, "voc_path", default_voc_path);
   o.alpha = vk::param<double>(pnh, "alpha", 40.0);
   o.beta = vk::param<double>(pnh, "beta", 20.0);
@@ -239,7 +254,7 @@ LoopClosureOptions loadLoopClosureOptions(const ros::NodeHandle& pnh)
   return o;
 }
 
-LoopClosingPtr getLoopClosingModule(const ros::NodeHandle &pnh,
+LoopClosingPtr getLoopClosingModule(const rclcpp::Node::SharedPtr& pnh,
                                     const CameraBundlePtr& cam)
 {
   // Create camera
@@ -254,7 +269,7 @@ LoopClosingPtr getLoopClosingModule(const ros::NodeHandle &pnh,
 #endif
 
 #ifdef SVO_GLOBAL_MAP
-GlobalMapPtr getGlobalMap(const ros::NodeHandle& pnh,
+GlobalMapPtr getGlobalMap(const rclcpp::Node::SharedPtr& pnh,
                           const CameraBundlePtr& ncams)
 {
   GlobalMapOptions o;
@@ -366,7 +381,7 @@ GlobalMapPtr getGlobalMap(const ros::NodeHandle& pnh,
       vk::param<bool>(pnh, "ba_output_errors", false);
   gtsam_opt_options.trace_dir =
       vk::param<std::string>(pnh, "trace_dir",
-                             ros::package::getPath("svo")+"/trace");
+                             "/tmp");
   gtsam_opt_options.optim_method =
       vk::param<std::string>(pnh, "isam_optimization_method",
                         std::string("GaussNewton"));
@@ -386,7 +401,7 @@ GlobalMapPtr getGlobalMap(const ros::NodeHandle& pnh,
 }
 #endif
 
-StereoTriangulationOptions loadStereoOptions(const ros::NodeHandle& pnh)
+StereoTriangulationOptions loadStereoOptions(const rclcpp::Node::SharedPtr& pnh)
 {
   StereoTriangulationOptions o;
   o.triangulate_n_features = vk::param<int>(pnh, "max_fts", 120);
@@ -396,7 +411,7 @@ StereoTriangulationOptions loadStereoOptions(const ros::NodeHandle& pnh)
   return o;
 }
 
-ImuHandler::Ptr getImuHandler(const ros::NodeHandle& pnh)
+ImuHandler::Ptr getImuHandler(const rclcpp::Node::SharedPtr& pnh)
 {
   std::string calib_file = vk::param<std::string>(pnh, "calib_file", "Flightmare/Calibration/param_vio_stereo.yaml");
   ImuCalibration imu_calib = ImuHandler::loadCalibrationFromFile(calib_file);
@@ -418,7 +433,7 @@ ImuHandler::Ptr getImuHandler(const ros::NodeHandle& pnh)
   return imu_handler;
 }
 
-GlobalPositionsHandler::Ptr getGlobalPositionsHandler(const ros::NodeHandle& pnh)
+GlobalPositionsHandler::Ptr getGlobalPositionsHandler(const rclcpp::Node::SharedPtr& pnh)
 {
   std::string settings_file = vk::param<std::string>(pnh, "gp_settings_file", "gp_settings.yaml");
   if(settings_file.empty())
@@ -433,7 +448,7 @@ GlobalPositionsHandler::Ptr getGlobalPositionsHandler(const ros::NodeHandle& pnh
 
 
 
-GlobalPoseHandler::Ptr getGlobalPoseHandler(const ros::NodeHandle& pnh)
+GlobalPoseHandler::Ptr getGlobalPoseHandler(const rclcpp::Node::SharedPtr& pnh)
 {
   std::string settings_file = vk::param<std::string>(pnh, "map_reg_settings_file", "gpose_settings.yaml");
   if(settings_file.empty())
@@ -448,16 +463,16 @@ GlobalPoseHandler::Ptr getGlobalPoseHandler(const ros::NodeHandle& pnh)
 
 
 
-void setInitialPose(const ros::NodeHandle& pnh, FrameHandlerBase& vo)
+void setInitialPose(const rclcpp::Node::SharedPtr& pnh, FrameHandlerBase& vo)
 {    
     // Variables to store the values
     double tx, ty, tz;
     bool tx_set, ty_set, tz_set;
 
     // Try to get the parameters and check if they were set
-    tx_set = pnh.getParam("T_world_imuinit/tx", tx);
-    ty_set = pnh.getParam("T_world_imuinit/ty", ty);
-    tz_set = pnh.getParam("T_world_imuinit/tz", tz);
+    tx_set = vk::getParam(pnh, "T_world_imuinit/tx", &tx);
+    ty_set = vk::getParam(pnh, "T_world_imuinit/ty", &ty);
+    tz_set = vk::getParam(pnh, "T_world_imuinit/tz", &tz);
 
     // Use the retrieved values or default values if they were not set
     tx = tx_set ? tx : 0.0;
@@ -494,7 +509,7 @@ void setInitialPose(const ros::NodeHandle& pnh, FrameHandlerBase& vo)
     vo.setInitialImuPose(T_world_imuinit);
 }
 
-FrameHandlerMono::Ptr makeMono(const ros::NodeHandle& pnh, const CameraBundlePtr& cam)
+FrameHandlerMono::Ptr makeMono(const rclcpp::Node::SharedPtr& pnh, const CameraBundlePtr& cam)
 {
   // Create camera
   CameraBundle::Ptr ncam = (cam) ? cam : loadCameraFromYaml(pnh);
@@ -521,7 +536,7 @@ FrameHandlerMono::Ptr makeMono(const ros::NodeHandle& pnh, const CameraBundlePtr
   return vo;
 }
 
-FrameHandlerStereo::Ptr makeStereo(const ros::NodeHandle& pnh, const CameraBundlePtr& cam)
+FrameHandlerStereo::Ptr makeStereo(const rclcpp::Node::SharedPtr& pnh, const CameraBundlePtr& cam)
 {
   // Load cameras
   CameraBundle::Ptr ncam = (cam) ? cam : loadCameraFromYaml(pnh);
@@ -551,7 +566,7 @@ FrameHandlerStereo::Ptr makeStereo(const ros::NodeHandle& pnh, const CameraBundl
   return vo;
 }
 
-FrameHandlerArray::Ptr makeArray(const ros::NodeHandle& pnh, const CameraBundlePtr& cam)
+FrameHandlerArray::Ptr makeArray(const rclcpp::Node::SharedPtr& pnh, const CameraBundlePtr& cam)
 {
   // Load cameras
   CameraBundle::Ptr ncam = (cam) ? cam : loadCameraFromYaml(pnh);

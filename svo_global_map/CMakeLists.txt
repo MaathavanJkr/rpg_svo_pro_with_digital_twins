@@ -1,8 +1,8 @@
+cmake_minimum_required(VERSION 3.16)
 project(svo_global_map)
-cmake_minimum_required(VERSION 2.8.3)
 
-find_package(catkin_simple REQUIRED)
-catkin_simple()
+find_package(ament_cmake_auto REQUIRED)
+ament_auto_find_build_dependencies()
 
 find_package(GTSAMCMakeTools REQUIRED)
 find_package(GTSAM REQUIRED)
@@ -31,8 +31,7 @@ set(SOURCES
   src/null_stream.cpp
   )
 
-cs_add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS})
-target_link_libraries(${PROJECT_NAME} gtsam)
+ament_auto_add_library(${PROJECT_NAME} SHARED ${SOURCES} ${HEADERS})
+target_link_libraries(${PROJECT_NAME} gtsam ${SVO_SYSTEM_LIBRARIES})
 
-cs_install()
-cs_export()
+ament_auto_package()

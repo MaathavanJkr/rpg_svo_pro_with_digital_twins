@@ -1,18 +1,19 @@
 
 #include "emitter.hpp"
-#include "satellite_simulator/EmitterMsg.h"
 #include "frame_handler.hpp"
 
 
-Emitter::Emitter(ros::NodeHandle& nh, double t0, const SatelliteParam& param)  //, gen(rd()), d(1, 10) // Call to base class constructor
+Emitter::Emitter(rclcpp::Node* nh, double t0, const SatelliteParam& param)  //, gen(rd()), d(1, 10) // Call to base class constructor
+    : param(param), timestamp(t0), nh_(nh), t0_(t0)
 {
-    std::string topic_sat = "satellite/pos/" + std::to_string(param.satellite_number_);
-    position_publisher = nh.advertise<satellite_simulator::EmitterMsg>(topic_sat, 1000);
+    // ROS 2 topic name tokens must not start with a digit: ~/satellite/pos/sat_<n>
+    std::string topic_sat = "~/satellite/pos/sat_" + std::to_string(param.satellite_number_);
+    position_publisher = nh->create_publisher<satellite_simulator::msg::EmitterMsg>(topic_sat, 1000);
     n = std::sqrt(param.muE / std::pow(param.sa, 3));
     tol = 1e-6;
 
-    std::string topic = "gnss/pseudorange/" + std::to_string(param.satellite_number_);
-    pseudorange_publisher = nh.advertise<satellite_simulator::EmitterMsg>(topic, 1000);
+    std::string topic = "~/gnss/pseudorange/sat_" + std::to_string(param.satellite_number_);
+    pseudorange_publisher = nh->create_publisher<satellite_simulator::msg::EmitterMsg>(topic, 1000);
 
 }
 
@@ -21,8 +22,8 @@ Emitter::~Emitter() {}
 void Emitter::updateTimestamp() {
     
     bool use_sim_time = false;
-    if (ros::param::get("/use_sim_time", use_sim_time) && use_sim_time) {
-        timestamp = ros::Time::now().toSec();
+    if (nh_->get_parameter("use_sim_time", use_sim_time) && use_sim_time) {
+        timestamp = nh_->now().seconds();
     } else {
         timestamp += 0.1; 
     }
@@ -112,8 +113,8 @@ void Emitter::process() {
 }
 
 void Emitter::publish() {
-    satellite_simulator::EmitterMsg msg;
-    msg.header.stamp = ros::Time(timestamp);
+    satellite_simulator::msg::EmitterMsg msg;
+    msg.header.stamp = rclcpp::Time(static_cast<int64_t>(timestamp * 1e9));
     msg.header.frame_id = "ECEF";
     msg.range.data = pseudorange;
     msg.position_ecef.x = Position_ECEF.x();
@@ -126,11 +127,11 @@ void Emitter::publish() {
     msg.elevation_angle.data = elevation_angle;
     msg.azimuth_angle.data = azimuth_angle;
     msg.idx_satellite.data = param.satellite_number_;
-    pseudorange_publisher.publish(msg);
+    pseudorange_publisher->publish(msg);
 
-    satellite_simulator::EmitterMsg position_msg;
+    satellite_simulator::msg::EmitterMsg position_msg;
 
-    position_msg.header.stamp =  ros::Time(timestamp);
+    position_msg.header.stamp = rclcpp::Time(static_cast<int64_t>(timestamp * 1e9));
 
     position_msg.header.frame_id = "ECEF";
 
@@ -144,7 +145,7 @@ void Emitter::publish() {
 
 
 
-    position_publisher.publish(position_msg);
+    position_publisher->publish(position_msg);
 
 }
 

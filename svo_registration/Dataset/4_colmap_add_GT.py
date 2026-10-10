@@ -1,8 +1,7 @@
 
 import numpy as np
-import rosbag
+from vikit_py.rosbag_utils import BagReader, BagWriter, stamp_to_sec, sec_to_stamp  # ROS 2 bags (ROS 1: rosbag/rospy)
 from geometry_msgs.msg import PoseStamped
-import rospy
 from scipy.spatial.transform import Rotation as R
 
 
@@ -55,22 +54,22 @@ def transform_trajectory(trajectory, scale, T_WL, T_BC):
     return transformed_trajectory
 
 def save_to_rosbag(new_bag_path, old_bag_path, trajectory):
-    with rosbag.Bag(new_bag_path, 'w') as new_bag:
-        with rosbag.Bag(old_bag_path, 'r') as old_bag:
+    with BagWriter(new_bag_path) as new_bag:
+        with BagReader(old_bag_path) as old_bag:
             for topic, msg, t in old_bag.read_messages():
                 if topic in ['/camera_2/image_raw', '/vio_module/imu_filtered', '/gps_lidar_enu', '/gps_lidar']:
-                        msg.header.stamp = rospy.Time.from_sec(t.to_sec()) #1520.036681984)
+                        msg.header.stamp = sec_to_stamp(stamp_to_sec(t)) #1520.036681984)
                         new_bag.write(topic, msg, msg.header.stamp)
         ini = True
         for timestamp, position, orientation in trajectory:
             if(ini):
-                t0 = rospy.Time.from_sec(timestamp)
+                t0 = sec_to_stamp(timestamp)
                 ini = False
-            # if(timestamp - t0.to_sec() > 275):
+            # if(timestamp - stamp_to_sec(t0) > 275):
             #     break
 
             pose = PoseStamped()
-            pose.header.stamp = rospy.Time.from_sec(timestamp)
+            pose.header.stamp = sec_to_stamp(timestamp)
             pose.header.frame_id = 'world'
             pose.pose.position.x = position[0]
             pose.pose.position.y = position[1]

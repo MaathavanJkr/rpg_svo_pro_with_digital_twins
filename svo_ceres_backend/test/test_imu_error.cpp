@@ -211,11 +211,11 @@ TEST(okvisTestSuite, ImuError)
 
   // let's use our own local quaternion perturbation
   std::cout<<"setting local parameterization for pose... "<<std::flush;
-  ceres::LocalParameterization* poseLocalParameterization =
+  ceres::Manifold* poseLocalParameterization =
       new ceres_backend::PoseLocalParameterization;
-  problem.SetParameterization(poseParameterBlock_0.parameters(),
+  problem.SetManifold(poseParameterBlock_0.parameters(),
                               poseLocalParameterization);
-  problem.SetParameterization(poseParameterBlock_1.parameters(),
+  problem.SetManifold(poseParameterBlock_1.parameters(),
                               poseLocalParameterization);
   std::cout<<" [ OK ] "<<std::endl;
 
@@ -304,7 +304,7 @@ TEST(okvisTestSuite, ImuError)
   //std::cout << "minimal Jacobian 0 = \n"<<J0min<<std::endl;
   //std::cout << "numDiff minimal Jacobian 0 = \n"<<J0_numDiff<<std::endl;
   Eigen::Matrix<double,7,6,Eigen::RowMajor> Jplus;
-  poseLocalParameterization->ComputeJacobian(parameters[0],Jplus.data());
+  poseLocalParameterization->PlusJacobian(parameters[0],Jplus.data());
   //std::cout << "Jacobian 0 times Plus Jacobian = \n"<<J0*Jplus<<std::endl;
 
   Eigen::Matrix<double,15,6> J2_numDiff;
@@ -328,7 +328,7 @@ TEST(okvisTestSuite, ImuError)
   EXPECT_TRUE((J2min-J2_numDiff).norm()<jacobianTolerance)
       << "minimal Jacobian 2 = \n" << J2min << std::endl
       << "numDiff minimal Jacobian 2 = \n" << J2_numDiff;
-  poseLocalParameterization->ComputeJacobian(parameters[2],Jplus.data());
+  poseLocalParameterization->PlusJacobian(parameters[2],Jplus.data());
   //std::cout << "Jacobian 2 times Plus Jacobian = \n"<<J2*Jplus<<std::endl;
 
   Eigen::Matrix<double,15,9> J1_numDiff;

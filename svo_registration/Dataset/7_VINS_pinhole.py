@@ -1,5 +1,4 @@
-import rospy
-import rosbag
+from vikit_py.rosbag_utils import BagReader, BagWriter, stamp_to_sec, sec_to_stamp  # ROS 2 bags (ROS 1: rosbag/rospy)
 import cv2
 from cv_bridge import CvBridge
 import numpy as np
@@ -37,22 +36,22 @@ def undistort_image(image_msg):
     return undistorted_image_msg
 
 def process_bag(input_bag_path, output_bag_path):
-    with rosbag.Bag(output_bag_path, 'w') as outbag:
-        with rosbag.Bag(input_bag_path, 'r') as inbag:
+    with BagWriter(output_bag_path) as outbag:
+        with BagReader(input_bag_path) as inbag:
             ini = True
             for topic, msg, t in inbag.read_messages():
                 if(ini):
                     t0 = t
                     ini = False
-                # if(t.to_sec() - t0.to_sec() >275):
+                # if(stamp_to_sec(t) - stamp_to_sec(t0) >275):
                 #     break
-                print(t.to_sec())
+                print(stamp_to_sec(t))
                 if msg._type == 'sensor_msgs/Image':
                     undistorted_msg = undistort_image(msg)
                     outbag.write(topic, undistorted_msg, t)
                 else:
                     outbag.write(topic, msg, t)
-                # if(t.to_sec() > 100):
+                # if(stamp_to_sec(t) > 100):
                 #     break
 
 if __name__ == '__main__':

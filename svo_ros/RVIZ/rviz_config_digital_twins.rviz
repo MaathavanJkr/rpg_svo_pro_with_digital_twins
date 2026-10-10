@@ -1,5 +1,5 @@
 Panels:
-  - Class: rviz/Displays
+  - Class: rviz_common/Displays
     Help Height: 0
     Name: Displays
     Property Tree Widget:
@@ -21,21 +21,21 @@ Panels:
         - //gps1/Status1
       Splitter Ratio: 0.7382352948188782
     Tree Height: 1264
-  - Class: rviz/Selection
+  - Class: rviz_common/Selection
     Name: Selection
-  - Class: rviz/Tool Properties
+  - Class: rviz_common/Tool Properties
     Expanded:
       - /2D Pose Estimate1
       - /2D Nav Goal1
       - /Publish Point1
     Name: Tool Properties
     Splitter Ratio: 0.5886790156364441
-  - Class: rviz/Views
+  - Class: rviz_common/Views
     Expanded:
       - /Current View1
     Name: Views
     Splitter Ratio: 0.5
-  - Class: rviz/Time
+  - Class: rviz_common/Time
     Name: Time
     SyncMode: 0
     SyncSource: Image
@@ -48,7 +48,7 @@ Visualization Manager:
   Displays:
     - Alpha: 0.5
       Cell Size: 1
-      Class: rviz/Grid
+      Class: rviz_default_plugins/Grid
       Color: 160; 160; 164
       Enabled: true
       Line Style:
@@ -64,7 +64,7 @@ Visualization Manager:
       Plane Cell Count: 10
       Reference Frame: vio
       Value: true
-    - Class: rviz/TF
+    - Class: rviz_default_plugins/TF
       Enabled: false
       Filter (blacklist): ""
       Filter (whitelist): ""
@@ -81,32 +81,39 @@ Visualization Manager:
         {}
       Update Interval: 0
       Value: false
-    - Class: rviz/Marker
+    - Class: rviz_default_plugins/Marker
       Enabled: true
-      Marker Topic: /svo/points
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /svo/points
       Name: /svo/points
       Namespaces:
         pts: true
         seeds: true
         trajectory: true
-      Queue Size: 100
       Value: true
-    - Class: rviz/Image
+    - Class: rviz_default_plugins/Image
       Enabled: false
-      Image Topic: /svo/image/0
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /svo/image_with_features_0
       Max Value: 1
       Median window: 5
       Min Value: 0
-      Name: /svo/image/0
+      Name: /svo/image_with_features_0
       Normalize Range: true
-      Queue Size: 2
-      Transport Hint: raw
       Unreliable: false
       Value: false
     - Alpha: 1
       Axes Length: 1
       Axes Radius: 0.10000000149011612
-      Class: rviz/PoseWithCovariance
+      Class: rviz_default_plugins/PoseWithCovariance
       Color: 85; 255; 255
       Covariance:
         Orientation:
@@ -127,36 +134,47 @@ Visualization Manager:
       Head Length: 0.30000001192092896
       Head Radius: 0.10000000149011612
       Name: /svo/pose_imu
-      Queue Size: 10
       Shaft Length: 1
       Shaft Radius: 0.05000000074505806
       Shape: Arrow
-      Topic: /svo/pose_imu
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /svo/pose_imu
       Unreliable: false
       Value: false
-    - Class: rviz/Image
+    - Class: rviz_default_plugins/Image
       Enabled: true
-      Image Topic: /svo/image_with_features/0
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /svo/image_with_features_0
       Max Value: 1
       Median window: 5
       Min Value: 0
       Name: Image
       Normalize Range: true
-      Queue Size: 2
-      Transport Hint: raw
       Unreliable: false
       Value: true
-    - Class: rviz/Group
+    - Class: rviz_common/Group
       Displays:
-        - Class: rviz/Marker
+        - Class: rviz_default_plugins/Marker
           Enabled: true
-          Marker Topic: /svo/keyframes
+          Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /svo/keyframes
           Name: svo_kfs
           Namespaces:
             active_kfs: true
             cams: true
             kfs: true
-          Queue Size: 100
           Value: true
         - Alpha: 1
           Autocompute Intensity Bounds: true
@@ -166,7 +184,7 @@ Visualization Manager:
             Value: true
           Axis: Z
           Channel Name: intensity
-          Class: rviz/PointCloud2
+          Class: rviz_default_plugins/PointCloud2
           Color: 255; 255; 255
           Color Transformer: Intensity
           Decay Time: 0
@@ -176,12 +194,16 @@ Visualization Manager:
           Min Color: 9; 9; 8
           Name: backend_points
           Position Transformer: XYZ
-          Queue Size: 10
           Selectable: true
           Size (Pixels): 3
           Size (m): 0.07999999821186066
           Style: Spheres
-          Topic: /svo/vio_backend_points
+          Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /svo/vio_backend_points
           Unreliable: false
           Use Fixed Frame: true
           Use rainbow: false
@@ -189,17 +211,21 @@ Visualization Manager:
         - Alpha: 1
           Axes Length: 1
           Axes Radius: 10
-          Class: rviz/Pose
+          Class: rviz_default_plugins/Pose
           Color: 0; 0; 255
           Enabled: true
           Head Length: 0.5
           Head Radius: 0.20000000298023224
           Name: /svo/backend_pose_imu_viz
-          Queue Size: 10
           Shaft Length: 1
           Shaft Radius: 0.10000000149011612
           Shape: Arrow
-          Topic: /svo/vio_backend_pose_imu_viz
+          Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /svo/vio_backend_pose_imu_viz
           Unreliable: false
           Value: true
         - Alpha: 1
@@ -210,7 +236,7 @@ Visualization Manager:
             Value: true
           Axis: Z
           Channel Name: intensity
-          Class: rviz/PointCloud2
+          Class: rviz_default_plugins/PointCloud2
           Color: 34; 99; 1
           Color Transformer: FlatColor
           Decay Time: 0
@@ -220,12 +246,16 @@ Visualization Manager:
           Min Color: 0; 0; 0
           Name: svo_pose_graph
           Position Transformer: XYZ
-          Queue Size: 10
           Selectable: true
           Size (Pixels): 3
           Size (m): 0.05999999865889549
           Style: Spheres
-          Topic: /svo/pose_graph
+          Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /svo/pose_graph
           Unreliable: false
           Use Fixed Frame: true
           Use rainbow: false
@@ -238,7 +268,7 @@ Visualization Manager:
             Value: true
           Axis: Z
           Channel Name: intensity
-          Class: rviz/PointCloud2
+          Class: rviz_default_plugins/PointCloud2
           Color: 255; 255; 255
           Color Transformer: Intensity
           Decay Time: 0
@@ -248,19 +278,23 @@ Visualization Manager:
           Min Color: 0; 0; 0
           Name: frontend_map
           Position Transformer: XYZ
-          Queue Size: 10
           Selectable: true
           Size (Pixels): 3
           Size (m): 0.019999999552965164
           Style: Flat Squares
-          Topic: /svo/pointcloud
+          Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /svo/pointcloud
           Unreliable: false
           Use Fixed Frame: true
           Use rainbow: true
           Value: true
       Enabled: true
       Name: Local
-    - Class: rviz/Group
+    - Class: rviz_common/Group
       Displays:
         - Alpha: 1
           Autocompute Intensity Bounds: true
@@ -270,7 +304,7 @@ Visualization Manager:
             Value: true
           Axis: Z
           Channel Name: intensity
-          Class: rviz/PointCloud2
+          Class: rviz_default_plugins/PointCloud2
           Color: 0; 0; 255
           Color Transformer: FlatColor
           Decay Time: 0
@@ -280,12 +314,16 @@ Visualization Manager:
           Min Color: 0; 0; 0
           Name: /svo/backend_points
           Position Transformer: XYZ
-          Queue Size: 10
           Selectable: true
           Size (Pixels): 3
           Size (m): 0.15000000596046448
           Style: Flat Squares
-          Topic: /svo/w_backend_points
+          Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /svo/w_backend_points
           Unreliable: false
           Use Fixed Frame: true
           Use rainbow: true
@@ -293,17 +331,21 @@ Visualization Manager:
         - Alpha: 1
           Axes Length: 1
           Axes Radius: 10
-          Class: rviz/Pose
+          Class: rviz_default_plugins/Pose
           Color: 0; 0; 255
           Enabled: true
           Head Length: 1.5
           Head Radius: 0.5
           Name: /svo/backend_pose_imu_viz
-          Queue Size: 10
           Shaft Length: 2
           Shaft Radius: 0.30000001192092896
           Shape: Arrow
-          Topic: /svo/w_backend_pose_imu_viz
+          Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /svo/w_backend_pose_imu_viz
           Unreliable: false
           Value: true
         - Alpha: 1
@@ -314,7 +356,7 @@ Visualization Manager:
             Value: true
           Axis: Z
           Channel Name: intensity
-          Class: rviz/PointCloud2
+          Class: rviz_default_plugins/PointCloud2
           Color: 0; 0; 0
           Color Transformer: FlatColor
           Decay Time: 0
@@ -324,12 +366,16 @@ Visualization Manager:
           Min Color: 0; 0; 0
           Name: city_twin
           Position Transformer: XYZ
-          Queue Size: 10
           Selectable: true
           Size (Pixels): 3
           Size (m): 0.10000000149011612
           Style: Flat Squares
-          Topic: /city_twin
+          Topic:
+            Depth: 5
+            Durability Policy: Transient Local
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /city_twin
           Unreliable: false
           Use Fixed Frame: true
           Use rainbow: true
@@ -342,7 +388,7 @@ Visualization Manager:
             Value: true
           Axis: Z
           Channel Name: intensity
-          Class: rviz/PointCloud2
+          Class: rviz_default_plugins/PointCloud2
           Color: 255; 0; 0
           Color Transformer: FlatColor
           Decay Time: 0
@@ -352,12 +398,16 @@ Visualization Manager:
           Min Color: 0; 0; 0
           Name: /svo/registered_backend_points
           Position Transformer: XYZ
-          Queue Size: 10
           Selectable: true
           Size (Pixels): 3
           Size (m): 0.15000000596046448
           Style: Flat Squares
-          Topic: /svo/w_backend_points_registered
+          Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /svo/w_backend_points_registered
           Unreliable: false
           Use Fixed Frame: true
           Use rainbow: true
@@ -365,7 +415,7 @@ Visualization Manager:
         - Alpha: 1
           Axes Length: 1
           Axes Radius: 0.10000000149011612
-          Class: rviz/PoseWithCovariance
+          Class: rviz_default_plugins/PoseWithCovariance
           Color: 255; 25; 0
           Covariance:
             Orientation:
@@ -386,11 +436,15 @@ Visualization Manager:
           Head Length: 1.5
           Head Radius: 0.5
           Name: /svo/global_pose_registrated
-          Queue Size: 10
           Shaft Length: 1
           Shaft Radius: 0.30000001192092896
           Shape: Arrow
-          Topic: /svo/w_registrated_pose
+          Topic:
+            Depth: 5
+            Durability Policy: Volatile
+            History Policy: Keep Last
+            Reliability Policy: Reliable
+            Value: /svo/w_registrated_pose
           Unreliable: false
           Value: true
       Enabled: true
@@ -398,33 +452,41 @@ Visualization Manager:
     - Alpha: 1
       Axes Length: 1
       Axes Radius: 0.10000000149011612
-      Class: rviz/Pose
+      Class: rviz_default_plugins/Pose
       Color: 0; 255; 0
       Enabled: true
       Head Length: 1.5
       Head Radius: 0.5
       Name: /ground_truth
-      Queue Size: 10
       Shaft Length: 2
       Shaft Radius: 0.30000001192092896
       Shape: Arrow
-      Topic: /groundtruth
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /groundtruth
       Unreliable: true
       Value: true
     - Alpha: 1
       Axes Length: 1.5
       Axes Radius: 1
-      Class: rviz/Pose
+      Class: rviz_default_plugins/Pose
       Color: 255; 25; 0
       Enabled: true
       Head Length: 1.5
       Head Radius: 0.10000000149011612
       Name: /gps
-      Queue Size: 10
       Shaft Length: 1
       Shaft Radius: 0.30000001192092896
       Shape: Axes
-      Topic: /gps
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /gps
       Unreliable: false
       Value: true
   Enabled: true
@@ -435,26 +497,41 @@ Visualization Manager:
     Frame Rate: 30
   Name: root
   Tools:
-    - Class: rviz/Interact
+    - Class: rviz_default_plugins/Interact
       Hide Inactive Objects: true
-    - Class: rviz/MoveCamera
-    - Class: rviz/Select
-    - Class: rviz/FocusCamera
-    - Class: rviz/Measure
-    - Class: rviz/SetInitialPose
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+    - Class: rviz_default_plugins/FocusCamera
+    - Class: rviz_default_plugins/Measure
+    - Class: rviz_default_plugins/SetInitialPose
       Theta std deviation: 0.2617993950843811
-      Topic: /initialpose
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /initialpose
       X std deviation: 0.5
       Y std deviation: 0.5
-    - Class: rviz/SetGoal
-      Topic: /move_base_simple/goal
-    - Class: rviz/PublishPoint
+    - Class: rviz_default_plugins/SetGoal
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /move_base_simple/goal
+    - Class: rviz_default_plugins/PublishPoint
       Single click: true
-      Topic: /clicked_point
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /clicked_point
   Value: true
   Views:
     Current:
-      Class: rviz/Orbit
+      Class: rviz_default_plugins/Orbit
       Distance: 39.32735824584961
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -476,7 +553,7 @@ Visualization Manager:
       Yaw: 2.72060489654541
     Saved: ~
 Window Geometry:
-  /svo/image/0:
+  /svo/image_with_features_0:
     collapsed: false
   Displays:
     collapsed: false

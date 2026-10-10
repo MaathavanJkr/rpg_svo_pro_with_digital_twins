@@ -2,8 +2,7 @@ import argparse
 import os
 
 import numpy as np
-import rosbag
-import rospy
+from vikit_py.rosbag_utils import read_messages, BagWriter, sec_to_stamp
 from geometry_msgs.msg import PoseStamped
 
 
@@ -37,12 +36,13 @@ if __name__ == "__main__":
     gp_measurements = np.asarray(gp_measurements)
 
 
-    in_bag = rosbag.Bag(args.bag_fn)
-    out_bag_name = os.path.join(args.out_dir, os.path.basename(args.bag_fn)[:-4] + '_with_gp.bag')
-    out_bag = rosbag.Bag(out_bag_name, 'w')
+    # Input and output are ROS 2 bags (directories).
+    bag_name = os.path.splitext(os.path.basename(os.path.normpath(args.bag_fn)))[0]
+    out_bag_name = os.path.join(args.out_dir, bag_name + '_with_gp')
+    out_bag = BagWriter(out_bag_name)
 
-    for bag_msg in in_bag:
-        out_bag.write(bag_msg.topic, bag_msg.message, bag_msg.timestamp)
+    for topic, msg, t in read_messages(args.bag_fn):
+        out_bag.write(topic, msg, t)
 
 
     for i, x in enumerate(gp_measurements):
@@ -50,7 +50,7 @@ if __name__ == "__main__":
         val = x[1:]
 
         msg = PoseStamped()
-        msg.header.stamp = rospy.Time(ts)
+        msg.header.stamp = sec_to_stamp(ts)
         msg.pose.position.x = val[0]
         msg.pose.position.y = val[1]
         msg.pose.position.z = val[2]
@@ -62,7 +62,6 @@ if __name__ == "__main__":
         
         out_bag.write('/gp_data', msg, msg.header.stamp)
 
-    out_bag.flush()
     out_bag.close()
     print("Bag saved to %s" % out_bag_name)
 

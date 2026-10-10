@@ -1,6 +1,4 @@
-#!/usr/bin/env python
-import os
-import rospy
+#!/usr/bin/env python3
 import argparse
 from qt_gui.plugin import Plugin
 from .svo_widget import SvoWidget
@@ -20,7 +18,7 @@ class Svo(Plugin):
     args = self._parse_args(context.argv())
 
     # Create QWidget
-    self._widget = SvoWidget(svo_namespace=args.topic)
+    self._widget = SvoWidget(context.node, svo_namespace=args.topic or 'svo')
 
     # Show _widget.windowTitle on left-top of each plugin (when
     # it's set in _widget). This is useful when you open multiple
@@ -45,6 +43,9 @@ class Svo(Plugin):
   #   group = parser.add_argument_group('Options for rqt_svo plugin')
   #   group.add_argument('--topic', type=argparse.FileType('r'), nargs='*', default=[], help='Svo Info Topic to display')
   #   return parser.parse_args(argv)
+
+  def shutdown_plugin(self):
+    self._widget.shutdown()
 
   def save_settings(self, plugin_settings, instance_settings):
      # TODO save intrinsic configuration, usually using:

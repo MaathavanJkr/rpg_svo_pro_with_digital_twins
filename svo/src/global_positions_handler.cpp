@@ -5,6 +5,7 @@
 
 #include <numeric>
 
+#include <svo/common/logging.h>
 #include <vikit/math_utils.h>
 #include <vikit/csv_utils.h>
 #include <vikit/timer.h>
@@ -433,7 +434,7 @@ bool GlobalPositionsHandler::estimateTransformation(Transformation& T_w_vio) {
     return false;
   }
 
-  ROS_INFO_STREAM("GPS Alignment done.");
+  SVO_INFO_STREAM("GPS Alignment done.");
 
 
   T_vio_w_ = Transformation(T);

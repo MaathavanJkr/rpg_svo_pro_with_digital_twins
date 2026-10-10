@@ -3,6 +3,10 @@
 int main(int argc, char **argv)
 {
   svo_ros::SvoNodeBase::initThirdParty(argc, argv);
-  svo_ros::SvoNodeBase node;
-  node.run();
+  {
+    svo_ros::SvoNodeBase node;
+    node.run();
+  }
+  rclcpp::shutdown();
+  return 0;
 }

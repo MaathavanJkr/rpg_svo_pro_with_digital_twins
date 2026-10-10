@@ -1,7 +1,7 @@
 import open3d as o3d
 import numpy as np
 import laspy
-import rosbag
+from vikit_py.rosbag_utils import BagReader, BagWriter, stamp_to_sec, sec_to_stamp  # ROS 2 bags (ROS 1: rosbag/rospy)
 from geometry_msgs.msg import PoseStamped
 
 def filter_point_cloud(pcd, x_min=-1000, y_min= -10000, z_min=-1500, xmax=1000, ymax=1050, zmax=1500):
@@ -35,7 +35,7 @@ def execute_icp(source, target, initial_transformation):
 
 
 def read_rosbag_trajectory(bag_file_path, topic_name):
-    bag = rosbag.Bag(bag_file_path)
+    bag = BagReader(bag_file_path)
     points = []
 
     for topic, msg, t in bag.read_messages(topics=[topic_name]):
@@ -53,8 +53,8 @@ def transform_pose_stamped(pose, transformation_matrix):
     return pose
 
 def create_outbag(input_bag_path, output_bag_path, topic_name, transformation_matrix):
-    in_bag = rosbag.Bag(input_bag_path, 'r')
-    out_bag = rosbag.Bag(output_bag_path, 'w')
+    in_bag = BagReader(input_bag_path)
+    out_bag = BagWriter(output_bag_path)
     
     for topic, msg, t in in_bag.read_messages():
         if topic != topic_name:
@@ -66,7 +66,7 @@ def create_outbag(input_bag_path, output_bag_path, topic_name, transformation_ma
         transformed_msg.header = msg.header
         transformed_msg.pose = transformed_pose
         out_bag.write(topic_name + "_enu", transformed_msg, t)
-        # print("t : ", t.to_sec())
+        # print("t : ", stamp_to_sec(t))
     
     in_bag.close()
     out_bag.close()

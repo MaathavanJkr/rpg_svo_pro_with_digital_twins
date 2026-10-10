@@ -28,7 +28,6 @@
 #include <svo/pgo/pgo.h>
 #include <rpg_common/eigen_type.h>
 #include <rpg_common/aligned.h>
-#include <ros/ros.h>
 
 #include "svo/online_loopclosing/bow.h"
 #include "svo/online_loopclosing/geometric_verification.h"

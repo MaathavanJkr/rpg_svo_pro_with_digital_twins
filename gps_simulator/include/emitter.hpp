@@ -8,8 +8,8 @@
 #include <iostream>
 
 #include "constellation.hpp"
-#include "ros/ros.h"
-#include "geometry_msgs/PointStamped.h"
+#include <rclcpp/rclcpp.hpp>
+#include "satellite_simulator/msg/emitter_msg.hpp"
 #include <Eigen/Dense>
 #include "satellite_param.hpp"
 #include <thread>
@@ -19,7 +19,7 @@
 class Emitter  {
 public:
 
-    Emitter(ros::NodeHandle& nh, double t0, const SatelliteParam& param);
+    Emitter(rclcpp::Node* nh, double t0, const SatelliteParam& param);
 
     ~Emitter();
 
@@ -28,7 +28,7 @@ public:
     void publish() ;
 
     void process() ;
-    ros::Publisher position_publisher;
+    rclcpp::Publisher<satellite_simulator::msg::EmitterMsg>::SharedPtr position_publisher;
 
     SatelliteParam param;
 
@@ -39,7 +39,8 @@ public:
 
 private:
 
-    ros::Publisher pseudorange_publisher;
+    rclcpp::Node* nh_;
+    rclcpp::Publisher<satellite_simulator::msg::EmitterMsg>::SharedPtr pseudorange_publisher;
 
     double calculate_elevation_angle();
 

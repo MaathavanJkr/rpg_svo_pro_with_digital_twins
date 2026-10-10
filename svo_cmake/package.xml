@@ -1,15 +1,17 @@
 <?xml version="1.0"?>
-<package format="2">
+<package format="3">
   <name>svo_cmake</name>
+  <version>0.1.0</version>
   <description>
     CMake configuration, scripts and macros common for common SVO usage
   </description>
-  <version>0.1.0</version>
-  <license>tbd</license>
-
   <maintainer email="forster@ifi.uzh.ch">Christian Forster</maintainer>
+  <license>GPLv3</license>
   <author>Manuel Werlberger</author>
 
-  <buildtool_depend>catkin</buildtool_depend>
-  <buildtool_depend>catkin_simple</buildtool_depend>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
 </package>

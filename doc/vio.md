@@ -7,15 +7,15 @@ Loop closure and correction using DBoW2 is also supported, but we are relative c
 ## Examples on EuRoC
 Source the workspace first:
 ```sh
-source ~/svo_ws/devel/setup.bash
+source ~/svo_ws/install/setup.bash
 ```
 
 ## Monocular VIO
 ```sh
 # launch svo
-roslaunch svo_ros euroc_vio_mono.launch
-# run the EuRoC bag
-rosbag play V2_02_medium.bag -s 10
+ros2 launch svo_ros euroc_vio_mono.launch.py
+# run the EuRoC bag (ROS 1 bags: convert first with `rosbags-convert --src X.bag --dst X`)
+ros2 bag play V2_02_medium --start-offset 10
 ```
 You might need to adjust a starting time to get the monocular pipeline started properly, as in the pure monocular case. You should be able to see a visualization like this:
 
@@ -30,9 +30,9 @@ You will also see line segments that connecting the current frame and the past k
 ## Stereo VIO
 ```sh
 # launch svo
-roslaunch svo_ros euroc_vio_stereo.launch
-# run the EuRoC bag
-rosbag play V2_03_difficult.bag
+ros2 launch svo_ros euroc_vio_stereo.launch.py
+# run the EuRoC bag (ROS 1 bags: convert first with `rosbags-convert --src X.bag --dst X`)
+ros2 bag play V2_03_difficult
 ```
 You should be able to see similar visualization as in the monocular case.
 

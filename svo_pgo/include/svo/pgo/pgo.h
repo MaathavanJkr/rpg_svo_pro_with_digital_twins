@@ -65,7 +65,7 @@ private:
   ceres::Solver::Options options_;
   ceres::Solver::Summary summary_;
   ceres::LossFunction* loss_function_ = NULL;
-  ceres::LocalParameterization* quaternion_local_parameterization_ =
-      new ceres::EigenQuaternionParameterization;
+  ceres::Manifold* quaternion_local_parameterization_ =
+      new ceres::EigenQuaternionManifold;
 };
 }

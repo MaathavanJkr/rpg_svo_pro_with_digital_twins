@@ -1,8 +1,8 @@
 #pragma once
 
-#include <ros/ros.h>
-#include <sensor_msgs/image_encodings.h>
-#include <cv_bridge/cv_bridge.h>
+#include <string>
+#include <sensor_msgs/image_encodings.hpp>
+#include <cv_bridge/cv_bridge.hpp>
 
 namespace vk {
 namespace img_type_conversion

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """
 @author: Christian Forster
 """
@@ -6,7 +6,6 @@
 import os
 import sys
 import yaml
-import rospkg
 import argparse
 import time
 import ros_node
@@ -19,9 +18,15 @@ from colorama import init, Fore
 init(autoreset=True)
 
 
+def benchmarking_dir():
+    """svo_benchmarking source folder (ROS 1: rospkg.RosPack().get_path('svo_benchmarking'))."""
+    return os.environ.get('SVO_BENCHMARKING_DIR', os.path.dirname(
+        os.path.dirname(os.path.realpath(__file__))))
+
+
 def get_cpu_info():
     command = "cat /proc/cpuinfo"
-    all_info = subprocess.check_output(command, shell=True).strip()
+    all_info = subprocess.check_output(command, shell=True).decode().strip()
     for line in all_info.split("\n"):
         if "model name" in line:
             model_name = re.sub(".*model name.*:", "", line, 1).strip()
@@ -56,8 +61,8 @@ def run_single_experiment(params, node='svo_ros', node_name='benchmark'):
     dataset_params_file = os.path.join(params['dataset_directory'],
                                        'dataset.yaml')
     if os.path.exists(dataset_params_file):
-        dataset_params = yaml.load(open(dataset_params_file, 'r'))
-        params = dict(params.items() + dataset_params.items())
+        dataset_params = yaml.safe_load(open(dataset_params_file, 'r'))
+        params = {**params, **dataset_params}
 
     # Check that calibration file exists
     calib_name = 'calib.yaml'
@@ -73,11 +78,10 @@ def run_single_experiment(params, node='svo_ros', node_name='benchmark'):
                     os.path.join(params['trace_dir'], 'calib.yaml'))
 
     # execute ros node
-    os.system('rosparam delete /svo')
     node = ros_node.RosNode(node, node_name)
     node.run(params, '', True, params['trace_dir'])
-    os.system('rosparam dump '+os.path.join(params['trace_dir'],
-                                            'params_ros.yaml'))
+    # (ROS 2: parameters only live in the node, so there is no global
+    # parameter server to dump; params.yaml below contains all of them.)
 
     # dump experiment params to file and copy the other parameter files:
     params['platform'] = get_cpu_info()
@@ -92,11 +96,11 @@ def run_experiments(experiment_file, num_monte_carlo_runs=None,
                     align_type='posyaw', n_aligned=-1):
     experiment_file = experiment_file.replace('.yaml', '')
     experiment_params_file = os.path.join(
-        rospkg.RosPack().get_path('svo_benchmarking'),
+        benchmarking_dir(),
         'experiments', experiment_file+'.yaml')
 
     # Load base algorithm parameters.
-    experiment_params = yaml.load(open(experiment_params_file, 'r'))
+    experiment_params = yaml.safe_load(open(experiment_params_file, 'r'))
     base_params = dict()
     base_params['experiment_label'] = experiment_params['experiment_label']
     base_params['time'] = time.strftime("%Y%m%d_%H%M%S", time.localtime())
@@ -107,8 +111,7 @@ def run_experiments(experiment_file, num_monte_carlo_runs=None,
 
     # pipeline parameters
     if 'settings' in experiment_params:
-        base_params = dict(base_params.items() +
-                           experiment_params['settings'].items())
+        base_params = {**base_params, **experiment_params['settings']}
     # benchmark node flag: verbosity, etc.
     if 'flags' in experiment_params:
         base_params['flags'] = experiment_params['flags']
@@ -117,7 +120,7 @@ def run_experiments(experiment_file, num_monte_carlo_runs=None,
 
     # Get base folder where trace-folder is created.
     trace_base_dir = os.path.join(
-        rospkg.RosPack().get_path('svo_benchmarking'), 'results')
+        benchmarking_dir(), 'results')
     if 'trace_base_dir' in experiment_params:
         trace_base_dir = experiment_params['trace_base_dir']
         print("Overwrite the default trace directory with {0}.".format(
@@ -143,7 +146,7 @@ def run_experiments(experiment_file, num_monte_carlo_runs=None,
 
         # Check if dataset directory exists
         cur_params['dataset_directory'] = os.path.join(
-            rospkg.RosPack().get_path('svo_benchmarking'),
+            benchmarking_dir(),
             'data', dataset_cfg['name'])
         assert os.path.exists(cur_params['dataset_directory']),\
             "Dataset {0} does not exist.".format(
@@ -154,8 +157,8 @@ def run_experiments(experiment_file, num_monte_carlo_runs=None,
         dataset_params_file = os.path.join(cur_params['dataset_directory'],
                                            'dataset.yaml')
         if os.path.exists(dataset_params_file):
-            dataset_params = yaml.load(open(dataset_params_file, 'r'))
-            cur_params = dict(cur_params.items() + dataset_params.items())
+            dataset_params = yaml.safe_load(open(dataset_params_file, 'r'))
+            cur_params = {**cur_params, **dataset_params}
         else:
             cur_params['dataset_name'] = dataset_cfg['name']
 

@@ -1,8 +1,0 @@
-prefix=/usr/local
-
-Name: svo_ros
-Description: Description of svo_ros
-Version: 0.1.0
-Cflags: -I${prefix}/include
-Libs: -L${prefix}/lib -lsvo_ros -lsvo_nodelet
-Requires: cmake_modules cv_bridge image_transport nodelet roscpp nav_msgs pcl_ros sensor_msgs std_msgs tf visualization_msgs

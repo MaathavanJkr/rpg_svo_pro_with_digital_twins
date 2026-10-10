@@ -1,18 +1,16 @@
+cmake_minimum_required(VERSION 3.16)
 project(rpg_common)
-cmake_minimum_required(VERSION 2.8.3)
 
-find_package(catkin_simple REQUIRED)
-catkin_simple(ALL_DEPS_REQUIRED)
-find_package(OpenCV REQUIRED)
+find_package(ament_cmake_auto REQUIRED)
+ament_auto_find_build_dependencies()
 
-add_definitions(-std=c++11)
+include(SvoSetup)
 
 FILE(GLOB_RECURSE HEADERS "include/*")
 
 list(APPEND SOURCES src/fs.cpp)
 
-cs_add_library(${PROJECT_NAME} ${HEADERS} ${SOURCES})
-target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBRARIES})
+ament_auto_add_library(${PROJECT_NAME} SHARED ${HEADERS} ${SOURCES})
+target_link_libraries(${PROJECT_NAME} ${SVO_SYSTEM_LIBRARIES})
 
-cs_install()
-cs_export()
+ament_auto_package()

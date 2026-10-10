@@ -1,11 +1,11 @@
+cmake_minimum_required(VERSION 3.16)
 project(svo_online_loopclosing)
-cmake_minimum_required(VERSION 2.8.3)
 
-find_package(catkin_simple REQUIRED)
-catkin_simple(ALL_DEPS_REQUIRED)
-find_package(OpenCV REQUIRED)
-message(STATUS "CMAKE_PREFIX_PATH: ${CMAKE_PREFIX_PATH}")
+find_package(ament_cmake_auto REQUIRED)
+ament_auto_find_build_dependencies()
+
 include(SvoSetup)
+find_package(opengv REQUIRED)
 
 set(HEADERS
   include/svo/online_loopclosing/bow.h
@@ -25,15 +25,18 @@ set(SOURCES
   src/map_alignment.cpp
   )
 
-#add_executable(svo_online_loopclosing ${SOURCES} ${HEADERS})
-cs_add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS})
-target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBRARIES})
+ament_auto_add_library(${PROJECT_NAME} SHARED ${SOURCES} ${HEADERS})
+target_link_libraries(${PROJECT_NAME} opengv ${SVO_SYSTEM_LIBRARIES})
 
-cs_add_library(bow src/bow.cpp include/svo/online_loopclosing/bow.h)
-target_link_libraries(bow ${OpenCV_LIBRARIES})
+ament_auto_add_library(bow SHARED src/bow.cpp include/svo/online_loopclosing/bow.h
+  NO_TARGET_LINK_LIBRARIES)
+target_link_libraries(bow ${SVO_SYSTEM_LIBRARIES})
 
-cs_add_executable(createvoc test/createvoc.cpp)
-target_link_libraries(createvoc bow)
+if(BUILD_TESTING)
+  add_executable(createvoc test/createvoc.cpp)
+  target_link_libraries(createvoc bow ament_index_cpp::ament_index_cpp)
+endif()
 
-cs_install()
-cs_export()
+install(DIRECTORY vocabularies DESTINATION share/${PROJECT_NAME})
+
+ament_auto_package()

@@ -6,8 +6,7 @@
 #include <string>
 #include <vector>
 #include <yaml-cpp/yaml.h>
-#include "ros/ros.h"
-#include "geometry_msgs/PointStamped.h"
+#include <rclcpp/rclcpp.hpp>
 #include <Eigen/Dense>
 #include "satellite_param.hpp"
 #include <thread>
@@ -16,7 +15,7 @@
 
 class Constellation {
 public:
-    Constellation(const std::string& filename, ros::NodeHandle& nh);
+    Constellation(const std::string& filename, rclcpp::Node* nh);
     ~Constellation();
 
     void startAllSatellites();

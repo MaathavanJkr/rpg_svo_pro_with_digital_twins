@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>eigen_checks</name>
+  <version>0.0.1</version>
+  <description>
+    ament wrapper building eigen_checks (ethz-asl/eigen_checks): glog/gtest checks for Eigen types.
+    The upstream sources are downloaded at configure time at a pinned commit.
+  </description>
+  <maintainer email="cioffi@ifi.uzh.ch">Giovanni Cioffi</maintainer>
+  <license>BSD</license>
+  <url type="repository">https://github.com/ethz-asl/eigen_checks</url>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>eigen</depend>
+  <depend>libgoogle-glog-dev</depend>
+  <depend>gtest</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

@@ -1,12 +1,26 @@
-#!/usr/bin/env python
+from setuptools import setup
 
-from distutils.core import setup
-from catkin_pkg.python_setup import generate_distutils_setup
+package_name = 'rqt_svo'
 
-d = generate_distutils_setup(
-    packages=['rqt_svo'],
+setup(
+    name=package_name,
+    version='0.0.0',
     package_dir={'': 'src'},
-    scripts=['scripts/rqt_svo']
+    packages=[package_name],
+    data_files=[
+        ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
+        ('share/' + package_name, ['package.xml', 'plugin.xml']),
+        ('share/' + package_name + '/resource', ['resource/widget.ui']),
+    ],
+    install_requires=['setuptools'],
+    zip_safe=True,
+    maintainer='cforster',
+    maintainer_email='cforster@todo.todo',
+    description='rqt plugin for SVO - Semi-Direct Visual Odometry',
+    license='TODO',
+    entry_points={
+        'console_scripts': [
+            'rqt_svo = rqt_svo.main:main',
+        ],
+    },
 )
-
-setup(**d)

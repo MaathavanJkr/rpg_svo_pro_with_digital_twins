@@ -7,12 +7,11 @@ import pyproj
 import pandas as pd
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-import rosbag
+from vikit_py.rosbag_utils import BagReader, BagWriter, stamp_to_sec, sec_to_stamp  # ROS 2 bags (ROS 1: rosbag/rospy)
 from std_msgs.msg import Header
 from geometry_msgs.msg import PoseStamped, Pose
 from sensor_msgs.msg import NavSatFix
 from datetime import datetime
-import rospy
 from tf.transformations import quaternion_from_matrix, quaternion_matrix
 
 class GeoTransform:
@@ -141,15 +140,17 @@ with open(gpx_file, 'r') as gpx_file:
                     'elevation': point.elevation
                 })
 
-with rosbag.Bag(out_bag_file, 'w') as outbag:
-    with rosbag.Bag(in_bag_file, 'r') as inbag:
+# rosbag2 cannot append to a bag: keep the writer open for both passes.
+outbag = BagWriter(out_bag_file)
+if True:
+    with BagReader(in_bag_file) as inbag:
         for topic, msg, t in inbag.read_messages():
             # if(ini):
-            #     t0_lidar = t.to_sec()
+            #     t0_lidar = stamp_to_sec(t)
             #     ini = False
             #     print('t0 removed : ', t0_lidar)
             # if topic == '/gps_lidar':
-            #     header = Header(stamp=rospy.Time.from_sec(t.to_sec()-t0_lidar), frame_id='world')
+            #     header = Header(stamp=sec_to_stamp(stamp_to_sec(t)-t0_lidar), frame_id='world')
             #     T_raw = np.eye(4)
             #     T_raw[:3, 3] = [msg.pose.position.x, msg.pose.position.y, msg.pose.position.z]
             #     T_raw[:3, :3] = quaternion_matrix([msg.pose.orientation.x, msg.pose.orientation.y, msg.pose.orientation.z, msg.pose.orientation.w])[:3, :3]
@@ -165,21 +166,21 @@ with rosbag.Bag(out_bag_file, 'w') as outbag:
             #     m.pose.orientation.z = q[2]
             #     m.pose.orientation.w = q[3]
 
-            #     outbag.write('/ENU_lidar_vio', m, rospy.Time.from_sec(t.to_sec()-t0_lidar))
+            #     outbag.write('/ENU_lidar_vio', m, sec_to_stamp(stamp_to_sec(t)-t0_lidar))
             #     transformed_msg_list.append(m)
-            #     stamp_list.append(t.to_sec() - t0_lidar)
+            #     stamp_list.append(stamp_to_sec(t) - t0_lidar)
             # else:
             if topic in ['/camera_2/image_raw', '/vio_module/imu_filtered', '/col_T_enu_b'] : #, '/gps_lidar_enu', '/gps_lidar']:
-                msg.header = Header(stamp=rospy.Time.from_sec(t.to_sec()), frame_id='world')
-                outbag.write(topic, msg, rospy.Time.from_sec(t.to_sec()))
+                msg.header = Header(stamp=sec_to_stamp(stamp_to_sec(t)), frame_id='world')
+                outbag.write(topic, msg, sec_to_stamp(stamp_to_sec(t)))
 
-with rosbag.Bag(out_bag_file, 'a') as outbag:
+if True:  # (ROS 1: re-opened the bag in append mode)
     t0 = gpx_data[0]['time'].timestamp()
     for data in gpx_data:
         enu_coords = geo_transform.geo2enu(data['latitude'], data['longitude'], data['elevation'])
         
         gps_pose_msg = PoseStamped()
-        gps_pose_msg.header = Header(stamp=rospy.Time.from_sec(data['time'].timestamp()-t0), frame_id='world')
+        gps_pose_msg.header = Header(stamp=sec_to_stamp(data['time'].timestamp()-t0), frame_id='world')
         gps_pose_msg.pose.position.x = enu_coords[0] - 26
         gps_pose_msg.pose.position.y = enu_coords[1]
         gps_pose_msg.pose.position.z = enu_coords[2]
@@ -194,14 +195,15 @@ with rosbag.Bag(out_bag_file, 'a') as outbag:
         navsat_msg.altitude = geo_coords[2] #data['elevation']
 
         navsat_msg.position_covariance = [
-            400, 0, 0,
-            0, 400, 0,
-            0, 0, 400
+            400.0, 0.0, 0.0,
+            0.0, 400.0, 0.0,
+            0.0, 0.0, 400.0
         ]
 
         navsat_msg.position_covariance_type = NavSatFix.COVARIANCE_TYPE_DIAGONAL_KNOWN
                 
-        outbag.write('/ENU_gps', gps_pose_msg, rospy.Time.from_sec(data['time'].timestamp()-t0+129)) #approximate guess of the time offset, will be corrected next =script.
-        outbag.write('/gps_t', navsat_msg, rospy.Time.from_sec(data['time'].timestamp()-t0+129))
+        outbag.write('/ENU_gps', gps_pose_msg, sec_to_stamp(data['time'].timestamp()-t0+129)) #approximate guess of the time offset, will be corrected next =script.
+        outbag.write('/gps_t', navsat_msg, sec_to_stamp(data['time'].timestamp()-t0+129))
 
+outbag.close()
 print("saved to ", out_bag_file)

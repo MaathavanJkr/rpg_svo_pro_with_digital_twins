@@ -11,9 +11,6 @@
 #include <svo/common/global_positions_settings.h>
 
 
-#include <ros/ros.h>
-#include <geometry_msgs/PoseStamped.h>
-#include <tf/transform_broadcaster.h>
 
 
 namespace svo {

@@ -11,7 +11,7 @@
  */
 
 #include <fstream>
-#include <ros/package.h>
+#include <ament_index_cpp/get_package_share_directory.hpp>
 
 #include "svo/online_loopclosing/bow.h"
 
@@ -34,8 +34,8 @@ int main(int argc, char* argv[])
   const WeightingType weight = TF_IDF;
   const ScoringType score = BHATTACHARYYA;
   stringstream voc_save_path_;
-  voc_save_path_ << ros::package::getPath("svo_online_loopclosing") << "/vocabu"
-                                                                       "laries";
+  voc_save_path_ << ament_index_cpp::get_package_share_directory(
+                       "svo_online_loopclosing") << "/vocabularies";
   string voc_save_path = voc_save_path_.str();
 
   string voc_name = std::string(argv[2]);

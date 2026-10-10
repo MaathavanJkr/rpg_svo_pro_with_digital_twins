@@ -5,13 +5,13 @@
 
 #pragma once
 
-#include <boost/shared_ptr.hpp>
-#include <ros/ros.h>
-#include <pcl_ros/point_cloud.h>
+#include <rclcpp/rclcpp.hpp>
+#include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
-#include <pcl_conversions/pcl_conversions.h>
-#include <geometry_msgs/PoseWithCovarianceStamped.h>
-#include <geometry_msgs/PoseStamped.h>
+#include <geometry_msgs/msg/pose_with_covariance_stamped.hpp>
+#include <geometry_msgs/msg/pose_stamped.hpp>
+#include <sensor_msgs/msg/point_cloud2.hpp>
+#include <svo_msgs/msg/pose_with_cloud.hpp>
 
 #include <svo/vio_common/backend_types.hpp>
 #include <mutex>
@@ -30,7 +30,7 @@ public:
   const std::string kWorldFrame = "world";
   const std::string kVIOFrame = "vio";
 
-  CeresBackendPublisher(const ros::NodeHandle& nh_private,
+  CeresBackendPublisher(const rclcpp::Node::SharedPtr& nh_private,
                         const std::shared_ptr<ceres_backend::Map>& map_ptr);
   ~CeresBackendPublisher()
   {
@@ -73,7 +73,7 @@ public:
                const int32_t seq, bool last_f_is_KF);
 
 private:
-  ros::NodeHandle pnh_;
+  rclcpp::Node::SharedPtr pnh_;
 
   mutable std::mutex mutex_frame_id_;
 
@@ -99,26 +99,26 @@ private:
   }
 
   // publisher helpers
-  ros::Publisher pub_vio_imu_pose_;
-  ros::Publisher pub_vio_imu_pose_viz_;
-  ros::Publisher pub_vio_points_;
+  rclcpp::Publisher<geometry_msgs::msg::PoseWithCovarianceStamped>::SharedPtr pub_vio_imu_pose_;
+  rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr pub_vio_imu_pose_viz_;
+  rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr pub_vio_points_;
 
-  ros::Publisher pub_w_imu_pose_;
-  ros::Publisher pub_w_pose_points_;
-  ros::Publisher pub_w_imu_pose_viz_;
-  ros::Publisher pub_w_points_;
+  rclcpp::Publisher<geometry_msgs::msg::PoseWithCovarianceStamped>::SharedPtr pub_w_imu_pose_;
+  rclcpp::Publisher<svo_msgs::msg::PoseWithCloud>::SharedPtr pub_w_pose_points_;
+  rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr pub_w_imu_pose_viz_;
+  rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr pub_w_points_;
 
-  geometry_msgs::PoseWithCovarianceStamped makePoseWithCovarianceMsg(
+  geometry_msgs::msg::PoseWithCovarianceStamped makePoseWithCovarianceMsg(
     const Eigen::Quaterniond& q,
     const Eigen::Vector3d& p,
-    const ros::Time& time,
+    const rclcpp::Time& time,
     int32_t seq, const std::string& frame_id);
 
 
-  geometry_msgs::PoseStamped makePoseMsg(
+  geometry_msgs::msg::PoseStamped makePoseMsg(
     const Eigen::Quaterniond& q,
     const Eigen::Vector3d& p,
-    const ros::Time& time,
+    const rclcpp::Time& time,
     int32_t seq, const std::string& frame_id) ;
 
   // publisher functions

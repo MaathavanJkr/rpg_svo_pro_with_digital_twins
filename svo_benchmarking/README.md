@@ -66,7 +66,7 @@ Each dataset folder is what we get from using `dataset_tools` in the previous st
 ### Run a configuration
 After the preparation is done, you can run one configuration via
 ```
-rosrun svo_benchmarking benchmark.py <config_name>.yaml
+python3 svo_benchmarking/scripts/benchmark.py <config_name>.yaml
 ```
 The results are written to `results/<time>_<config_name>`,
 and the results for each dataset are put into a corresponding sub-folder.

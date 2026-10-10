@@ -1,6 +1,6 @@
 # GPS Simulator
 
-The GPS Simulator is a ROS-based tool for simulating GPS data using real-world ephemeris data and Gaussian models. It incorporates the effects of multipath errors and provides trilaterated receiver positions in multiple coordinate frames.
+The GPS Simulator is a ROS 2 tool for simulating GPS data using real-world ephemeris data and Gaussian models. It incorporates the effects of multipath errors and provides trilaterated receiver positions in multiple coordinate frames.
 
 ## Overview
 
@@ -32,7 +32,7 @@ The simulator models GPS signals by:
 To start the GPS simulator, use the following command:
 
 ```bash
-roslaunch satellite_simulator gnss_simulator.launch
+ros2 launch satellite_simulator gnss_simulator.launch.py
 ```
 ## Example Models
 

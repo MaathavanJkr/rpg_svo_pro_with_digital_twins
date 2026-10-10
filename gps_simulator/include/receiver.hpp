@@ -1,14 +1,13 @@
 #ifndef RECEIVER_HPP
 #define RECEIVER_HPP
 
-#include <ros/ros.h>
-#include <geometry_msgs/PoseStamped.h>
-#include <geometry_msgs/PointStamped.h>
-#include <std_msgs/Int32.h>
-#include "satellite_simulator/DoubleMsg.h"
-#include "satellite_simulator/EmitterMsg.h"
-#include "satellite_simulator/DoubleArrayMsg.h"
-#include "satellite_simulator/IntMsg.h"
+#include <rclcpp/rclcpp.hpp>
+#include <geometry_msgs/msg/pose_stamped.hpp>
+#include <geometry_msgs/msg/point_stamped.hpp>
+#include "satellite_simulator/msg/double_msg.hpp"
+#include "satellite_simulator/msg/emitter_msg.hpp"
+#include "satellite_simulator/msg/double_array_msg.hpp"
+#include "satellite_simulator/msg/int_msg.hpp"
 #include "constellation.hpp"
 #include "emitter.hpp"
 #include "frame_handler.hpp"
@@ -48,8 +47,8 @@ private:
 
 class Receiver {
 public:
-    Receiver(GNSS &gnss, const std::string& config_path)
-        : gen(rd()), d(0, 2) {
+    Receiver(GNSS &gnss, const std::string& config_path, const rclcpp::Node::SharedPtr& nh)
+        : nh_(nh), gen(rd()), d(0, 2) {
 
         YAML::Node config = YAML::LoadFile(config_path);
 
@@ -57,13 +56,17 @@ public:
         number_of_satellite_topic = config["number_of_satellite_topic"].as<std::string>();
         ground_truth_topic = config["ground_truth_topic"].as<std::string>();
 
-        lla_receiver_pub = nh_.advertise<geometry_msgs::PointStamped>("/gnss_simulator/LLA", 1);
-        ecef_receiver_pub = nh_.advertise<geometry_msgs::PointStamped>("/gnss_simulator/ECEF", 1);
-        enu_receiver_pub = nh_.advertise<geometry_msgs::PoseStamped>("/gnss_simulator/ENU", 1);
+        lla_receiver_pub = nh_->create_publisher<geometry_msgs::msg::PointStamped>("/gnss_simulator/LLA", 1);
+        ecef_receiver_pub = nh_->create_publisher<geometry_msgs::msg::PointStamped>("/gnss_simulator/ECEF", 1);
+        enu_receiver_pub = nh_->create_publisher<geometry_msgs::msg::PoseStamped>("/gnss_simulator/ENU", 1);
 
-        reciever_number_of_visible_satellites = nh_.subscribe<satellite_simulator::IntMsg>(number_of_satellite_topic, 1, &Receiver::nSatLOSCallback, this);
-        reciever_multipath_errors = nh_.subscribe(pseudorange_error_topic, 1, &Receiver::multipathCallback, this);
-        reciever_groundtruth = nh_.subscribe(ground_truth_topic, 1, &Receiver::groundtruthCallback, this);
+        using std::placeholders::_1;
+        reciever_number_of_visible_satellites = nh_->create_subscription<satellite_simulator::msg::IntMsg>(
+            number_of_satellite_topic, 1, std::bind(&Receiver::nSatLOSCallback, this, _1));
+        reciever_multipath_errors = nh_->create_subscription<satellite_simulator::msg::DoubleArrayMsg>(
+            pseudorange_error_topic, 1, std::bind(&Receiver::multipathCallback, this, _1));
+        reciever_groundtruth = nh_->create_subscription<geometry_msgs::msg::PoseStamped>(
+            ground_truth_topic, 1, std::bind(&Receiver::groundtruthCallback, this, _1));
 
         receiver_enu_gt = Eigen::Vector3d::Zero();
         receiver_ecef_gt = Eigen::Vector3d::Zero();
@@ -77,16 +80,16 @@ public:
 
     void startReceiver();
 
-    void nSatLOSCallback(const satellite_simulator::IntMsg::ConstPtr& msg) {
+    void nSatLOSCallback(const satellite_simulator::msg::IntMsg::ConstSharedPtr& msg) {
         number_satellites_line_of_sight = msg->data.data;
     }
 
-    void groundtruthCallback(const geometry_msgs::PoseStamped::ConstPtr& msg) {
+    void groundtruthCallback(const geometry_msgs::msg::PoseStamped::ConstSharedPtr& msg) {
         groundtruth_enu_frame = Eigen::Vector3d(msg->pose.position.x, msg->pose.position.y, msg->pose.position.z); 
     }
 
 
-    void multipathCallback(const satellite_simulator::DoubleArrayMsg::ConstPtr& msg) {
+    void multipathCallback(const satellite_simulator::msg::DoubleArrayMsg::ConstSharedPtr& msg) {
         std::lock_guard<std::mutex> guard(data_mtx);
         satellites_range_errors_reciever.resize(satellites_range_errors.size()); // listens to the pseudorange generates by the python script 
         for (int i = 0; i < satellites_range_errors.size(); i++) 
@@ -171,36 +174,36 @@ public:
     void publish() {
         if(number_of_recieved_satellites>3) {
             // Publish the receiver position (ECEF, ENU, LLA
-            geometry_msgs::PointStamped msg;
-            msg.header.stamp = ros::Time::now();
+            geometry_msgs::msg::PointStamped msg;
+            msg.header.stamp = nh_->now();
             msg.header.frame_id = "ecef";
             msg.point.x = receiver_ecef_estimate(0);
             msg.point.y = receiver_ecef_estimate(1);
             msg.point.z = receiver_ecef_estimate(2);
-            ecef_receiver_pub.publish(msg);
+            ecef_receiver_pub->publish(msg);
 
-            geometry_msgs::PoseStamped enu_msg;
+            geometry_msgs::msg::PoseStamped enu_msg;
             enu_msg.header.frame_id = "world";
-            enu_msg.header.stamp = ros::Time::now();
+            enu_msg.header.stamp = nh_->now();
 
             enu_msg.pose.position.x = receiver_enu_estimate(0);
             enu_msg.pose.position.y = receiver_enu_estimate(1);
             enu_msg.pose.position.z = receiver_enu_estimate(2);
             enu_msg.pose.orientation.w = 1 ;// receiver_enu_estimate(2);
-            enu_receiver_pub.publish(enu_msg);
+            enu_receiver_pub->publish(enu_msg);
 
             msg.header.frame_id = "geo";
             msg.point.x = receiver_lla_estimate(0);
             msg.point.y = receiver_lla_estimate(1);
             msg.point.z = receiver_lla_estimate(2);
-            lla_receiver_pub.publish(msg);
+            lla_receiver_pub->publish(msg);
 
         }
 
     }
 
 private:
-    ros::NodeHandle nh_;
+    rclcpp::Node::SharedPtr nh_;
     std::string pseudorange_error_topic;
     std::string number_of_satellite_topic;
     std::string ground_truth_topic;
@@ -211,13 +214,13 @@ private:
     std::vector<double> satellites_range_errors_reciever;
     std::vector<double> satellites_range_errors;
 
-    ros::Publisher enu_receiver_pub;
-    ros::Publisher ecef_receiver_pub;
-    ros::Publisher lla_receiver_pub;
+    rclcpp::Publisher<geometry_msgs::msg::PoseStamped>::SharedPtr enu_receiver_pub;
+    rclcpp::Publisher<geometry_msgs::msg::PointStamped>::SharedPtr ecef_receiver_pub;
+    rclcpp::Publisher<geometry_msgs::msg::PointStamped>::SharedPtr lla_receiver_pub;
 
-    ros::Subscriber reciever_number_of_visible_satellites;
-    ros::Subscriber reciever_multipath_errors;
-    ros::Subscriber reciever_groundtruth;
+    rclcpp::Subscription<satellite_simulator::msg::IntMsg>::SharedPtr reciever_number_of_visible_satellites;
+    rclcpp::Subscription<satellite_simulator::msg::DoubleArrayMsg>::SharedPtr reciever_multipath_errors;
+    rclcpp::Subscription<geometry_msgs::msg::PoseStamped>::SharedPtr reciever_groundtruth;
 
     Eigen::Vector3d groundtruth_enu_frame;
 
@@ -227,8 +230,8 @@ private:
     Eigen::Vector3d receiver_lla_estimate;
 
 
-    int number_satellites_line_of_sight;
-    int number_of_recieved_satellites;
+    int number_satellites_line_of_sight = 0;
+    int number_of_recieved_satellites = 0;
 
     std::mutex data_mtx;
 

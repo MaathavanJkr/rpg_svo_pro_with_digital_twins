@@ -3,8 +3,7 @@
 #apply the transform to the trajectory.
 
 
-import rosbag
-import rospy
+from vikit_py.rosbag_utils import BagReader, BagWriter, stamp_to_sec, sec_to_stamp  # ROS 2 bags (ROS 1: rosbag/rospy)
 import tf
 import numpy as np
 from geometry_msgs.msg import PoseStamped
@@ -47,11 +46,11 @@ def find_closest_pose(bag, target_time, topic):
     min_time_diff = float('inf')
     
     for topic, msg, t in bag.read_messages(topics=[topic]):
-        time_diff = abs((msg.header.stamp.to_sec() - target_time))
+        time_diff = abs((stamp_to_sec(msg.header.stamp) - target_time))
         if time_diff < min_time_diff:
             closest_pose = msg
             min_time_diff = time_diff
-            t2 = msg.header.stamp.to_sec()
+            t2 = stamp_to_sec(msg.header.stamp)
     
     return closest_pose, t2
 
@@ -117,7 +116,7 @@ def transform_cov_pose(T, msg):
 def main():
     input_bag = '/home/roxane/SVO_MR_DATA/Oerlikon/SVO_GPS/res4.bag' #/res.bag' #SVO/res.bag' #/res2.bag' #Results/V2/VINS/oerlikon_vins_res.bag' #'/home/roxane/SVO_MR_DATA/Oerlikon/2024-06-09-11-08-18.bag' #SVO_VIO_GPS_v1.bag' #/home/roxane/Results/Recordings/TODO/SVO_VIO_FM.bag' #2024-06-04-20-38-51.bag' #Results/Recordings/2024-06-04-20-09-02.bag' #2024-06-04-10-24-04.bag' #2024-06-03-19-01-55.bag' #2024-06-03-18-25-09.bag' #VIO_GPS_oerlikon.bag'
     output_bag = '/home/roxane/SVO_MR_DATA/Oerlikon/SVO_GPS/res5.bag' #/res2.bag'
-    bag = rosbag.Bag(input_bag)
+    bag = BagReader(input_bag)
 
     idx = 0
     N = 160 #we cant just start at the begining as the yaw isnt initialized yet
@@ -148,7 +147,7 @@ def main():
                 print(idx)
             
             T_WB = pose_to_matrix(msg)
-            t1 = msg.header.stamp.to_sec()
+            t1 = stamp_to_sec(msg.header.stamp)
 
             closest_pose, t2 = find_closest_pose(bag, t1, '/svo/vio_backend_pose_imu') #/svo/vio_backend_pose_imu_viz')
             T_LB = pose_to_matrix(closest_pose.pose)
@@ -177,8 +176,8 @@ def main():
     T_WL = np.linalg.inv(T_LW)
     
     
-    with rosbag.Bag(output_bag, 'w') as outbag:
-        with rosbag.Bag(input_bag, 'r') as inbag:
+    with BagWriter(output_bag) as outbag:
+        with BagReader(input_bag) as inbag:
             for topic, msg, t in inbag.read_messages():
                 if(topic == '/colmap_L_T'):
                     continue

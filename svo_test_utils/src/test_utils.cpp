@@ -5,18 +5,35 @@
 #include <glog/logging.h>
 #include <opencv2/opencv.hpp>
 #ifdef SVO_USE_ROS
-# include <ros/package.h>
-# include <vikit/params_helper.h>
+# include <ament_index_cpp/get_package_share_directory.hpp>
 #endif
 
 namespace svo {
 namespace test_utils {
 
+#ifdef SVO_USE_ROS
+namespace {
+// Replacement of getPackagePath(): returns the share directory of an
+// installed package, or an empty string if the package is not installed.
+std::string getPackagePath(const std::string& package)
+{
+  try
+  {
+    return ament_index_cpp::get_package_share_directory(package);
+  }
+  catch (const std::exception&)
+  {
+    return std::string();
+  }
+}
+} // namespace
+#endif
+
 std::string getDatasetDir()
 {
   const char* env_dir = std::getenv("SVO_DATASET_DIR");
 #ifdef SVO_USE_ROS
-  std::string dataset_dir(ros::package::getPath("svo")+"/test/data");
+  std::string dataset_dir(getPackagePath("svo")+"/test/data");
   if(env_dir != NULL)
     dataset_dir = std::string(env_dir);
   return dataset_dir;
@@ -28,7 +45,7 @@ std::string getDatasetDir()
 std::string getTestDataDir()
 {
 #ifdef SVO_USE_ROS
-  return std::string(ros::package::getPath("svo_experiments")+"/data");
+  return std::string(getPackagePath("svo_experiments")+"/data");
 #else
   const char* env_dir = std::getenv("SVO_DATASET_DIR");
   return std::string(env_dir);
@@ -38,11 +55,18 @@ std::string getTestDataDir()
 std::string getTraceDir()
 {
 #ifdef SVO_USE_ROS
-  std::string default_dir(ros::package::getPath("svo_experiments")+"/results");
-  return vk::getParam<std::string>("svo/trace_dir", default_dir);
+  std::string default_dir(getPackagePath("svo_experiments")+"/results");
+  const char* env_dir = std::getenv("SVO_TRACE_DIR");
+  return env_dir != NULL ? std::string(env_dir) : default_dir;
 #else
   return "/tmp";
 #endif
+}
+
+std::string getRpgDatasetsDir()
+{
+  const char* env_dir = std::getenv("RPG_DATASETS_DIR");
+  return env_dir != NULL ? std::string(env_dir) : std::string("rpg_datasets");
 }
 
 VectorStats computeStats(std::vector<double>& v)

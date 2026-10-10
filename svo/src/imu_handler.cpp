@@ -570,12 +570,13 @@ bool ImuHandler::waitTill(const double img_timestamp_sec,
   while (this->getLatestTimestamp() <
          img_timestamp_sec - this->imu_calib_.delay_imu_cam)
   {
+    // stop() measures the time since start(); do not resume() here, otherwise
+    // only the last iteration is measured and the timeout never triggers.
     if (wait_time.stop() > timeout_sec)
     {
       LOG(ERROR) << "Did not get IMU measurements";
       return false;
     }
-    wait_time.resume();
     // wait
     VLOG(50) << "Waiting for imu measurements.";
   }

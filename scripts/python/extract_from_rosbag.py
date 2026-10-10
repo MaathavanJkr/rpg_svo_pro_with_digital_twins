@@ -1,19 +1,19 @@
 """
-Extract vio estimates from rosbag
+Extract vio estimates from a ROS 2 bag
 """
 
 import argparse
 import os
 
 import numpy as np
-import rosbag
+from vikit_py.rosbag_utils import read_messages, stamp_to_sec
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--bag_fn", type=str, required=True)
     parser.add_argument("--traj_out_fn", type=str, default='stamped_traj_estimate.txt')
-    parser.add_argument("--pose_topic", type=str, default='/svo/backend_pose_imu')
+    parser.add_argument("--pose_topic", type=str, default='/svo/vio_backend_pose_imu')
     parser.add_argument("--pose_topic_type", type=str, default='PoseWithCovarianceStamped')
     args = parser.parse_args()
 
@@ -22,11 +22,11 @@ if __name__ == "__main__":
 
     print('Reading topic %s from %s' % (args.pose_topic, args.bag_fn))
 
-    with rosbag.Bag(args.bag_fn, 'r') as bag:
-        for (topic, msg, ts) in bag.read_messages():
+    if True:  # ROS 2 bag
+        for (topic, msg, ts) in read_messages(args.bag_fn, topics=[args.pose_topic]):
             if topic == args.pose_topic:
                 if args.pose_topic_type == 'PoseWithCovarianceStamped':
-                    t = msg.header.stamp.to_sec()
+                    t = stamp_to_sec(msg.header.stamp)
                     px = msg.pose.pose.position.x
                     py = msg.pose.pose.position.y
                     pz = msg.pose.pose.position.z
@@ -41,7 +41,7 @@ if __name__ == "__main__":
                     traj.append(traj_i)
 
                 elif args.pose_topic_type == 'PoseStamped':
-                    t = msg.header.stamp.to_sec()
+                    t = stamp_to_sec(msg.header.stamp)
                     px = msg.pose.position.x
                     py = msg.pose.position.y
                     pz = msg.pose.position.z

@@ -49,22 +49,21 @@ namespace ceres_backend {
 bool LocalParamizationAdditionalInterfaces::verify(
     const double* x_raw, double purturbation_magnitude) const
 {
-  const ceres::LocalParameterization* casted =
-      dynamic_cast<const ceres::LocalParameterization*>(this);
+  const ceres::Manifold* casted = dynamic_cast<const ceres::Manifold*>(this);
   if (!casted)
   {
     return false;
   }
   // verify plus/minus
-  Eigen::VectorXd x(casted->GlobalSize());
-  memcpy(x.data(), x_raw, sizeof(double) * casted->GlobalSize());
-  Eigen::VectorXd delta_x(casted->LocalSize());
-  Eigen::VectorXd x_plus_delta(casted->GlobalSize());
-  Eigen::VectorXd delta_x2(casted->LocalSize());
+  Eigen::VectorXd x(casted->AmbientSize());
+  memcpy(x.data(), x_raw, sizeof(double) * casted->AmbientSize());
+  Eigen::VectorXd delta_x(casted->TangentSize());
+  Eigen::VectorXd x_plus_delta(casted->AmbientSize());
+  Eigen::VectorXd delta_x2(casted->TangentSize());
   delta_x.setRandom();
   delta_x *= purturbation_magnitude;
   casted->Plus(x.data(), delta_x.data(), x_plus_delta.data());
-  this->Minus(x.data(), x_plus_delta.data(), delta_x2.data());
+  casted->Minus(x_plus_delta.data(), x.data(), delta_x2.data());
   if ((delta_x2 - delta_x).norm() > 1.0e-12)
   {
     return false;
@@ -72,35 +71,35 @@ bool LocalParamizationAdditionalInterfaces::verify(
 
   // plusJacobian numDiff
   Eigen::Matrix<double, -1, -1, Eigen::RowMajor> J_plus_num_diff(
-      casted->GlobalSize(), casted->LocalSize());
+      casted->AmbientSize(), casted->TangentSize());
   const double dx = 1.0e-9;
-  for (int i = 0; i < casted->LocalSize(); ++i)
+  for (int i = 0; i < casted->TangentSize(); ++i)
   {
-    Eigen::VectorXd delta_p(casted->LocalSize());
+    Eigen::VectorXd delta_p(casted->TangentSize());
     delta_p.setZero();
     delta_p[i] = dx;
-    Eigen::VectorXd delta_m(casted->LocalSize());
+    Eigen::VectorXd delta_m(casted->TangentSize());
     delta_m.setZero();
     delta_m[i] = -dx;
 
     // reset
-    Eigen::VectorXd x_p(casted->GlobalSize());
-    Eigen::VectorXd x_m(casted->GlobalSize());
-    memcpy(x_p.data(), x_raw, sizeof(double) * casted->GlobalSize());
-    memcpy(x_m.data(), x_raw, sizeof(double) * casted->GlobalSize());
+    Eigen::VectorXd x_p(casted->AmbientSize());
+    Eigen::VectorXd x_m(casted->AmbientSize());
+    memcpy(x_p.data(), x_raw, sizeof(double) * casted->AmbientSize());
+    memcpy(x_m.data(), x_raw, sizeof(double) * casted->AmbientSize());
     casted->Plus(x.data(), delta_p.data(), x_p.data());
     casted->Plus(x.data(), delta_m.data(), x_m.data());
     J_plus_num_diff.col(i) = (x_p - x_m) / (2 * dx);
   }
 
   // verify lift
-  Eigen::Matrix<double, -1, -1, Eigen::RowMajor> J_plus(casted->GlobalSize(),
-                                                        casted->LocalSize());
-  Eigen::Matrix<double, -1, -1, Eigen::RowMajor> J_lift(casted->LocalSize(),
-                                                        casted->GlobalSize());
-  casted->ComputeJacobian(x_raw, J_plus.data());
-  ComputeLiftJacobian(x_raw, J_lift.data());
-  Eigen::MatrixXd identity(casted->LocalSize(), casted->LocalSize());
+  Eigen::Matrix<double, -1, -1, Eigen::RowMajor> J_plus(casted->AmbientSize(),
+                                                        casted->TangentSize());
+  Eigen::Matrix<double, -1, -1, Eigen::RowMajor> J_lift(casted->TangentSize(),
+                                                        casted->AmbientSize());
+  casted->PlusJacobian(x_raw, J_plus.data());
+  casted->MinusJacobian(x_raw, J_lift.data());
+  Eigen::MatrixXd identity(casted->TangentSize(), casted->TangentSize());
   identity.setIdentity();
   if (((J_lift * J_plus) - identity).norm() > 1.0e-6)
   {

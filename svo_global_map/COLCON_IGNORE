@@ -1,0 +1,2 @@
+Not built by default (as in the ROS 1 version): requires GTSAM (ros-jazzy-gtsam) and
+USE_GLOBAL_MAP in svo_cmake/cmake/Modules/SvoSetup.cmake. Delete this file to build it.

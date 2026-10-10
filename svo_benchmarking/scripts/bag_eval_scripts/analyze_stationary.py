@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-import rosbag
+from vikit_py.rosbag_utils import read_messages, BagWriter, stamp_to_sec
 import argparse
 import os
 import numpy as np
@@ -28,9 +28,8 @@ if __name__ == '__main__':
                   + '_'.join(args.topic_name.split('/')) + '_'
     print("Save preifx is {0}".format(save_prefix))
 
-    bag = rosbag.Bag(args.bag_name)
     pose_msgs = []
-    for topic, msg, t in bag.read_messages(topics=[args.topic_name]):
+    for topic, msg, t in read_messages(args.bag_name, topics=[args.topic_name]):
         pose_msgs.append(msg)
 
     n_total = len(pose_msgs)
@@ -42,15 +41,16 @@ if __name__ == '__main__':
 
     positions = []
     times = []
-    prev_seq = -1
+    prev_stamp = -1
     for i in range(n_total):
         msg_i = pose_msgs[i]
-        seq_i = msg_i.header.seq
-        assert seq_i > prev_seq, "{0} vs {1}".format(seq_i, prev_seq)
-        prev_seq = seq_i
+        # ROS 2 headers have no seq field: check the ordering with the stamps.
+        stamp_i = stamp_to_sec(msg_i.header.stamp)
+        assert stamp_i > prev_stamp, "{0} vs {1}".format(stamp_i, prev_stamp)
+        prev_stamp = stamp_i
         pos_i = pose_msgs[i].pose.pose.position
         positions.append([pos_i.x, pos_i.y, pos_i.z])
-        times.append(msg_i.header.stamp.to_sec())
+        times.append(stamp_to_sec(msg_i.header.stamp))
 
     static_pos = np.array(positions[n_start:n_end])
     static_times = np.array(times[n_start:n_end])

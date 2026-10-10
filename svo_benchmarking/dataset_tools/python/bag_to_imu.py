@@ -1,17 +1,17 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
-import rosbag
+from vikit_py.rosbag_utils import read_messages, BagWriter, stamp_to_sec
 import argparse
 
 def extract(bagfile, imu_topic, out_filename):
     n = 0
     f = open(out_filename, 'w')
     f.write('# timestamp ang_vel_x ang_vel_y ang_vel_z lin_acc_x lin_acc_y lin_acc_z\n')    
-    with rosbag.Bag(bagfile, 'r') as bag:
-        for (topic, msg, ts) in bag.read_messages(topics=str(imu_topic)):
+    if True:  # ROS 2 bag
+        for (topic, msg, ts) in read_messages(bagfile, topics=[imu_topic]):
             f.write('%d %.12f %.12f %.12f %.12f %.12f %.12f %.12f\n' % 
                     (n,
-                     msg.header.stamp.to_sec(),
+                     stamp_to_sec(msg.header.stamp),
                      msg.angular_velocity.x, msg.angular_velocity.y, msg.angular_velocity.z,
                      msg.linear_acceleration.x, msg.linear_acceleration.y, msg.linear_acceleration.z))
             n += 1

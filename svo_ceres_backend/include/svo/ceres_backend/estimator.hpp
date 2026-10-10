@@ -63,9 +63,6 @@
 #include "svo/ceres_backend/map.hpp"
 #include "svo/ceres_backend/estimator_types.hpp"
 
-#include <ros/ros.h>
-#include <geometry_msgs/PoseStamped.h>
-#include <sensor_msgs/Imu.h>
 
 namespace svo {
 

@@ -2,7 +2,6 @@
 
 #include <gflags/gflags.h>
 #include <glog/logging.h>
-#include <ros/ros.h>
 #include <svo/common/logging.h>
 #include <vikit/params_helper.h>
 
@@ -10,18 +9,35 @@ namespace svo_ros {
 
 void SvoNodeBase::initThirdParty(int argc, char **argv)
 {
+  rclcpp::init(argc, argv);
+
+  // Pass only the non-ROS arguments (e.g. --v=0) on to gflags/glog.
+  std::vector<std::string> args = rclcpp::remove_ros_arguments(argc, argv);
+  std::vector<char*> c_args;
+  for (std::string& arg : args)
+  {
+    c_args.push_back(&arg[0]);
+  }
+  int c_argc = static_cast<int>(c_args.size());
+  char** c_argv = c_args.data();
   google::InitGoogleLogging(argv[0]);
-  google::ParseCommandLineFlags(&argc, &argv, true);
+  google::ParseCommandLineFlags(&c_argc, &c_argv, true);
   google::InstallFailureSignalHandler();
   // FLAGS_logtostderr = 1;
-
-  ros::init(argc, argv, "svo");
 }
 
-SvoNodeBase::SvoNodeBase() : node_handle_(), private_node_handle_("~"), type_(
-    vk::param<bool>(private_node_handle_, "pipeline_is_stereo", true) ?
-        svo::PipelineType::kStereo : svo::PipelineType::kMono),
-        svo_interface_(type_, node_handle_, private_node_handle_) // svo interface created here 
+rclcpp::NodeOptions SvoNodeBase::defaultNodeOptions(rclcpp::NodeOptions options)
+{
+  return options
+      .allow_undeclared_parameters(true)
+      .automatically_declare_parameters_from_overrides(true);
+}
+
+SvoNodeBase::SvoNodeBase(const rclcpp::NodeOptions& options)
+  : node_(std::make_shared<rclcpp::Node>("svo", options))
+  , type_(vk::param<bool>(node_, "pipeline_is_stereo", true) ?
+          svo::PipelineType::kStereo : svo::PipelineType::kMono)
+  , svo_interface_(type_, node_) // svo interface created here
 {
 
   // subscribe to imu, gps, image and start the associated threads, waiting for new measurements.
@@ -64,7 +80,7 @@ SvoNodeBase::SvoNodeBase() : node_handle_(), private_node_handle_("~"), type_(
 
 void SvoNodeBase::run()
 {
-  ros::spin();
+  rclcpp::spin(node_);
   SVO_INFO_STREAM("SVO quit");
   svo_interface_.quit_ = true;
   SVO_INFO_STREAM("SVO terminated.\n");

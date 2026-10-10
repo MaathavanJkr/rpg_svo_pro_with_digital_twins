@@ -5,8 +5,8 @@ Here we introduce how to calibrate cameras using several commonly used models an
 ## Pinhole projection + Radial-tangential
 This is the distortion model used in opencv and ROS, also known as `plumb_bob`. We can calibrate it using the tool provided by ROS:
 ```sh
-sudo apt-get install ros-melodic-camera-calibration
-rosrun camera_calibration cameracalibrator.py <specify topics/calibration target>
+sudo apt-get install ros-jazzy-camera-calibration
+ros2 run camera_calibration cameracalibrator <specify topics/calibration target>
 ```
 Make sure to adapt size for the checkerboard actually used. What you get is in the format:
 ```

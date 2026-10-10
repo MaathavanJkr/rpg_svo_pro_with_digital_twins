@@ -1,10 +1,11 @@
+cmake_minimum_required(VERSION 3.16)
 project(svo)
-cmake_minimum_required(VERSION 2.8.3)
 
-find_package(catkin_simple)
-catkin_simple()
+find_package(ament_cmake_auto REQUIRED)
+ament_auto_find_build_dependencies()
 
 include(SvoSetup)
+find_package(GeographicLib REQUIRED)
 
 list(APPEND SVO_SOURCEFILES
   src/frame_handler_mono.cpp
@@ -43,18 +44,20 @@ list(APPEND SVO_HEADERFILES
 
 ################################################################################
 # Create svo library
-include_directories(include ${INCLUDE_DIRS})
-cs_add_library(svo SHARED ${SVO_SOURCEFILES} ${SVO_HEADERFILES})
-target_link_libraries(svo ${LINK_LIBS})
+ament_auto_add_library(svo SHARED ${SVO_SOURCEFILES} ${SVO_HEADERFILES})
+target_include_directories(svo SYSTEM PUBLIC ${GeographicLib_INCLUDE_DIRS})
+target_link_libraries(svo ${GeographicLib_LIBRARIES} ${SVO_SYSTEM_LIBRARIES})
 
 ################################################################################
 ###
 ### GTEST
 ###
-
-catkin_add_gtest(${PROJECT_NAME}-test-frame test/test_frame.cpp)
-target_link_libraries(${PROJECT_NAME}-test-frame ${PROJECT_NAME})
+if(BUILD_TESTING)
+  find_package(ament_cmake_gtest REQUIRED)
+  ament_add_gtest(${PROJECT_NAME}-test-frame test/test_frame.cpp)
+  target_link_libraries(${PROJECT_NAME}-test-frame ${PROJECT_NAME})
+  svo_link_test_deps(${PROJECT_NAME}-test-frame)
+endif()
 
 ################################################################################
-cs_install()
-cs_export()
+ament_auto_package()

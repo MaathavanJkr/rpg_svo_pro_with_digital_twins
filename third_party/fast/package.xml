@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>fast</name>
+  <version>0.0.1</version>
+  <description>
+    ament wrapper building the FAST corner detector (uzh-rpg/fast_neon, SSE2/NEON accelerated).
+    The upstream sources are downloaded at configure time at a pinned commit.
+  </description>
+  <maintainer email="cioffi@ifi.uzh.ch">Giovanni Cioffi</maintainer>
+  <license>BSD</license>
+  <url type="repository">https://github.com/uzh-rpg/fast_neon</url>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

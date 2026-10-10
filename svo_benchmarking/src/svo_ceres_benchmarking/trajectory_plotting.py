@@ -73,8 +73,8 @@ def plot_trajectory(results_dir, p_gt, p_es, n_align_frames):
     # write aligned trajectory to file
     file_out = open(os.path.join(results_dir, 'trajectory.csv'), 'w')
     file_out.write(
-        '# estimate-x [m], estimate-y [m], estimate-z [m],
-        groundtruth-x [m], groundtruth-y [m], groundtruth-z [m]\n')
+        '# estimate-x [m], estimate-y [m], estimate-z [m], '
+        'groundtruth-x [m], groundtruth-y [m], groundtruth-z [m]\n')
     for i in range(len(p_es)):
         file_out.write(
             '%.6f, %.6f, %.6f, %.6f, %.6f, %.6f\n' %

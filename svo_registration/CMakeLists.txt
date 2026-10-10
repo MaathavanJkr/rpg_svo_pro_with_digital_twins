@@ -1,25 +1,15 @@
-cmake_minimum_required(VERSION 3.0.2)
-project(svo_registration)
+cmake_minimum_required(VERSION 3.16)
+project(svo_registration NONE)
 
-find_package(catkin REQUIRED COMPONENTS
-  geometry_msgs
-  rospy
-  sensor_msgs
-  std_msgs
-  svo_msgs
-)
+find_package(ament_cmake REQUIRED)
 
-catkin_package(
-  CATKIN_DEPENDS rospy std_msgs sensor_msgs geometry_msgs message_runtime svo_msgs
-)
-
-include_directories(
-# include
-  ${catkin_INCLUDE_DIRS}
-)
-
+# Online registration of the SVO point cloud to the city twin.
+# Requires Open3D (`pip install open3d`), which is not packaged for Ubuntu 24.04.
 install(PROGRAMS
-  svo_registration/scripts/online_registration.py
-  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+  scripts/online_registration.py
+  DESTINATION lib/${PROJECT_NAME}
 )
 
+install(DIRECTORY config DESTINATION share/${PROJECT_NAME})
+
+ament_package()

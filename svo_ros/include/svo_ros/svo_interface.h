@@ -1,13 +1,14 @@
 #pragma once
 
+#include <mutex>
 #include <thread>
 
-#include <ros/ros.h>
-#include <std_msgs/String.h>    // user-input
-#include <geometry_msgs/PoseStamped.h>
-#include <geometry_msgs/PoseWithCovarianceStamped.h>
-#include <sensor_msgs/Image.h>
-#include <sensor_msgs/Imu.h>
+#include <rclcpp/rclcpp.hpp>
+#include <std_msgs/msg/string.hpp>    // user-input
+#include <geometry_msgs/msg/pose_stamped.hpp>
+#include <geometry_msgs/msg/pose_with_covariance_stamped.hpp>
+#include <sensor_msgs/msg/image.hpp>
+#include <sensor_msgs/msg/imu.hpp>
 
 
 #include <svo/common/types.h>
@@ -39,12 +40,15 @@ class SvoInterface
 public:
 
   // ROS subscription and publishing.
-  ros::NodeHandle nh_;
-  ros::NodeHandle pnh_;
+  // In ROS 2 there is no separate private node handle: parameters and
+  // published topics ("~/...") live in the node namespace.
+  rclcpp::Node::SharedPtr pnh_;
   PipelineType pipeline_type_;
-  ros::Subscriber sub_remote_key_;
+  rclcpp::Subscription<std_msgs::msg::String>::SharedPtr sub_remote_key_;
   std::string remote_input_;
-  
+
+  // Each sensor stream is processed in its own thread, spinning its own
+  // callback group (replaces the per-thread ros::CallbackQueue of ROS 1).
   std::unique_ptr<std::thread> imu_thread_;
   std::unique_ptr<std::thread> globalpositions_thread_;
   std::unique_ptr<std::thread> globalpose_thread_;
@@ -56,7 +60,6 @@ public:
   std::shared_ptr<ImuHandler> imu_handler_;
   std::shared_ptr<GlobalPositionsHandler> globalpositions_handler_;
   std::shared_ptr<GlobalPoseHandler> globalpose_handler_;
-  std::shared_ptr<BackendInterface> backend_interface_;
   std::shared_ptr<CeresBackendInterface> ceres_backend_interface_;
   std::shared_ptr<CeresBackendPublisher> ceres_backend_publisher_;
 
@@ -72,8 +75,7 @@ public:
   bool automatic_reinitialization_ = false;
 
   SvoInterface(const PipelineType& pipeline_type,
-          const ros::NodeHandle& nh,
-          const ros::NodeHandle& private_nh);
+               const rclcpp::Node::SharedPtr& node);
 
   virtual ~SvoInterface();
 
@@ -89,14 +91,14 @@ public:
       const int64_t timestamp_nanoseconds);
 
   // Subscription and callbacks
-  void monoCallback(const sensor_msgs::ImageConstPtr& msg);
+  void monoCallback(const sensor_msgs::msg::Image::ConstSharedPtr& msg);
   void stereoCallback(
-      const sensor_msgs::ImageConstPtr& msg0,
-      const sensor_msgs::ImageConstPtr& msg1);
-  void imuCallback(const sensor_msgs::ImuConstPtr& imu_msg);
-  void globalpositionsCallback(const geometry_msgs::PoseStampedConstPtr& gp_msg);
-  void globalposeCallback(const geometry_msgs::PoseWithCovarianceStampedPtr& gp_msg);
-  void inputKeyCallback(const std_msgs::StringConstPtr& key_input);
+      const sensor_msgs::msg::Image::ConstSharedPtr& msg0,
+      const sensor_msgs::msg::Image::ConstSharedPtr& msg1);
+  void imuCallback(const sensor_msgs::msg::Imu::ConstSharedPtr& imu_msg);
+  void globalpositionsCallback(const geometry_msgs::msg::PoseStamped::ConstSharedPtr& gp_msg);
+  void globalposeCallback(const geometry_msgs::msg::PoseWithCovarianceStamped::ConstSharedPtr& gp_msg);
+  void inputKeyCallback(const std_msgs::msg::String::ConstSharedPtr& key_input);
 
   // These functions are called before and after monoCallback or stereoCallback.
   // a derived class can implement some additional logic here.
@@ -122,10 +124,16 @@ public:
   bool gp_initialized_ = false;
   bool gpose_initialized_ = false;
 
-  bool refined_T_WL = false; 
+  bool refined_T_WL = false;
   bool reinitialize_T_W_VIO = false;
   bool estimate_world_vio_transform_ = false; // @todo: move this to a better location (Gp param???)
 
+private:
+  /// Spins the given callback group until shutdown (one executor per thread).
+  void spinCallbackGroup(const rclcpp::CallbackGroup::SharedPtr& group);
+
+  /// Serializes the creation of ROS entities from the different threads.
+  std::mutex ros_entities_mutex_;
 };
 
 } // namespace svo

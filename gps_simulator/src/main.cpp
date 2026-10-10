@@ -2,33 +2,30 @@
 #include "receiver.hpp"
 
 int main(int argc, char **argv) {
-    ros::init(argc, argv, "GNSSSimulator");
-    ros::NodeHandle nh("~");
+    rclcpp::init(argc, argv);
+    auto nh = std::make_shared<rclcpp::Node>("GNSSSimulator");
 
-    std::string constellation_file;
-    std::string config_path;
-
-    nh.getParam("constellation_file", constellation_file);
-    nh.getParam("config_path", config_path);
+    std::string constellation_file = nh->declare_parameter<std::string>("constellation_file", "");
+    std::string config_path = nh->declare_parameter<std::string>("config_path", "");
 
     YAML::Node config = YAML::LoadFile(config_path);
     double max_time_before_reset = config["max_time_before_resetting_error"].as<double>();
     double max_distance_before_reset = config["max_distance_before_resetting_error"].as<double>();
     std::string ground_truth_topic = config["ground_truth_topic"].as<std::string>();
 
-    ros::Rate loop_rate(5);
-    ros::Time last_called = ros::Time::now();
+    rclcpp::Rate loop_rate(5);
+    rclcpp::Time last_called = nh->now();
 
     GNSS gnss(constellation_file,config_path, nh);
     gnss.startAllEmitters(ground_truth_topic);
 
-    Receiver receiver(gnss, config_path);
+    Receiver receiver(gnss, config_path, nh);
     Eigen::Vector3d old_position = gnss.receiver_enu_gt;
     bool reset_pseusorange_errors = true;
 
-    while (ros::ok()) {
-        ros::Time current_time = ros::Time::now(); 
-        ros::Duration elapsed = current_time - last_called;
+    while (rclcpp::ok()) {
+        rclcpp::Time current_time = nh->now();
+        rclcpp::Duration elapsed = current_time - last_called;
 
         receiver.setReceiverECEF(gnss.receiver_ecef_gt);
         receiver.setReceiverENU(gnss.receiver_enu_gt);
@@ -39,7 +36,7 @@ int main(int argc, char **argv) {
             old_position = gnss.receiver_enu_gt;
         }
 
-        if ((elapsed.toSec() >= max_time_before_reset) || reset_pseusorange_errors) {
+        if ((elapsed.seconds() >= max_time_before_reset) || reset_pseusorange_errors) {
             reset_pseusorange_errors = false;
             receiver.generateRandomDoubles();
             last_called = current_time;
@@ -47,10 +44,11 @@ int main(int argc, char **argv) {
 
         receiver.trilateratesatellites(gnss);
         receiver.publish();
-        ros::spinOnce();
+        rclcpp::spin_some(nh);
         loop_rate.sleep();
     }
 
+    rclcpp::shutdown();
     return 0;
 }
 

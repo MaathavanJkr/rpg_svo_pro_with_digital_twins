@@ -1,11 +1,11 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import os
-import rospy
-import rospkg
-import numpy as np
+from ament_index_python.packages import get_package_share_directory
 from python_qt_binding import loadUi
 from python_qt_binding.QtWidgets import QWidget
 from python_qt_binding.QtCore import QTimer, Slot
+from rcl_interfaces.srv import GetParameters
+from rcl_interfaces.msg import ParameterType
 from svo_msgs.msg import Info
 from std_msgs.msg import String
 
@@ -15,14 +15,16 @@ class SvoWidget(QWidget):
   _subscriber = None
   _num_received_msgs = 0
   _svo_namespace = None
-  def __init__(self, svo_namespace='svo'):
+  _param_client = None
+  def __init__(self, node, svo_namespace='svo'):
 
     # Init QWidget
     super(SvoWidget, self).__init__()
     self.setObjectName('SvoWidget')
+    self._node = node
 
     # load UI
-    ui_file = os.path.join(rospkg.RosPack().get_path('rqt_svo'), 'resource', 'widget.ui')
+    ui_file = os.path.join(get_package_share_directory('rqt_svo'), 'resource', 'widget.ui')
     loadUi(ui_file, self)
 
     # init and start update timer for data, the timer calls the function update_info all 40ms
@@ -54,26 +56,49 @@ class SvoWidget(QWidget):
     if not svo_namespace:
         svo_namespace = 'svo'
 
-    max_num_features = rospy.get_param(svo_namespace+'/max_fts', 120)
-
-    # Feature bar
-    self.num_tracked_bar.setMaximum(max_num_features)
-    print('set maximum number of features to '+str(max_num_features))
+    # Feature bar (the maximum is updated once the svo node answers)
+    self.num_tracked_bar.setMaximum(120)
+    self._request_max_num_features(svo_namespace)
 
     # Subscribe to ROS Info topic and register callback
-    self._subscriber = rospy.Subscriber(svo_namespace+'/info', Info, self.info_cb)
+    self._subscriber = self._node.create_subscription(Info, svo_namespace+'/info', self.info_cb, 10)
 
     # Initialize Publisher
-    self._publisher = rospy.Publisher(svo_namespace+'/remote_key', String, queue_size=1)
+    self._publisher = self._node.create_publisher(String, svo_namespace+'/remote_key', 1)
+
+  def _request_max_num_features(self, svo_namespace):
+    # ROS 2 has no global parameter server: ask the svo node itself.
+    self._param_client = self._node.create_client(GetParameters, svo_namespace+'/get_parameters')
+    if not self._param_client.service_is_ready():
+      return
+    request = GetParameters.Request(names=['max_fts'])
+    self._param_client.call_async(request).add_done_callback(self._on_max_num_features)
+
+  def _on_max_num_features(self, future):
+    result = future.result()
+    if result is None or not result.values:
+      return
+    value = result.values[0]
+    if value.type == ParameterType.PARAMETER_INTEGER:
+      self.num_tracked_bar.setMaximum(value.integer_value)
+      print('set maximum number of features to '+str(value.integer_value))
 
   def unregister(self):
     if self._publisher is not None:
-      self._publisher.unregister()
+      self._node.destroy_publisher(self._publisher)
       self._publisher = None
 
     if self._subscriber is not None:
-      self._subscriber.unregister()
+      self._node.destroy_subscription(self._subscriber)
       self._subscriber = None
+
+    if self._param_client is not None:
+      self._node.destroy_client(self._param_client)
+      self._param_client = None
+
+  def shutdown(self):
+    self._update_info_timer.stop()
+    self.unregister()
 
 
   def info_cb(self, msg):
@@ -125,4 +150,4 @@ class SvoWidget(QWidget):
   def send_command(self, cmd):
     if self._publisher is None:
       return
-    self._publisher.publish(String(cmd))
+    self._publisher.publish(String(data=cmd))

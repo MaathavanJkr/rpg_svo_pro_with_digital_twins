@@ -1,20 +1,20 @@
 # Run the visual front-end
 Remember to source the workspace first
 ```sh
-source ~/svo_ws/devel/setup.bash
+source ~/svo_ws/install/setup.bash
 ```
 ## Example bags and launch files
 
 Download the test bag file from [here](http://rpg.ifi.uzh.ch/datasets/airground_rig_s3_2013-03-18_21-38-48.bag). Launch SVO node:
 
 ```sh
-roslaunch svo_ros run_from_bag.launch cam_name:=svo_test_pinhole
+ros2 launch svo_ros run_from_bag.launch.py cam_name:=svo_test_pinhole
 ```
 
 This will also start RVIZ. Then play the bag file:
 
 ```sh
-rosbag play airground_rig_s3_2013-03-18_21-38-48.bag
+ros2 bag play airground_rig_s3_2013-03-18_21-38-48
 ```
 
 Now you should be able to observe the camera motion and sparse map in RVIZ.
@@ -33,7 +33,7 @@ to
 And launch SVO via:
 
 ```sh
-roslaunch svo_ros run_from_bag.launch cam_name:=bluefox_25000826_fisheye
+ros2 launch svo_ros run_from_bag.launch.py cam_name:=bluefox_25000826_fisheye
 ```
 
 ## Customize launch files
@@ -73,8 +73,8 @@ Without using the relatively heavy ceres-based backend, the frontend can also us
 We provide two launch files for [EuRoC](http://projects.asl.ethz.ch/datasets/doku.php?id=kmavvisualinertialdatasets) for monocular and stereo setups:
 
 ```sh
-roslaunch svo_ros euroc_mono_frontend_imu.launch
-roslaunch svo_ros euroc_stereo_frontend_imu.launch
+ros2 launch svo_ros euroc_mono_frontend_imu.launch.py
+ros2 launch svo_ros euroc_stereo_frontend_imu.launch.py
 ```
 
 These launch files read the parameters from `param/euroc_mono_imu.yaml` and `param/euroc_stereo_imu.yaml`. The parameters are not necessarily optimal for every sequence, but should be enough as a good starting point.
@@ -82,12 +82,12 @@ These launch files read the parameters from `param/euroc_mono_imu.yaml` and `par
 The first several images of many EuRoC sequences are not good for initialize `SVO`, especially for the monocular case. Therefore it is better to start the bag at a later time, for example:
 
 ```sh
-rosbag play MH_01_easy.bag -s 50
-rosbag play MH_02_easy.bag -s 45
-rosbag play V1_01_easy.bag
-rosbag play V1_02_medium.bag -s 13
-rosbag play V2_01_easy.bag
-rosbag play V2_02_medium.bag -s 13
+ros2 bag play MH_01_easy --start-offset 50
+ros2 bag play MH_02_easy --start-offset 45
+ros2 bag play V1_01_easy
+ros2 bag play V1_02_medium --start-offset 13
+ros2 bag play V2_01_easy
+ros2 bag play V2_02_medium --start-offset 13
 ```
 
 This is to avoid, for example, strong rotation for monocular initialization. For more details on using SVO with this configuration, please read [the step-by-step instruction](./frontend_fla.md).

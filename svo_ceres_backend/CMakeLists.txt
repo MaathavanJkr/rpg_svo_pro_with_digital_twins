@@ -1,12 +1,17 @@
+cmake_minimum_required(VERSION 3.16)
 project(svo_ceres_backend)
-cmake_minimum_required(VERSION 2.8.3)
 
-find_package(catkin_simple REQUIRED)
-catkin_simple(ALL_DEPS_REQUIRED)
+find_package(ament_cmake_auto REQUIRED)
+ament_auto_find_build_dependencies()
 
 ################################################################################
 # generic setup (compiler flags, etc.)
 include(SvoSetup)
+
+# Ceres >= 2.1 is required (ceres::Manifold API).
+find_package(Ceres 2.1 REQUIRED)
+find_package(opengv REQUIRED)
+find_package(PCL REQUIRED COMPONENTS common)
 
 # OpenMP
 find_package(OpenMP QUIET)
@@ -76,46 +81,62 @@ set(SOURCES
   src/map_alignment.cpp
   )
 
-cs_add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+ament_auto_add_library(${PROJECT_NAME} SHARED ${SOURCES} ${HEADERS})
+target_include_directories(${PROJECT_NAME} SYSTEM PUBLIC ${PCL_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} Ceres::ceres opengv ${PCL_LIBRARIES} ${SVO_SYSTEM_LIBRARIES})
 
 ##########
 # GTESTS #
 ##########
-catkin_add_gtest(test_backend_id test/test_backend_id.cpp)
-target_link_libraries(test_backend_id ${PROJECT_NAME})
+if(BUILD_TESTING)
+  find_package(ament_cmake_gtest REQUIRED)
 
-catkin_add_gtest(test_estimator test/test_estimator.cpp)
-target_link_libraries(test_estimator ${PROJECT_NAME})
+  ament_add_gtest(test_backend_id test/test_backend_id.cpp)
+  target_link_libraries(test_backend_id ${PROJECT_NAME})
+  svo_link_test_deps(test_backend_id)
 
-catkin_add_gtest(test_homogeneous_point_error test/test_homogeneous_point_error.cpp)
-target_link_libraries(test_homogeneous_point_error ${PROJECT_NAME})
+  ament_add_gtest(test_estimator test/test_estimator.cpp)
+  target_link_libraries(test_estimator ${PROJECT_NAME})
+  svo_link_test_deps(test_estimator)
 
-catkin_add_gtest(test_map test/test_map.cpp)
-target_link_libraries(test_map ${PROJECT_NAME})
+  ament_add_gtest(test_homogeneous_point_error test/test_homogeneous_point_error.cpp)
+  target_link_libraries(test_homogeneous_point_error ${PROJECT_NAME})
+  svo_link_test_deps(test_homogeneous_point_error)
 
-catkin_add_gtest(test_marginalization test/test_marginalization.cpp)
-target_link_libraries(test_marginalization ${PROJECT_NAME})
+  ament_add_gtest(test_map test/test_map.cpp)
+  target_link_libraries(test_map ${PROJECT_NAME})
+  svo_link_test_deps(test_map)
 
-catkin_add_gtest(test_pose_error test/test_pose_error.cpp)
-target_link_libraries(test_pose_error ${PROJECT_NAME})
+  ament_add_gtest(test_marginalization test/test_marginalization.cpp)
+  target_link_libraries(test_marginalization ${PROJECT_NAME})
+  svo_link_test_deps(test_marginalization)
 
-catkin_add_gtest(test_pose_local_parameterization test/test_pose_local_parameterization.cpp)
-target_link_libraries(test_pose_local_parameterization ${PROJECT_NAME})
+  ament_add_gtest(test_pose_error test/test_pose_error.cpp)
+  target_link_libraries(test_pose_error ${PROJECT_NAME})
+  svo_link_test_deps(test_pose_error)
 
-catkin_add_gtest(test_reprojection_error test/test_reprojection_error.cpp)
-target_link_libraries(test_reprojection_error ${PROJECT_NAME})
+  ament_add_gtest(test_pose_local_parameterization test/test_pose_local_parameterization.cpp)
+  target_link_libraries(test_pose_local_parameterization ${PROJECT_NAME})
+  svo_link_test_deps(test_pose_local_parameterization)
 
-catkin_add_gtest(test_relative_pose_error test/test_relative_pose_error.cpp)
-target_link_libraries(test_relative_pose_error ${PROJECT_NAME})
+  ament_add_gtest(test_reprojection_error test/test_reprojection_error.cpp)
+  target_link_libraries(test_reprojection_error ${PROJECT_NAME})
+  svo_link_test_deps(test_reprojection_error)
 
-catkin_add_gtest(test_speed_and_bias_error test/test_speed_and_bias_error.cpp)
-target_link_libraries(test_speed_and_bias_error ${PROJECT_NAME})
+  ament_add_gtest(test_relative_pose_error test/test_relative_pose_error.cpp)
+  target_link_libraries(test_relative_pose_error ${PROJECT_NAME})
+  svo_link_test_deps(test_relative_pose_error)
 
-catkin_add_gtest(test_imu_error test/test_imu_error.cpp)
-target_link_libraries(test_imu_error ${PROJECT_NAME})
+  ament_add_gtest(test_speed_and_bias_error test/test_speed_and_bias_error.cpp)
+  target_link_libraries(test_speed_and_bias_error ${PROJECT_NAME})
+  svo_link_test_deps(test_speed_and_bias_error)
+
+  ament_add_gtest(test_imu_error test/test_imu_error.cpp)
+  target_link_libraries(test_imu_error ${PROJECT_NAME})
+  svo_link_test_deps(test_imu_error)
+endif()
 
 ##########
 # EXPORT #
 ##########
-cs_install()
-cs_export()
+ament_auto_package()

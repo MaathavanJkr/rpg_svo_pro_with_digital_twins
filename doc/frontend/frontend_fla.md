@@ -2,8 +2,8 @@ In this document, we will see how to use `SVO` with stereo setup and IMU informa
 
 Let's start with an example first. Download the dataset from http://rpg.ifi.uzh.ch/datasets/fla_stereo_imu.bag. This bag file contains synchronized stereo images and IMU measurements. You can run `SVO` on this bag by
 
-    roslaunch svo_ros fla_stereo_imu.launch
-    rosbag play fla_stereo_imu.bag
+    ros2 launch svo_ros fla_stereo_imu.launch.py
+    ros2 bag play fla_stereo_imu
 
 Now we will go through important things that need to be specified.
 

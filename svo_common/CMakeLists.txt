@@ -1,8 +1,8 @@
+cmake_minimum_required(VERSION 3.16)
 project(svo_common)
-cmake_minimum_required(VERSION 2.8.3)
 
-find_package(catkin_simple REQUIRED)
-catkin_simple()
+find_package(ament_cmake_auto REQUIRED)
+ament_auto_find_build_dependencies()
 
 include(SvoSetup)
 
@@ -26,27 +26,27 @@ set(SOURCES
   src/point.cpp
   )
 
-cs_add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+ament_auto_add_library(${PROJECT_NAME} SHARED ${SOURCES} ${HEADERS})
+target_link_libraries(${PROJECT_NAME} ${SVO_SYSTEM_LIBRARIES})
 
 ################################################################################
 # TESTS
+if(BUILD_TESTING)
+  find_package(ament_cmake_gtest REQUIRED)
+  ament_add_gtest(${PROJECT_NAME}-test
+    test/test_main.cpp
+    test/test_feature_wrapper.cpp
+    SKIP_LINKING_MAIN_LIBRARIES
+  )
+  target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME} pthread)
+  svo_link_test_deps(${PROJECT_NAME}-test)
+
+  ament_add_gtest(container-helpers-test
+    test/test_container_helpers.cpp
+  )
+  target_link_libraries(container-helpers-test ${PROJECT_NAME})
+  svo_link_test_deps(container-helpers-test)
+endif()
 
 ################################################################################
-###
-### GTEST
-###
-
-catkin_add_gtest(${PROJECT_NAME}-test
-  test/test_main.cpp
-  test/test_feature_wrapper.cpp
-)
-target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME} pthread)
-
-catkin_add_gtest(container-helpers-test
-  test/test_container_helpers.cpp
-)
-target_link_libraries(container-helpers-test ${PROJECT_NAME})
-
-################################################################################
-cs_install()
-cs_export()
+ament_auto_package()

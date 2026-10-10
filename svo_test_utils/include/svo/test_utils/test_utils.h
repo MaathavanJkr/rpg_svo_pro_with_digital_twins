@@ -25,6 +25,8 @@ namespace test_utils {
 std::string getDatasetDir();
 std::string getTestDataDir();
 std::string getTraceDir();
+// Location of the rpg_datasets: $RPG_DATASETS_DIR (ROS 1: ros::package::getPath("rpg_datasets")).
+std::string getRpgDatasetsDir();
 
 struct VectorStats
 {

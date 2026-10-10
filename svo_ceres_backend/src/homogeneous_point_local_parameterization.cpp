@@ -73,14 +73,13 @@ bool HomogeneousPointLocalParameterization::plus(const double* x,
 }
 
 // Computes the minimal difference between a variable x and a perturbed variable x_plus_delta.
-bool HomogeneousPointLocalParameterization::Minus(const double* x,
-                                                  const double* x_plus_delta,
-                                                  double* delta) const
+bool HomogeneousPointLocalParameterization::Minus(const double* y, const double* x,
+                                                  double* y_minus_x) const
 {
-  return minus(x, x_plus_delta, delta);
+  return minus(x, y, y_minus_x);
 }
 
-bool HomogeneousPointLocalParameterization::ComputeLiftJacobian(
+bool HomogeneousPointLocalParameterization::MinusJacobian(
     const double* x, double* jacobian) const
 {
   return liftJacobian(x, jacobian);
@@ -105,7 +104,7 @@ bool HomogeneousPointLocalParameterization::minus(const double* x,
 }
 
 // The jacobian of Plus(x, delta) w.r.t delta at delta = 0.
-bool HomogeneousPointLocalParameterization::ComputeJacobian(
+bool HomogeneousPointLocalParameterization::PlusJacobian(
     const double* x, double* jacobian) const
 {
   return plusJacobian(x, jacobian);

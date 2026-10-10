@@ -1,19 +1,23 @@
 <?xml version="1.0"?>
-<package format="2">
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
   <name>svo_global_map</name>
-  <description>
-    Maintain an optimized global map.
-  </description>
   <version>0.0.1</version>
+  <description>Maintain an optimized global map.</description>
+  <maintainer email="zzhang@ifi.uzh.ch">Zichao Zhang</maintainer>
   <license>tbd</license>
   <author>Christian Forster</author>
   <author>Zichao Zhang</author>
-  <maintainer email="zzhang@ifi.uzh.ch">Zichao Zhang</maintainer>
 
-  <buildtool_depend>catkin</buildtool_depend>
-  <buildtool_depend>catkin_simple</buildtool_depend>
+  <buildtool_depend>ament_cmake_auto</buildtool_depend>
+
+  <depend>svo_cmake</depend>
   <depend>gtsam</depend>
   <depend>svo_vio_common</depend>
   <depend>svo_common</depend>
   <depend>rpg_common</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
 </package>

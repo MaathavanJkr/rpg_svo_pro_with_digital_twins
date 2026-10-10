@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>minkindr</name>
+  <version>0.0.1</version>
+  <description>
+    ament wrapper installing the header-only minkindr library (ethz-asl/minkindr).
+    The upstream sources are downloaded at configure time at a pinned commit.
+  </description>
+  <maintainer email="cioffi@ifi.uzh.ch">Giovanni Cioffi</maintainer>
+  <license>BSD</license>
+  <url type="repository">https://github.com/ethz-asl/minkindr</url>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>eigen</depend>
+  <depend>libgoogle-glog-dev</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

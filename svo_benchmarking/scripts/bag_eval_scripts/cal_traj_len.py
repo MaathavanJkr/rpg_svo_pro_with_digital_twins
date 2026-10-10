@@ -1,23 +1,23 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import rosbag
+from vikit_py.rosbag_utils import read_messages, BagWriter, stamp_to_sec
 import argparse
 import os
 import numpy as np
 
 def calGTLengthFromBag(bag_fn, gt_topic):
-    bag = rosbag.Bag(bag_fn)
     gt_msgs = []
-    for topic, msg, t in bag.read_messages(topics=[gt_topic]):
+    for topic, msg, t in read_messages(bag_fn, topics=[gt_topic]):
         gt_msgs.append(msg)
 
-    prev_seq = -1
+    prev_stamp = -1
     gt_positions = []
     for msg_i in gt_msgs:
-        seq_i = msg_i.header.seq
-        assert seq_i > prev_seq
-        prev_seq = seq_i
+        # ROS 2 headers have no seq field: check the ordering with the stamps.
+        stamp_i = stamp_to_sec(msg_i.header.stamp)
+        assert stamp_i > prev_stamp
+        prev_stamp = stamp_i
         pos_i = msg_i.pose.position
         gt_positions.append([pos_i.x, pos_i.y, pos_i.z])
     assert len(gt_positions) > 0, "Found no groundtruth messages."

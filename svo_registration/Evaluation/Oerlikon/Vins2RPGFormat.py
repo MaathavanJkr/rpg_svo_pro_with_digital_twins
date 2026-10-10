@@ -1,4 +1,4 @@
-import rosbag
+from vikit_py.rosbag_utils import BagReader, BagWriter, stamp_to_sec, sec_to_stamp  # ROS 2 bags (ROS 1: rosbag/rospy)
 import csv
 from geometry_msgs.msg import PoseStamped
 import os
@@ -16,7 +16,7 @@ def write_to_csv_cov_pose(filename, messages):
         writer = csv.writer(csvfile, delimiter=' ')
         csvfile.write("# time x y z qx qy qz qw\n")
         for msg in messages:
-            timestamp = msg.header.stamp.to_sec()
+            timestamp = stamp_to_sec(msg.header.stamp)
             pose = msg.pose.pose
             position = pose.position
             orientation = pose.orientation
@@ -28,7 +28,7 @@ def write_to_csv_odo(filename, messages):
         writer = csv.writer(csvfile, delimiter=' ')
         csvfile.write("# time x y z qx qy qz qw\n")
         for msg in messages:
-            timestamp = msg.header.stamp.to_sec()
+            timestamp = stamp_to_sec(msg.header.stamp)
             pose = msg.pose.pose
             position = pose.position
             orientation = pose.orientation
@@ -44,7 +44,7 @@ def write_to_csv_pose(filename, messages):
             k=k+1
             if ((k%2==0) and topic == ground_truth_topic):
                 continue
-            timestamp = msg.header.stamp.to_sec()
+            timestamp = stamp_to_sec(msg.header.stamp)
             pose = msg.pose
             position = pose.position
             orientation = pose.orientation
@@ -64,13 +64,13 @@ ground_truth_msgs = []
 estimated_pose_msgs = []
 ini=True
 
-with rosbag.Bag(bag_path, 'r') as bag:
+with BagReader(bag_path) as bag:
     for topic, msg, t in bag.read_messages(topics=[ground_truth_topic, estimated_pose_topic]):
         if(ini):
-            t0 = t.to_sec()
+            t0 = stamp_to_sec(t)
             ini=False
 
-        if((t.to_sec() -t0) > 275):
+        if((stamp_to_sec(t) -t0) > 275):
             print("BREAK")
             break
 

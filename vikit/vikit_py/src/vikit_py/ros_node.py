@@ -1,7 +1,6 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import os
-import rospy
 import psutil
 import threading
 import numpy as np
@@ -23,25 +22,26 @@ class RosNode:
     def __init__(self, package, executable):
         self._package = package
         self._executable = executable
-        self._param_string = ''
+        self._param_string = ''  # non-ROS flags (e.g. --v=1)
+        self._ros_args = ''
     
     def add_parameters(self, namespace, parameter_dictionary):
         for key in parameter_dictionary.keys():
             if key == 'flags':
                 continue
             if type(parameter_dictionary[key]) is dict:
-                self.add_parameters(namespace+key+'/', parameter_dictionary[key])
+                self.add_parameters(namespace+key+'.', parameter_dictionary[key])
             else:
-                self._param_string += ' _'+namespace+key+':='+str(parameter_dictionary[key])
+                self._ros_args += ' -p '+namespace+key+':='+str(parameter_dictionary[key])
     
     def add_flags(self, flag_dictionary):
-        for key, value in flag_dictionary.iteritems():
+        for key, value in flag_dictionary.items():
             self._param_string += ' --'+key+'='+str(value)
                 
     def clear_all_parameters(self):
-        params = rospy.get_param_names()
-        for p in params:
-            rospy.delete_param(p)
+        # ROS 2 has no global parameter server: parameters are passed to the node on start.
+        self._param_string = ''
+        self._ros_args = ''
 
     def run(self, parameter_dictionary, namespace='', log_cpu_usage=True, log_cpu_usage_folder='/tmp'):
         self.clear_all_parameters()
@@ -55,7 +55,7 @@ class RosNode:
             t = threading.Thread(target=log_cpu_usage_thread, args=(log_cpu_usage_folder,t_stop))    
             t.start()
             
-        command = 'rosrun ' + self._package + ' ' + self._executable + ' ' + self._param_string
+        command = 'ros2 run ' + self._package + ' ' + self._executable + ' ' + self._param_string + ' --ros-args' + self._ros_args
         print('Executing Process: '+command)
         os.system(command)
         print('ROS node finished processing.')

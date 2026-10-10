@@ -1,4 +1,4 @@
-import rosbag
+from vikit_py.rosbag_utils import BagReader, BagWriter, stamp_to_sec, sec_to_stamp  # ROS 2 bags (ROS 1: rosbag/rospy)
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -6,15 +6,15 @@ import numpy as np
 
 def extract_pose_data(bag_file, topic):
 
-    bag = rosbag.Bag(bag_file)
+    bag = BagReader(bag_file)
     x_data = []
     y_data = []
     z_data = []
 
     if(topic == '/globalEstimator/global_odometry'):
         for topic, msg, t in bag.read_messages(topics=[topic]):
-            print(msg.header.stamp.to_sec()    )
-            if(msg.header.stamp.to_sec() > 284):
+            print(stamp_to_sec(msg.header.stamp)    )
+            if(stamp_to_sec(msg.header.stamp) > 284):
                 break
          
             x,y,z = msg.pose.pose.position.x, msg.pose.pose.position.y, msg.pose.pose.position.z
@@ -41,7 +41,7 @@ def extract_pose_data(bag_file, topic):
             x_data.append(msg.pose.position.x)
             y_data.append(msg.pose.position.y)
             z_data.append(msg.pose.position.z)
-            print(msg.header.stamp.to_sec())
+            print(stamp_to_sec(msg.header.stamp))
     bag.close()
     return np.array(x_data), np.array(y_data), np.array(z_data)
 

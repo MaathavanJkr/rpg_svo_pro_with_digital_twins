@@ -1,6 +1,6 @@
-#!/usr/bin/python2
+#!/usr/bin/env python3
 
-import rosbag
+from vikit_py.rosbag_utils import read_messages, BagWriter, stamp_to_sec
 import argparse
 import cv2
 import numpy as np
@@ -14,15 +14,15 @@ def extract(bagfile, pose_topic, out_filename, cam_id):
     extract_every_nth_image = 1
     #max_imgs = 400
 
-    with rosbag.Bag(bagfile, 'r') as bag:
-        for (topic, msg, ts) in bag.read_messages(topics=str(pose_topic)):
+    if True:  # ROS 2 bag
+        for (topic, msg, ts) in read_messages(bagfile, topics=[pose_topic]):
             if np.mod(n, extract_every_nth_image) == 0:
                 try:
                     img = cv_bridge.imgmsg_to_cv2(msg, 'bgr8')
-                except CvBridgeError, e:
-                    print e
+                except CvBridgeError as e:
+                    print(e)
                     
-                ts = msg.header.stamp.to_sec()
+                ts = stamp_to_sec(msg.header.stamp)
                 image_name = 'image_'+str(cam_id)+'_'+str(n)+'.png'
                 f.write('%d %.12f img/%s \n' % (n, ts, image_name))
                 cv2.imwrite(image_name, img)

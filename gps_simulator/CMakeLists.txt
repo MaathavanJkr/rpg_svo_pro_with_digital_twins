@@ -1,56 +1,48 @@
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 3.16)
 project(satellite_simulator)
 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+find_package(ament_cmake REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
 find_package(Ceres REQUIRED)
-find_package(catkin REQUIRED COMPONENTS
-  message_generation
-  roscpp
-  geometry_msgs
-  std_msgs
-)
-
+find_package(Eigen3 REQUIRED)
+find_package(yaml-cpp REQUIRED)
+find_package(glog REQUIRED)
+# Debian/Ubuntu install FindGeographicLib.cmake here (libgeographiclib-dev).
+list(APPEND CMAKE_MODULE_PATH "/usr/share/cmake/geographiclib")
 find_package(GeographicLib REQUIRED)
-find_package(Eigen3 REQUIRED yaml-cpp REQUIRED)
 
-
-add_message_files(
-  FILES
-  DoubleMsg.msg
-  EmitterMsg.msg
-  DoubleArrayMsg.msg
-  IntMsg.msg
+rosidl_generate_interfaces(${PROJECT_NAME}
+  msg/DoubleMsg.msg
+  msg/EmitterMsg.msg
+  msg/DoubleArrayMsg.msg
+  msg/IntMsg.msg
+  DEPENDENCIES std_msgs geometry_msgs
 )
-
-generate_messages(
-  DEPENDENCIES
-  std_msgs  
-  geometry_msgs
-)
-catkin_package(
-  CATKIN_DEPENDS message_runtime std_msgs
-)
-
-
-catkin_package(
-  INCLUDE_DIRS include
-  LIBRARIES satellite_simulator
-  CATKIN_DEPENDS roscpp geometry_msgs std_msgs
-  DEPENDS EIGEN3
-)
-
-include_directories(
-  include
-  ${catkin_INCLUDE_DIRS}
-  ${EIGEN3_INCLUDE_DIR}
-  ${YAML_CPP_INCLUDE_DIR}
-  ${GeographicLib_INCLUDE_DIRS}
-)
+rosidl_get_typesupport_target(cpp_typesupport_target ${PROJECT_NAME} rosidl_typesupport_cpp)
 
 add_executable(gnss_simulator src/main.cpp src/gnss.cpp src/satellite_param.cpp src/emitter.cpp src/frame_handler.cpp)
-target_link_libraries(gnss_simulator ${catkin_LIBRARIES} pthread yaml-cpp ${GeographicLib_LIBRARIES} ${CERES_LIBRARIES})
+target_include_directories(gnss_simulator PRIVATE include ${GeographicLib_INCLUDE_DIRS})
+target_link_libraries(gnss_simulator
+  rclcpp::rclcpp
+  ${geometry_msgs_TARGETS}
+  ${std_msgs_TARGETS}
+  "${cpp_typesupport_target}"
+  Eigen3::Eigen
+  ${YAML_CPP_LIBRARIES}
+  ${GeographicLib_LIBRARIES}
+  Ceres::ceres
+  glog::glog
+  pthread)
 
+install(TARGETS gnss_simulator DESTINATION lib/${PROJECT_NAME})
+install(PROGRAMS scripts/gps_error_publisher.py DESTINATION lib/${PROJECT_NAME})
+install(DIRECTORY config launch DESTINATION share/${PROJECT_NAME})
 
-install(PROGRAMS
-    script/gps_error_publisher.py
-    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
+ament_export_dependencies(rosidl_default_runtime)
+ament_package()
