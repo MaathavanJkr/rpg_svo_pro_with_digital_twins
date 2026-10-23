@@ -40,9 +40,12 @@ Started in Phase 2 (2026-10-23); extend it whenever a new transform is used.
 
 ## EuRoC initial alignment: stated assumption (decision D1(c), implemented in Phase 5)
 - **Assumption (state in the report):** the VIO frame W is aligned to the map M **once**, using the ground-truth pose at a single timestamp. This mimics a known take-off pose. No other GT is used online.
-- Timestamp t₀ = the **first keyframe with backend and scale both initialised** (decision 2026-10-23). It is observed with the FYP frame-event log in `svo_ros` (`log_frame_events`, off by default, log only). Each row is one processed image: `is_kf` = `getLastFrames()->at(0)->isKeyframe()`; `backend_init` = backend exists and `lastOptimizedBundleId() >= 0` (at least one optimisation finished); `scale_init` = `isBackendScaleInitialised()`. t₀ is the bundle stamp of the first row with all three true. **The Phase 5 online alignment must trigger on exactly this event.**
+- Timestamp t₀ = the **first keyframe with backend and scale both initialised AND ground truth available at its timestamp** (decision 2026-10-23; the GT condition was added after MH_01 showed the first such KF 0.22 s before EuRoC GT starts). It is observed with the FYP frame-event log in `svo_ros` (`log_frame_events`, off by default, log only). Each row is one processed image: `is_kf` = `getLastFrames()->at(0)->isKeyframe()`; `backend_init` = backend exists and `lastOptimizedBundleId() >= 0`; `scale_init` = `isBackendScaleInitialised()`.
+  - **GT available** at t: there are consecutive GT samples t_a ≤ t ≤ t_b (`state_groundtruth_estimate0`) with t_b − t_a ≤ **10 ms**. KFs failing this are skipped; t₀ is the first KF passing all conditions.
+  - **GT pose at t₀** is interpolated between that same pair: position linear, orientation slerp.
+  - **The Phase 5 online implementation must use the identical rule (same event, same 10 ms bracket, same interpolation).** Reference implementation: `analysis/initial_alignment.py` (`gt_bracket`, `gt_at`, `t0_from_kf_log`).
 - T_M_W is **4-DoF**: yaw ψ and translation only. **Exact definition** (reference implementation `analysis/initial_alignment.py`; Phase 5 online code must match it numerically):
-  - T_W_B(t₀) = the VIO estimate sample with stamp exactly t₀; T_V_B(t₀) = GT interpolated at t₀ (linear position, slerp orientation between the bracketing 200 Hz samples).
+  - T_W_B(t₀) = the VIO estimate sample with stamp exactly t₀; T_V_B(t₀) = GT interpolated at t₀ as above.
   - ΔR = R_V_B(t₀)·R_W_B(t₀)ᵀ, ψ = atan2(ΔR₁₀, ΔR₀₀), R_M_W = R_z(ψ), t_M_W = p_V_B(t₀) − R_z(ψ)·p_W_B(t₀).
   - With T_V_M = I, V and M coincide. Roll/pitch of W stay as estimated by VIO (gravity).
   - Map-frame ATE window: all estimates with stamp ≥ t₀, no further alignment.

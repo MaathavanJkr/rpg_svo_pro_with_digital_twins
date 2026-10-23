@@ -24,5 +24,11 @@ VIO-only could not run in this repo (upstream bug, F3 in `docs/pipeline_notes.md
 | ATE posyaw, off → on | 0.139 → 0.140 m |
 The logger costs ~0.06 % of the frontend time per frame.
 
-## D1 initial alignment on M1: open issue
-The frame-event log gives t₀ = first KF with backend and scale initialised = bundle 17, 0.85 s after the first image. EuRoC GT (`state_groundtruth_estimate0`) for MH_01 starts 1.07 s after the first image, so **t₀ precedes GT by 0.22 s** and T_V_B(t₀) does not exist. The approved rule cannot be evaluated. V1/V2 bags have the same ~1 s gap, so the issue will likely recur. Awaiting a decision; a preview with "first such KF with GT available" (t₀ = 1.35 s, yaw −15.10°) gives map-frame ATE 0.245 m (unapproved, saved as `PREVIEW_*.json`).
+## D1 initial alignment on M1 (amended rule, approved 2026-10-23)
+Rule (`docs/frames.md`): t₀ = first keyframe with backend and scale initialised **and GT available** (bracketing GT samples ≤ 10 ms apart); GT pose interpolated (linear / slerp). The unamended rule failed on MH_01: the first qualifying KF (bundle 17, 0.85 s after the first image) is 0.22 s before EuRoC GT starts.
+
+| Run | t₀ | t₀ after first image | yaw ψ | Map-frame ATE (no alignment, window t₀→end) |
+|---|---|---|---|---|
+| MH_01 M1 r01 | 1403636581.113555 | 1.35 s | −15.10° | RMSE **0.245 m**, median 0.257 m, max 0.429 m, final 0.263 m (n=3633, 181.6 s) |
+
+(The earlier `PREVIEW_*.json` in the run folder gave identical numbers and is superseded by `initial_alignment.json` / `map_frame_ate.json`.)

@@ -3,10 +3,14 @@
 map-frame (unaligned) ATE that follows from it.
 
 Definition (must be matched numerically by the Phase 5 online implementation):
-  t0      = stamp of the first keyframe after the VIO backend has initialised (scale initialised).
+  t0      = stamp of the first keyframe with backend AND scale both initialised AND ground truth
+            available at its timestamp (frame-event log from svo_node, log_frame_events:=true).
+            "GT available" = t0 lies between two GT samples (state_groundtruth_estimate0) that are
+            at most GT_MAX_GAP = 10 ms apart: t_a <= t0 <= t_b, t_b - t_a <= 0.010 s.
+            (Amended 2026-10-23: on EuRoC the first such KF without the GT condition can precede GT.)
   T_W_B   = VIO estimate at exactly t0 (a sample of the estimate stream with that stamp).
-  T_V_B   = ground truth at t0: position linearly interpolated, orientation slerped between the
-            two bracketing GT samples (state_groundtruth_estimate0, 200 Hz).
+  T_V_B   = ground truth at t0, interpolated between that same bracketing pair: position linear,
+            orientation slerp.
   dR      = R_V_B(t0) @ R_W_B(t0)^T                  (rotation from W to V/M implied at t0)
   psi     = atan2(dR[1,0], dR[0,0])                    (yaw part only; roll/pitch of W kept from VIO)
   R_M_W   = Rz(psi)
@@ -28,6 +32,7 @@ import numpy as np
 from scipy.spatial.transform import Rotation, Slerp
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+GT_MAX_GAP = 0.010  # s; max spacing of the GT samples bracketing t0
 
 
 def load_gt(seq):
@@ -43,10 +48,21 @@ def load_tum(path):
     return d[:, 0], d[:, 1:4], Rotation.from_quat(d[:, 4:8])
 
 
+def gt_bracket(t_gt, t):
+    """Index i of the bracketing GT pair (i-1, i) with t_gt[i-1] <= t <= t_gt[i] and spacing
+    <= GT_MAX_GAP, or None if GT is not available at t."""
+    i = int(np.searchsorted(t_gt, t))
+    if i < len(t_gt) and t_gt[i] == t:
+        i = max(i, 1)
+    if i == 0 or i >= len(t_gt) or t_gt[i] - t_gt[i - 1] > GT_MAX_GAP:
+        return None
+    return i
+
+
 def gt_at(t_gt, p_gt, r_gt, t0):
-    i = np.searchsorted(t_gt, t0)
-    if i == 0 or i >= len(t_gt):
-        raise ValueError("t0 outside ground-truth range")
+    i = gt_bracket(t_gt, t0)
+    if i is None:
+        raise ValueError(f"ground truth not available at t0={t0:.9f}")
     a = (t0 - t_gt[i - 1]) / (t_gt[i] - t_gt[i - 1])
     p = (1 - a) * p_gt[i - 1] + a * p_gt[i]
     r = Slerp([t_gt[i - 1], t_gt[i]], r_gt[[i - 1, i]])([t0])[0]
@@ -62,15 +78,17 @@ def compute_T_M_W(p_WB, R_WB, p_VB, R_VB):
     return T, psi
 
 
-def t0_from_kf_log(path):
-    """t0 = first keyframe with backend and scale both initialised (rows where the processed
-    bundle is the current image, i.e. frame_stamp_ns == stamp_ns)."""
+def t0_from_kf_log(path, t_gt):
+    """t0 = first keyframe with backend and scale both initialised and GT available at its stamp
+    (rows where the processed bundle is the current image, i.e. frame_stamp_ns == stamp_ns)."""
     d = np.genfromtxt(path, delimiter=",", names=True, dtype=np.int64)
     ok = ((d["frame_stamp_ns"] == d["stamp_ns"]) & (d["is_kf"] > 0)
           & (d["backend_init"] > 0) & (d["scale_init"] > 0))
-    if not ok.any():
-        raise ValueError("no keyframe with backend and scale initialised in " + path)
-    return int(d["frame_stamp_ns"][ok][0]) * 1e-9
+    for ns in d["frame_stamp_ns"][ok]:
+        t = int(ns) * 1e-9
+        if gt_bracket(t_gt, t) is not None:
+            return t
+    raise ValueError("no keyframe with backend+scale initialised and GT available in " + path)
 
 
 def main():
@@ -82,16 +100,18 @@ def main():
     ap.add_argument("--est", default=None, help="TUM file of the VIO-frame estimate (default analysis/est.tum)")
     args = ap.parse_args()
     out = os.path.join(args.run, "analysis")
-    t0 = args.t0 if args.t0 is not None else t0_from_kf_log(args.kf_log)
+    t_g, p_g, r_g = load_gt(args.seq)
+    t0 = args.t0 if args.t0 is not None else t0_from_kf_log(args.kf_log, t_g)
 
     t_e, p_e, r_e = load_tum(args.est or os.path.join(out, "est.tum"))
     k = int(np.argmin(np.abs(t_e - t0)))
     if abs(t_e[k] - t0) > 1e-6:
         raise ValueError(f"no estimate sample at t0={t0:.9f} (closest {t_e[k]:.9f})")
-    t_g, p_g, r_g = load_gt(args.seq)
     p_VB, r_VB = gt_at(t_g, p_g, r_g, t0)
     T, psi = compute_T_M_W(p_e[k], r_e[k].as_matrix(), p_VB, r_VB.as_matrix())
-    res = dict(sequence=args.seq, t0=t0, yaw_deg=float(np.degrees(psi)), T_M_W=T.tolist(),
+    i = gt_bracket(t_g, t0)
+    res = dict(sequence=args.seq, t0=t0, t0_rule="first KF with backend+scale init and GT bracket <= 10 ms",
+               gt_bracket=[float(t_g[i - 1]), float(t_g[i])], yaw_deg=float(np.degrees(psi)), T_M_W=T.tolist(),
                p_W_B_t0=p_e[k].tolist(), p_V_B_t0=p_VB.tolist(),
                note="4-DoF (yaw+translation) from GT at a single timestamp; see docs/frames.md (D1)")
     json.dump(res, open(os.path.join(out, "initial_alignment.json"), "w"), indent=2)

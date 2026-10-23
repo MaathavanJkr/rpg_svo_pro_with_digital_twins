@@ -76,7 +76,7 @@ Remarks:
 | Residual added | [estimator.cpp:1183-1225](../svo_ceres_backend/src/estimator.cpp#L1183-L1225) (GPS + registration, case D) and [estimator.cpp:1524-1566](../svo_ceres_backend/src/estimator.cpp#L1524-L1566) (registration only, case B); same code |
 | Residual form: e = [p_meas − p ; 2·vec(q_meas ⊗ q⁻¹)], weighted by √information | [pose_error.cpp:105-123](../svo_ceres_backend/src/pose_error.cpp#L105-L123) |
 
-**[RISK] Flag combinations.** Registered poses reach the optimiser **only when both** `use_global_measurements` **and** `use_map_registration` are true (case 1). With only `use_map_registration=true`, the dispatcher falls into "case 3" (pure VIO), and `gp_initialized_` never becomes true. Within case 1, "case B" (registration, no GPS message at that frame) is supported, so GPS messages are not needed *per frame*, only for the initial alignment.
+**[RISK] Flag combinations.** (Before fix F3, §9, *any* `false` flag crashed the backend; the case analysis below holds after F3.) Registered poses reach the optimiser **only when both** `use_global_measurements` **and** `use_map_registration` are true (case 1). With only `use_map_registration=true`, the dispatcher falls into "case 3" (pure VIO), and `gp_initialized_` never becomes true. Within case 1, "case B" (registration, no GPS message at that frame) is supported, so GPS messages are not needed *per frame*, only for the initial alignment.
 
 **[RISK] Timing.** A registration result is only used if its stamp matches a KF still in the sliding window (|Δt| < 1 ms, [estimator.cpp:1198](../svo_ceres_backend/src/estimator.cpp#L1198)). Slow registration therefore means lost measurements. This is a measurable effect for the M2/M3 runtime comparison. Log the number of results accepted vs published.
 
@@ -128,3 +128,13 @@ Remarks:
 | F1 | `online_registration.py:243` | `arccos` of trace term not clipped → NaN when trace > 3 by rounding; NaN passes the rotation check | clip the argument to [−1, 1] | 5 (planned) |
 | F2 | `online_registration.py:109-110` | `cross/‖cross‖` divides by zero when a point is parallel to its normal | skip or guard zero-norm rows | 5 (planned) |
 | F3 | `svo_ros/src/svo_interface.cpp` (constructor and `processImageBundle`) | `CeresBackendInterface::use_global_measurements_` / `use_map_registration_` default to `true` and were only ever set to `true`, so `use_global_measurements=false` segfaulted on the first frame (null `GlobalPositionsHandler`). VIO-only could not run. | Assign both configured flags to the backend explicitly (no change when both are true). **Applied 2026-10-23** (approved option A), in `svo_ros` itself, not in a copy. | 4 (done) |
+
+### F3 in detail (applied 2026-10-23, commit 06073b3)
+- **Symptom.** `euroc_m1.launch` (`use_global_measurements=false`, `use_map_registration=false`): `svo_node` segfaults (exit −11) on the first image. Stack: `SvoInterface::monoCallback → processImageBundle → FrameHandlerBase::addImageBundle → CeresBackendInterface::loadMapFromBundleAdjustment → addStatesInertialGpAndGposeMeasurementsToBackend → GlobalPositionsHandler::getMeasurementTillTime → pthread_mutex_lock` on address 0xa0 (null handler).
+- **Root cause.** `CeresBackendInterface::use_global_measurements_` and `use_map_registration_` are initialised to `true` (`svo_ceres_backend/include/svo/ceres_backend_interface.hpp:286-287`). `svo_interface.cpp` only ever assigned `true` (inside `if (use_global_measurements_)` / `if (use_map_registration_)`), never `false`. With both params false, the backend still took "case 1" (GP + MR) while `setGpHandler`/`setGposeHandler` had not been called, so the handler pointers were null. The upstream `Default/euroc_vio_mono.launch` would hit the same crash once its paths are fixed.
+- **Change.** Two assignments after the existing blocks in the constructor, and the same two in `processImageBundle` where the backend is re-created:
+  `ceres_backend_interface_->use_global_measurements_ = use_global_measurements_;`
+  `ceres_backend_interface_->use_map_registration_ = use_map_registration_;`
+- **Effect.** With both flags true (Oerlikon, M2, M3) the assigned values equal the previous ones, so there is no behavioural change by construction (checked empirically by an Oerlikon run on this build, see `docs/phase3_oerlikon.md`). With both false the backend now takes "case 3" (pure VIO), as the code intended. Backend and residuals are untouched.
+- **Verified** by the MH_01 M1 runs (3682/3682 frames, ATE posyaw 0.140 m).
+
