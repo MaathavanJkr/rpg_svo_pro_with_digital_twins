@@ -12,6 +12,12 @@ Metrics
 - ATE after SE(3) alignment (evo Umeyama), for reference only.
 - RPE (evo, all pairs) for segment lengths = 10/20/30/40/50 % of the GT path length
   (rpg_trajectory_evaluation convention): translation error [m] and rotation angle [deg].
+  Note: RPE uses the estimated/GT body orientations (relative translation is expressed in the
+  segment's start frame), so it is sensitive to GT orientation errors (docs/phase4_m1.md).
+- Relative displacement error (orientation-free drift metric): after the 4-DoF alignment, for
+  every pose i and the first pose j whose GT path length from i is >= d (same segment lengths as
+  RPE): e_ij = ||(p_est_j - p_est_i) - (p_gt_j - p_gt_i)||, world frame. Depends on positions and
+  the single world-frame yaw only.
 - Runtime: frames processed vs images in the input bag, frontend processing time (/svo/info),
   backend output latency (receipt wall time - stamp, offset estimated from /imu0), CPU (cpu.csv).
 Ground truth is used for evaluation only.
@@ -59,6 +65,16 @@ def align_posyaw(p_est, p_gt):
     c, s = np.cos(yaw), np.sin(yaw)
     R = np.array([[c, -s, 0], [s, c, 0], [0, 0, 1]])
     return R, mg - R @ me, yaw
+
+
+def rel_displacement_error(pa, pg, d):
+    """Orientation-free drift: world-frame displacement error over GT path-length segments d."""
+    s = np.r_[0.0, np.cumsum(np.linalg.norm(np.diff(pg, axis=0), axis=1))]
+    j = np.searchsorted(s, s + d)
+    ok = j < len(s)
+    i, j = np.flatnonzero(ok), j[ok]
+    e = np.linalg.norm((pa[j] - pa[i]) - (pg[j] - pg[i]), axis=1)
+    return dict(mean=float(e.mean()), rmse=float(np.sqrt(np.mean(e ** 2))), n=int(len(e)))
 
 
 def save_tum(path, traj):
@@ -111,6 +127,7 @@ def main():
             res[name] = dict(mean=float(np.mean(m.error)), rmse=float(np.sqrt(np.mean(m.error ** 2))),
                              n=int(len(m.error)))
         res["trans_pct_of_segment"] = 100.0 * res["trans_m"]["mean"] / d
+        res["rel_disp_m"] = rel_displacement_error(pe @ R.T + t, pg, d)
         rpe[f"{d}m"] = res
 
     # Runtime

@@ -26,6 +26,7 @@ for r in runs:
                ate_posyaw=s["ate_posyaw_m"]["rmse"], ate_se3=s["ate_se3_m"]["rmse"],
                rpe_trans={k: v["trans_m"]["mean"] for k, v in s["rpe"].items()},
                rpe_rot={k: v["rot_deg"]["mean"] for k, v in s["rpe"].items()},
+               rel_disp={k: v["rel_disp_m"]["mean"] for k, v in s["rpe"].items() if "rel_disp_m" in v},
                frames=f'{s["runtime"]["frames_processed"]}/{s["runtime"]["images_in_bag"]}',
                frontend_ms=s["runtime"]["frontend_ms"]["mean"],
                latency_ms=s["runtime"]["backend_output_latency_ms"]["median"],
@@ -41,8 +42,9 @@ agg = dict(ate_posyaw=ms([r["ate_posyaw"] for r in rows]), ate_se3=ms([r["ate_se
 if all("map_ate" in r for r in rows):
     agg["map_ate"] = ms([r["map_ate"] for r in rows])
     agg["yaw_deg"] = ms([r["yaw_deg"] for r in rows])
-for key in ("rpe_trans", "rpe_rot"):
-    agg[key] = {seg: ms([r[key][seg] for r in rows]) for seg in rows[0][key]}
+for key in ("rpe_trans", "rpe_rot", "rel_disp"):
+    if all(r[key] for r in rows):
+        agg[key] = {seg: ms([r[key][seg] for r in rows]) for seg in rows[0][key]}
 if all(r["cpu_core_pct"] is not None for r in rows):
     agg["cpu_core_pct"] = ms([r["cpu_core_pct"] for r in rows])
 
@@ -56,3 +58,5 @@ print("ATE posyaw [m]:", f(agg["ate_posyaw"]), "| ATE SE3 [m]:", f(agg["ate_se3"
       "| map-frame ATE [m]:", f(agg["map_ate"]) if "map_ate" in agg else "n/a")
 print("RPE trans mean [m]:", {k: f(v) for k, v in agg["rpe_trans"].items()})
 print("RPE rot mean [deg]:", {k: f(v) for k, v in agg["rpe_rot"].items()})
+if "rel_disp" in agg:
+    print("Rel. displacement error mean [m] (orientation-free):", {k: f(v) for k, v in agg["rel_disp"].items()})

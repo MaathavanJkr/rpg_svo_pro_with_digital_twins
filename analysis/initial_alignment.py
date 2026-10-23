@@ -24,11 +24,17 @@ Usage (venv):
   python analysis/initial_alignment.py runs/<run_id> <sequence> --kf-log runs/<run_id>/frame_events.csv
   (frame_events.csv is written by svo_node with log_frame_events:=true)
 Writes runs/<run_id>/analysis/initial_alignment.json and map_frame_ate.json.
+
+Sensitivity check only (NOT the D1 definition): --yaw-source vicon takes the orientation at t0
+from raw Vicon (mav0/vicon0, body orientation R_RS * R_BS^T, slerp at t0 on raw stamps) instead of
+state_groundtruth_estimate0; translation still from the GT estimate. Outputs get the suffix
+_sens_vicon_yaw and never overwrite the D1 files.
 """
 import argparse
 import json
 import os
 import numpy as np
+import yaml
 from scipy.spatial.transform import Rotation, Slerp
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -69,6 +75,14 @@ def gt_at(t_gt, p_gt, r_gt, t0):
     return p, r
 
 
+def vicon_orientation_at(seq, t0):
+    b = os.path.join(REPO, "dataset/derived/asl_meta", seq, "mav0/vicon0/")
+    v = np.loadtxt(b + "data.csv", delimiter=",", comments="#")
+    T_BS = np.array(yaml.safe_load(open(b + "sensor.yaml"))["T_BS"]["data"]).reshape(4, 4)
+    R_RB = Rotation.from_quat(np.c_[v[:, 5:8], v[:, 4]]) * Rotation.from_matrix(T_BS[:3, :3]).inv()
+    return Slerp(v[:, 0] * 1e-9, R_RB)([t0])[0]
+
+
 def compute_T_M_W(p_WB, R_WB, p_VB, R_VB):
     dR = R_VB @ R_WB.T
     psi = np.arctan2(dR[1, 0], dR[0, 0])
@@ -98,6 +112,8 @@ def main():
     g.add_argument("--t0", type=float)
     g.add_argument("--kf-log")
     ap.add_argument("--est", default=None, help="TUM file of the VIO-frame estimate (default analysis/est.tum)")
+    ap.add_argument("--yaw-source", choices=["gt", "vicon"], default="gt",
+                    help="gt = D1 definition; vicon = sensitivity check only")
     args = ap.parse_args()
     out = os.path.join(args.run, "analysis")
     t_g, p_g, r_g = load_gt(args.seq)
@@ -108,13 +124,18 @@ def main():
     if abs(t_e[k] - t0) > 1e-6:
         raise ValueError(f"no estimate sample at t0={t0:.9f} (closest {t_e[k]:.9f})")
     p_VB, r_VB = gt_at(t_g, p_g, r_g, t0)
+    suffix = ""
+    if args.yaw_source == "vicon":
+        r_VB = vicon_orientation_at(args.seq, t0)
+        suffix = "_sens_vicon_yaw"
     T, psi = compute_T_M_W(p_e[k], r_e[k].as_matrix(), p_VB, r_VB.as_matrix())
     i = gt_bracket(t_g, t0)
     res = dict(sequence=args.seq, t0=t0, t0_rule="first KF with backend+scale init and GT bracket <= 10 ms",
                gt_bracket=[float(t_g[i - 1]), float(t_g[i])], yaw_deg=float(np.degrees(psi)), T_M_W=T.tolist(),
                p_W_B_t0=p_e[k].tolist(), p_V_B_t0=p_VB.tolist(),
                note="4-DoF (yaw+translation) from GT at a single timestamp; see docs/frames.md (D1)")
-    json.dump(res, open(os.path.join(out, "initial_alignment.json"), "w"), indent=2)
+    res["yaw_source"] = args.yaw_source
+    json.dump(res, open(os.path.join(out, f"initial_alignment{suffix}.json"), "w"), indent=2)
 
     # Map-frame ATE, no further alignment, window [t0, end].
     m = t_e >= t0
@@ -126,7 +147,7 @@ def main():
     ate = dict(rmse=float(np.sqrt(np.mean(err ** 2))), mean=float(err.mean()), median=float(np.median(err)),
                max=float(err.max()), final=float(err[-1]), n=int(ok.sum()),
                window_s=float(t_e[m][ok][-1] - t0))
-    json.dump(dict(t0=t0, map_frame_ate_m=ate), open(os.path.join(out, "map_frame_ate.json"), "w"), indent=2)
+    json.dump(dict(t0=t0, map_frame_ate_m=ate), open(os.path.join(out, f"map_frame_ate{suffix}.json"), "w"), indent=2)
     print(json.dumps(dict(alignment=res, map_frame_ate_m=ate), indent=2))
 
 

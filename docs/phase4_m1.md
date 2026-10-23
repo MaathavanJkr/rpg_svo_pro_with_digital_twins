@@ -38,7 +38,7 @@ Runs `runs/2026-10-23_V1_01_easy_M1_r01..r05` (commit 3688064, libsvo_ros md5 a8
 
 | Run | ATE 4-DoF [m] | Map-frame ATE [m] | t₀ | ψ (yaw offset) | Frames | Frontend [ms] | Latency [ms] | CPU (1 core) |
 |---|---|---|---|---|---|---|---|---|
-| r01 | 0.051 | 0.224 | 1403715279.062143 | 123.24° | 2887/2912 | 13.0 | 49 | 75 % |
+| r01 ⚠ | 0.051 | 0.224 | 1403715279.062143 | 123.24° | **2887/2912** (25 dropped) | 13.0 | 49 | 75 % |
 | r02 | 0.058 | 0.245 | 1403715279.062143 | 122.50° | 2912/2912 | 7.6 | 51 | 73 % |
 | r03 | 0.058 | 0.237 | 1403715279.062143 | 122.55° | 2912/2912 | 7.4 | 51 | 72 % |
 | r04 | 0.056 | 0.235 | 1403715279.062143 | 123.23° | 2912/2912 | 7.5 | 51 | 72 % |
@@ -47,7 +47,7 @@ Runs `runs/2026-10-23_V1_01_easy_M1_r01..r05` (commit 3688064, libsvo_ros md5 a8
 
 - ATE SE(3)-aligned: 0.055 ± 0.003 m. t₀ is 5.80 s after the first image (4.76 s after GT starts), the same keyframe in every run.
 - **Reference:** Cioffi & Scaramuzza 2020, VIO-only V101 **0.061 m** (posyaw, median of 3). Ours 0.056 ± 0.003 m: consistent, not off.
-- r01 processed 2887/2912 images and had a higher frontend time (13.0 ms). It was the first V1_01 run after the Oerlikon run; cause not determined (possibly cold disk cache for the bag). Its accuracy is in line with the others.
+- ⚠ **r01 is flagged but kept in the statistics** (decision 2026-10-23): it processed 2887/2912 images and had a higher frontend time (13.0 ms). It was the first V1_01 run after the Oerlikon run; cause not determined (possibly cold disk cache for the bag). Its accuracy is in line with the others.
 
 RPE (evo, all pairs, segments = 10–50 % of the 58.6 m GT path), mean ± std over runs:
 
@@ -58,6 +58,15 @@ RPE (evo, all pairs, segments = 10–50 % of the 58.6 m GT path), mean ± std ov
 
 **These RPE values are dominated by a ground-truth orientation discrepancy, see below; read them with that caveat.**
 
+Orientation-free drift metric (decision 2026-10-23): relative displacement error after the 4-DoF alignment, e = ‖(p̂_j − p̂_i) − (p_j − p_i)‖ over the same GT path-length segments (`analysis/eval_vio.py`, `rel_disp_m`). It uses positions and one world-frame yaw only, so it is not affected by GT body orientation.
+
+| Segment | 5.9 m | 11.7 m | 17.6 m | 23.4 m | 29.3 m |
+|---|---|---|---|---|---|
+| **rel. displacement error [m]** | **0.064 ± 0.007** | **0.062 ± 0.005** | **0.071 ± 0.005** | **0.075 ± 0.007** | **0.075 ± 0.006** |
+| RPE translation [m] (for comparison) | 0.286 | 0.239 | 0.293 | 0.342 | 0.203 |
+
+Check on MH_01 (GT orientation consistent there): rel. displacement 0.122 / 0.188 / 0.195 / 0.211 / 0.231 m vs RPE translation 0.122 / 0.200 / 0.204 / 0.229 / 0.253 m. The two agree, which confirms that the V1_01 RPE inflation comes from orientation.
+
 ## Finding: EuRoC GT orientation vs raw Vicon (affects orientation-based metrics)
 On V1_01 the RPE rotation error is ~4° at every segment length (MH_01: 0.75 → 1.4°), and translation RPE is ~5× the ATE. Diagnosis (evaluation only):
 - Roll/pitch (tilt) error of the estimate vs `state_groundtruth_estimate0` is ~2.4° for the whole run, identical in all 5 runs (MH_01: converges to 0.3–0.8°). Not a timestamp offset (minimum at Δt = 0…+20 ms).
@@ -65,3 +74,22 @@ On V1_01 the RPE rotation error is ~4° at every segment length (MH_01: 0.75 →
 - Other sequences (GT estimate vs raw Vicon, median tilt / full rotation): V1_02 0.45° / 0.88°, V1_03 0.81° / 1.40°, V2_01 2.90° / 4.06°, V2_02 4.38° / 6.94°, V2_03 4.34° / 7.01°. V2 is confounded by a time offset beyond the ±100 ms searched; unresolved.
 - **Interpretation (not a conclusion):** on V1_01 the orientation of `state_groundtruth_estimate0` appears inconsistent with the Vicon-measured body orientation by a few degrees. Which one is closer to the truth is not established (raw Vicon depends on the `T_BS` calibration; the GT estimate is the dataset's official reference and what the literature uses).
 - **Impact:** (i) position-only metrics (4-DoF ATE, map-frame ATE positions) are unaffected by the body orientation itself; (ii) RPE (both translation, expressed in the start frame, and rotation) and any ATE_R are inflated; (iii) the D1 yaw ψ uses the GT orientation at t₀, so ψ can carry ~1–2° of this discrepancy, which shifts the map-frame ATE through the lever arm. It is the same t₀ and GT for M1/M2/M3, so method comparisons stay fair, but absolute map-frame numbers are affected. Decision requested at the Phase 4 gate.
+
+### Decision (Phase 4 gate, 2026-10-23)
+**Option (a):** keep `state_groundtruth_estimate0` for all metrics and for the D1 alignment. RPE is reported with the caveat above, plus the orientation-free relative displacement error.
+
+**The D1 alignment is identical for M1, M2 and M3** (same t₀ event rule, same GT, same interpolation), so any yaw bias it inherits from the GT orientation is **common to all three methods**. Method differences in map-frame ATE are not caused by it; absolute map-frame values are.
+
+### Sensitivity check (reported only; not a D1 change): t₀ yaw from raw Vicon
+`analysis/initial_alignment.py --yaw-source vicon`: orientation at t₀ from `vicon0` (body orientation R_RS·R_BSᵀ, slerp on raw stamps), translation still from the GT estimate. Output files `*_sens_vicon_yaw.json`.
+
+| Run | ψ (GT estimate, D1) | ψ (raw Vicon) | Δψ | Map-frame ATE, D1 [m] | Map-frame ATE, Vicon yaw [m] | Δ [m] |
+|---|---|---|---|---|---|---|
+| r01 | 123.24° | 125.46° | +2.22° | 0.224 | 0.127 | −0.097 |
+| r02 | 122.50° | 124.72° | +2.22° | 0.245 | 0.149 | −0.096 |
+| r03 | 122.55° | 124.77° | +2.22° | 0.237 | 0.138 | −0.099 |
+| r04 | 123.23° | 125.45° | +2.22° | 0.235 | 0.139 | −0.096 |
+| r05 | 122.52° | 124.74° | +2.22° | 0.247 | 0.149 | −0.098 |
+| mean | | | **+2.22°** | **0.237 ± 0.009** | **0.140 ± 0.009** | **−0.097** |
+
+**Reading:** the yaw taken from the official GT orientation at t₀ differs from the raw-Vicon yaw by 2.2°. That accounts for ~0.1 m (40 %) of M1's map-frame ATE on V1_01. The effect is a common offset for M1/M2/M3; it must be stated next to any absolute map-frame number for V1_01. (Raw Vicon was used on its own timestamps; the best-fit +10 ms shift found earlier was not applied.)
