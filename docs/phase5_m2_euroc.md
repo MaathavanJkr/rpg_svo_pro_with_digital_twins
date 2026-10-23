@@ -41,7 +41,8 @@ Registration (190 KF clouds): **75 accepted, 115 rejected (114 rotation > 5°, 1
 - Independently, **GT positions** prefer the same direction: re-aligning the five M1 runs with ψ_D1 + δ gives map-frame ATE 0.237 (δ=0), 0.139 (+2.25°), 0.080 (+4°), minimum **0.072 m at δ = +4.75°** (evaluation-only diagnostic).
 - Raw-Vicon orientation at t₀ gives δ = +2.22° (Phase 4 sensitivity).
 - Reading: the scan frame and the GT positions agree with each other; the **GT-estimate orientation at the single instant t₀** carries a ~4–5° yaw error on V1_01 (consistent with the Phase 4 GT-orientation finding). D1 inherits it. It dominates M1's map-frame ATE (0.237 m vs ~0.07 m with the yaw removed), and in M2 the registration repeatedly asks for the missing yaw against a fixed T_w_vio: the 5° limit rejects 60 % of results, the accepted ones pull the VIO, and local consistency degrades (4-DoF ATE 0.056 → 0.119 m).
-- **Decision needed before repeat runs** (options in the Phase 5 gate summary).
+- **Visual check:** `docs/img/phase5_yaw_check.png` (`analysis/phase5_yaw_check.py`, visualisation only). Wall slice z 0.5–2.5 m of the twin with the M2 r01 map-frame landmarks: with D1 the south- and east-wall landmark bands are visibly rotated against the scan walls; rotated by +4.1° they run parallel. Median landmark-to-twin distance 11.2 cm (D1) → 8.2 cm (+4.1°). The west wall has few landmarks (rarely in view), so the zooms show the south and north walls. Caveat: the M2 r01 landmarks already include the effect of the accepted corrections.
+- **Decision (2026-10-23): D1(B)**, an alignment from GT positions over the first 2 m of flight (docs/frames.md). Window length chosen on M1 runs by yaw stability (plateau L = 1–2 m), before looking at any M2/M3 result. M1 recomputed: map-frame ATE 0.132 ± 0.012 m (legacy 0.237 ± 0.009).
 
 ## RViz check (manual)
 Terminal 1 (no venv):
@@ -57,3 +58,7 @@ In RViz set **Fixed Frame = `world`**. The `world` frame exists only after the D
 - `/svo/w_backend_points_registered` (only accepted KFs, ~1 in 2.5): should lie on the scan surfaces.
 - `/svo/w_backend_pose_imu_viz`: the drone pose inside the room, 1–2 m above the floor.
 - `vio`-frame displays (`/svo/vio_backend_points`, `/svo/pose_imu`) now also render, through the static TF.
+
+## Fixes after the user's RViz check (2026-10-23)
+- **TF_REPEATED_DATA** (RViz, once, `vio (parent world)` at the D1 stamp; `svo_node` logged a single send): the static broadcaster was created at alignment time, so RViz connected to a brand-new latched publisher while the message was being sent and received it twice. The broadcaster is now created at start-up, and `sendTransform` is called exactly once. Verification: a `tf_echo world vio` listener running from before the alignment, in the next run.
+- `euroc_m2.launch`: `d1_gt_file` now defaults to the V1_01_easy GT file (full path via the package); no argument is needed for V1_01.
