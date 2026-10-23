@@ -122,8 +122,9 @@ Remarks:
 - **D3 → parameterised copy of the registration node for EuRoC (Phase 5).** Parameters: twin voxel size, z filter, fitness threshold, with defaults equal to the original hard-coded values (1.0 m, z ≥ 0, 0.75). The Leica scan is preprocessed **once** offline (crop outliers, downsample to 2–5 cm, estimate normals) into `dataset/derived/`, and M2 and M3 load the identical file. Bug fixes in the copy only, logged below.
 - **D4 → main comparison:** M3 outputs information in the **same heuristic convention** as M2, using the normalised ∇D as the normal. **Ablation:** a Hessian-based covariance for both M2 and M3 (2×2 design). Recorded in `docs/PLAN.md`.
 
-## 9. Bug fixes in our copies (never in the original files)
+## 9. Bug fixes (F1/F2 in our copies only; F3 approved as an in-place svo_ros fix)
 | # | Original location | Issue | Fix in copy | Phase |
 |---|---|---|---|---|
 | F1 | `online_registration.py:243` | `arccos` of trace term not clipped → NaN when trace > 3 by rounding; NaN passes the rotation check | clip the argument to [−1, 1] | 5 (planned) |
 | F2 | `online_registration.py:109-110` | `cross/‖cross‖` divides by zero when a point is parallel to its normal | skip or guard zero-norm rows | 5 (planned) |
+| F3 | `svo_ros/src/svo_interface.cpp` (constructor and `processImageBundle`) | `CeresBackendInterface::use_global_measurements_` / `use_map_registration_` default to `true` and were only ever set to `true`, so `use_global_measurements=false` segfaulted on the first frame (null `GlobalPositionsHandler`). VIO-only could not run. | Assign both configured flags to the backend explicitly (no change when both are true). **Applied 2026-10-23** (approved option A), in `svo_ros` itself, not in a copy. | 4 (done) |

@@ -145,6 +145,12 @@ SvoInterface::SvoInterface(
       ceres_backend_interface_->use_map_registration_ = true;
     }
 
+    // FYP fix: pass the configured flags to the backend. Its members default to
+    // true and were only ever set to true, so with use_global_measurements=false
+    // the backend dereferenced a null GlobalPositionsHandler on the first frame.
+    ceres_backend_interface_->use_global_measurements_ = use_global_measurements_;
+    ceres_backend_interface_->use_map_registration_ = use_map_registration_;
+
   }
 #ifdef SVO_USE_GTSAM_BACKEND
   if(vk::param<bool>(pnh_, "use_backend", false))
@@ -260,6 +266,9 @@ void SvoInterface::processImageBundle(
       {
         SVO_ERROR_STREAM("Cannot use ceres backend without using imu");
       }
+      // FYP fix: same as in the constructor, pass the configured flags.
+      ceres_backend_interface_->use_global_measurements_ = use_global_measurements_;
+      ceres_backend_interface_->use_map_registration_ = use_map_registration_;
     }
   }
   svo_->addImageBundle(images, timestamp_nanoseconds);
