@@ -42,6 +42,17 @@ Figures (r01): `docs/img/phase3_oerlikon_traj_top.png`, `docs/img/phase3_oerliko
 
 **Result:** position within the old-binary spread. Rotation is 0.18–0.20° *lower* (better) than all three old-binary runs, so it is **not** strictly within the r01–r03 range. With the flag off the logger returns on its first line, so a behavioural change is not expected, but n=3 is too few to define the run-to-run spread and this check does not prove equivalence. It can be strengthened with more runs of both binaries if needed.
 
+### Equivalence check 2: current build with F3 (flag fix), logger off
+`runs/2026-10-23_oerlikon_M2_F3_r01` (commit 3688064, libsvo_ros md5 `a8df1f97d777`).
+
+| | ATE_P whole [m] | ATE_P post [m] | ATE_R whole [°] | ATE_R post [°] | Accepted / rejected | Backend added |
+|---|---|---|---|---|---|---|
+| r01–r03 (old binary): mean ± std / range | 2.05 ± 0.14 / 1.95–2.21 | 1.54 ± 0.23 / 1.38–1.80 | 3.89 ± 0.08 / 3.83–3.98 | 3.79 ± 0.10 / 3.69–3.89 | 230–233 / 108–113 | 152, 200, 152 |
+| logger build (newbin_r01) | 1.98 | 1.38 | 3.65 | 3.49 | 239 / 100 | 200 |
+| **F3 build (F3_r01)** | **1.83** ✗ | **1.27** ✗ | **3.65** ✗ | **3.55** ✗ | 235 / 107 | 200 |
+
+**Result: not within the r01–r03 spread.** The F3-build run is *better* on every metric (whole-window ATE_P 1.6σ below the old mean). Both new-build runs are better than all three old-binary runs in rotation. With both flags true, F3 assigns the same values as before and the logger returns immediately, so no code-path change is expected. The cause is not established. Observations: (a) error appears to track how many registrations reach the backend, which is timing-dependent (old: 152/200/152 with r02 = 200 the best old run; both new runs 200); (b) the old binary was overwritten by the failed link and cannot be rerun without rebuilding commit `d641322`. A proper A/B (≥ 5 runs per build, same session) would settle it; decision requested.
+
 ## Comparison with the paper (Merat et al., RA-L 2025, arXiv:2412.08496)
 **Verdict: the pipeline runs end to end, and the results are of the same order as the paper but not strictly comparable.** Not called "reproduced".
 

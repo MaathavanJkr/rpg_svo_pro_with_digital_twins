@@ -1,0 +1,5 @@
+[0m[INFO] [1792755838.586565007]: Subscribing to /imu0[0m
+[0m[INFO] [1792755838.589191479]: Subscribing to /svo/info[0m
+[0m[INFO] [1792755838.591148770]: Subscribing to /svo/pose_imu[0m
+[0m[INFO] [1792755838.593041165]: Subscribing to /svo/vio_backend_pose_imu[0m
+[0m[INFO] [1792755838.595488500]: Recording to '/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-23_V1_01_easy_M1_r04/run.bag'.[0m
