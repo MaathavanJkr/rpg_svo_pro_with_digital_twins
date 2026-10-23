@@ -11,11 +11,11 @@ Scripts: `analysis/run_oerlikon_m2.sh`, `analysis/phase3_oerlikon_eval.py`. evo 
 ## Results: 3 runs (r01–r03), map frame, no alignment
 Script: `analysis/phase3_aggregate.py` → `runs/phase3_oerlikon_aggregate.json`. ATE_P = translation RMSE, ATE_R = rotation-angle RMSE, on `/svo/w_backend_pose_imu` (T_M_B as published by the system) vs `/groundtruth` (frame `world`), nearest GT within 0.05 s. Cross-check: evo APE on r01 gives 2.19 m vs 2.21 m here.
 
-| Run | Refinement at | ATE_P whole [m] | ATE_R whole [°] | ATE_P post-refinement [m] | ATE_R post-refinement [°] | Accepted / rejected | Backend residuals added |
+| Run | Refinement at | ATE_P whole [m] | ATE_R whole [°] | ATE_P post-refinement [m] | ATE_R post-refinement [°] | Accepted / rejected | Backend residuals added (rosout) |
 |---|---|---|---|---|---|---|---|
-| r01 | t₀+80.8 s | 2.21 | 3.98 | 1.80 | 3.89 | 231 / 113 | 152 |
-| r02 | t₀+82.0 s | 1.95 | 3.83 | 1.38 | 3.69 | 233 / 108 | 200 |
-| r03 | t₀+82.0 s | 1.99 | 3.86 | 1.43 | 3.79 | 230 / 113 | 152 |
+| r01 | t₀+80.8 s | 2.21 | 3.98 | 1.80 | 3.89 | 231 / 113 | 199 |
+| r02 | t₀+82.0 s | 1.95 | 3.83 | 1.38 | 3.69 | 233 / 108 | 202 |
+| r03 | t₀+82.0 s | 1.99 | 3.86 | 1.43 | 3.79 | 230 / 113 | 198 |
 | **mean ± std** | | **2.05 ± 0.14** | **3.89 ± 0.08** | **1.54 ± 0.23** | **3.79 ± 0.10** | | |
 
 Windows: whole = 349 s (from GPS alignment at ~t₀+51 s to the end); post-refinement ≈ 318 s. Run-to-run spread (max − min): 0.26 m (whole), 0.42 m (post-refinement), 0.15° / 0.20° rotation.
@@ -26,7 +26,7 @@ Other quantities (r01 detail; r02/r03 similar, see each run's `analysis/summary.
 | Landmarks per KF (mono) | median 829–840 raw (648–1000); r01 after node filters median 759. **Mono landmarks reach the registration.** |
 | Reject reasons (r01) | rmse 60, rmse+rotation 14, rmse+translation+rotation 25, rotation 11, translation+rotation 3. **Fitness ≥ 0.97 always**: the 0.75 gate never binds (see note 5a). |
 | Dropped online (queue_size=1) | 0 in all runs: the offline replay of the original node's methods reproduces each online accepted set exactly |
-| Published → backend (r01) | 32 before refinement (1 discarded + alignment-only); 199 after, 152 added, **47 (24 %) not added**. r02 added 200, r03 152. |
+| Published → backend | 32 before refinement (1 discarded + alignment-only); **all registrations published after refinement were added** (r01 199/199, r02 202/202, r03 198/198, from `rosout.log`). ~~152 added / 24 % not added~~ was a logging artifact; see note 5b. |
 | Registration runtime (offline replay, r01) | median 0.19 s, p90 0.43 s per KF (preprocessing + ICP together) |
 | `/gps` vs GT | RMSE 39 m; see GPS section |
 
@@ -37,8 +37,8 @@ Figures (r01): `docs/img/phase3_oerlikon_traj_top.png`, `docs/img/phase3_oerliko
 
 | | ATE_P whole [m] | ATE_P post [m] | ATE_R whole [°] | ATE_R post [°] | Accepted / rejected | Backend added |
 |---|---|---|---|---|---|---|
-| r01–r03 (old binary), range | 1.95–2.21 | 1.38–1.80 | 3.83–3.98 | 3.69–3.89 | 230–233 / 108–113 | 152–200 |
-| new binary | 1.98 ✓ | 1.38 ✓ (at edge) | **3.65** ✗ | **3.49** ✗ | 239 / 100 | 200 |
+| r01–r03 (old binary), range | 1.95–2.21 | 1.38–1.80 | 3.83–3.98 | 3.69–3.89 | 230–233 / 108–113 | 198–202 (rosout) |
+| new binary | 1.98 ✓ | 1.38 ✓ (at edge) | **3.65** ✗ | **3.49** ✗ | 239 / 100 | 209 (rosout) |
 
 **Result:** position within the old-binary spread. Rotation is 0.18–0.20° *lower* (better) than all three old-binary runs, so it is **not** strictly within the r01–r03 range. With the flag off the logger returns on its first line, so a behavioural change is not expected, but n=3 is too few to define the run-to-run spread and this check does not prove equivalence. It can be strengthened with more runs of both binaries if needed.
 
@@ -47,11 +47,11 @@ Figures (r01): `docs/img/phase3_oerlikon_traj_top.png`, `docs/img/phase3_oerliko
 
 | | ATE_P whole [m] | ATE_P post [m] | ATE_R whole [°] | ATE_R post [°] | Accepted / rejected | Backend added |
 |---|---|---|---|---|---|---|
-| r01–r03 (old binary): mean ± std / range | 2.05 ± 0.14 / 1.95–2.21 | 1.54 ± 0.23 / 1.38–1.80 | 3.89 ± 0.08 / 3.83–3.98 | 3.79 ± 0.10 / 3.69–3.89 | 230–233 / 108–113 | 152, 200, 152 |
-| logger build (newbin_r01) | 1.98 | 1.38 | 3.65 | 3.49 | 239 / 100 | 200 |
-| **F3 build (F3_r01)** | **1.83** ✗ | **1.27** ✗ | **3.65** ✗ | **3.55** ✗ | 235 / 107 | 200 |
+| r01–r03 (old binary): mean ± std / range | 2.05 ± 0.14 / 1.95–2.21 | 1.54 ± 0.23 / 1.38–1.80 | 3.89 ± 0.08 / 3.83–3.98 | 3.79 ± 0.10 / 3.69–3.89 | 230–233 / 108–113 | 199, 202, 198 (rosout) |
+| logger build (newbin_r01) | 1.98 | 1.38 | 3.65 | 3.49 | 239 / 100 | 209 (rosout) |
+| **F3 build (F3_r01)** | **1.83** ✗ | **1.27** ✗ | **3.65** ✗ | **3.55** ✗ | 235 / 107 | 205 (rosout) |
 
-**Result: not within the r01–r03 spread.** The F3-build run is *better* on every metric (whole-window ATE_P 1.6σ below the old mean). Both new-build runs are better than all three old-binary runs in rotation. With both flags true, F3 assigns the same values as before and the logger returns immediately, so no code-path change is expected. The cause is not established. Observations: (a) error appears to track how many registrations reach the backend, which is timing-dependent (old: 152/200/152 with r02 = 200 the best old run; both new runs 200); (b) the old binary was overwritten by the failed link and cannot be rerun without rebuilding commit `d641322`. A proper A/B (≥ 5 runs per build, same session) would settle it; decision requested.
+**Result: not within the r01–r03 spread.** The F3-build run is *better* on every metric (whole-window ATE_P 1.6σ below the old mean). Both new-build runs are better than all three old-binary runs in rotation. With both flags true, F3 assigns the same values as before and the logger returns immediately, so no code-path change is expected. The cause is not established. ~~(a) error appears to track how many registrations reach the backend~~ **retracted**: those counts were truncated logs (note 5b); with the complete counts every published registration was added in every run. (b) the old binary was overwritten by the failed link and cannot be rerun without rebuilding commit `d641322`. A proper A/B (≥ 5 runs per build, same session) would settle it; decision requested.
 
 ## Comparison with the paper (Merat et al., RA-L 2025, arXiv:2412.08496)
 **Verdict: the pipeline runs end to end, and the results are of the same order as the paper but not strictly comparable.** Not called "reproduced".
@@ -72,7 +72,12 @@ Why this is not like-for-like:
 
 ## Notes for Phase 5/6 (from these runs)
 - **(5a) Correspondence distance.** At `max_correspondence_distance: 8 m`, ICP fitness (inlier fraction within 8 m) is ≥ 0.97 for every KF and carries no information. The EuRoC config needs a room-scale distance (order 0.1–0.5 m, to be chosen in Phase 5), and fitness should then be re-checked as a gate.
-- **(5b) Accepted-but-not-added diagnosis (24 % in r01; 152–200 added across runs).** Log per registration: KF stamp, the backend's window KF stamps at arrival, |Δt| to the nearest KF, and whether it was added. This separates (i) KF already marginalised (window exit), (ii) stamp mismatch > 1 ms (precision), and (iii) other causes (e.g. one-per-KF limit, `readInitialPose` discard, alignment-only phase).
+- **(5b) Accepted-but-not-added: DIAGNOSED (Phase 5a, 2026-10-23) as a logging artifact, not a pipeline effect.**
+  - Category: **other**, neither window exit nor timestamp precision.
+  - Evidence: (1) every registration stamp equals a keyframe-cloud stamp exactly (231/231, 233/233, 230/230, 239/239, 235/235); (2) the backend window holds 15 KFs (`max_n_kfs: 15`, ~1 KF/s) while registration takes 0.2–0.4 s, so window exit is implausible; (3) in `svo.log` the last "registrated pose added" line is cut mid-line and `svo_node` is then killed by SIGTERM while hanging in `~SvoInterface()` → `std::thread::join()`; (4) `~/.ros/log/<run_id>/rosout.log`, which receives every ROS_INFO over the network independent of stdout buffering, has **exactly one "added" per registration published after refinement** in all 5 runs (199/199, 202/202, 198/198, 209/209, 205/205).
+  - Cause: `svo_node` stdout is redirected to a file, so it is block-buffered, and the buffer is lost when the process is SIGTERMed at shutdown. The "152 / 200" counts were just the flushed part.
+  - Consequences: (i) no fix to the pipeline is needed; (ii) the harness now copies `rosout.log` into each run folder and counts from it, and our launch copies run `svo_node` under `stdbuf -oL -eL` (line-buffered; I/O only); (iii) the earlier "24 % not added" statements are corrected above.
+  - Side observations (upstream, not changed): `Estimator::KFIdAtStamp` tests `(t_i − stamp) < 1e-3` without `abs()` (returns the first KF not newer than stamp+1 ms; correct for exact KF stamps); `getPoseAtKFatTimestamp` reads backend state without the backend mutex from the callback thread (original refine path); `svo_node` does not shut down cleanly (thread join hang).
 - **(5c) Timing breakdown.** Log ICP solve time separately from preprocessing (crop, outlier removal, voxel downsampling, map crop) and from information-matrix computation, per KF.
 
 ## RViz visual check (manual)
