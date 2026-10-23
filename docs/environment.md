@@ -60,11 +60,9 @@ source ~/venvs/fyp/bin/activate
 Python ROS nodes started by `roslaunch` use their shebang. If a node uses `#!/usr/bin/env python3`, it picks up whichever `python3` is first on `PATH`, which is the venv python if the venv is active in that terminal. **Run `roslaunch` in a terminal without the venv active**, so online nodes keep using the same system/`~/.local` packages they were developed with. Use the venv only for offline evaluation and analysis.
 
 ## Building the catkin workspace (important)
-`~/.zshrc` runs `brew shellenv`, which puts Linuxbrew (`/home/linuxbrew/.linuxbrew/bin`, including its own `ld` 2.47) first on `PATH`. Linking `svo_node` with that `ld` fails with hundreds of undefined references from system libraries (gdal, armadillo, opencv, yaml-cpp). A failed link also **deletes the previous binary**. Build with Linuxbrew removed from `PATH` for that command:
+`~/.zshrc` runs `brew shellenv`, which puts Linuxbrew (`/home/linuxbrew/.linuxbrew/bin`, including its own `ld` 2.47) first on `PATH`. Linking `svo_node` with that `ld` fails with hundreds of undefined references from system libraries (gdal, armadillo, opencv, yaml-cpp). A failed link also **deletes the previous binary**. **Always build with `scripts/build.sh`** (from 2026-10-23). It removes Linuxbrew from `PATH` for the build only, checks that `ld` is `/usr/bin/ld` (GNU ld 2.34), runs `catkin build` with the given arguments, and prints the `svo_node` / `libsvo_ros.so` timestamps and md5:
 ```bash
-cd ~/Desktop/twinforge/catkin_ws
-export PATH=$(echo $PATH | tr ':' '\n' | grep -v linuxbrew | paste -sd:)
-unset HOMEBREW_PREFIX HOMEBREW_CELLAR HOMEBREW_REPOSITORY
-source /opt/ros/noetic/setup.zsh && catkin build svo_ros --no-deps
+scripts/build.sh svo_ros --no-deps     # one package
+scripts/build.sh                        # whole workspace
 ```
-Check with `which ld` → `/usr/bin/ld` (GNU ld 2.34). Rebuilt this way on 2026-10-23 13:15 (frame-event logger).
+Your shell configuration is not changed. The 2026-10-23 13:15 rebuild (frame-event logger) was done with the same commands by hand, before the script existed.

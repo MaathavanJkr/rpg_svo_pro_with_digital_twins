@@ -26,6 +26,7 @@ fi
   echo "git_dirty: $(git -C "$REPO" status --porcelain | grep -v '^??' | wc -l) tracked files modified"
   echo "launch: svo_ros/launch/fyp/oerlikon_m2.launch rviz:=false reference_map:=$MAP"
   echo "input_bag: $INPUT_BAG (rosbag play, rate 1, no --clock; /use_sim_time=false)"
+  LIB="$WS/devel/.private/svo_ros/lib/libsvo_ros.so"; echo "libsvo_ros: $(stat -c %y "$LIB") md5 $(md5sum "$LIB" | cut -c1-12)"
   echo "svo_node binary: $(readlink -f "$WS/devel/lib/svo_ros/svo_node") $(stat -c %y "$(readlink -f "$WS/devel/lib/svo_ros/svo_node")")"
 } > "$RUN/meta.txt"
 cp "$REPO/svo_ros/launch/fyp/oerlikon_m2.launch" "$RUN/launch/"
