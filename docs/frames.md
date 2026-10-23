@@ -41,7 +41,11 @@ Started in Phase 2 (2026-10-23); extend it whenever a new transform is used.
 ## EuRoC initial alignment: stated assumption (decision D1(c), implemented in Phase 5)
 - **Assumption (state in the report):** the VIO frame W is aligned to the map M **once**, using the ground-truth pose at a single timestamp. This mimics a known take-off pose. No other GT is used online.
 - Timestamp t₀ = the **first keyframe after the backend has initialised** (not the first frame).
-- T_M_W is **4-DoF**: yaw ψ and translation only. ψ = yaw(R_V_B(t₀)) − yaw(R_W_B(t₀)), R_M_W = R_z(ψ), t_M_W = p_V_B(t₀) − R_z(ψ)·p_W_B(t₀). With T_V_M = I, V and M coincide. Roll/pitch of W stay as estimated by VIO (gravity).
+- T_M_W is **4-DoF**: yaw ψ and translation only. **Exact definition** (reference implementation `analysis/initial_alignment.py`; Phase 5 online code must match it numerically):
+  - T_W_B(t₀) = the VIO estimate sample with stamp exactly t₀; T_V_B(t₀) = GT interpolated at t₀ (linear position, slerp orientation between the bracketing 200 Hz samples).
+  - ΔR = R_V_B(t₀)·R_W_B(t₀)ᵀ, ψ = atan2(ΔR₁₀, ΔR₀₀), R_M_W = R_z(ψ), t_M_W = p_V_B(t₀) − R_z(ψ)·p_W_B(t₀).
+  - With T_V_M = I, V and M coincide. Roll/pitch of W stay as estimated by VIO (gravity).
+  - Map-frame ATE window: all estimates with stamp ≥ t₀, no further alignment.
 - Implementation: flag-guarded addition in `svo_ros` (default off). Sets `T_w_vio` + `gp_initialized_`, then broadcasts a static TF `world`→`vio`. T_M_W, t₀ and ψ are logged to the run folder.
 - `refine_T_WL: false` for M2 and M3 in the main runs (fixed alignment). Refinement is a separate ablation.
 - M1: the identical computation is applied offline to the M1 trajectory, at the same definition of t₀.
