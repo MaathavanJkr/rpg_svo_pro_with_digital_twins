@@ -5,7 +5,7 @@ Everything below comes from reading the code; nothing was run. Items marked **[R
 
 ## 0. Build / runtime layout
 - Catkin workspace: `~/Desktop/twinforge/catkin_ws`. `src/rpg_svo_pro_with_digital_twins` is a **symlink to this checkout**, so edits here are what gets built.
-- `devel/lib/svo_ros/svo_node` was built on 2026-10-21. No C++ has changed on master since (last C++ commit is 2024-12-02).
+- `devel/lib/svo_ros/svo_node` was last built on **2026-10-22 17:46**. No C++ differs between master and anything built since (last C++ commit on master is 2024-12-02, and that build only changed Python/config/launch files). Every run records the binary's timestamp in `meta.txt`.
 - `svo_ros` builds only one executable, `svo_node` ([svo_ros/CMakeLists.txt:77](../svo_ros/CMakeLists.txt#L77)).
 - The registration stage is a **single Python node**: [svo_registration/scripts/online_registration.py](../svo_registration/scripts/online_registration.py). There is no C++ in `svo_registration`.
 - **[RISK] Interpreter.** The shebang is `#!/usr/bin/env python`, but there is no `python` on this machine (only `python3`; `python-is-python3` is not installed). A run on 2026-10-22 did start this node (`~/.ros/log/latest/online_registration-2.log`); how `python` resolved then is unknown. Non-destructive fix for our launch files: `launch-prefix="python3"` on the node. Alternative: `sudo apt install python-is-python3` (needs your approval).
