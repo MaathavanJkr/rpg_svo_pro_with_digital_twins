@@ -1,0 +1,16 @@
+run_id: 2026-10-23_V1_01_easy_M2_r01
+sequence: V1_01_easy
+date: 2026-10-23T18:37:57+05:30
+git_commit: db597739a71056bbb4a7f8b0d500e1ccbd3cbade
+git_dirty: 0 tracked files modified
+launch: svo_ros/launch/fyp/euroc_m2.launch log_frame_events:=true
+input_bag: /home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/dataset/vicon_room1/V1_01_easy/V1_01_easy.bag (rosbag play, rate 1, no --clock)
+svo_node binary: /home/alpha/Desktop/twinforge/catkin_ws/devel/.private/svo_ros/lib/svo_ros/svo_node 2026-10-23 18:36:59.419596878 +0530
+libsvo_ros: 2026-10-23 18:36:53.683501741 +0530 md5 fae2d64c5024
+loadavg_before: 2.17 2.03 1.26 1/1429 129628
+nproc: 12
+nodes ready after ~2s, svo_node pid 129701
+play_wall_seconds: 149.904325414
+loadavg_after: 1.63 1.93 1.36 2/1419 130894
+ros_run_id: c447059a-cee2-11f1-b723-bd52899a295f
+done
