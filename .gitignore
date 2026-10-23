@@ -17,4 +17,4 @@ __pycache__/
 *.pyc
 
 # Failed runs (kept locally, large retry logs)
-runs/*_FAILED/
+runs/*_FAILED*/
