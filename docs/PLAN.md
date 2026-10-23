@@ -16,3 +16,8 @@ Each phase ends at a GATE. Do not start the next phase until the user approves.
 | 9 — Online integration M3 | registration_method config flag, all six Vicon sequences × 5 runs. | Runs complete. |
 | 10 — Evaluation and ablations | Main table M1/M2/M3, voxel/truncation ablations, reproducible figure scripts, H1–H4 status. | Results frozen. |
 | 11 — Write-up | Report sections, poster content (drafts). | — |
+
+## Design decisions recorded during execution
+- **Main comparison (D4):** M3 publishes information in the same heuristic convention as M2 (normalised ∇D used as the normal). **Ablation:** Hessian-based covariance for both M2 and M3 → 2×2 design {M2, M3} × {heuristic, Hessian}.
+- **Initial alignment (D1):** one-time 4-DoF GT alignment at the first keyframe after backend initialisation (see `docs/frames.md`). `refine_T_WL: false` in the main runs; refinement is an ablation.
+- **Logging additions (Phases 5, 6, 9):** per keyframe, (i) registration result published vs accepted by the backend (the 1 ms KF stamp match), (ii) registration runtime, (iii) local-cloud point count before/after filtering, (iv) accept/reject with reason.
