@@ -1,0 +1,987 @@
+Failure at 1792765126.485954938
+Exception thrown:"world" passed to lookupTransform argument target_frame does not exist. 
+The current list of frames is:
+
+Failure at 1792765126.486050291
+Exception thrown:"world" passed to lookupTransform argument target_frame does not exist. 
+The current list of frames is:
+
+Failure at 1792765127.478664607
+Exception thrown:"world" passed to lookupTransform argument target_frame does not exist. 
+The current list of frames is:
+
+Failure at 1792765128.478724602
+Exception thrown:"world" passed to lookupTransform argument target_frame does not exist. 
+The current list of frames is:
+
+Failure at 1792765129.478624809
+Exception thrown:"world" passed to lookupTransform argument target_frame does not exist. 
+The current list of frames is:
+
+Failure at 1792765130.478707817
+Exception thrown:"world" passed to lookupTransform argument target_frame does not exist. 
+The current list of frames is:
+
+Failure at 1792765131.478799552
+Exception thrown:"world" passed to lookupTransform argument target_frame does not exist. 
+The current list of frames is:
+
+Failure at 1792765132.478589329
+Exception thrown:"world" passed to lookupTransform argument target_frame does not exist. 
+The current list of frames is:
+
+Failure at 1792765133.479869248
+Exception thrown:"world" passed to lookupTransform argument target_frame does not exist. 
+The current list of frames is:
+
+Failure at 1792765134.478754121
+Exception thrown:"world" passed to lookupTransform argument target_frame does not exist. 
+The current list of frames is:
+
+Failure at 1792765135.479250348
+Exception thrown:"world" passed to lookupTransform argument target_frame does not exist. 
+The current list of frames is:
+
+Failure at 1792765136.478670898
+Exception thrown:"world" passed to lookupTransform argument target_frame does not exist. 
+The current list of frames is:
+
+Failure at 1792765137.479068104
+Exception thrown:"world" passed to lookupTransform argument target_frame does not exist. 
+The current list of frames is:
+
+Failure at 1792765138.478578104
+Exception thrown:"world" passed to lookupTransform argument target_frame does not exist. 
+The current list of frames is:
+
+Failure at 1792765139.478678385
+Exception thrown:"world" passed to lookupTransform argument target_frame does not exist. 
+The current list of frames is:
+
+Failure at 1792765140.479951933
+Exception thrown:"world" passed to lookupTransform argument target_frame does not exist. 
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765141.478629053
+Exception thrown:"world" passed to lookupTransform argument target_frame does not exist. 
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765142.478679056
+Exception thrown:"world" passed to lookupTransform argument target_frame does not exist. 
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765143.478820155
+Exception thrown:"world" passed to lookupTransform argument target_frame does not exist. 
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765144.479038078
+Exception thrown:"world" passed to lookupTransform argument target_frame does not exist. 
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765145.478788897
+Exception thrown:"world" passed to lookupTransform argument target_frame does not exist. 
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765146.478779336
+Exception thrown:"world" passed to lookupTransform argument target_frame does not exist. 
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765147.479117074
+Exception thrown:"world" passed to lookupTransform argument target_frame does not exist. 
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Warning: TF_REPEATED_DATA ignoring data with redundant timestamp for frame vio (parent world) at time 1403715286.862143 according to authority unknown_publisher
+         at line 277 in /tmp/binarydeb/ros-noetic-tf2-0.7.10/src/buffer_core.cpp
+Failure at 1792765148.478670666
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765149.479021825
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765150.478667028
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765151.479932814
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765152.478991880
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765153.478616359
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765154.478695741
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765155.478849931
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765156.478765905
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765157.478588478
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765158.478659801
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765159.478646540
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765160.478744177
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765161.478616352
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765162.478771316
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765163.478703069
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765164.478806605
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765165.479167053
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765166.478807612
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765167.478885953
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765168.478636231
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765169.478578272
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765170.478632510
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765171.479201199
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765172.479368943
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765173.480774233
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765174.478807764
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765175.479059400
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765176.478825826
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765177.478797518
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765178.478586763
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765179.478615344
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765180.478835438
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765181.478602867
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765182.478911471
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765183.479326488
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765184.478597341
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765185.478662893
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765186.478685841
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765187.479007849
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765188.479365261
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765189.479115135
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765190.479155033
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765191.479905877
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765192.478603709
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765193.479575497
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765194.479565755
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765195.478882286
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765196.478652973
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765197.478615757
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765198.478824355
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765199.478838964
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765200.478676697
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765201.479252671
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765202.479998007
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765203.478694048
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765204.481071725
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765205.479039839
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765206.479311796
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765207.480052415
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765208.479149096
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765209.480513527
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765210.478720254
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765211.478794292
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765212.479527165
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765213.478896292
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765214.479878466
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765215.478856537
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765216.479049012
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765217.479348132
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765218.478581098
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765219.478563455
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765220.479259821
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765221.478733175
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765222.478684899
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765223.479524256
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765224.480688962
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765225.478677606
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765226.479350624
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765227.479295143
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765228.478568127
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765229.478740888
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765230.478706735
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765231.478758252
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765232.478663406
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765233.479420847
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765234.479326028
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765235.478844492
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765236.489583715
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765237.478641026
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765238.478771970
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765239.478989078
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765240.478644948
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765241.478617451
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765242.478603183
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765243.479061420
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765244.478616376
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765245.478648807
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765246.478701297
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765247.479184314
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765248.478588728
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765249.479747212
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765250.478609224
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765251.478656240
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765252.478628070
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765253.478653264
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765254.478628621
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765255.479005955
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765256.479269627
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765257.478955031
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765258.478806514
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765259.478559521
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765260.479736973
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765261.478653222
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765262.478704415
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765263.478583975
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765264.478615100
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765265.478670435
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765266.479240443
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765267.478690517
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765268.478633060
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765269.478622310
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765270.478676555
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765271.478664665
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765272.481018566
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765273.479811081
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765274.478616439
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765275.479012645
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765276.479054091
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765277.479446997
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765278.478657648
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765279.478880964
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765280.478843165
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765281.482242772
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765282.479669981
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765283.479088075
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765284.478665100
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765285.478619408
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765286.481895713
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765287.479026540
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765288.480055023
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765289.479096004
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765290.478831668
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765291.479862519
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765292.478981023
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765293.478685113
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765294.485652464
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765295.479069015
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765296.480595351
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765297.478800905
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765298.478737627
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765299.478631141
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765300.478718578
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765301.479159378
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765302.479506709
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765303.479065122
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765304.479013250
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765305.479119734
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765306.479205595
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765307.482299121
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765308.486398350
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765309.486199087
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765310.482402823
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765311.479463182
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765312.478612150
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765313.478673160
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765314.478768520
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765315.478897169
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765316.479306071
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765317.479677903
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765318.481533920
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765319.479976222
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765320.478648677
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765321.478732099
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765322.480350248
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765323.480737604
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+
+Failure at 1792765324.478890884
+Exception thrown:Could not find a connection between 'world' and 'vio' because they are not part of the same tree.Tf has two or more unconnected trees.
+The current list of frames is:
+Frame vio exists with parent cam_pos.
+

@@ -234,9 +234,7 @@ SvoInterface::SvoInterface(
     }
     CHECK_GT(d1_gt_t_.size(), 1u) << "d1_alignment: no GT samples in " << gt_file;
     SVO_INFO_STREAM("D1 alignment enabled: " << d1_gt_t_.size() << " GT samples from " << gt_file);
-    // Create the static TF publisher now, not at alignment time: a latched publisher advertised
-    // at the moment of sending can be delivered twice to an already-running listener (RViz
-    // reported TF_REPEATED_DATA for world->vio).
+    // Static TF publisher for the D1 transform (published once, after alignment).
     d1_tf_broadcaster_.reset(new tf2_ros::StaticTransformBroadcaster());
     d1_thread_.reset(new std::thread(&SvoInterface::d1Loop, this));
   }
@@ -679,18 +677,25 @@ void SvoInterface::d1TryAlign()
   gp_initialized_ = true;
   d1_done_ = true;
 
+  // Static TF for visualisation. SVO's visualizer already publishes "cam_pos" -> "vio" (vio is a
+  // child of cam_pos), and a TF frame can have only one parent, so "world" is attached as a child
+  // of "vio" (transform T_vio_world = T_M_W^-1) instead of making it the parent of "vio".
+  // Rigid inverse written out explicitly: Eigen's Matrix4d::inverse() returned wrong values in this
+  // build (Phase 5 TF smoke test), so it is not used.
+  const Eigen::Matrix3d R_MW = T.block<3, 3>(0, 0);
+  const Eigen::Vector3d t_WM = -(R_MW.transpose() * T.block<3, 1>(0, 3));
+  const Eigen::Quaterniond q_WM = Eigen::Quaterniond(R_MW).conjugate().normalized();
   geometry_msgs::TransformStamped tf_msg;
   tf_msg.header.stamp.fromNSec(t_end_ns);
-  tf_msg.header.frame_id = "world";
-  tf_msg.child_frame_id = "vio";
-  const Eigen::Quaterniond q_MW(T.block<3, 3>(0, 0));
-  tf_msg.transform.translation.x = T(0, 3);
-  tf_msg.transform.translation.y = T(1, 3);
-  tf_msg.transform.translation.z = T(2, 3);
-  tf_msg.transform.rotation.w = q_MW.w();
-  tf_msg.transform.rotation.x = q_MW.x();
-  tf_msg.transform.rotation.y = q_MW.y();
-  tf_msg.transform.rotation.z = q_MW.z();
+  tf_msg.header.frame_id = "vio";
+  tf_msg.child_frame_id = "world";
+  tf_msg.transform.translation.x = t_WM.x();
+  tf_msg.transform.translation.y = t_WM.y();
+  tf_msg.transform.translation.z = t_WM.z();
+  tf_msg.transform.rotation.w = q_WM.w();
+  tf_msg.transform.rotation.x = q_WM.x();
+  tf_msg.transform.rotation.y = q_WM.y();
+  tf_msg.transform.rotation.z = q_WM.z();
   d1_tf_broadcaster_->sendTransform(tf_msg);  // exactly once (d1_done_ guards re-entry)
 
   std::ofstream log(d1_log_file_);

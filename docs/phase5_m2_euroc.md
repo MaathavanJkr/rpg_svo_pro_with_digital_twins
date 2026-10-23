@@ -60,5 +60,27 @@ In RViz set **Fixed Frame = `world`**. The `world` frame exists only after the D
 - `vio`-frame displays (`/svo/vio_backend_points`, `/svo/pose_imu`) now also render, through the static TF.
 
 ## Fixes after the user's RViz check (2026-10-23)
-- **TF_REPEATED_DATA** (RViz, once, `vio (parent world)` at the D1 stamp; `svo_node` logged a single send): the static broadcaster was created at alignment time, so RViz connected to a brand-new latched publisher while the message was being sent and received it twice. The broadcaster is now created at start-up, and `sendTransform` is called exactly once. Verification: a `tf_echo world vio` listener running from before the alignment, in the next run.
-- `euroc_m2.launch`: `d1_gt_file` now defaults to the V1_01_easy GT file (full path via the package); no argument is needed for V1_01.
+- **TF_REPEATED_DATA, real cause: a TF tree conflict.** SVO's visualizer publishes `cam_pos → vio` (`vk::output_helper::publishTfTransform(T_cam_world, …, "cam_pos", "vio")`), so `vio` already has a parent. Our static `world → vio` gave it a second parent. My first hypothesis (latched-publisher double delivery) was wrong; creating the broadcaster at start-up did not remove the warning (a `tf_echo` listener still logged it in M2 r02). **Fix:** publish the static transform as `vio → world` (T_M_W⁻¹), giving one tree `cam_pos → vio → world`. Visualisation only: no estimator or registration code reads TF.
+- **Second defect found while verifying:** in this build, `Eigen::Matrix4d::inverse()` returned wrong values (first an invalid quaternion (0, 0, 0, 0.707), rejected by tf2 as TF_DENORMALIZED_QUATERNION; then a sign-flipped translation). The inverse is now written out explicitly (Rᵀ, −Rᵀt). No `Matrix4d::inverse()` is used in the estimation code (grep); the cause (likely an Eigen vectorisation/ABI mismatch in the build) is not investigated further. The M2 r01/r02 builds published `world → vio` directly from T (no inverse), and those recorded transforms are valid unit quaternions.
+- **Verified** (30 s smoke test, not an experiment run; scratchpad only): `tf_echo world vio` resolves the transform (22 samples) and equals T_M_W (published ∘ T_M_W = I to 2e-16); 0 TF_REPEATED_DATA, 0 denormalised-quaternion errors; `tf_monitor` shows the chain `world → vio`. Final build libsvo_ros md5 `0ca99295b1b1`.
+- `euroc_m2.launch`: `d1_gt_file` now defaults to the V1_01_easy GT file; no argument is needed for V1_01.
+
+## M2 r02: first run under D1(B) (single run)
+Run `runs/2026-10-23_V1_01_easy_M2_r02` (commit e8b455f, libsvo_ros md5 d5ca50151dbc; the later TF-only fix does not affect results).
+
+**D1(B) online vs offline (same run):** t₀, t_end (t₀ + 7.8 s), all 157 window samples and the 2.0118 m path length identical; yaw 129.6724488° vs 129.6724501° (Δ 1.4e-6°), max |ΔT_M_W| 1.8e-8 (TUM 9-decimal rounding over 157 samples). **Match.**
+
+| | M1 (5 runs, D1(B)) | M2 r01 (legacy D1) | **M2 r02 (D1(B))** |
+|---|---|---|---|
+| Map-frame ATE, no alignment, t > t_end [m] | 0.132 ± 0.012 | 0.216 (window from t₀) | **0.088** (median 0.069, max 0.196, final 0.048; n = 2619) |
+| ATE 4-DoF [m] | 0.056 ± 0.003 | 0.119 | **0.070** |
+| Rel. displacement @ 5.9 / 11.7 / 17.6 / 23.4 / 29.3 m [m] | 0.064 / 0.062 / 0.071 / 0.075 / 0.075 | 0.095 / 0.127 / 0.145 / 0.150 / 0.160 | **0.089 / 0.078 / 0.100 / 0.093 / 0.105** |
+| KF clouds / registered / accepted / rejected / added | – | 190 / 190 / 75 / 115 / 74 | **189 / 187 / 187 / 0 / 186** |
+| Median ICP correction | – | 0.168 m / 5.2° | **0.092 m / 1.59°** (p10 0.66°, p90 3.22°) |
+| Mean correction rotation vector [°] | – | (0.08, 0.35, **+4.09**) ± (0.8, 0.9, 0.5) | (0.27, 0.16, **−1.22**) ± (0.79, 0.87, 1.07) |
+
+- 189 KF clouds published, 187 processed: 2 were dropped by the node's `queue_size=1` while it was busy (registration ~300 ms per KF). The first accepted result is discarded by the original `readInitialPose` logic → 186 added (rosout).
+- Landmarks per KF median 481 raw / 349 filtered; fitness 1.00; inlier RMSE 0.061 m. Timing medians: preprocessing 90 ms, ICP 176 ms, information matrix 33 ms.
+- Frames 2912/2912, frontend 7.7 ms, backend latency 52 ms, svo_node 75 % of one core.
+- **Against expectation:** the median correction is **1.59°, not a few tenths of a degree**. The mean yaw component is now −1.2° (opposite sign to before) with 1.1° spread. Possible contributors (not tested): VIO yaw drift after the 7.8 s window (the yaw-vs-L study shows the best-fit yaw changing by ~1–2.5° for longer windows); the rotation-about-map-origin coupling; landmark noise with ~350 points per KF.
+- **Reading (one run, no claims):** with D1(B) every registration passes the 5° limit; M2's map-frame ATE is below M1's (0.088 vs 0.132 ± 0.012 m), but its local consistency is still worse than M1 (4-DoF ATE 0.070 vs 0.056 m; relative displacement 0.08–0.11 vs 0.06–0.075 m). Repeat runs are needed before any statement.

@@ -149,7 +149,8 @@ public:
   // samples from t0 until the GT path length reaches d1_window_length (default 2 m); T_M_W =
   // 4-DoF least-squares fit of VIO to interpolated GT positions over the window (GT orientation
   // not used). Reference implementation: analysis/initial_alignment.py (window_alignment).
-  // Sets T_w_vio and gp_initialized_, broadcasts static TF world->vio.
+  // Sets T_w_vio and gp_initialized_, broadcasts static TF vio->world (world as child of vio,
+  // because SVO's visualizer already makes vio a child of cam_pos).
   bool d1_enabled_ = false;
   double d1_window_length_ = 2.0;
   std::vector<double> d1_gt_t_;                    // GT stamps [s]

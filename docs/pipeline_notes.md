@@ -138,3 +138,6 @@ Remarks:
 - **Effect.** With both flags true (Oerlikon, M2, M3) the assigned values equal the previous ones, so there is no behavioural change by construction (checked empirically by an Oerlikon run on this build, see `docs/phase3_oerlikon.md`). With both false the backend now takes "case 3" (pure VIO), as the code intended. Backend and residuals are untouched.
 - **Verified** by the MH_01 M1 runs (3682/3682 frames, ATE posyaw 0.140 m).
 
+### Build observation (2026-10-23): `Eigen::Matrix4d::inverse()` wrong in `svo_ros`
+While verifying the D1 static TF, `T.inverse()` on an `Eigen::Matrix4d` rigid transform returned wrong values inside `libsvo_ros` (invalid rotation block, sign-flipped translation). Our code now writes the rigid inverse out explicitly. A grep finds no `Matrix4d::inverse()` in the estimation code (`svo`, `svo_common`, `svo_ceres_backend`, frontend packages, `vikit`), which use kindr `Transformation` inverses. The cause (likely an Eigen alignment/vectorisation or version mismatch between packages in the workspace) was not investigated. Avoid `Matrix4d::inverse()` in new C++ code here.
+
