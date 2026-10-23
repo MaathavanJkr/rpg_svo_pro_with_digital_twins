@@ -64,6 +64,7 @@ def main():
     ap.add_argument("--grid", required=True)
     ap.add_argument("--mu", type=float, default=None)
     ap.add_argument("--delta", type=float, default=0.05)
+    ap.add_argument("--max-iter", type=int, default=25)
     ap.add_argument("--tag", required=True)
     ap.add_argument("--no-replay", action="store_true")
     args = ap.parse_args()
@@ -90,7 +91,7 @@ def main():
                 row["p2p_replay_s"] = time.perf_counter() - t_s
                 row["p2p_replay_maxdiff"] = float(np.abs(Tr - d["T_icp"]).max())
             # 2. distance field
-            res = dfr.register(cloud, grid, mu=args.mu, delta=args.delta)
+            res = dfr.register(cloud, grid, mu=args.mu, delta=args.delta, max_iter=args.max_iter)
             val = dfr.validate(res)
             Tdf = res["T_c"]
             row.update(df_valid=val["valid"], df_reason=val["reason"], df_fitness=val["fitness"],
@@ -128,7 +129,7 @@ def main():
         vals = [v[name] for v in per_run.values() if v[name]]
         return {k: [float(np.mean([v[k] for v in vals])), float(np.std([v[k] for v in vals], ddof=1)) if len(vals) > 1 else 0.0]
                 for k in vals[0]} if vals else {}
-    summary = dict(grid=args.grid, mu=args.mu, huber_delta=args.delta, n_keyframes=len(rows), runs=list(per_run),
+    summary = dict(grid=args.grid, mu=args.mu, huber_delta=args.delta, max_iter=args.max_iter, n_keyframes=len(rows), runs=list(per_run),
                    sanity_p2p_replay_maxdiff=dict(max=float(np.nanmax(A.get("p2p_replay_maxdiff", [np.nan]))),
                                                   median=med(A.get("p2p_replay_maxdiff", [np.nan]))),
                    accept_rate=dict(df=float(dfv.mean()), p2p=float(ppv.mean())),

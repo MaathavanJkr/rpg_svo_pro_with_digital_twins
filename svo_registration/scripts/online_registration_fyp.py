@@ -237,7 +237,7 @@ class CityMapRegistrator:
                 return
             msg = ev.pop("msg")
             raw = np.asarray(list(point_cloud2.read_points(msg.point_cloud, skip_nans=True,
-                                                           field_names=("x", "y", "z"))), dtype=np.float32)
+                                                           field_names=("x", "y", "z"))), dtype=np.float64)
             np.savez_compressed(os.path.join(self.event_dir, "kf_%d.npz" % msg.header.stamp.to_nsec()),
                                 stamp_ns=np.int64(msg.header.stamp.to_nsec()), cloud_raw=raw, **ev)
 
@@ -295,7 +295,7 @@ class CityMapRegistrator:
             if self.event_dir:
                 filtered = filtered_points if self.valid else np.asarray(current_vio_pointcloud.points).copy()
                 self.event_queue.put(dict(
-                    msg=msg, cloud_filtered=filtered.astype(np.float32),
+                    msg=msg, cloud_filtered=filtered.astype(np.float64),
                     n_target=np.int64(len(target_point_cloud.points)),
                     T_init_world_body=T_world_body, T_icp_init=np.identity(4),
                     T_icp=np.asarray(icp_result.transformation),
