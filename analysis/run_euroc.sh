@@ -57,7 +57,11 @@ for i in $(seq 1 60); do
   sleep 1
 done
 sleep 3
-SVO_PID="$(pgrep -x svo_node | head -1)"
+# svo_node started by THIS roslaunch only (another ROS session's svo_node must never be picked).
+SVO_PID=""
+for c in $(pgrep -P $LAUNCH_PID) $LAUNCH_PID; do
+  p="$(pgrep -P "$c" -x svo_node | head -1)"; [ -n "$p" ] && SVO_PID="$p" && break
+done
 echo "nodes ready after ~${i}s, svo_node pid ${SVO_PID}" >> "$RUN/meta.txt"
 if [ -z "$SVO_PID" ]; then
   echo "ABORT: svo_node did not start within 60 s (see svo.log)" | tee -a "$RUN/meta.txt" >&2
