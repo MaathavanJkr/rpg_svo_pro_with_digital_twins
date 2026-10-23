@@ -10,6 +10,11 @@
 #   3. Optional per-keyframe CSV log (registration_settings.log_file; default off): point counts,
 #      ICP fitness/rmse, correction size, accept/reject reason, and timings split into
 #      preprocessing (local + twin crop/filter), ICP solve, and information-matrix computation.
+#   4. Optional per-keyframe event dump (--event-dir; default off, Phase 6): one .npz per processed
+#      keyframe with the local cloud as received and after the node's filters, the initial guess
+#      (VIO keyframe pose in the map frame; ICP initialised at identity), the ICP transformation and
+#      result pose, fitness/rmse/correspondences, the raw and final information matrices, verdict,
+#      reason and timings. Written by a background thread after publishing (no effect on outputs).
 # Everything else (topics, ICP settings, information heuristic, output message) is identical.
 import argparse
 import time
@@ -24,6 +29,8 @@ import transforms3d as t3d
 import tf.transformations
 from threading import Lock
 import threading
+import queue
+import os
 import yaml
 from svo_msgs.msg import PoseWithCloud
 from std_srvs.srv import Empty, EmptyResponse
@@ -85,6 +92,7 @@ class CityMapRegistrator:
         self.twin_min_z = config.get('twin_min_z', 0.0)
         self.fitness_threshold = config.get('fitness_threshold', 0.75)
         self.log_file = config.get('log_file', None)
+        self.event_dir = None
         self.log = None
         if self.log_file:
             self.log = open(self.log_file, 'w', buffering=1)
@@ -221,6 +229,18 @@ class CityMapRegistrator:
 
         return filtered_pointcloud.voxel_down_sample(voxel_size=0.1)
 
+    def event_writer(self):
+        # Phase 6: writes queued per-keyframe events; runs in its own thread.
+        while True:
+            ev = self.event_queue.get()
+            if ev is None:
+                return
+            msg = ev.pop("msg")
+            raw = np.asarray(list(point_cloud2.read_points(msg.point_cloud, skip_nans=True,
+                                                           field_names=("x", "y", "z"))), dtype=np.float32)
+            np.savez_compressed(os.path.join(self.event_dir, "kf_%d.npz" % msg.header.stamp.to_nsec()),
+                                stamp_ns=np.int64(msg.header.stamp.to_nsec()), cloud_raw=raw, **ev)
+
     def svo_reg_callback(self, msg):
         with self.lock:
             t_start = time.perf_counter()
@@ -241,6 +261,8 @@ class CityMapRegistrator:
 
             self.valid, reason = self.validate_icp_result(icp_result)
             t_info = 0.0
+            A_raw = np.full((6, 6), np.nan)
+            A_final = np.full((6, 6), np.nan)
 
             if self.valid:
                 reg_T_WB = icp_result.transformation @ T_world_body
@@ -250,7 +272,9 @@ class CityMapRegistrator:
                 source_indices = [src for src, _ in icp_result.correspondence_set]
                 source_points = np.asarray(current_vio_pointcloud.points)[source_indices]
 
+                filtered_points = np.asarray(current_vio_pointcloud.points).copy()
                 A_pn = self.calculate_information_matrix(source_points, target_normals)
+                A_raw = A_pn.copy()
                 current_vio_pointcloud.transform(icp_result.transformation)
 
                 A_pn = (A_pn/np.max(A_pn))* np.exp(-0.9 * icp_result.inlier_rmse)
@@ -259,6 +283,7 @@ class CityMapRegistrator:
                 A_pn[:3, 3:6] *= self.scale_factor_rotation*self.scale_factor_position
                 A_pn[3:6,:3] *= self.scale_factor_rotation*self.scale_factor_position
                 t_info = time.perf_counter() - t_icp
+                A_final = A_pn.copy()
                 pose_msg_w_b = self.create_pose_with_covariance_stamped(reg_T_WB, A_pn, msg.header.stamp)
 
                 self.registration_T_w_b_pub.publish(pose_msg_w_b)
@@ -266,6 +291,20 @@ class CityMapRegistrator:
                 registrated_pointcloud.header.stamp = msg.header.stamp
                 registrated_pointcloud.header.frame_id = WORLD_FRAME_ID
                 self.registered_point_cloud_pub.publish(registrated_pointcloud)
+
+            if self.event_dir:
+                filtered = filtered_points if self.valid else np.asarray(current_vio_pointcloud.points).copy()
+                self.event_queue.put(dict(
+                    msg=msg, cloud_filtered=filtered.astype(np.float32),
+                    n_target=np.int64(len(target_point_cloud.points)),
+                    T_init_world_body=T_world_body, T_icp_init=np.identity(4),
+                    T_icp=np.asarray(icp_result.transformation),
+                    T_result_world_body=np.asarray(icp_result.transformation) @ T_world_body,
+                    fitness=icp_result.fitness, inlier_rmse=icp_result.inlier_rmse,
+                    n_correspondences=np.int64(len(icp_result.correspondence_set)),
+                    information_raw=A_raw, information_final=A_final,
+                    valid=bool(self.valid), reject_reason=reason,
+                    t_preproc_s=t_pre - t_start, t_icp_s=t_icp - t_pre, t_info_s=t_info))
 
             if self.log:
                 T = icp_result.transformation
@@ -308,10 +347,17 @@ if __name__ == '__main__':
     parser.add_argument('--config-file', type=str)
     parser.add_argument('--reference-map', type=str)
     parser.add_argument('--log-file', type=str, default=None)
+    parser.add_argument('--event-dir', type=str, default=None)
     # args = parser.parse_args()
     args, unknown = parser.parse_known_args()
 
     processor = CityMapRegistrator(args.config_file, args.reference_map)
+    processor.event_dir = None if args.event_dir in (None, "none") else args.event_dir
+    if processor.event_dir:
+        os.makedirs(processor.event_dir, exist_ok=True)
+        processor.event_queue = queue.Queue()
+        writer = threading.Thread(target=processor.event_writer, daemon=True)
+        writer.start()
     if args.log_file and processor.log is None:
         processor.log = open(args.log_file, 'w', buffering=1)
         processor.log.write("stamp,n_raw,n_filtered,n_target,fitness,inlier_rmse,corr_t_m,corr_rot_deg,"
@@ -323,3 +369,6 @@ if __name__ == '__main__':
         rospy.spin()
     except rospy.ROSInterruptException:
         rospy.loginfo("PointCloudProcessor node shutdown.")
+    if processor.event_dir:
+        processor.event_queue.put(None)  # drain queued events before exiting
+        writer.join(timeout=20)

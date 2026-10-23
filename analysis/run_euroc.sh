@@ -27,6 +27,8 @@ LAUNCH_NAME="$LAUNCH"
 EXTRA=(frame_event_log_file:="$RUN/frame_events.csv")
 grep -q 'name="d1_gt_file"' "$LAUNCH_PATH" && EXTRA+=(d1_gt_file:="$REPO/dataset/derived/asl_meta/$SEQ/mav0/state_groundtruth_estimate0/data.csv" d1_log_file:="$RUN/d1_alignment.csv")
 grep -q 'name="registration_log_file"' "$LAUNCH_PATH" && EXTRA+=(registration_log_file:="$RUN/registration.csv")
+# Phase 6 logging (always on when the launch supports it).
+grep -q 'name="registration_event_dir"' "$LAUNCH_PATH" && EXTRA+=(registration_event_dir:="$RUN/reg_events" log_registration_events:=true registration_event_log_file:="$RUN/registration_events.csv")
 # Pre-flight: the launch file must parse (catches XML errors before anything starts).
 if ! roslaunch --dump-params svo_ros "$LAUNCH_NAME" "${EXTRA[@]}" "$@" > /dev/null 2> "$RUN/preflight.err"; then
   echo "PREFLIGHT FAILED: launch file does not parse, see $RUN/preflight.err" | tee -a "$RUN/meta.txt" >&2; exit 1

@@ -153,6 +153,11 @@ public:
   // because SVO's visualizer already makes vio a child of cam_pos).
   bool d1_enabled_ = false;
   double d1_window_length_ = 2.0;
+
+  // FYP Phase 6: optional registration-event log (param log_registration_events, default off):
+  // one row per registered pose received in globalposeCallback (wall time, stamp, branch taken).
+  bool log_registration_events_ = false;
+  std::ofstream registration_event_log_;
   std::vector<double> d1_gt_t_;                    // GT stamps [s]
   std::vector<std::array<double, 7>> d1_gt_pose_;  // px py pz qw qx qy qz
   std::mutex d1_mutex_;

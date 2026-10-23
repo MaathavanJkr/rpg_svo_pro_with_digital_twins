@@ -207,6 +207,17 @@ SvoInterface::SvoInterface(
     SVO_INFO_STREAM("Logging frame events to " << path);
   }
 
+  // FYP Phase 6: optional registration-event log (log only; off by default).
+  log_registration_events_ = vk::param<bool>(pnh_, "log_registration_events", false);
+  if (log_registration_events_)
+  {
+    const std::string path = vk::param<std::string>(
+          pnh_, "registration_event_log_file", "/tmp/svo_registration_events.csv");
+    registration_event_log_.open(path);
+    registration_event_log_ << "wall_ns,stamp_ns,branch\n";
+    SVO_INFO_STREAM("Logging registration events to " << path);
+  }
+
   // FYP D1: optional one-time initial alignment from ground truth (off by default).
   d1_enabled_ = vk::param<bool>(pnh_, "d1_alignment", false);
   if (d1_enabled_)
@@ -833,6 +844,17 @@ void SvoInterface::globalposeCallback(const geometry_msgs::PoseWithCovarianceSta
             information(i, j) = msg->pose.covariance[i * 6 + j];
     }
     const GposeMeasurement m(msg->header.stamp.toSec(), position, orientation, information);
+
+    // FYP Phase 6: log which branch below this message takes (same conditions, read before use).
+    if (log_registration_events_)
+    {
+      const char* branch = globalpose_handler_->readInitialPose() ? "initial_discard"
+          : !gp_initialized_ ? "not_initialized"
+          : (refined_T_WL || !globalpose_handler_->gp_settings_.refine_T_WL) ? "to_handler"
+          : "alignment";
+      registration_event_log_ << ros::WallTime::now().toNSec() << ',' << msg->header.stamp.toNSec()
+                              << ',' << branch << std::endl;
+    }
 
     if(globalpose_handler_->readInitialPose())
     {

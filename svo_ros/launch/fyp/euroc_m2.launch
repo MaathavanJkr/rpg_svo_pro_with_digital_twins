@@ -18,6 +18,9 @@
   <arg name="d1_log_file" default="/tmp/svo_d1_alignment.csv"/>
   <arg name="d1_window_length" default="2.0"/>
   <arg name="registration_log_file" default="/tmp/svo_registration.csv"/>
+  <arg name="registration_event_dir" default="none"/>  <!-- Phase 6 per-KF .npz dump; "none" = off -->
+  <arg name="log_registration_events" default="false"/>
+  <arg name="registration_event_log_file" default="/tmp/svo_registration_events.csv"/>
   <arg name="rviz" default="false"/>
   <arg name="log_frame_events" default="false"/>
   <arg name="frame_event_log_file" default="/tmp/svo_frame_events.csv"/>
@@ -40,12 +43,14 @@
     <param name="d1_log_file" value="$(arg d1_log_file)" />
     <param name="d1_window_length" value="$(arg d1_window_length)" type="double" />
 
+    <param name="log_registration_events" value="$(arg log_registration_events)" />
+    <param name="registration_event_log_file" value="$(arg registration_event_log_file)" />
     <param name="log_frame_events" value="$(arg log_frame_events)" />
     <param name="frame_event_log_file" value="$(arg frame_event_log_file)" />
   </node>
 
   <node pkg="svo_registration" type="online_registration_fyp.py" name="online_registration" output="screen" launch-prefix="python3 -u"
-        args="--config-file $(arg registration_config) --reference-map $(arg reference_map) --log-file $(arg registration_log_file)"/>
+        args="--config-file $(arg registration_config) --reference-map $(arg reference_map) --log-file $(arg registration_log_file) --event-dir $(arg registration_event_dir)"/>
 
   <node if="$(arg rviz)" name="vis" pkg="rviz" type="rviz" args=" -d $(find svo_ros)/RVIZ/rviz_config_digital_twins.rviz" />
 </launch>
