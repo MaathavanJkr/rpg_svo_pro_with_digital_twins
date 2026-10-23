@@ -23,8 +23,12 @@ fi
 
 LAUNCH_PATH="$(find "$REPO/svo_ros/launch/fyp" -name "$LAUNCH")"
 LAUNCH_NAME="$LAUNCH"
+# Per-run log paths and the sequence's GT file, passed only if the launch file declares the arg.
+EXTRA=(frame_event_log_file:="$RUN/frame_events.csv")
+grep -q 'name="d1_gt_file"' "$LAUNCH_PATH" && EXTRA+=(d1_gt_file:="$REPO/dataset/derived/asl_meta/$SEQ/mav0/state_groundtruth_estimate0/data.csv" d1_log_file:="$RUN/d1_alignment.csv")
+grep -q 'name="registration_log_file"' "$LAUNCH_PATH" && EXTRA+=(registration_log_file:="$RUN/registration.csv")
 # Pre-flight: the launch file must parse (catches XML errors before anything starts).
-if ! roslaunch --dump-params svo_ros "$LAUNCH_NAME" frame_event_log_file:="$RUN/frame_events.csv" "$@" > /dev/null 2> "$RUN/preflight.err"; then
+if ! roslaunch --dump-params svo_ros "$LAUNCH_NAME" "${EXTRA[@]}" "$@" > /dev/null 2> "$RUN/preflight.err"; then
   echo "PREFLIGHT FAILED: launch file does not parse, see $RUN/preflight.err" | tee -a "$RUN/meta.txt" >&2; exit 1
 fi
 {
@@ -42,8 +46,9 @@ fi
 } > "$RUN/meta.txt"
 cp "$LAUNCH_PATH" "$RUN/launch/"
 cp "$REPO"/svo_ros/param/fyp/euroc/*.yaml "$RUN/config/"
+cp "$REPO"/svo_registration/config/euroc_v1.yaml "$REPO"/dataset/derived/euroc_twin/*.json "$RUN/config/" 2>/dev/null
 
-roslaunch svo_ros "$LAUNCH" frame_event_log_file:="$RUN/frame_events.csv" "$@" > "$RUN/svo.log" 2>&1 &
+roslaunch svo_ros "$LAUNCH" "${EXTRA[@]}" "$@" > "$RUN/svo.log" 2>&1 &
 LAUNCH_PID=$!
 for i in $(seq 1 60); do
   rosnode list 2>/dev/null | grep -q '^/svo$' && break
@@ -73,6 +78,7 @@ fi
 ) > "$RUN/cpu.csv" &
 
 rosbag record -O "$RUN/run.bag" /svo/vio_backend_pose_imu /svo/pose_imu /svo/info /imu0 \
+  /svo/w_backend_pose_imu /svo/w_registrated_pose /svo/w_backend_pose_points /svo/w_backend_points_registered /tf_static \
   > "$RUN/record.log" 2>&1 &
 REC_PID=$!
 sleep 3
@@ -98,6 +104,9 @@ sleep 5
 kill -INT $REC_PID; wait $REC_PID
 kill -INT $LAUNCH_PID; wait $LAUNCH_PID
 echo "loadavg_after: $(cat /proc/loadavg)" >> "$RUN/meta.txt"
+RUN_ID_ROS="$(grep -o 'setting /run_id to [0-9a-f-]*' "$RUN/svo.log" | awk '{print $4}')"
+[ -n "$RUN_ID_ROS" ] && cp "$HOME/.ros/log/$RUN_ID_ROS/rosout.log" "$RUN/rosout.log" 2>/dev/null
+echo "ros_run_id: $RUN_ID_ROS" >> "$RUN/meta.txt"
 if grep -q "process has died" "$RUN/svo.log" && ! grep -q "^FAILED" "$RUN/meta.txt"; then
   echo "FAILED: a node died (see svo.log)" | tee -a "$RUN/meta.txt" >&2
 fi

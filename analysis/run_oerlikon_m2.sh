@@ -78,6 +78,9 @@ echo "play_wall_seconds: $((END-START))" >> "$RUN/meta.txt"
 sleep 10   # let the last keyframes / registrations finish
 kill -INT $REC_PID; wait $REC_PID
 kill -INT $LAUNCH_PID; wait $LAUNCH_PID
+RUN_ID_ROS="$(grep -o 'setting /run_id to [0-9a-f-]*' "$RUN/svo.log" | awk '{print $4}')"
+[ -n "$RUN_ID_ROS" ] && cp "$HOME/.ros/log/$RUN_ID_ROS/rosout.log" "$RUN/rosout.log" 2>/dev/null
+echo "ros_run_id: $RUN_ID_ROS" >> "$RUN/meta.txt"
 if grep -q "process has died" "$RUN/svo.log" && ! grep -q "^FAILED" "$RUN/meta.txt"; then
   echo "FAILED: a node died (see svo.log)" | tee -a "$RUN/meta.txt" >&2
 fi

@@ -8,6 +8,7 @@
           (copies of the Oerlikon files; unused in M1).
        3. glog verbosity v=0 instead of v=2 (logging only). Note: no double hyphen allowed in XML comments.
        4. RViz optional (default off).
+       6. svo_node output line-buffered (stdbuf), I/O only (Phase 5a).
        5. FYP frame-event log (log only, default off): log_frame_events:=true frame_event_log_file:=<csv>.
      Usage: roslaunch svo_ros euroc_m1.launch [rviz:=true] [log_frame_events:=true frame_event_log_file:=...] -->
 <launch>
@@ -16,7 +17,7 @@
   <arg name="log_frame_events" default="false"/>
   <arg name="frame_event_log_file" default="/tmp/svo_frame_events.csv"/>
 
-  <node pkg="svo_ros" type="svo_node" name="svo" clear_params="true" output="screen" args="--v=0" >
+  <node pkg="svo_ros" type="svo_node" name="svo" clear_params="true" output="screen" args="--v=0" launch-prefix="stdbuf -oL -eL">
     <param name="cam0_topic" value="/cam0/image_raw" type="str" />
     <param name="imu_topic" value="/imu0" type="str" />
     <param name="calib_file" value="$(arg param_dir)/euroc_mono.yaml" />

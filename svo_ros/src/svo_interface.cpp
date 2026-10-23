@@ -28,6 +28,9 @@
 #include <vikit/params_helper.h>
 #include <vikit/timer.h>
 #include <svo_ros/ceres_backend_factory.h>
+#include <tf2_ros/static_transform_broadcaster.h>  // FYP D1
+#include <geometry_msgs/TransformStamped.h>        // FYP D1
+#include <cstdlib>
 
 
 // #include <svo/backend/backend_interface.h>
@@ -204,11 +207,42 @@ SvoInterface::SvoInterface(
     SVO_INFO_STREAM("Logging frame events to " << path);
   }
 
+  // FYP D1: optional one-time initial alignment from ground truth (off by default).
+  d1_enabled_ = vk::param<bool>(pnh_, "d1_alignment", false);
+  if (d1_enabled_)
+  {
+    const std::string gt_file = vk::param<std::string>(pnh_, "d1_gt_file", "");
+    d1_log_file_ = vk::param<std::string>(pnh_, "d1_log_file", "/tmp/svo_d1_alignment.csv");
+    std::ifstream in(gt_file);
+    CHECK(in.good()) << "d1_alignment: cannot open d1_gt_file '" << gt_file << "'";
+    std::string line;
+    while (std::getline(in, line))
+    {
+      if (line.empty() || line[0] == '#')
+        continue;
+      const char* c = line.c_str();
+      char* end;
+      double v[8];
+      for (int k = 0; k < 8; ++k)
+      {
+        v[k] = std::strtod(c, &end);
+        c = (*end == ',') ? end + 1 : end;
+      }
+      d1_gt_t_.push_back(v[0] * 1e-9);  // same arithmetic as the Python reference
+      d1_gt_pose_.push_back({v[1], v[2], v[3], v[4], v[5], v[6], v[7]});
+    }
+    CHECK_GT(d1_gt_t_.size(), 1u) << "d1_alignment: no GT samples in " << gt_file;
+    SVO_INFO_STREAM("D1 alignment enabled: " << d1_gt_t_.size() << " GT samples from " << gt_file);
+    d1_thread_.reset(new std::thread(&SvoInterface::d1Loop, this));
+  }
+
   svo_->start();
 }
 
 SvoInterface::~SvoInterface()
 {
+  if (d1_thread_)
+    d1_thread_->join();
   if (frame_event_log_.is_open())
   {
     frame_event_log_.close();  // FYP: flushes the frame event log
@@ -514,7 +548,8 @@ void SvoInterface::stereoCallback(
 // scale_init:   frontend flag also required by the original GPS alignment.
 void SvoInterface::logFrameEvent(const int64_t timestamp_nanoseconds)
 {
-  if (!log_frame_events_ || !frame_event_log_.is_open())
+  const bool do_log = log_frame_events_ && frame_event_log_.is_open();
+  if (!do_log && !d1_enabled_)
     return;
   vk::Timer timer;
   timer.start();
@@ -522,6 +557,23 @@ void SvoInterface::logFrameEvent(const int64_t timestamp_nanoseconds)
   const bool is_kf = frames && frames->at(0)->isKeyframe();
   const bool backend_init = svo_->isBackendValid()
       && svo_->getBundleAdjuster()->lastOptimizedBundleId() >= 0;
+
+  // FYP D1: the same event the offline reference reads from frame_events.csv.
+  if (d1_enabled_ && frames && is_kf && backend_init && svo_->isBackendScaleInitialised()
+      && frames->getMinTimestampNanoseconds() == timestamp_nanoseconds)
+  {
+    std::lock_guard<std::mutex> lock(d1_mutex_);
+    size_t i;
+    if (d1_t0_ns_ < 0 && d1GtBracket(static_cast<double>(timestamp_nanoseconds) * 1e-9, &i))
+    {
+      d1_t0_ns_ = timestamp_nanoseconds;
+      SVO_INFO_STREAM("D1: t0 = " << d1_t0_ns_ << " ns (bundle " << frames->getBundleId() << ")");
+      d1TryAlign();
+    }
+  }
+  if (!do_log)
+    return;
+
   frame_event_log_ << timestamp_nanoseconds << ','
                    << (frames ? frames->getMinTimestampNanoseconds() : -1) << ','
                    << (frames ? frames->getBundleId() : -1) << ','
@@ -533,6 +585,119 @@ void SvoInterface::logFrameEvent(const int64_t timestamp_nanoseconds)
   const double dt = timer.stop();
   frame_event_log_time_sum_ += dt;
   frame_event_log_time_max_ = std::max(frame_event_log_time_max_, dt);
+}
+
+// FYP D1: GT available at t <=> t_gt[i-1] <= t <= t_gt[i] with t_gt[i] - t_gt[i-1] <= 10 ms.
+// Mirrors analysis/initial_alignment.py:gt_bracket (np.searchsorted, side='left').
+bool SvoInterface::d1GtBracket(const double t, size_t* i) const
+{
+  size_t k = std::lower_bound(d1_gt_t_.begin(), d1_gt_t_.end(), t) - d1_gt_t_.begin();
+  if (k < d1_gt_t_.size() && d1_gt_t_[k] == t)
+    k = std::max<size_t>(k, 1);
+  if (k == 0 || k >= d1_gt_t_.size() || d1_gt_t_[k] - d1_gt_t_[k - 1] > 0.010)
+    return false;
+  *i = k;
+  return true;
+}
+
+// FYP D1: compute and apply T_M_W once both t0 and the backend pose at t0 are known.
+void SvoInterface::d1TryAlign()
+{
+  if (d1_done_ || d1_t0_ns_ < 0)
+    return;
+  const auto it = d1_vio_poses_.find(d1_t0_ns_);
+  if (it == d1_vio_poses_.end())
+    return;  // backend pose for t0 not received yet
+  const double t0 = static_cast<double>(d1_t0_ns_) * 1e-9;
+  size_t i;
+  CHECK(d1GtBracket(t0, &i));
+  const auto& g0 = d1_gt_pose_[i - 1];
+  const auto& g1 = d1_gt_pose_[i];
+  const double a = (t0 - d1_gt_t_[i - 1]) / (d1_gt_t_[i] - d1_gt_t_[i - 1]);
+  const Eigen::Vector3d p_VB = (1.0 - a) * Eigen::Vector3d(g0[0], g0[1], g0[2])
+                               + a * Eigen::Vector3d(g1[0], g1[1], g1[2]);
+  const Eigen::Quaterniond q0(g0[3], g0[4], g0[5], g0[6]), q1(g1[3], g1[4], g1[5], g1[6]);
+  const Eigen::Matrix3d R_VB = q0.normalized().slerp(a, q1.normalized()).toRotationMatrix();
+  const auto& v = it->second;
+  const Eigen::Vector3d p_WB(v[0], v[1], v[2]);
+  const Eigen::Matrix3d R_WB = Eigen::Quaterniond(v[3], v[4], v[5], v[6]).normalized().toRotationMatrix();
+
+  const Eigen::Matrix3d dR = R_VB * R_WB.transpose();
+  const double psi = std::atan2(dR(1, 0), dR(0, 0));
+  Eigen::Matrix4d T = Eigen::Matrix4d::Identity();
+  T.block<3, 3>(0, 0) = Eigen::AngleAxisd(psi, Eigen::Vector3d::UnitZ()).toRotationMatrix();
+  T.block<3, 1>(0, 3) = p_VB - T.block<3, 3>(0, 0) * p_WB;
+  const Transformation T_w_vio(T);
+
+  // Same effect as a successful GPS alignment in globalpositionsCallback.
+  globalpose_handler_->setT_w_vio(T_w_vio);
+  if (globalpositions_handler_)
+    globalpositions_handler_->setT_w_vio(T_w_vio);
+  ceres_backend_interface_->setT_w_vio(T_w_vio);
+  ceres_backend_interface_->setT_w_vio_temp(T_w_vio);
+  gp_initialized_ = true;
+  d1_done_ = true;
+
+  geometry_msgs::TransformStamped tf_msg;
+  tf_msg.header.stamp.fromNSec(d1_t0_ns_);
+  tf_msg.header.frame_id = "world";
+  tf_msg.child_frame_id = "vio";
+  const Eigen::Quaterniond q_MW(T.block<3, 3>(0, 0));
+  tf_msg.transform.translation.x = T(0, 3);
+  tf_msg.transform.translation.y = T(1, 3);
+  tf_msg.transform.translation.z = T(2, 3);
+  tf_msg.transform.rotation.w = q_MW.w();
+  tf_msg.transform.rotation.x = q_MW.x();
+  tf_msg.transform.rotation.y = q_MW.y();
+  tf_msg.transform.rotation.z = q_MW.z();
+  if (!d1_tf_broadcaster_)
+    d1_tf_broadcaster_.reset(new tf2_ros::StaticTransformBroadcaster());
+  d1_tf_broadcaster_->sendTransform(tf_msg);
+
+  std::ofstream log(d1_log_file_);
+  log.precision(17);
+  log << "t0_ns,t0,yaw_deg,gt_t_a,gt_t_b,p_W_B_x,p_W_B_y,p_W_B_z,p_V_B_x,p_V_B_y,p_V_B_z";
+  for (int r = 0; r < 4; ++r)
+    for (int c = 0; c < 4; ++c)
+      log << ",T_M_W_" << r << c;
+  log << "\n" << d1_t0_ns_ << ',' << t0 << ',' << psi * 180.0 / M_PI << ','
+      << d1_gt_t_[i - 1] << ',' << d1_gt_t_[i] << ','
+      << p_WB.x() << ',' << p_WB.y() << ',' << p_WB.z() << ','
+      << p_VB.x() << ',' << p_VB.y() << ',' << p_VB.z();
+  for (int r = 0; r < 4; ++r)
+    for (int c = 0; c < 4; ++c)
+      log << ',' << T(r, c);
+  log << "\n";
+  const Eigen::Vector3d t_MW = T.block<3, 1>(0, 3);
+  SVO_INFO_STREAM("D1: T_M_W set at t0 = " << d1_t0_ns_ << " ns, yaw " << psi * 180.0 / M_PI
+                  << " deg, t = " << t_MW.transpose());
+}
+
+// FYP D1: receives the backend's own published poses (/svo/vio_backend_pose_imu), so the VIO pose at
+// t0 is exactly the sample the offline reference uses. Keeps the last few seconds only.
+void SvoInterface::d1Loop()
+{
+  ros::NodeHandle nh;
+  ros::CallbackQueue queue;
+  nh.setCallbackQueue(&queue);
+  boost::function<void(const geometry_msgs::PoseWithCovarianceStampedConstPtr&)> cb =
+      [this](const geometry_msgs::PoseWithCovarianceStampedConstPtr& m)
+  {
+    std::lock_guard<std::mutex> lock(d1_mutex_);
+    if (d1_done_)
+      return;
+    const auto& p = m->pose.pose;
+    d1_vio_poses_[static_cast<int64_t>(m->header.stamp.toNSec())] =
+        {p.position.x, p.position.y, p.position.z,
+         p.orientation.w, p.orientation.x, p.orientation.y, p.orientation.z};
+    while (d1_vio_poses_.size() > 400)
+      d1_vio_poses_.erase(d1_vio_poses_.begin());
+    d1TryAlign();
+  };
+  ros::Subscriber sub = nh.subscribe<geometry_msgs::PoseWithCovarianceStamped>(
+        pnh_.resolveName("vio_backend_pose_imu"), 100, cb);
+  while (ros::ok() && !quit_)
+    queue.callAvailable(ros::WallDuration(0.1));
 }
 
 void SvoInterface::imuCallback(const sensor_msgs::ImuConstPtr& msg)
