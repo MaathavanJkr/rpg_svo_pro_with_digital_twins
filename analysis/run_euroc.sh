@@ -2,7 +2,9 @@
 # One headless EuRoC run.
 # Usage: analysis/run_euroc.sh <run_id> <sequence> <launch_file_in_svo_ros> [extra roslaunch args...]
 #   e.g. analysis/run_euroc.sh 2026-10-23_MH_01_easy_M1_r01 MH_01_easy euroc_m1.launch
-# Output: runs/<run_id>/{meta.txt, launch/, config/, svo.log, run.bag, cpu.csv}
+# Output: runs/<run_id>/{meta.txt, launch/, config/, svo.log, run.bag, cpu.csv[, frame_events.csv]}
+# The frame-event log path is always set to runs/<run_id>/frame_events.csv; it is only written if
+# log_frame_events:=true is passed.
 # Must be run WITHOUT the analysis venv active.
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
 WS="$REPO/../catkin_ws"
@@ -29,13 +31,14 @@ LAUNCH_PATH="$(find "$REPO/svo_ros/launch/fyp" -name "$LAUNCH")"
   echo "launch: svo_ros/launch/fyp/$LAUNCH $*"
   echo "input_bag: $INPUT_BAG (rosbag play, rate 1, no --clock)"
   echo "svo_node binary: $(readlink -f "$WS/devel/lib/svo_ros/svo_node") $(stat -c %y "$(readlink -f "$WS/devel/lib/svo_ros/svo_node")")"
+  LIB="$WS/devel/.private/svo_ros/lib/libsvo_ros.so"; echo "libsvo_ros: $(stat -c %y "$LIB") md5 $(md5sum "$LIB" | cut -c1-12)"
   echo "loadavg_before: $(cat /proc/loadavg)"
   echo "nproc: $(nproc)"
 } > "$RUN/meta.txt"
 cp "$LAUNCH_PATH" "$RUN/launch/"
 cp "$REPO"/svo_ros/param/fyp/euroc/*.yaml "$RUN/config/"
 
-roslaunch svo_ros "$LAUNCH" "$@" > "$RUN/svo.log" 2>&1 &
+roslaunch svo_ros "$LAUNCH" frame_event_log_file:="$RUN/frame_events.csv" "$@" > "$RUN/svo.log" 2>&1 &
 LAUNCH_PID=$!
 for i in $(seq 1 60); do
   rosnode list 2>/dev/null | grep -q '^/svo$' && break

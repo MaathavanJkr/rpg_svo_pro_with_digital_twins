@@ -40,7 +40,7 @@ Started in Phase 2 (2026-10-23); extend it whenever a new transform is used.
 
 ## EuRoC initial alignment: stated assumption (decision D1(c), implemented in Phase 5)
 - **Assumption (state in the report):** the VIO frame W is aligned to the map M **once**, using the ground-truth pose at a single timestamp. This mimics a known take-off pose. No other GT is used online.
-- Timestamp t₀ = the **first keyframe after the backend has initialised** (not the first frame).
+- Timestamp t₀ = the **first keyframe with backend and scale both initialised** (decision 2026-10-23). It is observed with the FYP frame-event log in `svo_ros` (`log_frame_events`, off by default, log only). Each row is one processed image: `is_kf` = `getLastFrames()->at(0)->isKeyframe()`; `backend_init` = backend exists and `lastOptimizedBundleId() >= 0` (at least one optimisation finished); `scale_init` = `isBackendScaleInitialised()`. t₀ is the bundle stamp of the first row with all three true. **The Phase 5 online alignment must trigger on exactly this event.**
 - T_M_W is **4-DoF**: yaw ψ and translation only. **Exact definition** (reference implementation `analysis/initial_alignment.py`; Phase 5 online code must match it numerically):
   - T_W_B(t₀) = the VIO estimate sample with stamp exactly t₀; T_V_B(t₀) = GT interpolated at t₀ (linear position, slerp orientation between the bracketing 200 Hz samples).
   - ΔR = R_V_B(t₀)·R_W_B(t₀)ᵀ, ψ = atan2(ΔR₁₀, ΔR₀₀), R_M_W = R_z(ψ), t_M_W = p_V_B(t₀) − R_z(ψ)·p_W_B(t₀).

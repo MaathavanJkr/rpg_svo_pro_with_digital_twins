@@ -1,6 +1,8 @@
 #pragma once
 
 #include <thread>
+#include <fstream>
+#include <vector>
 
 #include <ros/ros.h>
 #include <std_msgs/String.h>    // user-input
@@ -125,6 +127,16 @@ public:
   bool refined_T_WL = false; 
   bool reinitialize_T_W_VIO = false;
   bool estimate_world_vio_transform_ = false; // @todo: move this to a better location (Gp param???)
+
+  // FYP: optional per-frame event log (stamp, keyframe, backend/scale initialised).
+  // Log only, off by default (param log_frame_events); does not affect estimation.
+  void logFrameEvent(const int64_t timestamp_nanoseconds);
+  bool log_frame_events_ = false;
+  std::ofstream frame_event_log_;
+  std::vector<char> frame_event_log_buffer_;
+  size_t frame_event_log_count_ = 0;
+  double frame_event_log_time_sum_ = 0.0;
+  double frame_event_log_time_max_ = 0.0;
 
 };
 

@@ -17,7 +17,8 @@ Map-frame ATE: every estimate with stamp >= t0 is mapped by T_M_W and compared w
 
 Usage (venv):
   python analysis/initial_alignment.py runs/<run_id> <sequence> --t0 <stamp_s>
-  python analysis/initial_alignment.py runs/<run_id> <sequence> --kf-log <csv with stamp,is_kf,scale_init>
+  python analysis/initial_alignment.py runs/<run_id> <sequence> --kf-log runs/<run_id>/frame_events.csv
+  (frame_events.csv is written by svo_node with log_frame_events:=true)
 Writes runs/<run_id>/analysis/initial_alignment.json and map_frame_ate.json.
 """
 import argparse
@@ -62,11 +63,14 @@ def compute_T_M_W(p_WB, R_WB, p_VB, R_VB):
 
 
 def t0_from_kf_log(path):
-    d = np.genfromtxt(path, delimiter=",", names=True)
-    ok = (d["is_kf"] > 0) & (d["scale_init"] > 0)
+    """t0 = first keyframe with backend and scale both initialised (rows where the processed
+    bundle is the current image, i.e. frame_stamp_ns == stamp_ns)."""
+    d = np.genfromtxt(path, delimiter=",", names=True, dtype=np.int64)
+    ok = ((d["frame_stamp_ns"] == d["stamp_ns"]) & (d["is_kf"] > 0)
+          & (d["backend_init"] > 0) & (d["scale_init"] > 0))
     if not ok.any():
-        raise ValueError("no keyframe after backend initialisation in " + path)
-    return float(d["stamp"][ok][0])
+        raise ValueError("no keyframe with backend and scale initialised in " + path)
+    return int(d["frame_stamp_ns"][ok][0]) * 1e-9
 
 
 def main():

@@ -184,11 +184,33 @@ SvoInterface::SvoInterface(
 #endif
   }
 
+  // FYP: optional per-frame event log (log only; does not affect estimation).
+  log_frame_events_ = vk::param<bool>(pnh_, "log_frame_events", false);
+  if (log_frame_events_)
+  {
+    const std::string path = vk::param<std::string>(
+          pnh_, "frame_event_log_file", "/tmp/svo_frame_events.csv");
+    frame_event_log_buffer_.resize(1 << 20);  // 1 MB buffer, set before open()
+    frame_event_log_.rdbuf()->pubsetbuf(frame_event_log_buffer_.data(),
+                                        frame_event_log_buffer_.size());
+    frame_event_log_.open(path);
+    frame_event_log_ << "stamp_ns,frame_stamp_ns,bundle_id,stage,is_kf,backend_init,scale_init\n";
+    SVO_INFO_STREAM("Logging frame events to " << path);
+  }
+
   svo_->start();
 }
 
 SvoInterface::~SvoInterface()
 {
+  if (frame_event_log_.is_open())
+  {
+    frame_event_log_.close();  // FYP: flushes the frame event log
+    if (frame_event_log_count_ > 0)
+      std::cout << "FYP frame event log: " << frame_event_log_count_ << " rows, mean "
+                << 1e6 * frame_event_log_time_sum_ / frame_event_log_count_ << " us, max "
+                << 1e6 * frame_event_log_time_max_ << " us per frame" << std::endl;
+  }
   if (imu_thread_)
     imu_thread_->join();
   if (image_thread_)
@@ -429,11 +451,13 @@ void SvoInterface::monoCallback(const sensor_msgs::ImageConstPtr& msg)
     return;
   }
 
-  imageCallbackPreprocessing(msg->header.stamp.toNSec()); // does nothing for now 
+  imageCallbackPreprocessing(msg->header.stamp.toNSec()); // does nothing for now
 
   processImageBundle(images, msg->header.stamp.toNSec());
 
   publishResults(images, msg->header.stamp.toNSec());
+
+  logFrameEvent(msg->header.stamp.toNSec()); // FYP: no-op unless log_frame_events
 
   if(svo_->stage() == Stage::kPaused && automatic_reinitialization_)
     svo_->start();
@@ -466,13 +490,40 @@ void SvoInterface::stereoCallback(
 
   processImageBundle({img0, img1}, msg0->header.stamp.toNSec());
   publishResults({img0, img1}, msg0->header.stamp.toNSec());
+  logFrameEvent(msg0->header.stamp.toNSec()); // FYP: no-op unless log_frame_events
 
   if(svo_->stage() == Stage::kPaused && automatic_reinitialization_) {
     std::cout << "(re)start of svo" << std::endl;
     svo_->start();
   }
 
-  imageCallbackPostprocessing(); // does nothing 
+  imageCallbackPostprocessing(); // does nothing
+}
+
+// FYP: one CSV row per processed image bundle. Reads state only.
+// backend_init: backend exists and has finished at least one optimisation.
+// scale_init:   frontend flag also required by the original GPS alignment.
+void SvoInterface::logFrameEvent(const int64_t timestamp_nanoseconds)
+{
+  if (!log_frame_events_ || !frame_event_log_.is_open())
+    return;
+  vk::Timer timer;
+  timer.start();
+  const FrameBundlePtr frames = svo_->getLastFrames();
+  const bool is_kf = frames && frames->at(0)->isKeyframe();
+  const bool backend_init = svo_->isBackendValid()
+      && svo_->getBundleAdjuster()->lastOptimizedBundleId() >= 0;
+  frame_event_log_ << timestamp_nanoseconds << ','
+                   << (frames ? frames->getMinTimestampNanoseconds() : -1) << ','
+                   << (frames ? frames->getBundleId() : -1) << ','
+                   << static_cast<int>(svo_->stage()) << ','
+                   << is_kf << ',' << backend_init << ','
+                   << svo_->isBackendScaleInitialised() << '\n';
+  if (++frame_event_log_count_ % 200 == 0)
+    frame_event_log_.flush();
+  const double dt = timer.stop();
+  frame_event_log_time_sum_ += dt;
+  frame_event_log_time_max_ = std::max(frame_event_log_time_max_, dt);
 }
 
 void SvoInterface::imuCallback(const sensor_msgs::ImuConstPtr& msg)

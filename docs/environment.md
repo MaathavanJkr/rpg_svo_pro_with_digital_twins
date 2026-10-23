@@ -58,3 +58,13 @@ source ~/venvs/fyp/bin/activate
 
 ### Caveat for running ROS nodes
 Python ROS nodes started by `roslaunch` use their shebang. If a node uses `#!/usr/bin/env python3`, it picks up whichever `python3` is first on `PATH`, which is the venv python if the venv is active in that terminal. **Run `roslaunch` in a terminal without the venv active**, so online nodes keep using the same system/`~/.local` packages they were developed with. Use the venv only for offline evaluation and analysis.
+
+## Building the catkin workspace (important)
+`~/.zshrc` runs `brew shellenv`, which puts Linuxbrew (`/home/linuxbrew/.linuxbrew/bin`, including its own `ld` 2.47) first on `PATH`. Linking `svo_node` with that `ld` fails with hundreds of undefined references from system libraries (gdal, armadillo, opencv, yaml-cpp). A failed link also **deletes the previous binary**. Build with Linuxbrew removed from `PATH` for that command:
+```bash
+cd ~/Desktop/twinforge/catkin_ws
+export PATH=$(echo $PATH | tr ':' '\n' | grep -v linuxbrew | paste -sd:)
+unset HOMEBREW_PREFIX HOMEBREW_CELLAR HOMEBREW_REPOSITORY
+source /opt/ros/noetic/setup.zsh && catkin build svo_ros --no-deps
+```
+Check with `which ld` → `/usr/bin/ld` (GNU ld 2.34). Rebuilt this way on 2026-10-23 13:15 (frame-event logger).
