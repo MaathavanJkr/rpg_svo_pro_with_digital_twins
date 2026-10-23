@@ -39,6 +39,14 @@ Accepted − added = 2 per run, both explained: the first is discarded by the or
 
 Registration runtime per KF (median of run medians): preprocessing 90.5 ± 0.8 ms, ICP 176.6 ± 1.2 ms, information matrix 33.0 ± 0.4 ms, **total 301 ± 2.5 ms** (KF interval ~0.8 s).
 
+Welch's t-test (two-sided, unequal variances; `analysis/compare_methods.py`, `runs/phase6_V1_01_M1_vs_M2.json`; n = 5 per group, low power):
+| Metric | M1 | M2 | p |
+|---|---|---|---|
+| map-frame ATE [m] | 0.132 ± 0.012 | 0.126 ± 0.012 | 0.46 |
+| ATE 4-DoF [m] | 0.056 ± 0.003 | 0.085 ± 0.012 | 0.004 |
+| rel. displacement 5.9 / 11.7 / 17.6 / 23.4 / 29.3 m | | | 0.001 / 0.005 / 0.010 / 0.009 / 0.007 |
+| backend latency [ms] | 50.5 ± 0.7 | 52.0 ± 0.4 | 0.005 |
+
 **Reading (no improvement claimed):** with 5 runs, M2's map-frame ATE (0.126 ± 0.012 m) is **not distinguishable** from M1's (0.132 ± 0.012 m). The single-run 0.088 m (M2 r02) was optimistic. M2 **degrades local consistency**: 4-DoF ATE +52 %, relative displacement error +48 to +57 %.
 
 ## Step 4: correction diagnosis (offline, from the 5 runs' logs; 894 accepted KFs)

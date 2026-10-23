@@ -112,5 +112,16 @@ echo "ros_run_id: $RUN_ID_ROS" >> "$RUN/meta.txt"
 if grep -q "process has died" "$RUN/svo.log" && ! grep -q "^FAILED" "$RUN/meta.txt"; then
   echo "FAILED: a node died (see svo.log)" | tee -a "$RUN/meta.txt" >&2
 fi
+# Phase 6: manifest of the per-KF event dumps (the dumps themselves are git-ignored).
+if [ -d "$RUN/reg_events" ]; then
+  python3 - "$RUN" <<'PYEOF'
+import csv, glob, hashlib, os, sys
+run = sys.argv[1]
+with open(os.path.join(run, "reg_events_manifest.csv"), "w", newline="") as fh:
+    w = csv.writer(fh); w.writerow(["file", "bytes", "sha256"])
+    for f in sorted(glob.glob(os.path.join(run, "reg_events", "*.npz"))):
+        b = open(f, "rb").read(); w.writerow([os.path.basename(f), len(b), hashlib.sha256(b).hexdigest()])
+PYEOF
+fi
 grep -q "^FAILED" "$RUN/meta.txt" && exit 1
 echo "done" >> "$RUN/meta.txt"
