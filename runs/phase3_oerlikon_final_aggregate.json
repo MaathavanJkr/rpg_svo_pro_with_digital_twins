@@ -1,0 +1,130 @@
+{
+  "runs": {
+    "runs/2026-10-23_oerlikon_M2_final_r01": {
+      "whole": {
+        "ate_p": 2.127565899157001,
+        "ate_r": 4.152426307831106,
+        "n": 2575,
+        "window_s": 348.774256991
+      },
+      "post_refinement": {
+        "ate_p": 1.6995418791136223,
+        "ate_r": 4.101986857685158,
+        "n": 2360,
+        "window_s": 317.341215838
+      },
+      "refine_t_since_start": 82.16586375162561,
+      "accepted": 237,
+      "rejected": 108,
+      "published": 237,
+      "backend_added": 204,
+      "points_median": 834.0
+    },
+    "runs/2026-10-23_oerlikon_M2_final_r02": {
+      "whole": {
+        "ate_p": 1.984725765588504,
+        "ate_r": 3.9256875384477192,
+        "n": 2500,
+        "window_s": 348.774256991
+      },
+      "post_refinement": {
+        "ate_p": 1.3296701423349373,
+        "ate_r": 3.80025197966289,
+        "n": 2272,
+        "window_s": 316.570882591
+      },
+      "refine_t_since_start": 83.00421714708764,
+      "accepted": 235,
+      "rejected": 103,
+      "published": 235,
+      "backend_added": 206,
+      "points_median": 835.0
+    },
+    "runs/2026-10-23_oerlikon_M2_final_r03": {
+      "whole": {
+        "ate_p": 1.8514215376178098,
+        "ate_r": 3.7095350158164195,
+        "n": 2343,
+        "window_s": 348.97382015899996
+      },
+      "post_refinement": {
+        "ate_p": 1.257328684972493,
+        "ate_r": 3.582761373100447,
+        "n": 2126,
+        "window_s": 318.540257407
+      },
+      "refine_t_since_start": 80.94600438997705,
+      "accepted": 220,
+      "rejected": 116,
+      "published": 220,
+      "backend_added": 189,
+      "points_median": 830.5
+    },
+    "runs/2026-10-23_oerlikon_M2_final_r05": {
+      "whole": {
+        "ate_p": 1.8374993804036004,
+        "ate_r": 3.7466427588367757,
+        "n": 2400,
+        "window_s": 348.774256991
+      },
+      "post_refinement": {
+        "ate_p": 1.2161033580860057,
+        "ate_r": 3.6650408141806805,
+        "n": 2204,
+        "window_s": 317.57450687899996
+      },
+      "refine_t_since_start": 81.94595026895959,
+      "accepted": 248,
+      "rejected": 91,
+      "published": 248,
+      "backend_added": 216,
+      "points_median": 832.0
+    },
+    "runs/2026-10-23_oerlikon_M2_final_r06": {
+      "whole": {
+        "ate_p": 1.9549931845616226,
+        "ate_r": 3.84747374515875,
+        "n": 2607,
+        "window_s": 348.774256991
+      },
+      "post_refinement": {
+        "ate_p": 1.365550722305297,
+        "ate_r": 3.740432615175474,
+        "n": 2374,
+        "window_s": 317.705019998
+      },
+      "refine_t_since_start": 81.76359820291955,
+      "accepted": 249,
+      "rejected": 95,
+      "published": 249,
+      "backend_added": 218,
+      "points_median": 842.5
+    }
+  },
+  "aggregate": {
+    "whole.ate_p": {
+      "mean": 1.9512411534657077,
+      "std": 0.1173955488687624,
+      "min": 1.8374993804036004,
+      "max": 2.127565899157001
+    },
+    "whole.ate_r": {
+      "mean": 3.876353073218154,
+      "std": 0.1761656648232794,
+      "min": 3.7095350158164195,
+      "max": 4.152426307831106
+    },
+    "post_refinement.ate_p": {
+      "mean": 1.3736389573624712,
+      "std": 0.19141377637857507,
+      "min": 1.2161033580860057,
+      "max": 1.6995418791136223
+    },
+    "post_refinement.ate_r": {
+      "mean": 3.77809472796093,
+      "std": 0.19858990229983234,
+      "min": 3.582761373100447,
+      "max": 4.101986857685158
+    }
+  }
+}

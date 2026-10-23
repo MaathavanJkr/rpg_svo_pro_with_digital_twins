@@ -1,0 +1,20 @@
+gp_settings:
+  # Covariance.
+  variance_x: 900
+  variance_y: 900
+  variance_z: 900
+  # position of point P (e.g. gps receiver) in body frame.
+  B_t_PB: [0.0, 0.0, 0.0]
+  # Max number of global residuals for each keyframe.
+  max_num_residuals: 1
+  estimate_world_vio_transform : true
+
+  alignement_threshold: 5.0e-4 # covariance pose threshold for initial GPS alignement, assume weights are 1
+  alignement_speed_min: 0.0 # minimum speed for a measurement to be used in the alignement process 
+  alignement_d_min: 2 # yaw not observable if parcoured distance is too small.
+
+  # Initialize with a known orientaion.
+  # Set to true in the case the initial orientation is known (e.g. through an external motion capture system)
+  initial_orientation_known: false
+
+  coordinates: 'local' #'local' = x y z, 'geographic' = lat long alt, will activate transformation from LLA to ECEF

@@ -6,7 +6,7 @@ Per run (after analysis/phase3_oerlikon_eval.py has produced analysis/*.tum):
   evaluated on /svo/w_backend_pose_imu with no alignment, nearest GT within 0.05 s, for
   (a) the whole map-frame output window and (b) from the refinement event onward
   (bag time of "World to local transform estimated", from svo.log + wall/bag offset).
-Run in the venv: python analysis/phase3_aggregate.py runs/<id1> runs/<id2> ...
+Run in the venv: python analysis/phase3_aggregate.py [--out runs/<name>.json] runs/<id1> runs/<id2> ...
 """
 import re
 import sys
@@ -42,8 +42,12 @@ def refine_bag_time(run):
     return wall - off
 
 
+args = sys.argv[1:]
+out_path = "runs/phase3_oerlikon_aggregate.json"
+if args and args[0] == "--out":
+    out_path, args = args[1], args[2:]
 rows = {}
-for run in sys.argv[1:]:
+for run in args:
     est = load_tum(f"{run}/analysis/w_backend.tum")
     gt = load_tum(f"{run}/analysis/groundtruth.tum")
     tr = refine_bag_time(run)
@@ -61,4 +65,4 @@ for w in ("whole", "post_refinement"):
                                min=float(v.min()), max=float(v.max()))
 out = dict(runs=rows, aggregate=agg)
 print(json.dumps(out, indent=2))
-json.dump(out, open("runs/phase3_oerlikon_aggregate.json", "w"), indent=2)
+json.dump(out, open(out_path, "w"), indent=2)

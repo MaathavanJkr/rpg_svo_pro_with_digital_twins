@@ -71,3 +71,17 @@ Corrections: median rotation 2.76°, median yaw −2.51°, median translation 0.
 **Conclusion (V1_01, M2 as published, 5 runs):** the ~2–3° corrections are mainly a systematic correction of real VIO heading drift, superimposed on ~0.9° per-keyframe ICP noise. The noise component explains the loss of local consistency; the systematic component is what a working registration should provide.
 
 **Not changed:** M2's information weights (scale factors 9 / 2, power 1, exp(−0.9·rmse), max-normalisation) stay as the faithful baseline; no tuning. **The weighting question is covered by the D4 ablation** (Hessian-based covariance for both M2 and M3, 2×2 design, docs/PLAN.md).
+
+## V1_03_difficult: 5 × M1 and 5 × M2 (2026-10-23): comparison INVALID, see finding
+Runs `runs/2026-10-23_V1_03_difficult_{M1,M2}_r01..r05` (commit 56aae82, final build, full logging, D1(B)).
+
+**Finding: SVO fully resets on V1_03, and the current pipeline cannot keep the map alignment across a reset.**
+- Per run, tracking is lost 12–21 times; most are relocalised, but there are **1–4 full resets** (relocalisation failed → `resetAll` → `resetBackend()` destroys the backend → re-initialisation), always at ~12.3 s and usually also at ~101.7 s (some runs also at 7.3 s or 32 s).
+- **The VIO frame is not preserved across a full reset:** position stays continuous (no jump > 0.3 m), but the heading is re-initialised (over a 2 s span containing the 12.3 s reset, estimated yaw changes +3.1° vs GT +14.2° in M1 r01, +2.1° vs +14.2° in r02; −8.0° vs +0.9° across the 7.3 s reset in r04).
+- **M2:** after a reset, `SvoInterface::processImageBundle` creates a new backend/publisher and re-attaches handlers and flags, but **nothing re-applies T_w_vio**. The publisher therefore stops publishing map-frame output (`/svo/w_backend_pose_points`, `/svo/w_backend_pose_imu`). Only 5–7 keyframe clouds are published per run (before 12.3 s), 4–5 accepted, 2–3 added. M2 is effectively VIO-only after 12.3 s. The same gap exists in the original GPS pipeline (it aligns once).
+- **D1(B) on V1_03:** the 2 m window lies at 7.2–11.0 s, right after initialisation and before the first reset; window yaw varies widely between runs (153.5°, 154.3°, 167.3°, 154.1°, and −129.2° in r03, where a reset at 7.3 s precedes the window).
+- **M1:** the offline map-frame ATE (one T_M_W across resets) is meaningless; even the 4-DoF ATE mixes frames. M1 4-DoF ATE 0.294 ± 0.079 m vs the published 0.179 m (Cioffi & Scaramuzza 2020, V103, median of 3), consistent with the resets.
+
+Numbers recorded but **not valid as a method comparison** (`runs/phase6_V1_03_M1_vs_M2_INVALID.json`): 4-DoF ATE M1 0.294 ± 0.079 vs M2 0.241 ± 0.100 (p = 0.38); rel. displacement 0.111–0.218 vs 0.117–0.236 m (p ≥ 0.34). The correction diagnosis was not run: there are only 2–3 registrations per run.
+
+**Decision needed** (options at the Phase 7 checkpoint).

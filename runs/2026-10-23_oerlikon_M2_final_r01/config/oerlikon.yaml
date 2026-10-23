@@ -1,0 +1,9 @@
+registration_settings:
+  scale_factor_position: 9 #6 
+  scale_factor_rotation: 2 
+  max_correspondence_distance: 8 
+  inliers_rmse_thr: 1.6
+  max_translation_distance: 20 
+  information_matrix_power: 1 
+  max_rotation_distance: 15
+  size_bounding_box: 350

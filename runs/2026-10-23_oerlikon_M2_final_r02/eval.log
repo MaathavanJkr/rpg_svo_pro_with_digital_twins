@@ -1,0 +1,49 @@
+{
+  "n_keyframe_clouds": 338,
+  "points_raw": {
+    "min": 655,
+    "median": 835.0,
+    "max": 1005
+  },
+  "points_after_node_filters": {
+    "min": 534,
+    "median": 760.0,
+    "max": 947
+  },
+  "replay_accepted": 235,
+  "replay_rejected": 103,
+  "reject_reasons": {
+    "rmse": 40,
+    "rmse+rotation": 11,
+    "rmse+translation+rotation": 17,
+    "rotation": 24,
+    "translation+rotation": 11
+  },
+  "published_online": 235,
+  "published_online_matched_to_kf": 235,
+  "accepted_offline_not_published_online": 0,
+  "published_online_but_rejected_offline": 0,
+  "backend_residuals_added": 206,
+  "gps_alignment_done": 1,
+  "mr_refinement_done": 1,
+  "replay_runtime_s": {
+    "median": 0.18341230051009916,
+    "p90": 0.3471406889089849
+  },
+  "map_frame_pos_error_w_backend_m": {
+    "rmse": 2.0063609207952866,
+    "median": 1.3511688266915964,
+    "max": 6.319174896998612,
+    "final": 0.7014240168490078
+  },
+  "gps_pos_error_m": {
+    "rmse": 39.31146777227566,
+    "median": 40.43826826620139
+  },
+  "kf_error_before_registration_accepted_m": 1.4216108151155658,
+  "kf_error_after_registration_accepted_m": 0.8005918782421084,
+  "duration_s": {
+    "gt": 399.54054699899996,
+    "w_backend": 348.99382188900006
+  }
+}

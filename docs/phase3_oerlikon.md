@@ -8,7 +8,21 @@ Scripts: `analysis/run_oerlikon_m2.sh`, `analysis/phase3_oerlikon_eval.py`. evo 
 - Rationale (code check): wall-clock `Time::now()` appears only in visualisation stamps (`svo_ros/src/visualizer.cpp`, `backend_visualizer.cpp`, and the `/city_twin` cloud in `online_registration.py:39`). Everything that matters (IMU/image processing, keyframe stamps, registration message stamps, the backend's 1 ms KF match, published poses) uses message header stamps.
 - Consequence: the real-time behaviour equals the original setup, since registration has wall-clock time to finish before its KF leaves the window.
 
-## Results: 3 runs (r01–r03), map frame, no alignment
+## OFFICIAL Oerlikon M2 baseline: final build, 5 runs (2026-10-23)
+Runs `runs/2026-10-23_oerlikon_M2_final_r01, r02, r03, r05, r06` (commit 56aae82 / 7509c7f, libsvo_ros c49078a025f0; launch `oerlikon_m2.launch`, logger off). r04 **failed**: an external ROS session registered nodes with the same names during the run (`runs/_failed/`); r06 replaces it. Aggregate `runs/phase3_oerlikon_final_aggregate.json` (`analysis/phase3_aggregate.py --out ...`). Map frame, no alignment.
+
+| Run | Refinement at | ATE_P whole [m] | ATE_R whole [°] | ATE_P post [m] | ATE_R post [°] | KF clouds | accepted / rejected | added (rosout) |
+|---|---|---|---|---|---|---|---|---|
+| r01 | t₀+82.2 s | 2.13 | 4.15 | 1.70 | 4.10 | 345 | 237 / 108 | 204 |
+| r02 | t₀+83.0 s | 1.98 | 3.93 | 1.33 | 3.80 | 338 | 235 / 103 | 206 |
+| r03 | t₀+80.9 s | 1.85 | 3.71 | 1.26 | 3.58 | 336 | 220 / 116 | 189 |
+| r05 | t₀+81.9 s | 1.84 | 3.75 | 1.22 | 3.67 | 339 | 248 / 91 | 216 |
+| r06 | t₀+81.8 s | 1.95 | 3.85 | 1.37 | 3.74 | 344 | 249 / 95 | 218 |
+| **mean ± std** | | **1.95 ± 0.12** | **3.88 ± 0.18** | **1.37 ± 0.19** | **3.78 ± 0.20** | 340 ± 4 | 238 ± 12 / 103 ± 10 | 207 ± 12 |
+
+Against the historical r01–r03 (old binary): ATE_P whole 2.05 vs 1.95 (Welch p = 0.37), post 1.54 vs 1.37 (p = 0.37), ATE_R p = 0.87 / 0.92. Not distinguishable. **These five runs are the official Oerlikon M2 numbers**; r01–r03 remain historical.
+
+## Results: 3 runs (r01–r03), map frame, no alignment (HISTORICAL)
 Script: `analysis/phase3_aggregate.py` → `runs/phase3_oerlikon_aggregate.json`. ATE_P = translation RMSE, ATE_R = rotation-angle RMSE, on `/svo/w_backend_pose_imu` (T_M_B as published by the system) vs `/groundtruth` (frame `world`), nearest GT within 0.05 s. Cross-check: evo APE on r01 gives 2.19 m vs 2.21 m here.
 
 | Run | Refinement at | ATE_P whole [m] | ATE_R whole [°] | ATE_P post-refinement [m] | ATE_R post-refinement [°] | Accepted / rejected | Backend residuals added (rosout) |

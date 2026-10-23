@@ -1,0 +1,43 @@
+<!-- FYP copy of svo_ros/launch/Oerlikon.launch (original untouched).
+     Differences from the original:
+       1. online_registration.py is started with launch-prefix="python3" (no `python` on this machine, decision D2).
+       2. RViz is optional (arg rviz, default true) so runs can be headless.
+       3. Output line-buffered (svo_node under stdbuf, python3 -u): a block-buffered stdout lost the end of svo.log
+          when svo_node was killed at shutdown (Phase 5a). I/O only.
+     Everything else (topics, params, config files) is identical.
+     Usage: roslaunch svo_ros oerlikon_m2.launch reference_map:=<abs path>/dataset/Oerlikon.ply [rviz:=false] -->
+<launch>
+  <arg name="reference_map" default="$(find svo_registration)/maps/Oerlikon.ply"/>
+  <arg name="rviz" default="true"/>
+
+    <node pkg="svo_ros" type="svo_node" name="svo" clear_params="true" output="screen" args="--v=0" launch-prefix="stdbuf -oL -eL">
+
+      <param name="cam0_topic" value="/camera_2/image_raw" type="str" />
+
+      <param name="imu_topic" value="/vio_module/imu_filtered" type="str" />
+
+      <param name="calib_file" value="$(find svo_ros)/param/Oerlikon/calibration.yaml" />
+      <rosparam file="$(find svo_ros)/param/Oerlikon/mono_vio.yaml" />
+
+      <param name="gp_topic" value="/gps" type="str" />
+      <param name="use_global_measurements" value="true" />
+      <param name="gp_settings_file" value="$(find svo_ros)/param/Oerlikon/gp_settings.yaml"/>
+      <param name="/use_sim_time" value="False"/>
+
+      <param name="map_alignement_T_w_b" value="/svo/w_registrated_pose" type="str" />
+      <param name="use_map_registration" value="true" />
+      <param name="map_reg_settings_file" value="$(find svo_ros)/param/Oerlikon/gpose_settings.yaml" />
+
+      <param name="imu_temporal_stationary_check" value="false" />
+      <param name="imu_temporal_window_length_sec" type="double" value="1" />
+      <param name="stationary_acc_sigma_thresh" type="double" value="1e-3" />
+      <param name="stationary_gyr_sigma_thresh" type="double" value="1e-3" />
+
+    </node>
+
+    <node if="$(arg rviz)" name="vis" pkg="rviz" type="rviz" args=" -d $(find svo_ros)/RVIZ/rviz_config_digital_twins.rviz" />
+
+    <node pkg="svo_registration" type="online_registration.py" name="online_registration" output="screen" launch-prefix="python3 -u"
+        args="--config-file $(find svo_registration)/config/oerlikon.yaml --reference-map $(arg reference_map)"/>
+
+  </launch>
