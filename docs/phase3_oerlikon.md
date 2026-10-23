@@ -1,6 +1,6 @@
 # Phase 3: Oerlikon reproduction (original pipeline, M2)
 
-Run `runs/2026-10-23_oerlikon_M2_r01` (one run). Launch: `svo_ros/launch/fyp/oerlikon_m2.launch` (copy of `Oerlikon.launch` + `python3` prefix + optional RViz), `reference_map:=dataset/Oerlikon.ply`, `rviz:=false`.
+Runs `runs/2026-10-23_oerlikon_M2_r01`, `_r02`, `_r03`. Launch: `svo_ros/launch/fyp/oerlikon_m2.launch` (copy of `Oerlikon.launch` + `python3` prefix + optional RViz), `reference_map:=dataset/Oerlikon.ply`, `rviz:=false`.
 Scripts: `analysis/run_oerlikon_m2.sh`, `analysis/phase3_oerlikon_eval.py`. evo from `~/venvs/fyp`.
 
 ## Clock choice
@@ -8,27 +8,51 @@ Scripts: `analysis/run_oerlikon_m2.sh`, `analysis/phase3_oerlikon_eval.py`. evo 
 - Rationale (code check): wall-clock `Time::now()` appears only in visualisation stamps (`svo_ros/src/visualizer.cpp`, `backend_visualizer.cpp`, and the `/city_twin` cloud in `online_registration.py:39`). Everything that matters (IMU/image processing, keyframe stamps, registration message stamps, the backend's 1 ms KF match, published poses) uses message header stamps.
 - Consequence: the real-time behaviour equals the original setup, since registration has wall-clock time to finish before its KF leaves the window.
 
-## Results (single run; no repeat statistics yet)
+## Results: 3 runs (r01–r03), map frame, no alignment
+Script: `analysis/phase3_aggregate.py` → `runs/phase3_oerlikon_aggregate.json`. ATE_P = translation RMSE, ATE_R = rotation-angle RMSE, on `/svo/w_backend_pose_imu` (T_M_B as published by the system) vs `/groundtruth` (frame `world`), nearest GT within 0.05 s. Cross-check: evo APE on r01 gives 2.19 m vs 2.21 m here.
+
+| Run | Refinement at | ATE_P whole [m] | ATE_R whole [°] | ATE_P post-refinement [m] | ATE_R post-refinement [°] | Accepted / rejected | Backend residuals added |
+|---|---|---|---|---|---|---|---|
+| r01 | t₀+80.8 s | 2.21 | 3.98 | 1.80 | 3.89 | 231 / 113 | 152 |
+| r02 | t₀+82.0 s | 1.95 | 3.83 | 1.38 | 3.69 | 233 / 108 | 200 |
+| r03 | t₀+82.0 s | 1.99 | 3.86 | 1.43 | 3.79 | 230 / 113 | 152 |
+| **mean ± std** | | **2.05 ± 0.14** | **3.89 ± 0.08** | **1.54 ± 0.23** | **3.79 ± 0.10** | | |
+
+Windows: whole = 349 s (from GPS alignment at ~t₀+51 s to the end); post-refinement ≈ 318 s. Run-to-run spread (max − min): 0.26 m (whole), 0.42 m (post-refinement), 0.15° / 0.20° rotation.
+
+Other quantities (r01 detail; r02/r03 similar, see each run's `analysis/summary.json`):
 | Quantity | Value |
 |---|---|
-| Map-frame position error vs `/groundtruth`, **no alignment** (evo APE) | RMSE **2.19 m**, median 1.36 m, max 6.22 m (over 349 s of map-frame output) |
-| Same, SE(3)-aligned (for reference only) | RMSE 1.73 m |
-| `/gps` in the bag vs GT | RMSE 39 m, growing from ~5 m to ~50 m. Property of the provided GPS; weight is low (variance 900 m²) |
-| GPS alignment (T_w_vio) | at t₀+51 s |
-| Registration refinement of T_w_vio (`refine_T_WL`) | at t₀+81 s; error drops from ~5 m to ~1 m (visible jump in the top view near (−5, −10)) |
-| Keyframe clouds sent to registration | 344 |
-| **Landmarks per KF (mono)** | raw median 840 (661–960); after node filters median 759 (563–916). **Mono landmarks do reach the registration.** |
-| Registration accepted / rejected | 231 / 113. Reasons: rmse 60, rmse+rotation 14, rmse+translation+rotation 25, rotation 11, translation+rotation 3. **Fitness ≥ 0.97 always**, so the 0.75 fitness gate never binds |
-| Dropped online (queue_size=1) | 0 (offline replay with the original node's methods reproduces the online accepted set exactly: 231/231, 0 mismatches) |
-| Published registrations → use | 32 before refinement (1 discarded + alignment-only pairs); 199 after, of which **152 added** as backend residuals; **47 (24 %) not added** (most likely the KF left the window / failed the 1 ms stamp match; to be confirmed by Phase 5/6 logging) |
-| Registration runtime (offline replay, same code, this PC) | median 0.19 s, p90 0.43 s per KF |
+| Landmarks per KF (mono) | median 829–840 raw (648–1000); r01 after node filters median 759. **Mono landmarks reach the registration.** |
+| Reject reasons (r01) | rmse 60, rmse+rotation 14, rmse+translation+rotation 25, rotation 11, translation+rotation 3. **Fitness ≥ 0.97 always**: the 0.75 gate never binds (see note 5a). |
+| Dropped online (queue_size=1) | 0 in all runs: the offline replay of the original node's methods reproduces each online accepted set exactly |
+| Published → backend (r01) | 32 before refinement (1 discarded + alignment-only); 199 after, 152 added, **47 (24 %) not added**. r02 added 200, r03 152. |
+| Registration runtime (offline replay, r01) | median 0.19 s, p90 0.43 s per KF (preprocessing + ICP together) |
+| `/gps` vs GT | RMSE 39 m; see GPS section |
 
-Figures: `docs/img/phase3_oerlikon_traj_top.png`, `docs/img/phase3_oerlikon_errors_points_fitness.png`.
+Figures (r01): `docs/img/phase3_oerlikon_traj_top.png`, `docs/img/phase3_oerlikon_errors_points_fitness.png`.
 
-## Caveats
-- One run only. Runtime numbers are from the offline replay, not measured inside the live node.
-- I have not compared these numbers with the paper's reported Oerlikon numbers; the figures/tables there should be checked before claiming "reproduced within X".
-- Publication gaps at ~130–170 s, ~240–285 s and ~350–400 s coincide with rejections (rmse/rotation), not with point-count drops.
+## Comparison with the paper (Merat et al., RA-L 2025, arXiv:2412.08496)
+**Verdict: the pipeline runs end to end, and the results are of the same order as the paper but not strictly comparable.** Not called "reproduced".
+
+Paper, real-world experiment (Table IV, SVO-Digital Twin): **ATE_P 1.09 m, ATE_R 3.40°**. Ours: 2.05 ± 0.14 m / 3.89 ± 0.08° (whole window), 1.54 ± 0.23 m / 3.79 ± 0.10° (post-refinement).
+
+Why this is not like-for-like:
+1. **Same flight: probable, not confirmed.** The paper never names "Oerlikon", and the download page has no README. For: the data-prep scripts in `svo_registration/Dataset/` reference `PaperData/RW/Dataset/Flight2→3.bag`; the bag is a real Elios 3 flight (`camera_2`, `/vio_module/imu_filtered`, GPX GPS, COLMAP ground truth) with loops of increasing altitude (3.6–16 m GT). Against: the paper says "circa 5 minutes" and ">500 m", while the bag has 399.5 s and 443.7 m of GT path, and the paper says altitude 0–17 m.
+2. **The initial alignment is driven by GPS with hand-set offsets.** The `/gps` stream was built from the drone's GPX log with a hand-chosen linearisation altitude (`390+30-28` m; a commented-out alternative reads `425-80+470`), an x shift of −26 m, and a time offset marked "approximate guess" (`5_GPS_reading.py`). The GPS alignment at ~t₀+51 s, and therefore the first ~30 s of map-frame output (~5 m error), depends on these choices. Whether the paper's run used the same GPS processing is unknown.
+3. **The evaluation window is unstated.** The paper defines ATE_P/ATE_R as RMSE in the world frame using the system's own T_WL (the same convention we use), but does not say whether the window starts at GPS alignment, at refinement, or elsewhere. Our two windows differ by 0.5 m, which is a large fraction of the paper-vs-ours gap.
+4. Further differences: one paper number vs our 3-run mean; unknown hardware and real-time load (registration latency affects how many results reach the backend; we saw 152–200 added).
+
+## GPS in the bag: intentionally degraded?
+- **No statement anywhere that it is intentionally degraded.** The paper describes simulated GPS (ray tracing + GMM multipath, 5 Hz) for its simulation experiment only, and says nothing about the real-flight GPS. The download page has no description.
+- **Source (from repo scripts):** real Elios 3 GPX log converted to ENU in `svo_registration/Dataset/5_GPS_reading.py`, with the hand-set offsets above. 1 Hz in the bag.
+- **Observed error vs GT:** horizontal median 5.3 m (0–50 s) → 10–15 m mid-flight → 7.4 m at the end. Vertical median 0.5 m → 11 m → 31 m → **49 m**. The growing error is **mostly vertical**, consistent with a drifting GPS/barometric altitude or an altitude-reference choice in the conversion, not with an added synthetic degradation. Cause not confirmed.
+- Its effect on the estimate is limited: `gp_settings.yaml` variance 900 m² (σ = 30 m).
+
+## Notes for Phase 5/6 (from these runs)
+- **(5a) Correspondence distance.** At `max_correspondence_distance: 8 m`, ICP fitness (inlier fraction within 8 m) is ≥ 0.97 for every KF and carries no information. The EuRoC config needs a room-scale distance (order 0.1–0.5 m, to be chosen in Phase 5), and fitness should then be re-checked as a gate.
+- **(5b) Accepted-but-not-added diagnosis (24 % in r01; 152–200 added across runs).** Log per registration: KF stamp, the backend's window KF stamps at arrival, |Δt| to the nearest KF, and whether it was added. This separates (i) KF already marginalised (window exit), (ii) stamp mismatch > 1 ms (precision), and (iii) other causes (e.g. one-per-KF limit, `readInitialPose` discard, alignment-only phase).
+- **(5c) Timing breakdown.** Log ICP solve time separately from preprocessing (crop, outlier removal, voxel downsampling, map crop) and from information-matrix computation, per KF.
 
 ## RViz visual check (manual)
 RViz's Fixed Frame must exist in the TF tree. Nothing in the pipeline broadcasts a frame named `world`; `svo_node` only broadcasts TF in `vio`, and only while images are processed. So with Fixed Frame `world`, the Grid reports an error and nothing in `world` is drawn (observed by the user on 2026-10-23). Workaround for visualisation only:

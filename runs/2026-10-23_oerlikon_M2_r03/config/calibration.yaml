@@ -1,0 +1,50 @@
+cameras:
+- T_B_C:
+    cols: 4
+    data: [0.003282939472533192, -0.19294942909971347, 0.9812032104098082, 0.030087415920571525,
+          -0.9999469827980318, 0.008943046094240282, 0.005104264850980736, 0.014700960773767908,
+          -0.009759810527481877, -0.9811679467535876, -0.19290983998183384, -0.010556222345895877,
+          0.0, 0.0, 0.0, 1.0]
+    rows: 4
+  calib_date: 0
+  camera:
+    distortion:
+      parameters:
+        cols: 1
+        data: [-0.07321701837897686, -0.02964399348764655, 0.028207592603742136, -0.013234383835932766]
+        rows: 4
+      type: equidistant
+    image_height: 400
+    image_width: 640
+    intrinsics:
+      cols: 1
+      data: [387.7113338951933, 387.8098232626537, 313.42251525400184, 211.99430613976855]
+      rows: 4
+    label: cam0
+    line-delay-nanoseconds: 0
+    type: pinhole
+  description: /camera_2/image_raw
+  serial_no: 0
+label: Calibration-camchain-imucam.yaml
+
+imu_params:
+  delay_imu_cam: 0.0
+  max_imu_delta_t: 0.01
+  acc_max: 176.0
+  omega_max: 17
+  sigma_omega_c: 12.0e-4 
+  sigma_acc_c: 8.0e-3 
+  sigma_omega_bias_c: 3.0e-5
+  sigma_acc_bias_c:  1.0e-4 
+  sigma_integration: 0.0
+  g: 9.81 
+  imu_rate: 200
+
+
+imu_initialization:
+  acc_bias: [0.0, 0.0, 0.0]
+  acc_bias_sigma: 0.01 
+  omega_bias: [0.0, 0.0, 0.0]
+  omega_bias_sigma: 0.01 
+  velocity: [0.0, 0.0, 0.0]
+  velocity_sigma: 1.0
