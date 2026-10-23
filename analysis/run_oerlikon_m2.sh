@@ -30,6 +30,11 @@ fi
   echo "svo_node binary: $(readlink -f "$WS/devel/lib/svo_ros/svo_node") $(stat -c %y "$(readlink -f "$WS/devel/lib/svo_ros/svo_node")")"
 } > "$RUN/meta.txt"
 cp "$REPO/svo_ros/launch/fyp/oerlikon_m2.launch" "$RUN/launch/"
+LAUNCH_NAME=oerlikon_m2.launch
+# Pre-flight: the launch file must parse (catches XML errors before anything starts).
+if ! roslaunch --dump-params svo_ros "$LAUNCH_NAME" rviz:=false reference_map:="$MAP" > /dev/null 2> "$RUN/preflight.err"; then
+  echo "PREFLIGHT FAILED: launch file does not parse, see $RUN/preflight.err" | tee -a "$RUN/meta.txt" >&2; exit 1
+fi
 cp "$REPO"/svo_ros/param/Oerlikon/*.yaml "$REPO/svo_registration/config/oerlikon.yaml" "$RUN/config/"
 
 roslaunch svo_ros oerlikon_m2.launch rviz:=false reference_map:="$MAP" > "$RUN/svo.log" 2>&1 &
@@ -42,6 +47,11 @@ for i in $(seq 1 120); do
 done
 sleep 3
 echo "nodes ready after ~${i}s" >> "$RUN/meta.txt"
+SVO_PID="$(pgrep -f 'svo_ros/svo_node' | head -1)"
+if [ -z "$SVO_PID" ]; then
+  echo "ABORT: svo_node did not start within 120 s (see svo.log)" | tee -a "$RUN/meta.txt" >&2
+  kill -INT $LAUNCH_PID 2>/dev/null; wait $LAUNCH_PID 2>/dev/null; exit 1
+fi
 
 rosbag record -O "$RUN/run.bag" \
   /svo/vio_backend_pose_imu /svo/w_backend_pose_imu \
@@ -51,7 +61,7 @@ REC_PID=$!
 sleep 3
 
 START=$(date +%s)
-rosbag play -q "$INPUT_BAG" > "$RUN/play.log" 2>&1
+timeout 520 rosbag play -q "$INPUT_BAG" > "$RUN/play.log" 2>&1 || echo "WARNING: rosbag play exit code $?" >> "$RUN/meta.txt"
 END=$(date +%s)
 echo "play_wall_seconds: $((END-START))" >> "$RUN/meta.txt"
 

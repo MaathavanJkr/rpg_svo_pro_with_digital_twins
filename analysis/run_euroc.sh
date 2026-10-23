@@ -22,6 +22,11 @@ if rosnode list >/dev/null 2>&1; then
 fi
 
 LAUNCH_PATH="$(find "$REPO/svo_ros/launch/fyp" -name "$LAUNCH")"
+LAUNCH_NAME="$LAUNCH"
+# Pre-flight: the launch file must parse (catches XML errors before anything starts).
+if ! roslaunch --dump-params svo_ros "$LAUNCH_NAME" frame_event_log_file:="$RUN/frame_events.csv" "$@" > /dev/null 2> "$RUN/preflight.err"; then
+  echo "PREFLIGHT FAILED: launch file does not parse, see $RUN/preflight.err" | tee -a "$RUN/meta.txt" >&2; exit 1
+fi
 {
   echo "run_id: $RUN_ID"
   echo "sequence: $SEQ"
@@ -47,6 +52,10 @@ done
 sleep 3
 SVO_PID="$(pgrep -f 'svo_ros/svo_node' | head -1)"
 echo "nodes ready after ~${i}s, svo_node pid ${SVO_PID}" >> "$RUN/meta.txt"
+if [ -z "$SVO_PID" ]; then
+  echo "ABORT: svo_node did not start within 60 s (see svo.log)" | tee -a "$RUN/meta.txt" >&2
+  kill -INT $LAUNCH_PID 2>/dev/null; wait $LAUNCH_PID 2>/dev/null; exit 1
+fi
 
 # CPU sampler: 1 Hz, system-wide busy % and svo_node % of one core.
 (
@@ -69,7 +78,9 @@ REC_PID=$!
 sleep 3
 
 START=$(date +%s.%N)
-rosbag play -q "$INPUT_BAG" > "$RUN/play.log" 2>&1
+# Hard limit: bag duration + 120 s, so a dead master can never hang the harness.
+BAG_S=$(rosbag info -y -k duration "$INPUT_BAG" | cut -d. -f1)
+timeout $((BAG_S + 120)) rosbag play -q "$INPUT_BAG" > "$RUN/play.log" 2>&1 || echo "WARNING: rosbag play exit code $?" >> "$RUN/meta.txt"
 END=$(date +%s.%N)
 echo "play_wall_seconds: $(echo "$END - $START" | bc)" >> "$RUN/meta.txt"
 
