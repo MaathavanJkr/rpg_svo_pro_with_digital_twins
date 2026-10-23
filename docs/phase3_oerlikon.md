@@ -29,3 +29,10 @@ Figures: `docs/img/phase3_oerlikon_traj_top.png`, `docs/img/phase3_oerlikon_erro
 - One run only. Runtime numbers are from the offline replay, not measured inside the live node.
 - I have not compared these numbers with the paper's reported Oerlikon numbers; the figures/tables there should be checked before claiming "reproduced within X".
 - Publication gaps at ~130–170 s, ~240–285 s and ~350–400 s coincide with rejections (rmse/rotation), not with point-count drops.
+
+## RViz visual check (manual)
+RViz's Fixed Frame must exist in the TF tree. Nothing in the pipeline broadcasts a frame named `world`; `svo_node` only broadcasts TF in `vio`, and only while images are processed. So with Fixed Frame `world`, the Grid reports an error and nothing in `world` is drawn (observed by the user on 2026-10-23). Workaround for visualisation only:
+```
+rosrun tf2_ros static_transform_publisher 0 0 0 0 0 0 world fyp_world_anchor
+```
+This creates the `world` frame via a dummy child. It asserts **no** relation between `world` (M) and `vio` (W). Displays in `vio` still show "No transform" errors. The proper `world→vio` static TF comes with the D1 alignment in Phase 5 (EuRoC).
