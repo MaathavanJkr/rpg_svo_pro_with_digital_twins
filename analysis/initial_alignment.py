@@ -2,7 +2,19 @@
 """Decision D1: one-time 4-DoF initial alignment T_M_W from ground truth (EuRoC), and the
 map-frame (unaligned) ATE that follows from it.
 
-Definition (must be matched numerically by the Phase 5 online implementation):
+CURRENT DEFINITION, D1(B), 2026-10-23 ("initial alignment from GT positions over the first L m of
+flight"); must be matched numerically by the online implementation in svo_ros (d1_alignment):
+  t0      = first keyframe with backend AND scale initialised AND GT available (unchanged, below).
+  window  = estimate samples (/svo/vio_backend_pose_imu) from t0 up to and including the first
+            sample at which the GT path length reaches L (default L = 2.0 m). The path length is
+            the polyline through the GT positions interpolated at the kept sample stamps. Samples
+            without a <= 10 ms GT bracket are skipped.
+  T_M_W   = 4-DoF least-squares fit (yaw about z + 3-D translation, closed form) of the VIO
+            positions to the GT positions over the window. GT orientation is NOT used.
+  Map-frame ATE window: estimate samples after the window end (t > t_end), no further alignment.
+  (GT orientation on V1 is unreliable by several degrees, docs/phase4_m1.md and phase5_m2_euroc.md.)
+
+LEGACY DEFINITION (superseded; --legacy-orientation): orientation of GT at t0 only:
   t0      = stamp of the first keyframe with backend AND scale both initialised AND ground truth
             available at its timestamp (frame-event log from svo_node, log_frame_events:=true).
             "GT available" = t0 lies between two GT samples (state_groundtruth_estimate0) that are
@@ -16,8 +28,7 @@ Definition (must be matched numerically by the Phase 5 online implementation):
   R_M_W   = Rz(psi)
   t_M_W   = p_V_B(t0) - R_M_W @ p_W_B(t0)
   M := V for EuRoC (scan frame = Vicon frame, docs/frames.md).
-Map-frame ATE: every estimate with stamp >= t0 is mapped by T_M_W and compared with GT
-(nearest GT sample within 3 ms), with no further alignment.
+  Legacy map-frame ATE window: every estimate with stamp >= t0.
 
 Usage (venv):
   python analysis/initial_alignment.py runs/<run_id> <sequence> --t0 <stamp_s>
@@ -92,6 +103,42 @@ def compute_T_M_W(p_WB, R_WB, p_VB, R_VB):
     return T, psi
 
 
+def window_alignment(t_e, p_e, t_gt, p_gt, t0, L=None, T=None):
+    """D1(B) candidate: 4-DoF least-squares fit of VIO positions to GT positions over a window that
+    starts at t0 (an estimate sample) and ends at the first estimate sample where the GT path length
+    (polyline through GT positions interpolated at the kept estimate stamps) reaches L metres
+    (or, alternatively, where the elapsed time reaches T seconds). GT orientation is not used.
+    Estimate samples without a <= 10 ms GT bracket are skipped. Returns (T_M_W, psi, info)."""
+    k0 = int(np.argmin(np.abs(t_e - t0)))
+    if abs(t_e[k0] - t0) > 1e-6:
+        raise ValueError(f"no estimate sample at t0={t0:.9f}")
+    idx, g, s = [], [], [0.0]
+    for k in range(k0, len(t_e)):
+        i = gt_bracket(t_gt, t_e[k])
+        if i is None:
+            continue
+        a = (t_e[k] - t_gt[i - 1]) / (t_gt[i] - t_gt[i - 1])
+        gk = (1 - a) * p_gt[i - 1] + a * p_gt[i]
+        if g:
+            s.append(s[-1] + float(np.linalg.norm(gk - g[-1])))
+        idx.append(k); g.append(gk)
+        if (L is not None and s[-1] >= L) or (T is not None and t_e[k] - t0 >= T):
+            break
+    else:
+        raise ValueError("window end (L/T) not reached before the end of the estimate stream")
+    pe, pg = p_e[idx], np.array(g)
+    me, mg = pe.mean(0), pg.mean(0)
+    ae, bg = pe - me, pg - mg
+    psi = np.arctan2(np.sum(ae[:, 0] * bg[:, 1] - ae[:, 1] * bg[:, 0]),
+                     np.sum(ae[:, 0] * bg[:, 0] + ae[:, 1] * bg[:, 1]))
+    c, sn = np.cos(psi), np.sin(psi)
+    R = np.array([[c, -sn, 0.0], [sn, c, 0.0], [0.0, 0.0, 1.0]])
+    Tm = np.eye(4); Tm[:3, :3] = R; Tm[:3, 3] = mg - R @ me
+    info = dict(n_samples=len(idx), t_end=float(t_e[idx[-1]]), duration_s=float(t_e[idx[-1]] - t0),
+                gt_path_length_m=float(s[-1]))
+    return Tm, psi, info
+
+
 def t0_from_kf_log(path, t_gt):
     """t0 = first keyframe with backend and scale both initialised and GT available at its stamp
     (rows where the processed bundle is the current image, i.e. frame_stamp_ns == stamp_ns)."""
@@ -112,8 +159,11 @@ def main():
     g.add_argument("--t0", type=float)
     g.add_argument("--kf-log")
     ap.add_argument("--est", default=None, help="TUM file of the VIO-frame estimate (default analysis/est.tum)")
+    ap.add_argument("--window-length", type=float, default=2.0, help="D1(B) window L [m] (default 2.0)")
+    ap.add_argument("--legacy-orientation", action="store_true",
+                    help="superseded D1: GT orientation at t0 (outputs get suffix _legacy_orientation)")
     ap.add_argument("--yaw-source", choices=["gt", "vicon"], default="gt",
-                    help="gt = D1 definition; vicon = sensitivity check only")
+                    help="legacy mode only: gt, or vicon = sensitivity check")
     args = ap.parse_args()
     out = os.path.join(args.run, "analysis")
     t_g, p_g, r_g = load_gt(args.seq)
@@ -123,22 +173,30 @@ def main():
     k = int(np.argmin(np.abs(t_e - t0)))
     if abs(t_e[k] - t0) > 1e-6:
         raise ValueError(f"no estimate sample at t0={t0:.9f} (closest {t_e[k]:.9f})")
-    p_VB, r_VB = gt_at(t_g, p_g, r_g, t0)
-    suffix = ""
-    if args.yaw_source == "vicon":
-        r_VB = vicon_orientation_at(args.seq, t0)
-        suffix = "_sens_vicon_yaw"
-    T, psi = compute_T_M_W(p_e[k], r_e[k].as_matrix(), p_VB, r_VB.as_matrix())
     i = gt_bracket(t_g, t0)
-    res = dict(sequence=args.seq, t0=t0, t0_rule="first KF with backend+scale init and GT bracket <= 10 ms",
-               gt_bracket=[float(t_g[i - 1]), float(t_g[i])], yaw_deg=float(np.degrees(psi)), T_M_W=T.tolist(),
-               p_W_B_t0=p_e[k].tolist(), p_V_B_t0=p_VB.tolist(),
-               note="4-DoF (yaw+translation) from GT at a single timestamp; see docs/frames.md (D1)")
+    if args.legacy_orientation:
+        p_VB, r_VB = gt_at(t_g, p_g, r_g, t0)
+        suffix = "_legacy_orientation"
+        if args.yaw_source == "vicon":
+            r_VB = vicon_orientation_at(args.seq, t0)
+            suffix = "_sens_vicon_yaw"
+        T, psi = compute_T_M_W(p_e[k], r_e[k].as_matrix(), p_VB, r_VB.as_matrix())
+        t_eval = t0
+        res = dict(sequence=args.seq, t0=t0, rule="LEGACY: GT orientation at t0 (superseded)",
+                   gt_bracket=[float(t_g[i - 1]), float(t_g[i])], yaw_deg=float(np.degrees(psi)), T_M_W=T.tolist(),
+                   p_W_B_t0=p_e[k].tolist(), p_V_B_t0=p_VB.tolist())
+    else:
+        T, psi, info = window_alignment(t_e, p_e, t_g, p_g, t0, L=args.window_length)
+        suffix = ""
+        t_eval = np.nextafter(info["t_end"], np.inf)  # strictly after the window end
+        res = dict(sequence=args.seq, t0=t0, rule="D1(B): 4-DoF LSQ fit of VIO to GT positions from t0 over the first L m of GT path",
+                   window_length_m=args.window_length, window=info, yaw_deg=float(np.degrees(psi)), T_M_W=T.tolist(),
+                   t0_rule="first KF with backend+scale init and GT bracket <= 10 ms")
     res["yaw_source"] = args.yaw_source
     json.dump(res, open(os.path.join(out, f"initial_alignment{suffix}.json"), "w"), indent=2)
 
-    # Map-frame ATE, no further alignment, window [t0, end].
-    m = t_e >= t0
+    # Map-frame ATE, no further alignment, window [t_eval, end].
+    m = t_e >= t_eval
     p_M = p_e[m] @ T[:3, :3].T + T[:3, 3]
     j = np.clip(np.searchsorted(t_g, t_e[m]), 1, len(t_g) - 1)
     j = np.where(np.abs(t_g[j - 1] - t_e[m]) < np.abs(t_g[j] - t_e[m]), j - 1, j)
@@ -146,7 +204,7 @@ def main():
     err = np.linalg.norm(p_M[ok] - p_g[j[ok]], axis=1)
     ate = dict(rmse=float(np.sqrt(np.mean(err ** 2))), mean=float(err.mean()), median=float(np.median(err)),
                max=float(err.max()), final=float(err[-1]), n=int(ok.sum()),
-               window_s=float(t_e[m][ok][-1] - t0))
+               window_start=float(t_e[m][ok][0]), window_s=float(t_e[m][ok][-1] - t_e[m][ok][0]))
     json.dump(dict(t0=t0, map_frame_ate_m=ate), open(os.path.join(out, f"map_frame_ate{suffix}.json"), "w"), indent=2)
     print(json.dumps(dict(alignment=res, map_frame_ate_m=ate), indent=2))
 

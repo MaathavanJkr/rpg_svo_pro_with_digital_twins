@@ -213,6 +213,7 @@ SvoInterface::SvoInterface(
   {
     const std::string gt_file = vk::param<std::string>(pnh_, "d1_gt_file", "");
     d1_log_file_ = vk::param<std::string>(pnh_, "d1_log_file", "/tmp/svo_d1_alignment.csv");
+    d1_window_length_ = vk::param<double>(pnh_, "d1_window_length", 2.0);
     std::ifstream in(gt_file);
     CHECK(in.good()) << "d1_alignment: cannot open d1_gt_file '" << gt_file << "'";
     std::string line;
@@ -233,6 +234,10 @@ SvoInterface::SvoInterface(
     }
     CHECK_GT(d1_gt_t_.size(), 1u) << "d1_alignment: no GT samples in " << gt_file;
     SVO_INFO_STREAM("D1 alignment enabled: " << d1_gt_t_.size() << " GT samples from " << gt_file);
+    // Create the static TF publisher now, not at alignment time: a latched publisher advertised
+    // at the moment of sending can be delivered twice to an already-running listener (RViz
+    // reported TF_REPEATED_DATA for world->vio).
+    d1_tf_broadcaster_.reset(new tf2_ros::StaticTransformBroadcaster());
     d1_thread_.reset(new std::thread(&SvoInterface::d1Loop, this));
   }
 
@@ -600,33 +605,69 @@ bool SvoInterface::d1GtBracket(const double t, size_t* i) const
   return true;
 }
 
-// FYP D1: compute and apply T_M_W once both t0 and the backend pose at t0 are known.
+// FYP D1(B): once t0 is known and the backend samples from t0 cover d1_window_length_ metres of
+// GT path, fit yaw + translation of VIO to GT positions and apply T_M_W. Mirrors
+// analysis/initial_alignment.py:window_alignment exactly (same sample set, bracket, interpolation,
+// path-length polyline and closed-form fit).
 void SvoInterface::d1TryAlign()
 {
   if (d1_done_ || d1_t0_ns_ < 0)
     return;
-  const auto it = d1_vio_poses_.find(d1_t0_ns_);
-  if (it == d1_vio_poses_.end())
-    return;  // backend pose for t0 not received yet
-  const double t0 = static_cast<double>(d1_t0_ns_) * 1e-9;
-  size_t i;
-  CHECK(d1GtBracket(t0, &i));
-  const auto& g0 = d1_gt_pose_[i - 1];
-  const auto& g1 = d1_gt_pose_[i];
-  const double a = (t0 - d1_gt_t_[i - 1]) / (d1_gt_t_[i] - d1_gt_t_[i - 1]);
-  const Eigen::Vector3d p_VB = (1.0 - a) * Eigen::Vector3d(g0[0], g0[1], g0[2])
-                               + a * Eigen::Vector3d(g1[0], g1[1], g1[2]);
-  const Eigen::Quaterniond q0(g0[3], g0[4], g0[5], g0[6]), q1(g1[3], g1[4], g1[5], g1[6]);
-  const Eigen::Matrix3d R_VB = q0.normalized().slerp(a, q1.normalized()).toRotationMatrix();
-  const auto& v = it->second;
-  const Eigen::Vector3d p_WB(v[0], v[1], v[2]);
-  const Eigen::Matrix3d R_WB = Eigen::Quaterniond(v[3], v[4], v[5], v[6]).normalized().toRotationMatrix();
+  const auto first = d1_vio_poses_.lower_bound(d1_t0_ns_);
+  if (first == d1_vio_poses_.end())
+    return;  // backend sample for t0 not received yet
+  if (first->first != d1_t0_ns_)
+  {
+    LOG(ERROR) << "D1: no backend sample at t0 = " << d1_t0_ns_ << " ns; alignment not possible";
+    d1_done_ = true;
+    return;
+  }
+  std::vector<Eigen::Vector3d> pe, pg;
+  double s = 0.0;
+  int64_t t_end_ns = -1;
+  for (auto it = first; it != d1_vio_poses_.end(); ++it)
+  {
+    const double t = static_cast<double>(it->first) * 1e-9;
+    size_t i;
+    if (!d1GtBracket(t, &i))
+      continue;
+    const auto& g0 = d1_gt_pose_[i - 1];
+    const auto& g1 = d1_gt_pose_[i];
+    const double a = (t - d1_gt_t_[i - 1]) / (d1_gt_t_[i] - d1_gt_t_[i - 1]);
+    const Eigen::Vector3d g = (1.0 - a) * Eigen::Vector3d(g0[0], g0[1], g0[2])
+                              + a * Eigen::Vector3d(g1[0], g1[1], g1[2]);
+    if (!pg.empty())
+      s += (g - pg.back()).norm();
+    pe.emplace_back(it->second[0], it->second[1], it->second[2]);
+    pg.push_back(g);
+    if (s >= d1_window_length_)
+    {
+      t_end_ns = it->first;
+      break;
+    }
+  }
+  if (t_end_ns < 0)
+    return;  // window not complete yet; wait for more backend samples
 
-  const Eigen::Matrix3d dR = R_VB * R_WB.transpose();
-  const double psi = std::atan2(dR(1, 0), dR(0, 0));
+  Eigen::Vector3d me = Eigen::Vector3d::Zero(), mg = Eigen::Vector3d::Zero();
+  for (size_t k = 0; k < pe.size(); ++k)
+  {
+    me += pe[k];
+    mg += pg[k];
+  }
+  me /= static_cast<double>(pe.size());
+  mg /= static_cast<double>(pg.size());
+  double num = 0.0, den = 0.0;
+  for (size_t k = 0; k < pe.size(); ++k)
+  {
+    const Eigen::Vector3d ae = pe[k] - me, bg = pg[k] - mg;
+    num += ae.x() * bg.y() - ae.y() * bg.x();
+    den += ae.x() * bg.x() + ae.y() * bg.y();
+  }
+  const double psi = std::atan2(num, den);
   Eigen::Matrix4d T = Eigen::Matrix4d::Identity();
   T.block<3, 3>(0, 0) = Eigen::AngleAxisd(psi, Eigen::Vector3d::UnitZ()).toRotationMatrix();
-  T.block<3, 1>(0, 3) = p_VB - T.block<3, 3>(0, 0) * p_WB;
+  T.block<3, 1>(0, 3) = mg - T.block<3, 3>(0, 0) * me;
   const Transformation T_w_vio(T);
 
   // Same effect as a successful GPS alignment in globalpositionsCallback.
@@ -639,7 +680,7 @@ void SvoInterface::d1TryAlign()
   d1_done_ = true;
 
   geometry_msgs::TransformStamped tf_msg;
-  tf_msg.header.stamp.fromNSec(d1_t0_ns_);
+  tf_msg.header.stamp.fromNSec(t_end_ns);
   tf_msg.header.frame_id = "world";
   tf_msg.child_frame_id = "vio";
   const Eigen::Quaterniond q_MW(T.block<3, 3>(0, 0));
@@ -650,27 +691,23 @@ void SvoInterface::d1TryAlign()
   tf_msg.transform.rotation.x = q_MW.x();
   tf_msg.transform.rotation.y = q_MW.y();
   tf_msg.transform.rotation.z = q_MW.z();
-  if (!d1_tf_broadcaster_)
-    d1_tf_broadcaster_.reset(new tf2_ros::StaticTransformBroadcaster());
-  d1_tf_broadcaster_->sendTransform(tf_msg);
+  d1_tf_broadcaster_->sendTransform(tf_msg);  // exactly once (d1_done_ guards re-entry)
 
   std::ofstream log(d1_log_file_);
   log.precision(17);
-  log << "t0_ns,t0,yaw_deg,gt_t_a,gt_t_b,p_W_B_x,p_W_B_y,p_W_B_z,p_V_B_x,p_V_B_y,p_V_B_z";
+  log << "t0_ns,t_end_ns,n_samples,gt_path_length_m,window_length_m,yaw_deg";
   for (int r = 0; r < 4; ++r)
     for (int c = 0; c < 4; ++c)
       log << ",T_M_W_" << r << c;
-  log << "\n" << d1_t0_ns_ << ',' << t0 << ',' << psi * 180.0 / M_PI << ','
-      << d1_gt_t_[i - 1] << ',' << d1_gt_t_[i] << ','
-      << p_WB.x() << ',' << p_WB.y() << ',' << p_WB.z() << ','
-      << p_VB.x() << ',' << p_VB.y() << ',' << p_VB.z();
+  log << "\n" << d1_t0_ns_ << ',' << t_end_ns << ',' << pe.size() << ',' << s << ','
+      << d1_window_length_ << ',' << psi * 180.0 / M_PI;
   for (int r = 0; r < 4; ++r)
     for (int c = 0; c < 4; ++c)
       log << ',' << T(r, c);
   log << "\n";
   const Eigen::Vector3d t_MW = T.block<3, 1>(0, 3);
-  SVO_INFO_STREAM("D1: T_M_W set at t0 = " << d1_t0_ns_ << " ns, yaw " << psi * 180.0 / M_PI
-                  << " deg, t = " << t_MW.transpose());
+  SVO_INFO_STREAM("D1: T_M_W set (window " << pe.size() << " samples, " << s << " m, t_end "
+                  << t_end_ns << " ns), yaw " << psi * 180.0 / M_PI << " deg, t = " << t_MW.transpose());
 }
 
 // FYP D1: receives the backend's own published poses (/svo/vio_backend_pose_imu), so the VIO pose at
@@ -690,7 +727,7 @@ void SvoInterface::d1Loop()
     d1_vio_poses_[static_cast<int64_t>(m->header.stamp.toNSec())] =
         {p.position.x, p.position.y, p.position.z,
          p.orientation.w, p.orientation.x, p.orientation.y, p.orientation.z};
-    while (d1_vio_poses_.size() > 400)
+    while (d1_vio_poses_.size() > 4000)  // ~200 s at 20 Hz; the window needs ~8 s
       d1_vio_poses_.erase(d1_vio_poses_.begin());
     d1TryAlign();
   };

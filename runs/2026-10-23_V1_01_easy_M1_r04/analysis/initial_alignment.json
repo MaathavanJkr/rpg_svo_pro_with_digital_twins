@@ -1,30 +1,33 @@
 {
   "sequence": "V1_01_easy",
   "t0": 1403715279.062143,
-  "t0_rule": "first KF with backend+scale init and GT bracket <= 10 ms",
-  "gt_bracket": [
-    1403715279.0571432,
-    1403715279.062143
-  ],
-  "yaw_deg": 123.22898238377518,
+  "rule": "D1(B): 4-DoF LSQ fit of VIO to GT positions from t0 over the first L m of GT path",
+  "window_length_m": 2.0,
+  "window": {
+    "n_samples": 157,
+    "t_end": 1403715286.862143,
+    "duration_s": 7.799999952316284,
+    "gt_path_length_m": 2.0118280988297563
+  },
+  "yaw_deg": 130.3471160049423,
   "T_M_W": [
     [
-      -0.5479864206265855,
-      -0.836487228120587,
+      -0.647416725354502,
+      -0.7621361976256299,
       0.0,
-      0.904144975215526
+      0.8811671146151261
     ],
     [
-      0.836487228120587,
-      -0.5479864206265855,
+      0.7621361976256299,
+      -0.647416725354502,
       0.0,
-      2.1754192006692943
+      2.1586522808856765
     ],
     [
       0.0,
       0.0,
       1.0,
-      0.9577686589999999
+      0.9528190667794871
     ],
     [
       0.0,
@@ -33,15 +36,6 @@
       1.0
     ]
   ],
-  "p_W_B_t0": [
-    -0.027108567,
-    -0.048301871,
-    0.128503341
-  ],
-  "p_V_B_t0": [
-    0.959404,
-    2.179212,
-    1.086272
-  ],
-  "note": "4-DoF (yaw+translation) from GT at a single timestamp; see docs/frames.md (D1)"
+  "t0_rule": "first KF with backend+scale init and GT bracket <= 10 ms",
+  "yaw_source": "gt"
 }

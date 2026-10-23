@@ -36,14 +36,14 @@ Rule (`docs/frames.md`): t₀ = first keyframe with backend and scale initialise
 ## V1_01_easy: 5 runs (M1, logger on, rate 1.0, idle machine)
 Runs `runs/2026-10-23_V1_01_easy_M1_r01..r05` (commit 3688064, libsvo_ros md5 a8df1f97d777). Aggregate: `runs/phase4_V1_01_M1_aggregate.json` (`analysis/aggregate_euroc.py`, sample std).
 
-| Run | ATE 4-DoF [m] | Map-frame ATE [m] | t₀ | ψ (yaw offset) | Frames | Frontend [ms] | Latency [ms] | CPU (1 core) |
+| Run | ATE 4-DoF [m] | Map-frame ATE [m], legacy D1 | t₀ | ψ legacy (GT orientation) | Frames | Frontend [ms] | Latency [ms] | CPU (1 core) |
 |---|---|---|---|---|---|---|---|---|
-| r01 ⚠ | 0.051 | 0.224 | 1403715279.062143 | 123.24° | **2887/2912** (25 dropped) | 13.0 | 49 | 75 % |
-| r02 | 0.058 | 0.245 | 1403715279.062143 | 122.50° | 2912/2912 | 7.6 | 51 | 73 % |
-| r03 | 0.058 | 0.237 | 1403715279.062143 | 122.55° | 2912/2912 | 7.4 | 51 | 72 % |
-| r04 | 0.056 | 0.235 | 1403715279.062143 | 123.23° | 2912/2912 | 7.5 | 51 | 72 % |
-| r05 | 0.057 | 0.247 | 1403715279.062143 | 122.52° | 2912/2912 | 7.4 | 51 | 71 % |
-| **mean ± std** | **0.056 ± 0.003** | **0.237 ± 0.009** | identical | 122.81 ± 0.39° | | 8.6 ± 2.5 | 51 ± 1 | 73 ± 2 % |
+| r01 ⚠ | 0.051 | ~~0.224~~ | 1403715279.062143 | 123.24° | **2887/2912** (25 dropped) | 13.0 | 49 | 75 % |
+| r02 | 0.058 | ~~0.245~~ | 1403715279.062143 | 122.50° | 2912/2912 | 7.6 | 51 | 73 % |
+| r03 | 0.058 | ~~0.237~~ | 1403715279.062143 | 122.55° | 2912/2912 | 7.4 | 51 | 72 % |
+| r04 | 0.056 | ~~0.235~~ | 1403715279.062143 | 123.23° | 2912/2912 | 7.5 | 51 | 72 % |
+| r05 | 0.057 | ~~0.247~~ | 1403715279.062143 | 122.52° | 2912/2912 | 7.4 | 51 | 71 % |
+| **mean ± std** | **0.056 ± 0.003** | ~~0.237 ± 0.009~~ (superseded, see below) | identical | 122.81 ± 0.39° | | 8.6 ± 2.5 | 51 ± 1 | 73 ± 2 % |
 
 - ATE SE(3)-aligned: 0.055 ± 0.003 m. t₀ is 5.80 s after the first image (4.76 s after GT starts), the same keyframe in every run.
 - **Reference:** Cioffi & Scaramuzza 2020, VIO-only V101 **0.061 m** (posyaw, median of 3). Ours 0.056 ± 0.003 m: consistent, not off.
@@ -93,3 +93,17 @@ On V1_01 the RPE rotation error is ~4° at every segment length (MH_01: 0.75 →
 | mean | | | **+2.22°** | **0.237 ± 0.009** | **0.140 ± 0.009** | **−0.097** |
 
 **Reading:** the yaw taken from the official GT orientation at t₀ differs from the raw-Vicon yaw by 2.2°. That accounts for ~0.1 m (40 %) of M1's map-frame ATE on V1_01. The effect is a common offset for M1/M2/M3; it must be stated next to any absolute map-frame number for V1_01. (Raw Vicon was used on its own timestamps; the best-fit +10 ms shift found earlier was not applied.)
+
+## OFFICIAL M1 map-frame ATE under D1(B) (2026-10-23)
+D1 was amended to D1(B): "initial alignment from GT positions over the first L m of flight", L = 2 m (docs/frames.md). The map-frame window now starts after the alignment window (t > t_end). **These numbers supersede the legacy-D1 map-frame values above** (legacy values remain in each run as `*_legacy_orientation.json`).
+
+| Run | ψ, D1(B) | ψ, legacy | window | Map-frame ATE D1(B) [m] (RMSE / median / max / final) | Legacy [m] |
+|---|---|---|---|---|---|
+| r01 ⚠ | 130.30° | 123.24° | 7.8 s, 151 samples, 2.01 m | **0.122** / 0.111 / 0.211 / 0.077 | 0.224 |
+| r02 | 129.78° | 122.50° | 7.8 s, 157, 2.01 m | **0.127** / 0.112 / 0.215 / 0.095 | 0.245 |
+| r03 | 129.98° | 122.55° | 7.8 s, 157, 2.01 m | **0.147** / 0.144 / 0.266 / 0.063 | 0.237 |
+| r04 | 130.35° | 123.23° | 7.8 s, 157, 2.01 m | **0.141** / 0.135 / 0.227 / 0.131 | 0.235 |
+| r05 | 129.94° | 122.52° | 7.8 s, 157, 2.01 m | **0.121** / 0.107 / 0.231 / 0.115 | 0.247 |
+| **mean ± std** | **130.07 ± 0.25°** | 122.81 ± 0.39° | | **0.132 ± 0.012** | 0.237 ± 0.009 |
+
+Window-length study (yaw stability, M1 only): see docs/frames.md, "Why L = 2 m". The 4-DoF-aligned ATE and RPE / relative displacement are unaffected by D1.

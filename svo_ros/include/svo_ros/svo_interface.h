@@ -143,12 +143,15 @@ public:
   double frame_event_log_time_sum_ = 0.0;
   double frame_event_log_time_max_ = 0.0;
 
-  // FYP decision D1: one-time 4-DoF initial alignment T_M_W (= T_w_vio) from ground truth.
+  // FYP decision D1(B): one-time 4-DoF initial alignment T_M_W (= T_w_vio) from GT positions.
   // Off by default (param d1_alignment). t0 = first keyframe with backend and scale initialised
-  // and GT available (bracketing GT samples <= 10 ms apart); GT interpolated (linear / slerp);
-  // VIO pose = the /svo/vio_backend_pose_imu sample with stamp t0. Reference implementation:
-  // analysis/initial_alignment.py. Sets T_w_vio and gp_initialized_, broadcasts static TF world->vio.
+  // and GT available (bracketing GT samples <= 10 ms apart). Window = /svo/vio_backend_pose_imu
+  // samples from t0 until the GT path length reaches d1_window_length (default 2 m); T_M_W =
+  // 4-DoF least-squares fit of VIO to interpolated GT positions over the window (GT orientation
+  // not used). Reference implementation: analysis/initial_alignment.py (window_alignment).
+  // Sets T_w_vio and gp_initialized_, broadcasts static TF world->vio.
   bool d1_enabled_ = false;
+  double d1_window_length_ = 2.0;
   std::vector<double> d1_gt_t_;                    // GT stamps [s]
   std::vector<std::array<double, 7>> d1_gt_pose_;  // px py pz qw qx qy qz
   std::mutex d1_mutex_;
