@@ -1,0 +1,17 @@
+# Datasets and derived data (never commit)
+dataset/
+
+# Large data / digital-twin files
+*.bag
+*.bag.active
+*.zip
+*.ply
+*.pcd
+*.las
+*.laz
+*.e57
+*.vdb
+
+# Python caches
+__pycache__/
+*.pyc
