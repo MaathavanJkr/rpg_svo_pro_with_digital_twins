@@ -50,7 +50,7 @@ for i in $(seq 1 60); do
   sleep 1
 done
 sleep 3
-SVO_PID="$(pgrep -f 'svo_ros/svo_node' | head -1)"
+SVO_PID="$(pgrep -x svo_node | head -1)"
 echo "nodes ready after ~${i}s, svo_node pid ${SVO_PID}" >> "$RUN/meta.txt"
 if [ -z "$SVO_PID" ]; then
   echo "ABORT: svo_node did not start within 60 s (see svo.log)" | tee -a "$RUN/meta.txt" >&2
@@ -80,7 +80,17 @@ sleep 3
 START=$(date +%s.%N)
 # Hard limit: bag duration + 120 s, so a dead master can never hang the harness.
 BAG_S=$(rosbag info -y -k duration "$INPUT_BAG" | cut -d. -f1)
-timeout $((BAG_S + 120)) rosbag play -q "$INPUT_BAG" > "$RUN/play.log" 2>&1 || echo "WARNING: rosbag play exit code $?" >> "$RUN/meta.txt"
+timeout $((BAG_S + 120)) rosbag play -q "$INPUT_BAG" > "$RUN/play.log" 2>&1 &
+PLAY_PID=$!
+# Watchdog: if svo_node dies during playback, stop the bag and mark the run FAILED.
+while kill -0 $PLAY_PID 2>/dev/null; do
+  if ! kill -0 "$SVO_PID" 2>/dev/null; then
+    echo "FAILED: svo_node (pid $SVO_PID) died during playback; see svo.log" | tee -a "$RUN/meta.txt" >&2
+    kill -INT $PLAY_PID 2>/dev/null; break
+  fi
+  sleep 1
+done
+wait $PLAY_PID 2>/dev/null
 END=$(date +%s.%N)
 echo "play_wall_seconds: $(echo "$END - $START" | bc)" >> "$RUN/meta.txt"
 
@@ -88,4 +98,8 @@ sleep 5
 kill -INT $REC_PID; wait $REC_PID
 kill -INT $LAUNCH_PID; wait $LAUNCH_PID
 echo "loadavg_after: $(cat /proc/loadavg)" >> "$RUN/meta.txt"
+if grep -q "process has died" "$RUN/svo.log" && ! grep -q "^FAILED" "$RUN/meta.txt"; then
+  echo "FAILED: a node died (see svo.log)" | tee -a "$RUN/meta.txt" >&2
+fi
+grep -q "^FAILED" "$RUN/meta.txt" && exit 1
 echo "done" >> "$RUN/meta.txt"

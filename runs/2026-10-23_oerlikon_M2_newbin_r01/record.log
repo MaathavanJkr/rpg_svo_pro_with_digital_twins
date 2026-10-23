@@ -1,0 +1,8 @@
+[0m[INFO] [1792752879.526308041]: Subscribing to /gps[0m
+[0m[INFO] [1792752879.529047478]: Subscribing to /groundtruth[0m
+[0m[INFO] [1792752879.530863850]: Subscribing to /svo/vio_backend_pose_imu[0m
+[0m[INFO] [1792752879.532772494]: Subscribing to /svo/w_backend_points_registered[0m
+[0m[INFO] [1792752879.535463693]: Subscribing to /svo/w_backend_pose_imu[0m
+[0m[INFO] [1792752879.537384347]: Subscribing to /svo/w_backend_pose_points[0m
+[0m[INFO] [1792752879.539143499]: Subscribing to /svo/w_registrated_pose[0m
+[0m[INFO] [1792752879.541427019]: Recording to '/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-23_oerlikon_M2_newbin_r01/run.bag'.[0m

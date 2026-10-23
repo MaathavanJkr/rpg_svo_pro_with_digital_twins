@@ -1,0 +1,11 @@
+run_id: 2026-10-23_oerlikon_M2_newbin_r01
+date: 2026-10-23T16:24:26+05:30
+git_commit: ca4a09898368367d364a0bdea413b8beabd2c1ec
+git_dirty: 0 tracked files modified
+launch: svo_ros/launch/fyp/oerlikon_m2.launch rviz:=false reference_map:=/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/dataset/Oerlikon.ply
+input_bag: /home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/dataset/oerlikon.bag (rosbag play, rate 1, no --clock; /use_sim_time=false)
+libsvo_ros: 2026-10-23 13:14:49.698060441 +0530 md5 3a339b876666
+svo_node binary: /home/alpha/Desktop/twinforge/catkin_ws/devel/.private/svo_ros/lib/svo_ros/svo_node 2026-10-23 13:15:16.618563803 +0530
+nodes ready after ~6s
+play_wall_seconds: 400
+done

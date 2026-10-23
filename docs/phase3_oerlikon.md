@@ -32,6 +32,16 @@ Other quantities (r01 detail; r02/r03 similar, see each run's `analysis/summary.
 
 Figures (r01): `docs/img/phase3_oerlikon_traj_top.png`, `docs/img/phase3_oerlikon_errors_points_fitness.png`.
 
+### Equivalence check: new binary (frame-event logger built in, flag off)
+`svo_ros` was rebuilt on 2026-10-23 13:15 with the log-only frame-event logger (`libsvo_ros.so` md5 `3a339b876666`). r01–r03 used the 2026-10-22 binary. One Oerlikon run on the new binary with `log_frame_events` off (`runs/2026-10-23_oerlikon_M2_newbin_r01`):
+
+| | ATE_P whole [m] | ATE_P post [m] | ATE_R whole [°] | ATE_R post [°] | Accepted / rejected | Backend added |
+|---|---|---|---|---|---|---|
+| r01–r03 (old binary), range | 1.95–2.21 | 1.38–1.80 | 3.83–3.98 | 3.69–3.89 | 230–233 / 108–113 | 152–200 |
+| new binary | 1.98 ✓ | 1.38 ✓ (at edge) | **3.65** ✗ | **3.49** ✗ | 239 / 100 | 200 |
+
+**Result:** position within the old-binary spread. Rotation is 0.18–0.20° *lower* (better) than all three old-binary runs, so it is **not** strictly within the r01–r03 range. With the flag off the logger returns on its first line, so a behavioural change is not expected, but n=3 is too few to define the run-to-run spread and this check does not prove equivalence. It can be strengthened with more runs of both binaries if needed.
+
 ## Comparison with the paper (Merat et al., RA-L 2025, arXiv:2412.08496)
 **Verdict: the pipeline runs end to end, and the results are of the same order as the paper but not strictly comparable.** Not called "reproduced".
 
