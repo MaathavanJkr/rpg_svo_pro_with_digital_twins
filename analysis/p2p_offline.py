@@ -66,7 +66,7 @@ def icp(points, twin_pcd, max_corr=0.5, max_iter=100, count_iterations=True):
         t0 = time.perf_counter()
         r = o3d.pipelines.registration.registration_icp(src, twin_pcd, max_corr, np.identity(4), est, crit)
         dt = time.perf_counter() - t0
-    return dict(T_c=np.asarray(r.transformation), fitness=r.fitness, inlier_rmse=r.inlier_rmse,
+    return dict(T_c=np.array(r.transformation), fitness=r.fitness, inlier_rmse=r.inlier_rmse,
                 correspondences=np.asarray(r.correspondence_set), iterations=iters, runtime_s=dt,
                 lookups=None if iters is None else (iters + 1) * len(points))
 

@@ -1,0 +1,155 @@
+{
+  "n_keyframes": 115,
+  "stride": 8,
+  "levels": [
+    [
+      "translation",
+      0.1,
+      0.0
+    ],
+    [
+      "translation",
+      0.2,
+      0.0
+    ],
+    [
+      "translation",
+      0.3,
+      0.0
+    ],
+    [
+      "translation",
+      0.5,
+      0.0
+    ],
+    [
+      "translation",
+      0.75,
+      0.0
+    ],
+    [
+      "translation",
+      1.0,
+      0.0
+    ],
+    [
+      "rotation",
+      0.0,
+      2
+    ],
+    [
+      "rotation",
+      0.0,
+      5
+    ],
+    [
+      "rotation",
+      0.0,
+      10
+    ],
+    [
+      "rotation",
+      0.0,
+      15
+    ],
+    [
+      "rotation",
+      0.0,
+      20
+    ],
+    [
+      "combined",
+      0.1,
+      2
+    ],
+    [
+      "combined",
+      0.3,
+      5
+    ],
+    [
+      "combined",
+      0.5,
+      10
+    ],
+    [
+      "combined",
+      0.75,
+      15
+    ],
+    [
+      "combined",
+      1.0,
+      20
+    ],
+    [
+      "yaw",
+      0.0,
+      2
+    ],
+    [
+      "yaw",
+      0.0,
+      5
+    ],
+    [
+      "yaw",
+      0.0,
+      10
+    ],
+    [
+      "yaw",
+      0.0,
+      15
+    ],
+    [
+      "yaw",
+      0.0,
+      20
+    ]
+  ],
+  "methods": {
+    "p2p_d0.5": {
+      "method": "p2p",
+      "d": 0.5
+    },
+    "p2p_d1.0": {
+      "method": "p2p",
+      "d": 1.0
+    },
+    "p2p_d2.0": {
+      "method": "p2p",
+      "d": 2.0
+    },
+    "df_v50_untrunc": {
+      "method": "df",
+      "v": 0.05,
+      "mu": null,
+      "delta": 0.05
+    },
+    "df_v100_untrunc": {
+      "method": "df",
+      "v": 0.1,
+      "mu": null,
+      "delta": 0.05
+    },
+    "df_v200_untrunc": {
+      "method": "df",
+      "v": 0.2,
+      "mu": null,
+      "delta": 0.05
+    },
+    "df_v50_mu5v": {
+      "method": "df",
+      "v": 0.05,
+      "mu": 0.25,
+      "delta": 0.05
+    }
+  },
+  "thresholds": {
+    "same_t_m": 0.05,
+    "same_r_deg": 1.0,
+    "gt_pos_m": 0.25
+  },
+  "seconds": 406.3109745979309
+}

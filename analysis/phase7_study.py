@@ -14,6 +14,10 @@ Both use the same iteration cap (100) and each method's own convergence criteria
 
 Usage (venv): python analysis/phase7_study.py accuracy|basin runs/<M2 run> ...
 """
+import os
+# One OpenMP thread per worker, set before Open3D is imported: Open3D's threading in worker processes
+# deadlocked the first study run (fork after Open3D initialisation). Workers use the spawn context.
+os.environ.setdefault("OMP_NUM_THREADS", "1")
 import argparse
 import csv
 import glob
@@ -22,7 +26,7 @@ import os
 import re
 import sys
 import time
-from multiprocessing import Pool
+import multiprocessing as mp
 import numpy as np
 import open3d as o3d
 from scipy.spatial.transform import Rotation as Rot
@@ -190,11 +194,14 @@ def main():
     ap.add_argument("--procs", type=int, default=10)
     ap.add_argument("--basin-stride", type=int, default=8)
     ap.add_argument("--only", nargs="*", default=None)
+    ap.add_argument("--max-kfs", type=int, default=None, help="testing: use only the first N keyframes")
     args = ap.parse_args()
     os.makedirs(OUT, exist_ok=True)
     kfs = load_kfs(args.runs)
+    if args.max_kfs:
+        kfs = kfs[:args.max_kfs]
     print(f"{len(kfs)} keyframes from {len(args.runs)} runs", flush=True)
-    with Pool(args.procs, initializer=_init) as pool:
+    with mp.get_context("spawn").Pool(args.procs, initializer=_init) as pool:
         if args.cmd == "accuracy":
             for name, cfg in accuracy_configs().items():
                 if args.only and name not in args.only:

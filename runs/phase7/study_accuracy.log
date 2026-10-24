@@ -1,0 +1,16 @@
+917 keyframes from 5 runs
+p2p_d0.5: 50 s
+df_v50_untrunc_h0.05: 10 s
+df_v50_mu2v_h0.05: 10 s
+df_v50_mu5v_h0.05: 10 s
+df_v50_mu10v_h0.05: 10 s
+df_v100_untrunc_h0.05: 10 s
+df_v100_mu2v_h0.05: 11 s
+df_v100_mu5v_h0.05: 11 s
+df_v100_mu10v_h0.05: 10 s
+df_v200_untrunc_h0.05: 12 s
+df_v200_mu2v_h0.05: 13 s
+df_v200_mu5v_h0.05: 13 s
+df_v200_mu10v_h0.05: 12 s
+df_v50_untrunc_h0.02: 10 s
+df_v50_untrunc_h0.10: 9 s
