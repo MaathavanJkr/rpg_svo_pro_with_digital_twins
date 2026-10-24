@@ -1,0 +1,328 @@
+[0m[INFO] [1792832161.276704547]: Found parameter: pipeline_is_stereo, value: 0[0m
+[33m[WARN] [1792832161.278216016]: Cannot find value for parameter: set_initial_attitude_from_gravity, assigning default: 1[0m
+[0m[INFO] [1792832161.279475181]: Found parameter: automatic_reinitialization, value: 1[0m
+[0m[INFO] [1792832161.280504176]: Found parameter: calib_file, value: /home/alpha/Desktop/twinforge/catkin_ws/src/rpg_svo_pro_with_digital_twins/svo_ros/param/fyp/euroc/euroc_mono.yaml[0m
+load pinhole camera with fisheye distortion started
+distortion_parameters:   -0.283408
+  0.0739591
+0.000193595
+1.76187e-05
+load pinhole camera with fisheye distortion finished
+
+  name = cam0
+  size = [752, 480]
+  Projection = Pinhole
+  Focal length = (458.655, 457.297)
+  Principal point = (367.216, 248.375)
+  Distortion: RadTan(-0.283408, 0.0739591, 0.000193595, 1.76187e-05)
+[33m[WARN] [1792832161.283167281]: Cannot find value for parameter: klt_max_level, assigning default: 4[0m
+[33m[WARN] [1792832161.283603938]: Cannot find value for parameter: klt_min_level, assigning default: 0[0m
+[0m[INFO] [1792832161.284770871]: Found parameter: reprojector_max_n_kfs, value: 5[0m
+[0m[INFO] [1792832161.286093665]: Found parameter: max_fts, value: 180[0m
+[0m[INFO] [1792832161.287243220]: Found parameter: grid_size, value: 25[0m
+[0m[INFO] [1792832161.288388932]: Found parameter: reproject_unconverged_seeds, value: 1[0m
+[0m[INFO] [1792832161.289479413]: Found parameter: max_unconverged_seeds_ratio, value: 0.2[0m
+[0m[INFO] [1792832161.290548517]: Found parameter: quality_min_fts, value: 40[0m
+[0m[INFO] [1792832161.291583865]: Found parameter: seed_convergence_sigma2_thresh, value: 200[0m
+[0m[INFO] [1792832161.292602546]: Found parameter: reprojector_affine_est_offset, value: 1[0m
+[0m[INFO] [1792832161.293760786]: Found parameter: reprojector_affine_est_gain, value: 0[0m
+[33m[WARN] [1792832161.294237393]: Cannot find value for parameter: reprojector_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792832161.294678796]: Cannot find value for parameter: reprojector_max_n_global_kfs, assigning default: 20[0m
+[33m[WARN] [1792832161.295126581]: Cannot find value for parameter: reprojector_use_kfs_from_global_map, assigning default: 0[0m
+[33m[WARN] [1792832161.295562319]: Cannot find value for parameter: reprojector_fixed_lm_grid_size, assigning default: 50[0m
+[0m[INFO] [1792832161.296705535]: Found parameter: init_min_features, value: 60[0m
+[33m[WARN] [1792832161.298135062]: Cannot find value for parameter: init_min_tracked, assigning default: 80[0m
+[33m[WARN] [1792832161.298637719]: Cannot find value for parameter: init_min_inliers, assigning default: 70[0m
+[0m[INFO] [1792832161.299794263]: Found parameter: init_min_disparity, value: 30[0m
+[33m[WARN] [1792832161.300229412]: Cannot find value for parameter: init_min_features_factor, assigning default: 2[0m
+[33m[WARN] [1792832161.300650926]: Cannot find value for parameter: reproj_err_thresh, assigning default: 2[0m
+[33m[WARN] [1792832161.301112599]: Cannot find value for parameter: init_disparity_pivot_ratio, assigning default: 0.5[0m
+[33m[WARN] [1792832161.301570103]: Cannot find value for parameter: init_method, assigning default: FivePoint[0m
+[0m[INFO] [1792832161.302781592]: Found parameter: grid_size, value: 25[0m
+[0m[INFO] [1792832161.303909925]: Found parameter: n_pyr_levels, value: 3[0m
+[0m[INFO] [1792832161.304878803]: Found parameter: detector_threshold_primary, value: 10[0m
+[0m[INFO] [1792832161.305805667]: Found parameter: detector_threshold_secondary, value: 200[0m
+[0m[INFO] [1792832161.306861117]: Found parameter: detector_threshold_shitomasi, value: 50[0m
+[33m[WARN] [1792832161.307252543]: Cannot find value for parameter: use_edgelets, assigning default: 1[0m
+[0m[INFO] [1792832161.308385778]: Found parameter: n_pyr_levels, value: 3[0m
+[33m[WARN] [1792832161.308827967]: Cannot find value for parameter: use_threaded_depthfilter, assigning default: 1[0m
+[0m[INFO] [1792832161.309962580]: Found parameter: seed_convergence_sigma2_thresh, value: 200[0m
+[0m[INFO] [1792832161.311111503]: Found parameter: mappoint_convergence_sigma2_thresh, value: 500[0m
+[0m[INFO] [1792832161.312056028]: Found parameter: scan_epi_unit_sphere, value: 0[0m
+[0m[INFO] [1792832161.313135265]: Found parameter: depth_filter_affine_est_offset, value: 1[0m
+[0m[INFO] [1792832161.314137766]: Found parameter: depth_filter_affine_est_gain, value: 0[0m
+[0m[INFO] [1792832161.315046766]: Found parameter: max_fts, value: 180[0m
+[33m[WARN] [1792832161.315423410]: Cannot find value for parameter: max_seeds_ratio, assigning default: 3[0m
+[0m[INFO] [1792832161.316495434]: Found parameter: max_map_fts, value: 300[0m
+[33m[WARN] [1792832161.316930240]: Cannot find value for parameter: depth_filter_extra_map_points, assigning default: 0[0m
+[0m[INFO] [1792832161.318057797]: Found parameter: runlc, value: 0[0m
+[0m[INFO] [1792832161.319098870]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792832161.320101069]: Found parameter: use_imu, value: 1[0m
+[33m[WARN] [1792832161.341733621]: Cannot find value for parameter: trace_dir, assigning default: /home/alpha/Desktop/twinforge/catkin_ws/src/rpg_svo_pro_with_digital_twins/svo/trace[0m
+[0m[INFO] [1792832161.342898715]: Found parameter: quality_min_fts, value: 40[0m
+[33m[WARN] [1792832161.343302234]: Cannot find value for parameter: quality_max_drop_fts, assigning default: 40[0m
+[0m[INFO] [1792832161.344242808]: Found parameter: relocalization_max_trials, value: 5[0m
+[0m[INFO] [1792832161.345196850]: Found parameter: poseoptim_prior_lambda, value: 0[0m
+[0m[INFO] [1792832161.346210608]: Found parameter: poseoptim_using_unit_sphere, value: 0[0m
+[0m[INFO] [1792832161.347244676]: Found parameter: img_align_prior_lambda_rot, value: 0.5[0m
+[0m[INFO] [1792832161.348257205]: Found parameter: img_align_prior_lambda_trans, value: 0[0m
+[33m[WARN] [1792832161.348636902]: Cannot find value for parameter: structure_optimization_max_pts, assigning default: 20[0m
+[0m[INFO] [1792832161.349661274]: Found parameter: map_scale, value: 1.5[0m
+[0m[INFO] [1792832161.351120487]: Found parameter: kfselect_criterion, value: FORWARD[0m
+[33m[WARN] [1792832161.351549857]: Cannot find value for parameter: kfselect_min_dist, assigning default: 0.12[0m
+[0m[INFO] [1792832161.352532388]: Found parameter: kfselect_numkfs_upper_thresh, value: 140[0m
+[0m[INFO] [1792832161.353988016]: Found parameter: kfselect_numkfs_lower_thresh, value: 100[0m
+[0m[INFO] [1792832161.355057254]: Found parameter: kfselect_min_dist_metric, value: 0.1[0m
+[0m[INFO] [1792832161.356161172]: Found parameter: kfselect_min_angle, value: 20[0m
+[0m[INFO] [1792832161.358125551]: Found parameter: kfselect_min_disparity, value: 40[0m
+[33m[WARN] [1792832161.358573443]: Cannot find value for parameter: kfselect_min_num_frames_between_kfs, assigning default: 2[0m
+[33m[WARN] [1792832161.359006462]: Cannot find value for parameter: kfselect_backend_max_time_sec, assigning default: 3[0m
+[0m[INFO] [1792832161.360127039]: Found parameter: img_align_max_level, value: 4[0m
+[0m[INFO] [1792832161.361088469]: Found parameter: img_align_min_level, value: 2[0m
+[33m[WARN] [1792832161.361482224]: Cannot find value for parameter: img_align_robustification, assigning default: 0[0m
+[33m[WARN] [1792832161.361851270]: Cannot find value for parameter: img_align_use_distortion_jacobian, assigning default: 0[0m
+[0m[INFO] [1792832161.363058859]: Found parameter: img_align_est_illumination_gain, value: 1[0m
+[0m[INFO] [1792832161.364159007]: Found parameter: img_align_est_illumination_offset, value: 1[0m
+[0m[INFO] [1792832161.365438260]: Found parameter: poseoptim_thresh, value: 2[0m
+[0m[INFO] [1792832161.366424915]: Found parameter: update_seeds_with_old_keyframes, value: 1[0m
+[0m[INFO] [1792832161.367309518]: Found parameter: use_async_reprojectors, value: 0[0m
+[33m[WARN] [1792832161.367733189]: Cannot find value for parameter: trace_statistics, assigning default: 0[0m
+[0m[INFO] [1792832161.368809899]: Found parameter: backend_scale_stable_thresh, value: 0.02[0m
+[33m[WARN] [1792832161.369270089]: Cannot find value for parameter: global_map_timeout_sec, assigning default: 2[0m
+[0m[INFO] [1792832161.369482560]: DepthFilter: created.[0m
+[0m[INFO] [1792832161.369590964]: DepthFilter: Start thread.[0m
+Parameter T_world_imuinit/tx was not set. Using default value: 0
+Parameter T_world_imuinit/ty was not set. Using default value: 0
+Parameter T_world_imuinit/tz was not set. Using default value: 0
+[0m[INFO] [1792832161.372077432]: Found parameter: T_world_imuinit/qw, value: 1[0m
+[0m[INFO] [1792832161.372994176]: Found parameter: T_world_imuinit/qx, value: 0[0m
+[0m[INFO] [1792832161.374100959]: Found parameter: T_world_imuinit/qy, value: 0[0m
+[0m[INFO] [1792832161.375057360]: Found parameter: T_world_imuinit/qz, value: 0[0m
+[0m[INFO] [1792832161.375985588]: Found parameter: T_world_imuinit/qz, value: 0[0m
+[0m[INFO] [1792832161.376926914]: Found parameter: T_world_imuinit/qy, value: 0[0m
+[0m[INFO] [1792832161.378093666]: Found parameter: T_world_imuinit/qx, value: 0[0m
+[0m[INFO] [1792832161.379065525]: Found parameter: T_world_imuinit/qw, value: 1[0m
+[33m[WARN] [1792832161.379473949]: Cannot find value for parameter: publish_img_pyr_level, assigning default: 0[0m
+[33m[WARN] [1792832161.379923933]: Cannot find value for parameter: publish_every_nth_img, assigning default: 1[0m
+[0m[INFO] [1792832161.381040725]: Found parameter: publish_every_nth_dense_input, value: 5[0m
+[33m[WARN] [1792832161.381481777]: Cannot find value for parameter: publish_image_caption_str, assigning default: 0[0m
+[33m[WARN] [1792832161.382509821]: Cannot find value for parameter: publish_world_in_cam_frame, assigning default: 1[0m
+[33m[WARN] [1792832161.382950481]: Cannot find value for parameter: publish_map_every_frame, assigning default: 0[0m
+[33m[WARN] [1792832161.384047006]: Cannot find value for parameter: publish_point_display_time, assigning default: 0[0m
+[33m[WARN] [1792832161.384522918]: Cannot find value for parameter: publish_seeds, assigning default: 1[0m
+[33m[WARN] [1792832161.384969906]: Cannot find value for parameter: publish_seeds_uncertainty, assigning default: 0[0m
+[0m[INFO] [1792832161.386139871]: Found parameter: publish_active_kfs, value: 1[0m
+[33m[WARN] [1792832161.386596447]: Cannot find value for parameter: trace_pointcloud, assigning default: 0[0m
+[0m[INFO] [1792832161.387770118]: Found parameter: publish_marker_scale, value: 0.5[0m
+[0m[INFO] [1792832161.453584708]: Found parameter: use_imu, value: 1[0m
+[0m[INFO] [1792832161.454841706]: Found parameter: calib_file, value: /home/alpha/Desktop/twinforge/catkin_ws/src/rpg_svo_pro_with_digital_twins/svo_ros/param/fyp/euroc/euroc_mono.yaml[0m
+Loaded IMU Calibration
+  delay_imu_cam = 0
+  sigma_omega_c = 0.0012
+  sigma_acc_c = 0.008
+  sigma_integration_c = 0
+  sigma_omega_bias_c = 0.03
+  sigma_acc_bias_c = 0.1
+  g = 9.8082
+  coriolis = 0 0 0
+Loaded IMU Initialization
+  velocity = 0 0 0
+  omega_bias = 0 0 0
+  acc_bias = 0 0 0
+  velocity_sigma = 2
+  omega_bias_sigma = 0.01
+  acc_bias_sigma = 0.1
+[33m[WARN] [1792832161.458304393]: Cannot find value for parameter: imu_temporal_stationary_check, assigning default: 0[0m
+[33m[WARN] [1792832161.458741727]: Cannot find value for parameter: imu_temporal_window_length_sec, assigning default: 0.5[0m
+[33m[WARN] [1792832161.459207287]: Cannot find value for parameter: stationary_acc_sigma_thresh, assigning default: 0[0m
+[33m[WARN] [1792832161.459652028]: Cannot find value for parameter: stationary_gyr_sigma_thresh, assigning default: 0[0m
+[0m[INFO] [1792832161.460851515]: Found parameter: gp_settings_file, value: /home/alpha/Desktop/twinforge/catkin_ws/src/rpg_svo_pro_with_digital_twins/svo_ros/param/fyp/euroc/gp_settings.yaml[0m
+Loaded Global Positions Settings
+cov = 900   0   0
+  0 900   0
+  0   0 900
+B_t_PB = 0
+0
+0
+max_num_residuals = 1
+initial_orientation_known = 0
+[0m[INFO] [1792832161.462709705]: Found parameter: use_global_measurements, value: 0[0m
+[33m[WARN] [1792832161.463159098]: Cannot find value for parameter: estimate_world_vio_transform, assigning default: 1[0m
+[0m[INFO] [1792832161.464267405]: Found parameter: map_reg_settings_file, value: /home/alpha/Desktop/twinforge/catkin_ws/src/rpg_svo_pro_with_digital_twins/svo_ros/param/fyp/euroc/gpose_settings.yaml[0m
+Loaded Global Pose (map alignement) Settings
+cov = 1 0 0 0 0 0
+0 1 0 0 0 0
+0 0 1 0 0 0
+0 0 0 1 0 0
+0 0 0 0 1 0
+0 0 0 0 0 1
+B_t_PB = 0
+0
+0
+max_num_residuals = 1
+initial_orientation_known = 0
+[0m[INFO] [1792832161.466184118]: Found parameter: use_map_registration, value: 0[0m
+[0m[INFO] [1792832161.467417299]: Found parameter: use_ceres_backend, value: 1[0m
+[0m[INFO] [1792832161.469019811]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792832161.470394914]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792832161.474405703]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792832161.474906309]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792832161.477420978]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792832161.478911867]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792832161.480249312]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792832161.480729454]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792832161.481200141]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792832161.481621407]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792832161.483209221]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792832161.483571809]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792832161.484184549]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792832161.485262491]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792832161.486626310]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792832161.487764304]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792832161.488886880]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792832161.490102088]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792832161.490505753]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792832161.490903096]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792832161.491292418]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792832161.491678000]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792832161.492053971]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792832161.493144765]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792832161.494290484]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792832161.495529829]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792832161.496728742]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792832161.497894590]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792832161.498411396]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792832161.502614810]: Found parameter: runlc, value: 0[0m
+[33m[WARN] [1792832161.502982110]: Cannot find value for parameter: use_global_map, assigning default: 0[0m
+[0m[INFO] [1792832161.504673489]: Found parameter: log_frame_events, value: 1[0m
+[0m[INFO] [1792832161.505763126]: Found parameter: frame_event_log_file, value: /home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-24_V1_02_medium_M1_survey_r01/frame_events.csv[0m
+[0m[INFO] [1792832161.506344008]: Logging frame events to /home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-24_V1_02_medium_M1_survey_r01/frame_events.csv[0m
+[33m[WARN] [1792832161.506761469]: Cannot find value for parameter: log_registration_events, assigning default: 0[0m
+[33m[WARN] [1792832161.507156118]: Cannot find value for parameter: d1_alignment, assigning default: 0[0m
+[0m[INFO] [1792832161.507311682]: SvoNode: Started IMU loop.[0m
+[0m[INFO] [1792832161.508490439]: Found parameter: imu_topic, value: /imu0[0m
+[0m[INFO] [1792832164.510253464]: SvoNode: Started Image loop.[0m
+[33m[WARN] [1792832164.510778667]: Cannot find value for parameter: remote_key_topic, assigning default: svo/remote_key[0m
+[0m[INFO] [1792832164.513811405]: Found parameter: cam0_topic, value: /cam0/image_raw[0m
+[0m[INFO] [1792832175.296922095]: DepthFilter: RESET.[0m
+[0m[INFO] [1792832180.621920703]: Init: Triangulated 81 points[0m
+[33m[WARN] [1792832226.459871627]: Lost 85 features![0m
+[33m[WARN] [1792832226.537683595]: Lost 49 features![0m
+FYP frame event log: 1710 rows, mean 5.88582 us, max 177.793 us per frame
+... logging to /home/alpha/.ros/log/bc083664-cf88-11f1-b723-bd52899a295f/roslaunch-alpha-276980.log
+Checking log directory for disk usage. This may take a while.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/svo_ros/launch/fyp/euroc_m1.launch
+[1mstarted roslaunch server http://alpha:38651/[0m
+
+SUMMARY
+========
+
+CLEAR PARAMETERS
+ * /svo/
+
+PARAMETERS
+ * /rosdistro: noetic
+ * /rosversion: 1.17.4
+ * /svo/T_world_imuinit/qw: 1
+ * /svo/T_world_imuinit/qx: 0
+ * /svo/T_world_imuinit/qy: 0
+ * /svo/T_world_imuinit/qz: 0
+ * /svo/automatic_reinitialization: True
+ * /svo/backend_only_use_corners: False
+ * /svo/backend_scale_stable_thresh: 0.02
+ * /svo/backend_use_zero_motion_detection: True
+ * /svo/backend_zero_motion_check_n_frames: 5
+ * /svo/calib_file: /home/alpha/Deskt...
+ * /svo/cam0_topic: /cam0/image_raw
+ * /svo/ceres_marginalize: True
+ * /svo/ceres_max_iteration_time: 0.04
+ * /svo/ceres_num_imu_frames: 3
+ * /svo/ceres_num_iterations: 3
+ * /svo/ceres_verbose: False
+ * /svo/depth_filter_affine_est_gain: False
+ * /svo/depth_filter_affine_est_offset: True
+ * /svo/detector_threshold_primary: 10
+ * /svo/detector_threshold_secondary: 200
+ * /svo/detector_threshold_shitomasi: 50
+ * /svo/frame_event_log_file: /home/alpha/Deskt...
+ * /svo/gp_settings_file: /home/alpha/Deskt...
+ * /svo/grid_size: 25
+ * /svo/img_align_est_illumination_gain: True
+ * /svo/img_align_est_illumination_offset: True
+ * /svo/img_align_max_level: 4
+ * /svo/img_align_min_level: 2
+ * /svo/img_align_prior_lambda_rot: 0.5
+ * /svo/img_align_prior_lambda_trans: 0.0
+ * /svo/imu_topic: /imu0
+ * /svo/init_min_disparity: 30
+ * /svo/init_min_features: 60
+ * /svo/kfselect_criterion: FORWARD
+ * /svo/kfselect_min_angle: 20
+ * /svo/kfselect_min_disparity: 40
+ * /svo/kfselect_min_dist_metric: 0.1
+ * /svo/kfselect_numkfs_lower_thresh: 100
+ * /svo/kfselect_numkfs_upper_thresh: 140
+ * /svo/log_frame_events: True
+ * /svo/map_reg_settings_file: /home/alpha/Deskt...
+ * /svo/map_scale: 1.5
+ * /svo/mappoint_convergence_sigma2_thresh: 500
+ * /svo/max_depth_inv: 0.05
+ * /svo/max_fts: 180
+ * /svo/max_map_fts: 300
+ * /svo/max_n_kfs: 10
+ * /svo/max_unconverged_seeds_ratio: 0.2
+ * /svo/mean_depth_inv: 0.3
+ * /svo/min_depth_inv: 1.0
+ * /svo/n_pyr_levels: 3
+ * /svo/outlier_rejection_px_threshold: 2.0
+ * /svo/pipeline_is_stereo: False
+ * /svo/poseoptim_prior_lambda: 0.0
+ * /svo/poseoptim_thresh: 2.0
+ * /svo/poseoptim_using_unit_sphere: False
+ * /svo/publish_active_kfs: True
+ * /svo/publish_every_nth_dense_input: 5
+ * /svo/publish_marker_scale: 0.5
+ * /svo/publish_marker_scale_backend: 0.5
+ * /svo/quality_min_fts: 40
+ * /svo/ransac3d_inlier_percent: 35
+ * /svo/relocalization_max_trials: 5
+ * /svo/reproject_unconverged_seeds: True
+ * /svo/reprojector_affine_est_gain: False
+ * /svo/reprojector_affine_est_offset: True
+ * /svo/reprojector_max_n_kfs: 5
+ * /svo/runlc: False
+ * /svo/scan_epi_unit_sphere: False
+ * /svo/seed_convergence_sigma2_thresh: 200
+ * /svo/update_seeds_with_old_keyframes: True
+ * /svo/use_async_reprojectors: False
+ * /svo/use_ceres_backend: True
+ * /svo/use_global_measurements: False
+ * /svo/use_imu: True
+ * /svo/use_map_registration: False
+ * /svo/use_outlier_rejection: True
+ * /svo/zero_motion_max_features_to_check: 15
+ * /svo/zero_motion_min_number_correspondences: 5
+ * /svo/zero_motion_px_diff_threshold: 0.2
+ * /svo/zero_motion_ratio_moving_pixels_threshold: 0.1
+ * /svo/zero_motion_sigma: 0.1
+
+NODES
+  /
+    svo (svo_ros/svo_node)
+
+auto-starting new master
+[1mprocess[master]: started with pid [277015][0m
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/svo_ros/launch/fyp/euroc_m1.launch http://localhost:11311
+[1msetting /run_id to bc083664-cf88-11f1-b723-bd52899a295f[0m
+[1mprocess[rosout-1]: started with pid [277043][0m
+started core service [/rosout]
+[1mprocess[svo-2]: started with pid [277051][0m
+[svo-2] killing on exit
+[rosout-1] killing on exit
+[master] killing on exit
+shutting down processing monitor...
+... shutting down processing monitor complete
+[1mdone[0m

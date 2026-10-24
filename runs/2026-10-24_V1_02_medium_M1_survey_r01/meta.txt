@@ -1,0 +1,16 @@
+run_id: 2026-10-24_V1_02_medium_M1_survey_r01
+sequence: V1_02_medium
+date: 2026-10-24T14:25:59+05:30
+git_commit: 7e02802753d8e16d02e4c82c5f3c895ff935d2e0
+git_dirty: 0 tracked files modified
+launch: svo_ros/launch/fyp/euroc_m1.launch log_frame_events:=true
+input_bag: /home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/dataset/vicon_room1/V1_02_medium/V1_02_medium.bag (rosbag play, rate 1, no --clock)
+svo_node binary: /home/alpha/Desktop/twinforge/catkin_ws/devel/.private/svo_ros/lib/svo_ros/svo_node 2026-10-23 20:20:24.063852306 +0530
+libsvo_ros: 2026-10-23 20:20:17.727757873 +0530 md5 c49078a025f0
+loadavg_before: 0.20 0.38 0.29 1/1485 276975
+nproc: 12
+nodes ready after ~2s, svo_node pid 277051
+play_wall_seconds: 96.801764327
+loadavg_after: 0.74 0.57 0.37 1/1480 277867
+ros_run_id: bc083664-cf88-11f1-b723-bd52899a295f
+done

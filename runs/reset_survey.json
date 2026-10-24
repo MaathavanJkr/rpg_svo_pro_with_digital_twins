@@ -1,0 +1,129 @@
+[
+  {
+    "run": "2026-10-24_V1_02_medium_M1_survey_r01",
+    "duration_s": 85.45,
+    "first_tracking_s": 5.3500000000000005,
+    "tracking_lost": 1,
+    "relocalised": 1,
+    "n_resets": 0,
+    "reset_times_s": [],
+    "all_resets_early": true,
+    "final_reinit_tracking_s": null,
+    "classification": "(i) include"
+  },
+  {
+    "run": "2026-10-23_V1_03_difficult_M1_r01",
+    "duration_s": 107.30000000000001,
+    "first_tracking_s": 6.9,
+    "tracking_lost": 12,
+    "relocalised": 10,
+    "n_resets": 2,
+    "reset_times_s": [
+      12.3,
+      101.7
+    ],
+    "all_resets_early": false,
+    "final_reinit_tracking_s": null,
+    "classification": "(iii) exclude (mid-flight reset)"
+  },
+  {
+    "run": "2026-10-23_V1_03_difficult_M1_r02",
+    "duration_s": 107.30000000000001,
+    "first_tracking_s": 6.9,
+    "tracking_lost": 15,
+    "relocalised": 13,
+    "n_resets": 2,
+    "reset_times_s": [
+      12.3,
+      101.7
+    ],
+    "all_resets_early": false,
+    "final_reinit_tracking_s": null,
+    "classification": "(iii) exclude (mid-flight reset)"
+  },
+  {
+    "run": "2026-10-23_V1_03_difficult_M1_r03",
+    "duration_s": 107.4,
+    "first_tracking_s": 7.0,
+    "tracking_lost": 12,
+    "relocalised": 8,
+    "n_resets": 4,
+    "reset_times_s": [
+      7.3,
+      12.4,
+      32.2,
+      101.8
+    ],
+    "all_resets_early": false,
+    "final_reinit_tracking_s": null,
+    "classification": "(iii) exclude (mid-flight reset)"
+  },
+  {
+    "run": "2026-10-23_V1_03_difficult_M1_r04",
+    "duration_s": 107.4,
+    "first_tracking_s": 7.0,
+    "tracking_lost": 21,
+    "relocalised": 19,
+    "n_resets": 2,
+    "reset_times_s": [
+      7.3,
+      12.4
+    ],
+    "all_resets_early": true,
+    "final_reinit_tracking_s": 12.600000000000001,
+    "classification": "(ii) include, start shifted to 12.6 s"
+  },
+  {
+    "run": "2026-10-23_V1_03_difficult_M1_r05",
+    "duration_s": 107.4,
+    "first_tracking_s": 7.0,
+    "tracking_lost": 12,
+    "relocalised": 10,
+    "n_resets": 2,
+    "reset_times_s": [
+      12.4,
+      101.8
+    ],
+    "all_resets_early": false,
+    "final_reinit_tracking_s": null,
+    "classification": "(iii) exclude (mid-flight reset)"
+  },
+  {
+    "run": "2026-10-24_V2_01_easy_M1_survey_r01",
+    "duration_s": 113.9,
+    "first_tracking_s": 6.6000000000000005,
+    "tracking_lost": 3,
+    "relocalised": 2,
+    "n_resets": 1,
+    "reset_times_s": [
+      6.9
+    ],
+    "all_resets_early": true,
+    "final_reinit_tracking_s": 7.550000000000001,
+    "classification": "(ii) include, start shifted to 7.6 s"
+  },
+  {
+    "run": "2026-10-24_V2_02_medium_M1_survey_r01",
+    "duration_s": 117.30000000000001,
+    "first_tracking_s": 3.7,
+    "tracking_lost": 3,
+    "relocalised": 3,
+    "n_resets": 0,
+    "reset_times_s": [],
+    "all_resets_early": true,
+    "final_reinit_tracking_s": null,
+    "classification": "(i) include"
+  },
+  {
+    "run": "2026-10-24_V2_03_difficult_M1_survey_r01",
+    "duration_s": 116.65,
+    "first_tracking_s": 7.0,
+    "tracking_lost": 7,
+    "relocalised": 7,
+    "n_resets": 0,
+    "reset_times_s": [],
+    "all_resets_early": true,
+    "final_reinit_tracking_s": null,
+    "classification": "(i) include"
+  }
+]
