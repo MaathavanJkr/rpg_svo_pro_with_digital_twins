@@ -148,19 +148,44 @@ Run-level (n = 5, paired t-test vs P2P d = 0.5):
 | yaw-only 20° | 0.63 ± 0.10 | 0.71 ± 0.09 (p = 0.075) | 0.86 ± 0.06 (p = 0.001) | 0.90 ± 0.05 (p = 0.001) |
 | translation 0.1 m (floor) | 0.84 ± 0.10 | 0.84 ± 0.10 | 0.90 ± 0.06 (p = 0.026) | 0.95 ± 0.04 (p = 0.041) |
 
+**Floor-corrected view (added 2026-10-24).** Part of DF's unconditional advantage is a **higher floor** (success at the smallest perturbation: P2P 0.84–0.87, DF 0.90–0.95), i.e. more KFs whose solution is stable at all, not a larger basin. Therefore: **conditional success** = success at a level among the KFs that succeed at the smallest perturbation of that axis (0.1 m; 2°; 0.1 m/2°; yaw 2°), and **drop from floor** = floor − unconditional success at that level.
+
+Conditional success (pooled; floor set per method) | drop from floor:
+| level | P2P 0.5 | P2P 1.0 | P2P 2.0 | DF v=0.05 | DF v=0.10 | DF v=0.20 | DF μ=5v |
+|---|---|---|---|---|---|---|---|
+| translation 0.5 m | 0.98 \| +0.01 | 0.99 \| +0.01 | 0.99 \| +0.01 | 0.99 \| +0.01 | 0.99 \| +0.01 | 1.00 \| +0.00 | 0.95 \| +0.05 |
+| translation 1.0 m | 0.79 \| +0.19 | 0.94 \| +0.05 | 0.95 \| +0.04 | 0.94 \| +0.06 | 0.94 \| +0.06 | 0.96 \| +0.04 | 0.52 \| +0.47 |
+| rotation 20° | 0.94 \| +0.05 | 0.96 \| +0.03 | 0.95 \| +0.04 | 0.99 \| +0.01 | 0.99 \| +0.00 | 0.99 \| +0.00 | 0.94 \| +0.06 |
+| combined 0.5 m / 10° | 0.91 \| +0.08 | 0.94 \| +0.05 | 0.94 \| +0.05 | 0.98 \| +0.02 | 0.98 \| +0.01 | 0.98 \| +0.02 | 0.90 \| +0.10 |
+| combined 1.0 m / 20° | 0.72 \| +0.25 | 0.78 \| +0.18 | 0.79 \| +0.18 | 0.80 \| +0.19 | 0.80 \| +0.19 | 0.83 \| +0.16 | 0.53 \| +0.46 |
+| yaw-only 10° | 0.93 \| +0.07 | 0.93 \| +0.07 | 0.93 \| +0.07 | 0.99 \| +0.01 | 1.00 \| −0.01 | 0.99 \| +0.01 | 0.98 \| +0.02 |
+| yaw-only 20° | 0.73 \| +0.26 | 0.83 \| +0.17 | 0.83 \| +0.17 | 0.96 \| +0.04 | 0.97 \| +0.01 | 0.97 \| +0.03 | 0.67 \| +0.32 |
+(All levels in `runs/phase7/study/report.json`, key `basin_conditional`.)
+
+Run-level conditional success at the largest levels (n = 5, paired t-test):
+| level | DF v=0.05 | P2P 0.5 | P2P 2.0 | p (DF vs P2P 0.5) | p (DF vs P2P 2.0) |
+|---|---|---|---|---|---|
+| translation 1.0 m | 0.94 ± 0.04 | 0.79 ± 0.09 | 0.95 ± 0.01 | 0.008 | 0.78 |
+| combined 1.0 m / 20° | 0.80 ± 0.03 | 0.72 ± 0.08 | 0.79 ± 0.07 | 0.11 | 0.76 |
+| rotation 20° | 0.99 ± 0.02 | 0.94 ± 0.05 | 0.95 ± 0.03 | 0.13 | 0.083 |
+| yaw-only 20° | **0.96 ± 0.02** | 0.73 ± 0.04 | 0.83 ± 0.04 | **0.0003** | **0.006** |
+(DF v = 0.10 vs P2P 2.0: translation 1.0 m p = 0.76, combined p = 0.76, rotation p = 0.16, yaw 20° p = 0.007.)
+
 **Reading (offline, open-loop):**
-- **There is a success floor even at the smallest perturbation** (P2P 0.84, DF 0.90–0.95): in 5–16 % of KFs the solution moves by > 5 cm or > 1° for a 0.1 m / 2° change of the start. This measures how well-determined each KF's registration is (weak geometry / few landmarks), not the basin. DF has the higher floor.
-- **Larger correspondence distance helps P2P only at large perturbations** (1.0 m: 0.68 → 0.80–0.81 with d = 1.0 / 2.0 m); at small ones all three are equal. So the basin comparison is not decided by P2P's 0.5 m setting.
-- **Untruncated DF keeps a higher success rate than P2P at every d** for large translation, combined and especially yaw-only perturbations (yaw 20°: 0.86–0.90 vs 0.63–0.71). **H1 status (offline): supported** on V1_01 inputs; the advantage over the best P2P setting is ~0.05–0.19 at the largest perturbations.
-- **Truncation limits the basin:** μ = 5v (0.25 m) collapses at 1.0 m (0.48) and 20° yaw (0.63), as expected (no gradient beyond μ).
-- v = 0.10 m has the largest basin of the grids tested, slightly ahead of 0.05 m (smoother field), but with more position jitter (table above).
+- **There is a success floor even at the smallest perturbation** (P2P 0.84–0.87, DF 0.90–0.95): in 5–16 % of KFs the solution moves by > 5 cm or > 1° for a 0.1 m / 2° change of the start. This measures how well-determined each KF's registration is (weak geometry / few landmarks), not the basin. **DF has the higher floor, i.e. is more stable overall.**
+- **Relative to the floor, translation and combined basins are comparable** once P2P uses a correspondence distance ≥ 1.0 m (translation 1.0 m: 0.94 vs 0.95, p = 0.78; combined 1.0 m / 20°: 0.80 vs 0.79, p = 0.76). DF beats P2P only against the EuRoC 0.5 m setting (translation 1.0 m: p = 0.008). So the unconditional translation/combined advantage was mostly the floor plus P2P's configuration.
+- **Random-axis rotation:** DF slightly more stable (0.99 vs 0.94–0.95 at 20°), not significant at n = 5 (p = 0.08–0.16).
+- **Yaw:** DF has a **clearly larger basin**: conditional success at 20° yaw 0.96–0.97 vs 0.73 (P2P 0.5) and 0.83 (P2P 1.0/2.0), p ≤ 0.007 against every P2P setting.
+- **Truncation limits the basin:** μ = 5v (0.25 m) collapses at 1.0 m (conditional 0.52) and 20° yaw (0.67), as expected (no gradient beyond μ).
 
 ## Overall Phase 7 reading (offline, open-loop, V1_01 inputs from M2 runs)
 | Hypothesis | Offline evidence | Status |
 |---|---|---|
-| H1 convergence basin | DF (untruncated) succeeds more often than P2P at d = 0.5 / 1.0 / 2.0 for large perturbations; truncation shrinks the basin | supported offline |
+| H1 convergence basin | Floor-corrected: **larger basin for yaw** (20°: 0.96–0.97 vs 0.73–0.83, p ≤ 0.007 vs every P2P setting); translation and combined **comparable** relative to the floor when P2P uses d ≥ 1.0 m; random-axis rotation slightly better, not significant. DF is **more stable overall** (floor 0.90–0.95 vs 0.84–0.87). Truncation shrinks the basin. | **supported for yaw**; comparable for translation/combined; DF more stable overall (offline) |
 | H2 speed | iterations 26–37 (DF) vs 9 (P2P); per iteration O(1) lookups vs NN search; Python vs C++ times not comparable | open (Phase 8, C++) |
 | H3 accuracy | −5 to −6 mm median per-KF position error (v ≤ 0.10, CIs exclude 0), ~20 % less KF-to-KF yaw jitter; p90 tail unchanged | supported offline per KF; online effect open (Phase 9) |
+
+**Note on the jitter result:** the per-KF yaw-jitter reduction (0.604 → 0.485°, ≈ 20 %) is **modest relative to the ~0.9° per-KF ICP noise** that cost M2 its local consistency online (docs/phase6_logging.md). Whether it is enough to change the online picture is open. **The D4 weighting ablation may matter as much as the solver**: with M2's heuristic weighting, both methods enter the backend with almost identical information (see Information outputs), so the remaining noise is weighted the same way.
 | H4 memory | 0.39 / 3.0 / 23.4 MB for v = 0.20 / 0.10 / 0.05 m (room scale), scaling ≈ (1/v)³ (×7.6–7.9 per halving) | consistent (room scale is small) |
 
 **Candidate for Phase 8 (for decision):** DF **v = 0.05 m, untruncated** (or μ = 10v, identical here), Huber 0.05 m, information in the M2 heuristic convention (D4 main) plus the Hessian variant for the ablation. v = 0.10 m is a close alternative (larger basin, 8× less memory, more position jitter).

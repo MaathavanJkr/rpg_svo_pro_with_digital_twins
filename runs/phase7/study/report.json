@@ -4211,5 +4211,2421 @@
         "paired_p_vs_p2p_d0_5": 0.023292590218955595
       }
     }
+  },
+  "basin_conditional": {
+    "translation": {
+      "(0.1, 0.0)": {
+        "p2p_d0.5": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.9405940594059405,
+          "drop_from_floor": 0.0,
+          "n_floor": 95,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "p2p_d1.0": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.9405940594059405,
+          "drop_from_floor": 0.0,
+          "n_floor": 95,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "p2p_d2.0": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.9405940594059405,
+          "drop_from_floor": 0.0,
+          "n_floor": 95,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v50_untrunc": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": 0.0,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v100_untrunc": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.9702970297029703,
+          "drop_from_floor": 0.0,
+          "n_floor": 98,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v200_untrunc": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": 0.0,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v50_mu5v": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.9702970297029703,
+          "drop_from_floor": 0.0,
+          "n_floor": 98,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "(0.2, 0.0)": {
+        "p2p_d0.5": {
+          "conditional": 0.9789473684210527,
+          "conditional_run_mean": 0.9783625730994151,
+          "conditional_run_std": 0.029646296738331194,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.9306930693069307,
+          "drop_from_floor": 0.009900990099009799,
+          "n_floor": 95,
+          "run_values": [
+            1.0,
+            0.9473684210526315,
+            0.9444444444444444,
+            1.0,
+            1.0
+          ]
+        },
+        "p2p_d1.0": {
+          "conditional": 0.9789473684210527,
+          "conditional_run_mean": 0.9783625730994151,
+          "conditional_run_std": 0.029646296738331194,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.9306930693069307,
+          "drop_from_floor": 0.009900990099009799,
+          "n_floor": 95,
+          "run_values": [
+            1.0,
+            0.9473684210526315,
+            0.9444444444444444,
+            1.0,
+            1.0
+          ]
+        },
+        "p2p_d2.0": {
+          "conditional": 0.9789473684210527,
+          "conditional_run_mean": 0.9783625730994151,
+          "conditional_run_std": 0.029646296738331194,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.9306930693069307,
+          "drop_from_floor": 0.009900990099009799,
+          "n_floor": 95,
+          "run_values": [
+            1.0,
+            0.9473684210526315,
+            0.9444444444444444,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v50_untrunc": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": 0.0,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v100_untrunc": {
+          "conditional": 0.9897959183673469,
+          "conditional_run_mean": 0.9913043478260869,
+          "conditional_run_std": 0.019444069369563378,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": 0.00990099009900991,
+          "n_floor": 98,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            0.9565217391304348,
+            1.0
+          ]
+        },
+        "df_v200_untrunc": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": 0.0,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v50_mu5v": {
+          "conditional": 0.9897959183673469,
+          "conditional_run_mean": 0.9888888888888889,
+          "conditional_run_std": 0.024845199749997673,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": 0.00990099009900991,
+          "n_floor": 98,
+          "run_values": [
+            1.0,
+            1.0,
+            0.9444444444444444,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "(0.3, 0.0)": {
+        "p2p_d0.5": {
+          "conditional": 0.9894736842105263,
+          "conditional_run_mean": 0.9913043478260869,
+          "conditional_run_std": 0.019444069369563378,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.9405940594059405,
+          "drop_from_floor": 0.0,
+          "n_floor": 95,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            0.9565217391304348,
+            1.0
+          ]
+        },
+        "p2p_d1.0": {
+          "conditional": 0.968421052631579,
+          "conditional_run_mean": 0.969666920925502,
+          "conditional_run_std": 0.02804631701811652,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.9207920792079208,
+          "drop_from_floor": 0.01980198019801971,
+          "n_floor": 95,
+          "run_values": [
+            1.0,
+            0.9473684210526315,
+            0.9444444444444444,
+            0.9565217391304348,
+            1.0
+          ]
+        },
+        "p2p_d2.0": {
+          "conditional": 0.968421052631579,
+          "conditional_run_mean": 0.969666920925502,
+          "conditional_run_std": 0.02804631701811652,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.9207920792079208,
+          "drop_from_floor": 0.01980198019801971,
+          "n_floor": 95,
+          "run_values": [
+            1.0,
+            0.9473684210526315,
+            0.9444444444444444,
+            0.9565217391304348,
+            1.0
+          ]
+        },
+        "df_v50_untrunc": {
+          "conditional": 0.9896907216494846,
+          "conditional_run_mean": 0.9913043478260869,
+          "conditional_run_std": 0.019444069369563378,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9504950495049505,
+          "drop_from_floor": 0.00990099009900991,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            0.9565217391304348,
+            1.0
+          ]
+        },
+        "df_v100_untrunc": {
+          "conditional": 0.9795918367346939,
+          "conditional_run_mean": 0.981304347826087,
+          "conditional_run_std": 0.02570370652844775,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.9504950495049505,
+          "drop_from_floor": 0.01980198019801982,
+          "n_floor": 98,
+          "run_values": [
+            1.0,
+            0.95,
+            1.0,
+            0.9565217391304348,
+            1.0
+          ]
+        },
+        "df_v200_untrunc": {
+          "conditional": 0.979381443298969,
+          "conditional_run_mean": 0.981304347826087,
+          "conditional_run_std": 0.02570370652844775,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9405940594059405,
+          "drop_from_floor": 0.01980198019801982,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            0.95,
+            1.0,
+            0.9565217391304348,
+            1.0
+          ]
+        },
+        "df_v50_mu5v": {
+          "conditional": 0.9591836734693877,
+          "conditional_run_mean": 0.9614975845410628,
+          "conditional_run_std": 0.037867124412844115,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.9306930693069307,
+          "drop_from_floor": 0.03960396039603953,
+          "n_floor": 98,
+          "run_values": [
+            1.0,
+            0.95,
+            0.9444444444444444,
+            0.9130434782608695,
+            1.0
+          ]
+        }
+      },
+      "(0.5, 0.0)": {
+        "p2p_d0.5": {
+          "conditional": 0.9789473684210527,
+          "conditional_run_mean": 0.976388888888889,
+          "conditional_run_std": 0.03242393758313543,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.9306930693069307,
+          "drop_from_floor": 0.009900990099009799,
+          "n_floor": 95,
+          "run_values": [
+            0.9375,
+            1.0,
+            0.9444444444444444,
+            1.0,
+            1.0
+          ]
+        },
+        "p2p_d1.0": {
+          "conditional": 0.9894736842105263,
+          "conditional_run_mean": 0.9875,
+          "conditional_run_std": 0.02795084971874737,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.9306930693069307,
+          "drop_from_floor": 0.009900990099009799,
+          "n_floor": 95,
+          "run_values": [
+            0.9375,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "p2p_d2.0": {
+          "conditional": 0.9894736842105263,
+          "conditional_run_mean": 0.9875,
+          "conditional_run_std": 0.02795084971874737,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.9306930693069307,
+          "drop_from_floor": 0.009900990099009799,
+          "n_floor": 95,
+          "run_values": [
+            0.9375,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v50_untrunc": {
+          "conditional": 0.9896907216494846,
+          "conditional_run_mean": 0.9913043478260869,
+          "conditional_run_std": 0.019444069369563378,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9504950495049505,
+          "drop_from_floor": 0.00990099009900991,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            0.9565217391304348,
+            1.0
+          ]
+        },
+        "df_v100_untrunc": {
+          "conditional": 0.9897959183673469,
+          "conditional_run_mean": 0.9913043478260869,
+          "conditional_run_std": 0.019444069369563378,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": 0.00990099009900991,
+          "n_floor": 98,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            0.9565217391304348,
+            1.0
+          ]
+        },
+        "df_v200_untrunc": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": 0.0,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v50_mu5v": {
+          "conditional": 0.9489795918367347,
+          "conditional_run_mean": 0.9503864734299515,
+          "conditional_run_std": 0.050248396968781764,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.9207920792079208,
+          "drop_from_floor": 0.04950495049504944,
+          "n_floor": 98,
+          "run_values": [
+            1.0,
+            0.95,
+            0.8888888888888888,
+            0.9130434782608695,
+            1.0
+          ]
+        }
+      },
+      "(0.75, 0.0)": {
+        "p2p_d0.5": {
+          "conditional": 0.8947368421052632,
+          "conditional_run_mean": 0.8934242308670226,
+          "conditional_run_std": 0.06471471509444487,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.8514851485148515,
+          "drop_from_floor": 0.08910891089108908,
+          "n_floor": 95,
+          "run_values": [
+            0.9375,
+            0.8947368421052632,
+            0.8888888888888888,
+            0.9565217391304348,
+            0.7894736842105263
+          ]
+        },
+        "p2p_d1.0": {
+          "conditional": 0.9473684210526315,
+          "conditional_run_mean": 0.9466406051360284,
+          "conditional_run_std": 0.037839252866747164,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.9108910891089109,
+          "drop_from_floor": 0.02970297029702962,
+          "n_floor": 95,
+          "run_values": [
+            0.9375,
+            1.0,
+            0.9444444444444444,
+            0.9565217391304348,
+            0.8947368421052632
+          ]
+        },
+        "p2p_d2.0": {
+          "conditional": 0.9473684210526315,
+          "conditional_run_mean": 0.9466406051360284,
+          "conditional_run_std": 0.037839252866747164,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.9108910891089109,
+          "drop_from_floor": 0.02970297029702962,
+          "n_floor": 95,
+          "run_values": [
+            0.9375,
+            1.0,
+            0.9444444444444444,
+            0.9565217391304348,
+            0.8947368421052632
+          ]
+        },
+        "df_v50_untrunc": {
+          "conditional": 0.9587628865979382,
+          "conditional_run_mean": 0.959756728778468,
+          "conditional_run_std": 0.04113787658525139,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9207920792079208,
+          "drop_from_floor": 0.03960396039603953,
+          "n_floor": 97,
+          "run_values": [
+            0.9375,
+            1.0,
+            1.0,
+            0.9565217391304348,
+            0.9047619047619048
+          ]
+        },
+        "df_v100_untrunc": {
+          "conditional": 0.9591836734693877,
+          "conditional_run_mean": 0.9627329192546583,
+          "conditional_run_std": 0.0619563271529814,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.9306930693069307,
+          "drop_from_floor": 0.03960396039603953,
+          "n_floor": 98,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            0.9565217391304348,
+            0.8571428571428571
+          ]
+        },
+        "df_v200_untrunc": {
+          "conditional": 0.9484536082474226,
+          "conditional_run_mean": 0.9509682133723054,
+          "conditional_run_std": 0.05860492629994089,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9108910891089109,
+          "drop_from_floor": 0.04950495049504944,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            0.9411764705882353,
+            0.9565217391304348,
+            0.8571428571428571
+          ]
+        },
+        "df_v50_mu5v": {
+          "conditional": 0.8979591836734694,
+          "conditional_run_mean": 0.8968995859213249,
+          "conditional_run_std": 0.052043427287590045,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.8712871287128713,
+          "drop_from_floor": 0.09900990099009899,
+          "n_floor": 98,
+          "run_values": [
+            0.9375,
+            0.9,
+            0.8333333333333334,
+            0.9565217391304348,
+            0.8571428571428571
+          ]
+        }
+      },
+      "(1.0, 0.0)": {
+        "p2p_d0.5": {
+          "conditional": 0.7894736842105263,
+          "conditional_run_mean": 0.7910278413424866,
+          "conditional_run_std": 0.08942113289140215,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.7524752475247525,
+          "drop_from_floor": 0.18811881188118806,
+          "n_floor": 95,
+          "run_values": [
+            0.8125,
+            0.8947368421052632,
+            0.6666666666666666,
+            0.7391304347826086,
+            0.8421052631578947
+          ]
+        },
+        "p2p_d1.0": {
+          "conditional": 0.9368421052631579,
+          "conditional_run_mean": 0.9355294940249174,
+          "conditional_run_std": 0.02692686243399874,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.8910891089108911,
+          "drop_from_floor": 0.04950495049504944,
+          "n_floor": 95,
+          "run_values": [
+            0.9375,
+            0.9473684210526315,
+            0.8888888888888888,
+            0.9565217391304348,
+            0.9473684210526315
+          ]
+        },
+        "p2p_d2.0": {
+          "conditional": 0.9473684210526315,
+          "conditional_run_mean": 0.9466406051360284,
+          "conditional_run_std": 0.006838677230802444,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.900990099009901,
+          "drop_from_floor": 0.03960396039603953,
+          "n_floor": 95,
+          "run_values": [
+            0.9375,
+            0.9473684210526315,
+            0.9444444444444444,
+            0.9565217391304348,
+            0.9473684210526315
+          ]
+        },
+        "df_v50_untrunc": {
+          "conditional": 0.9381443298969072,
+          "conditional_run_mean": 0.9403363481166684,
+          "conditional_run_std": 0.04226705485267132,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.900990099009901,
+          "drop_from_floor": 0.05940594059405935,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            0.9473684210526315,
+            0.8888888888888888,
+            0.9130434782608695,
+            0.9523809523809523
+          ]
+        },
+        "df_v100_untrunc": {
+          "conditional": 0.9387755102040817,
+          "conditional_run_mean": 0.9395583160800551,
+          "conditional_run_std": 0.04538068449610531,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.9108910891089109,
+          "drop_from_floor": 0.05940594059405935,
+          "n_floor": 98,
+          "run_values": [
+            1.0,
+            0.9,
+            0.8888888888888888,
+            0.9565217391304348,
+            0.9523809523809523
+          ]
+        },
+        "df_v200_untrunc": {
+          "conditional": 0.9587628865979382,
+          "conditional_run_mean": 0.9569467787114846,
+          "conditional_run_std": 0.04832314359958057,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9207920792079208,
+          "drop_from_floor": 0.03960396039603953,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            0.95,
+            0.8823529411764706,
+            1.0,
+            0.9523809523809523
+          ]
+        },
+        "df_v50_mu5v": {
+          "conditional": 0.5204081632653061,
+          "conditional_run_mean": 0.5204140786749483,
+          "conditional_run_std": 0.04731757119549218,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.504950495049505,
+          "drop_from_floor": 0.4653465346534653,
+          "n_floor": 98,
+          "run_values": [
+            0.5,
+            0.6,
+            0.5,
+            0.4782608695652174,
+            0.5238095238095238
+          ]
+        },
+        "paired_p_df_v50_untrunc_vs_p2p_d0.5": 0.0078017644080464335,
+        "paired_p_df_v50_untrunc_vs_p2p_d2.0": 0.777630662282457,
+        "paired_p_df_v100_untrunc_vs_p2p_d2.0": 0.7553924330867458
+      }
+    },
+    "rotation": {
+      "(0.0, 2.0)": {
+        "p2p_d0.5": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.9504950495049505,
+          "drop_from_floor": 0.0,
+          "n_floor": 96,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "p2p_d1.0": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.9504950495049505,
+          "drop_from_floor": 0.0,
+          "n_floor": 96,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "p2p_d2.0": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.9504950495049505,
+          "drop_from_floor": 0.0,
+          "n_floor": 96,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v50_untrunc": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": 0.0,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v100_untrunc": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": 0.0,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v200_untrunc": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.9504950495049505,
+          "drop_from_floor": 0.0,
+          "n_floor": 96,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v50_mu5v": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.9702970297029703,
+          "drop_from_floor": 0.0,
+          "n_floor": 98,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "(0.0, 5.0)": {
+        "p2p_d0.5": {
+          "conditional": 0.9583333333333334,
+          "conditional_run_mean": 0.9580952380952381,
+          "conditional_run_std": 0.06338880492302378,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.9108910891089109,
+          "drop_from_floor": 0.03960396039603953,
+          "n_floor": 96,
+          "run_values": [
+            0.9333333333333333,
+            1.0,
+            1.0,
+            1.0,
+            0.8571428571428571
+          ]
+        },
+        "p2p_d1.0": {
+          "conditional": 0.9583333333333334,
+          "conditional_run_mean": 0.9565079365079365,
+          "conditional_run_std": 0.042259203282015836,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.9108910891089109,
+          "drop_from_floor": 0.03960396039603953,
+          "n_floor": 96,
+          "run_values": [
+            0.9333333333333333,
+            1.0,
+            0.9444444444444444,
+            1.0,
+            0.9047619047619048
+          ]
+        },
+        "p2p_d2.0": {
+          "conditional": 0.9583333333333334,
+          "conditional_run_mean": 0.9565079365079365,
+          "conditional_run_std": 0.042259203282015836,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.9108910891089109,
+          "drop_from_floor": 0.03960396039603953,
+          "n_floor": 96,
+          "run_values": [
+            0.9333333333333333,
+            1.0,
+            0.9444444444444444,
+            1.0,
+            0.9047619047619048
+          ]
+        },
+        "df_v50_untrunc": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": 0.0,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v100_untrunc": {
+          "conditional": 0.9896907216494846,
+          "conditional_run_mean": 0.99,
+          "conditional_run_std": 0.022360679774997918,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9504950495049505,
+          "drop_from_floor": 0.00990099009900991,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            0.95,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v200_untrunc": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": -0.00990099009900991,
+          "n_floor": 96,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v50_mu5v": {
+          "conditional": 0.9897959183673469,
+          "conditional_run_mean": 0.99,
+          "conditional_run_std": 0.022360679774997918,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": 0.00990099009900991,
+          "n_floor": 98,
+          "run_values": [
+            1.0,
+            0.95,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "(0.0, 10.0)": {
+        "p2p_d0.5": {
+          "conditional": 0.9479166666666666,
+          "conditional_run_mean": 0.9459816207184628,
+          "conditional_run_std": 0.03457352883198508,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.9207920792079208,
+          "drop_from_floor": 0.02970297029702962,
+          "n_floor": 96,
+          "run_values": [
+            0.9333333333333333,
+            0.9473684210526315,
+            0.9444444444444444,
+            1.0,
+            0.9047619047619048
+          ]
+        },
+        "p2p_d1.0": {
+          "conditional": 0.96875,
+          "conditional_run_mean": 0.9682539682539681,
+          "conditional_run_std": 0.048923920658483964,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.9405940594059405,
+          "drop_from_floor": 0.00990099009900991,
+          "n_floor": 96,
+          "run_values": [
+            1.0,
+            1.0,
+            0.8888888888888888,
+            1.0,
+            0.9523809523809523
+          ]
+        },
+        "p2p_d2.0": {
+          "conditional": 0.96875,
+          "conditional_run_mean": 0.9682539682539681,
+          "conditional_run_std": 0.048923920658483964,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.9405940594059405,
+          "drop_from_floor": 0.00990099009900991,
+          "n_floor": 96,
+          "run_values": [
+            1.0,
+            1.0,
+            0.8888888888888888,
+            1.0,
+            0.9523809523809523
+          ]
+        },
+        "df_v50_untrunc": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": 0.0,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v100_untrunc": {
+          "conditional": 0.9896907216494846,
+          "conditional_run_mean": 0.99,
+          "conditional_run_std": 0.022360679774997918,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9504950495049505,
+          "drop_from_floor": 0.00990099009900991,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            0.95,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v200_untrunc": {
+          "conditional": 0.9895833333333334,
+          "conditional_run_mean": 0.9894736842105264,
+          "conditional_run_std": 0.023537557657892547,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.9405940594059405,
+          "drop_from_floor": 0.00990099009900991,
+          "n_floor": 96,
+          "run_values": [
+            1.0,
+            0.9473684210526315,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v50_mu5v": {
+          "conditional": 0.9897959183673469,
+          "conditional_run_mean": 0.99,
+          "conditional_run_std": 0.022360679774997918,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": 0.00990099009900991,
+          "n_floor": 98,
+          "run_values": [
+            1.0,
+            0.95,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "(0.0, 15.0)": {
+        "p2p_d0.5": {
+          "conditional": 0.96875,
+          "conditional_run_mean": 0.96984126984127,
+          "conditional_run_std": 0.043614703695346306,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.9207920792079208,
+          "drop_from_floor": 0.02970297029702962,
+          "n_floor": 96,
+          "run_values": [
+            1.0,
+            1.0,
+            0.9444444444444444,
+            1.0,
+            0.9047619047619048
+          ]
+        },
+        "p2p_d1.0": {
+          "conditional": 0.96875,
+          "conditional_run_mean": 0.9682539682539681,
+          "conditional_run_std": 0.048923920658483964,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.9207920792079208,
+          "drop_from_floor": 0.02970297029702962,
+          "n_floor": 96,
+          "run_values": [
+            1.0,
+            1.0,
+            0.8888888888888888,
+            1.0,
+            0.9523809523809523
+          ]
+        },
+        "p2p_d2.0": {
+          "conditional": 0.96875,
+          "conditional_run_mean": 0.9682539682539681,
+          "conditional_run_std": 0.048923920658483964,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.9207920792079208,
+          "drop_from_floor": 0.02970297029702962,
+          "n_floor": 96,
+          "run_values": [
+            1.0,
+            1.0,
+            0.8888888888888888,
+            1.0,
+            0.9523809523809523
+          ]
+        },
+        "df_v50_untrunc": {
+          "conditional": 0.9896907216494846,
+          "conditional_run_mean": 0.9913043478260869,
+          "conditional_run_std": 0.019444069369563378,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9504950495049505,
+          "drop_from_floor": 0.00990099009900991,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            0.9565217391304348,
+            1.0
+          ]
+        },
+        "df_v100_untrunc": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": 0.0,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v200_untrunc": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": -0.00990099009900991,
+          "n_floor": 96,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v50_mu5v": {
+          "conditional": 0.9591836734693877,
+          "conditional_run_mean": 0.9626086956521739,
+          "conditional_run_std": 0.05140741305689549,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.9306930693069307,
+          "drop_from_floor": 0.03960396039603953,
+          "n_floor": 98,
+          "run_values": [
+            1.0,
+            0.9,
+            1.0,
+            0.9130434782608695,
+            1.0
+          ]
+        }
+      },
+      "(0.0, 20.0)": {
+        "p2p_d0.5": {
+          "conditional": 0.9375,
+          "conditional_run_mean": 0.9410954923540734,
+          "conditional_run_std": 0.05197672600328578,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.900990099009901,
+          "drop_from_floor": 0.04950495049504944,
+          "n_floor": 96,
+          "run_values": [
+            1.0,
+            0.9473684210526315,
+            0.9444444444444444,
+            0.9565217391304348,
+            0.8571428571428571
+          ]
+        },
+        "p2p_d1.0": {
+          "conditional": 0.9583333333333334,
+          "conditional_run_mean": 0.9611456176673568,
+          "conditional_run_std": 0.040307439057985325,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.9207920792079208,
+          "drop_from_floor": 0.02970297029702962,
+          "n_floor": 96,
+          "run_values": [
+            1.0,
+            1.0,
+            0.9444444444444444,
+            0.9565217391304348,
+            0.9047619047619048
+          ]
+        },
+        "p2p_d2.0": {
+          "conditional": 0.9479166666666666,
+          "conditional_run_mean": 0.9478122843340235,
+          "conditional_run_std": 0.03490605183270254,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.9108910891089109,
+          "drop_from_floor": 0.03960396039603953,
+          "n_floor": 96,
+          "run_values": [
+            0.9333333333333333,
+            1.0,
+            0.9444444444444444,
+            0.9565217391304348,
+            0.9047619047619048
+          ]
+        },
+        "df_v50_untrunc": {
+          "conditional": 0.9896907216494846,
+          "conditional_run_mean": 0.9913043478260869,
+          "conditional_run_std": 0.019444069369563378,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9504950495049505,
+          "drop_from_floor": 0.00990099009900991,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            0.9565217391304348,
+            1.0
+          ]
+        },
+        "df_v100_untrunc": {
+          "conditional": 0.9896907216494846,
+          "conditional_run_mean": 0.99,
+          "conditional_run_std": 0.022360679774997918,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": 0.0,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            0.95,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v200_untrunc": {
+          "conditional": 0.9895833333333334,
+          "conditional_run_mean": 0.9894736842105264,
+          "conditional_run_std": 0.023537557657892547,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.9504950495049505,
+          "drop_from_floor": 0.0,
+          "n_floor": 96,
+          "run_values": [
+            1.0,
+            0.9473684210526315,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v50_mu5v": {
+          "conditional": 0.9387755102040817,
+          "conditional_run_mean": 0.9389130434782608,
+          "conditional_run_std": 0.06418752064991579,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.9108910891089109,
+          "drop_from_floor": 0.05940594059405935,
+          "n_floor": 98,
+          "run_values": [
+            0.875,
+            0.95,
+            1.0,
+            0.8695652173913043,
+            1.0
+          ]
+        },
+        "paired_p_df_v50_untrunc_vs_p2p_d0.5": 0.12709770707174578,
+        "paired_p_df_v50_untrunc_vs_p2p_d2.0": 0.08282029578317432,
+        "paired_p_df_v100_untrunc_vs_p2p_d2.0": 0.16135900115792035
+      }
+    },
+    "combined": {
+      "(0.1, 2.0)": {
+        "p2p_d0.5": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.9405940594059405,
+          "drop_from_floor": 0.0,
+          "n_floor": 95,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "p2p_d1.0": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.9405940594059405,
+          "drop_from_floor": 0.0,
+          "n_floor": 95,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "p2p_d2.0": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.9405940594059405,
+          "drop_from_floor": 0.0,
+          "n_floor": 95,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v50_untrunc": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": 0.0,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v100_untrunc": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": 0.0,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v200_untrunc": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.9504950495049505,
+          "drop_from_floor": 0.0,
+          "n_floor": 96,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v50_mu5v": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": 0.0,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "(0.3, 5.0)": {
+        "p2p_d0.5": {
+          "conditional": 0.9578947368421052,
+          "conditional_run_mean": 0.9589473684210527,
+          "conditional_run_std": 0.05624442108375809,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.9207920792079208,
+          "drop_from_floor": 0.01980198019801971,
+          "n_floor": 95,
+          "run_values": [
+            1.0,
+            0.8947368421052632,
+            1.0,
+            1.0,
+            0.9
+          ]
+        },
+        "p2p_d1.0": {
+          "conditional": 0.9473684210526315,
+          "conditional_run_mean": 0.9489473684210527,
+          "conditional_run_std": 0.07167369889696923,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.900990099009901,
+          "drop_from_floor": 0.03960396039603953,
+          "n_floor": 95,
+          "run_values": [
+            1.0,
+            0.8947368421052632,
+            1.0,
+            1.0,
+            0.85
+          ]
+        },
+        "p2p_d2.0": {
+          "conditional": 0.9473684210526315,
+          "conditional_run_mean": 0.9489473684210527,
+          "conditional_run_std": 0.07167369889696923,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.900990099009901,
+          "drop_from_floor": 0.03960396039603953,
+          "n_floor": 95,
+          "run_values": [
+            1.0,
+            0.8947368421052632,
+            1.0,
+            1.0,
+            0.85
+          ]
+        },
+        "df_v50_untrunc": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": 0.0,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v100_untrunc": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": 0.0,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v200_untrunc": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.9504950495049505,
+          "drop_from_floor": 0.0,
+          "n_floor": 96,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v50_mu5v": {
+          "conditional": 0.9896907216494846,
+          "conditional_run_mean": 0.9888888888888889,
+          "conditional_run_std": 0.024845199749997673,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9504950495049505,
+          "drop_from_floor": 0.00990099009900991,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            0.9444444444444444,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "(0.5, 10.0)": {
+        "p2p_d0.5": {
+          "conditional": 0.9052631578947369,
+          "conditional_run_mean": 0.9007780320366134,
+          "conditional_run_std": 0.05241899272604796,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.8613861386138614,
+          "drop_from_floor": 0.07920792079207917,
+          "n_floor": 95,
+          "run_values": [
+            0.8666666666666667,
+            0.9473684210526315,
+            0.8333333333333334,
+            0.9565217391304348,
+            0.9
+          ]
+        },
+        "p2p_d1.0": {
+          "conditional": 0.9368421052631579,
+          "conditional_run_mean": 0.9346376811594203,
+          "conditional_run_std": 0.06174831529964233,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.8910891089108911,
+          "drop_from_floor": 0.04950495049504944,
+          "n_floor": 95,
+          "run_values": [
+            0.9333333333333333,
+            1.0,
+            0.8333333333333334,
+            0.9565217391304348,
+            0.95
+          ]
+        },
+        "p2p_d2.0": {
+          "conditional": 0.9368421052631579,
+          "conditional_run_mean": 0.9346376811594203,
+          "conditional_run_std": 0.06174831529964233,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.8910891089108911,
+          "drop_from_floor": 0.04950495049504944,
+          "n_floor": 95,
+          "run_values": [
+            0.9333333333333333,
+            1.0,
+            0.8333333333333334,
+            0.9565217391304348,
+            0.95
+          ]
+        },
+        "df_v50_untrunc": {
+          "conditional": 0.979381443298969,
+          "conditional_run_mean": 0.9801932367149758,
+          "conditional_run_std": 0.027455598528275987,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9405940594059405,
+          "drop_from_floor": 0.01980198019801982,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            0.9444444444444444,
+            0.9565217391304348,
+            1.0
+          ]
+        },
+        "df_v100_untrunc": {
+          "conditional": 0.979381443298969,
+          "conditional_run_mean": 0.9801932367149758,
+          "conditional_run_std": 0.027455598528275987,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9504950495049505,
+          "drop_from_floor": 0.00990099009900991,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            0.9444444444444444,
+            0.9565217391304348,
+            1.0
+          ]
+        },
+        "df_v200_untrunc": {
+          "conditional": 0.9791666666666666,
+          "conditional_run_mean": 0.9777089783281733,
+          "conditional_run_std": 0.03060164406972526,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.9306930693069307,
+          "drop_from_floor": 0.01980198019801971,
+          "n_floor": 96,
+          "run_values": [
+            1.0,
+            0.9473684210526315,
+            0.9411764705882353,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v50_mu5v": {
+          "conditional": 0.8969072164948454,
+          "conditional_run_mean": 0.9021357742181542,
+          "conditional_run_std": 0.09776253877943053,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.8613861386138614,
+          "drop_from_floor": 0.09900990099009899,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            0.8947368421052632,
+            0.8333333333333334,
+            0.782608695652174,
+            1.0
+          ]
+        }
+      },
+      "(0.75, 15.0)": {
+        "p2p_d0.5": {
+          "conditional": 0.8736842105263158,
+          "conditional_run_mean": 0.872140859394864,
+          "conditional_run_std": 0.029050999139914564,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.8217821782178217,
+          "drop_from_floor": 0.1188118811881188,
+          "n_floor": 95,
+          "run_values": [
+            0.8666666666666667,
+            0.8421052631578947,
+            0.8888888888888888,
+            0.9130434782608695,
+            0.85
+          ]
+        },
+        "p2p_d1.0": {
+          "conditional": 0.9263157894736842,
+          "conditional_run_mean": 0.9258072718026952,
+          "conditional_run_std": 0.027288968416511062,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.8712871287128713,
+          "drop_from_floor": 0.06930693069306926,
+          "n_floor": 95,
+          "run_values": [
+            0.9333333333333333,
+            0.8947368421052632,
+            0.9444444444444444,
+            0.9565217391304348,
+            0.9
+          ]
+        },
+        "p2p_d2.0": {
+          "conditional": 0.9263157894736842,
+          "conditional_run_mean": 0.9235850495804729,
+          "conditional_run_std": 0.053740687839611175,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.8712871287128713,
+          "drop_from_floor": 0.06930693069306926,
+          "n_floor": 95,
+          "run_values": [
+            0.8666666666666667,
+            0.8947368421052632,
+            1.0,
+            0.9565217391304348,
+            0.9
+          ]
+        },
+        "df_v50_untrunc": {
+          "conditional": 0.9587628865979382,
+          "conditional_run_mean": 0.9587542225128038,
+          "conditional_run_std": 0.024125687369812087,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9207920792079208,
+          "drop_from_floor": 0.03960396039603953,
+          "n_floor": 97,
+          "run_values": [
+            0.9375,
+            0.9473684210526315,
+            1.0,
+            0.9565217391304348,
+            0.9523809523809523
+          ]
+        },
+        "df_v100_untrunc": {
+          "conditional": 0.9587628865979382,
+          "conditional_run_mean": 0.9587542225128038,
+          "conditional_run_std": 0.024125687369812087,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9207920792079208,
+          "drop_from_floor": 0.03960396039603953,
+          "n_floor": 97,
+          "run_values": [
+            0.9375,
+            0.9473684210526315,
+            1.0,
+            0.9565217391304348,
+            0.9523809523809523
+          ]
+        },
+        "df_v200_untrunc": {
+          "conditional": 0.9583333333333334,
+          "conditional_run_mean": 0.9575158324199246,
+          "conditional_run_std": 0.024999340001208757,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.9108910891089109,
+          "drop_from_floor": 0.03960396039603953,
+          "n_floor": 96,
+          "run_values": [
+            0.9375,
+            1.0,
+            0.9411764705882353,
+            0.9565217391304348,
+            0.9523809523809523
+          ]
+        },
+        "df_v50_mu5v": {
+          "conditional": 0.7731958762886598,
+          "conditional_run_mean": 0.7755725364134974,
+          "conditional_run_std": 0.050376909766733806,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.7425742574257426,
+          "drop_from_floor": 0.2178217821782178,
+          "n_floor": 97,
+          "run_values": [
+            0.8125,
+            0.8421052631578947,
+            0.7222222222222222,
+            0.7391304347826086,
+            0.7619047619047619
+          ]
+        }
+      },
+      "(1.0, 20.0)": {
+        "p2p_d0.5": {
+          "conditional": 0.7157894736842105,
+          "conditional_run_mean": 0.7240783117213324,
+          "conditional_run_std": 0.07735797596547113,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.693069306930693,
+          "drop_from_floor": 0.24752475247524752,
+          "n_floor": 95,
+          "run_values": [
+            0.8,
+            0.7894736842105263,
+            0.7222222222222222,
+            0.6086956521739131,
+            0.7
+          ]
+        },
+        "p2p_d1.0": {
+          "conditional": 0.7789473684210526,
+          "conditional_run_mean": 0.780884820747521,
+          "conditional_run_std": 0.09824987198868895,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.7623762376237624,
+          "drop_from_floor": 0.17821782178217815,
+          "n_floor": 95,
+          "run_values": [
+            0.8,
+            0.8421052631578947,
+            0.6666666666666666,
+            0.6956521739130435,
+            0.9
+          ]
+        },
+        "p2p_d2.0": {
+          "conditional": 0.7894736842105263,
+          "conditional_run_mean": 0.7901652682430714,
+          "conditional_run_std": 0.06960905161372635,
+          "floor": 0.9405940594059405,
+          "unconditional": 0.7623762376237624,
+          "drop_from_floor": 0.17821782178217815,
+          "n_floor": 95,
+          "run_values": [
+            0.8,
+            0.7894736842105263,
+            0.7222222222222222,
+            0.7391304347826086,
+            0.9
+          ]
+        },
+        "df_v50_untrunc": {
+          "conditional": 0.8041237113402062,
+          "conditional_run_mean": 0.8046597471940722,
+          "conditional_run_std": 0.029160652777962256,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.7722772277227723,
+          "drop_from_floor": 0.18811881188118806,
+          "n_floor": 97,
+          "run_values": [
+            0.8125,
+            0.7894736842105263,
+            0.8333333333333334,
+            0.8260869565217391,
+            0.7619047619047619
+          ]
+        },
+        "df_v100_untrunc": {
+          "conditional": 0.8041237113402062,
+          "conditional_run_mean": 0.8046597471940722,
+          "conditional_run_std": 0.029160652777962256,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.7722772277227723,
+          "drop_from_floor": 0.18811881188118806,
+          "n_floor": 97,
+          "run_values": [
+            0.8125,
+            0.7894736842105263,
+            0.8333333333333334,
+            0.8260869565217391,
+            0.7619047619047619
+          ]
+        },
+        "df_v200_untrunc": {
+          "conditional": 0.8333333333333334,
+          "conditional_run_mean": 0.8390534360197167,
+          "conditional_run_std": 0.05916088761509286,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.7920792079207921,
+          "drop_from_floor": 0.15841584158415833,
+          "n_floor": 96,
+          "run_values": [
+            0.9375,
+            0.8421052631578947,
+            0.8235294117647058,
+            0.782608695652174,
+            0.8095238095238095
+          ]
+        },
+        "df_v50_mu5v": {
+          "conditional": 0.5257731958762887,
+          "conditional_run_mean": 0.5170471468526389,
+          "conditional_run_std": 0.1020719203363894,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.504950495049505,
+          "drop_from_floor": 0.4554455445544554,
+          "n_floor": 97,
+          "run_values": [
+            0.375,
+            0.5263157894736842,
+            0.5555555555555556,
+            0.6521739130434783,
+            0.47619047619047616
+          ]
+        },
+        "paired_p_df_v50_untrunc_vs_p2p_d0.5": 0.11061439277820595,
+        "paired_p_df_v50_untrunc_vs_p2p_d2.0": 0.7564431895205479,
+        "paired_p_df_v100_untrunc_vs_p2p_d2.0": 0.7564431895205479
+      }
+    },
+    "yaw": {
+      "(0.0, 2.0)": {
+        "p2p_d0.5": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.9702970297029703,
+          "drop_from_floor": 0.0,
+          "n_floor": 98,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "p2p_d1.0": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.9702970297029703,
+          "drop_from_floor": 0.0,
+          "n_floor": 98,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "p2p_d2.0": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.9702970297029703,
+          "drop_from_floor": 0.0,
+          "n_floor": 98,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v50_untrunc": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": 0.0,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v100_untrunc": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.9504950495049505,
+          "drop_from_floor": 0.0,
+          "n_floor": 96,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v200_untrunc": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": 0.0,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v50_mu5v": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.9702970297029703,
+          "drop_from_floor": 0.0,
+          "n_floor": 98,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "(0.0, 5.0)": {
+        "p2p_d0.5": {
+          "conditional": 0.9591836734693877,
+          "conditional_run_mean": 0.9606694271911664,
+          "conditional_run_std": 0.022415858393772685,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.9306930693069307,
+          "drop_from_floor": 0.03960396039603953,
+          "n_floor": 98,
+          "run_values": [
+            1.0,
+            0.95,
+            0.9444444444444444,
+            0.9565217391304348,
+            0.9523809523809523
+          ]
+        },
+        "p2p_d1.0": {
+          "conditional": 0.9591836734693877,
+          "conditional_run_mean": 0.9606694271911664,
+          "conditional_run_std": 0.022415858393772685,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.9306930693069307,
+          "drop_from_floor": 0.03960396039603953,
+          "n_floor": 98,
+          "run_values": [
+            1.0,
+            0.95,
+            0.9444444444444444,
+            0.9565217391304348,
+            0.9523809523809523
+          ]
+        },
+        "p2p_d2.0": {
+          "conditional": 0.9591836734693877,
+          "conditional_run_mean": 0.9606694271911664,
+          "conditional_run_std": 0.022415858393772685,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.9306930693069307,
+          "drop_from_floor": 0.03960396039603953,
+          "n_floor": 98,
+          "run_values": [
+            1.0,
+            0.95,
+            0.9444444444444444,
+            0.9565217391304348,
+            0.9523809523809523
+          ]
+        },
+        "df_v50_untrunc": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": 0.0,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v100_untrunc": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": -0.00990099009900991,
+          "n_floor": 96,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v200_untrunc": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": 0.0,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v50_mu5v": {
+          "conditional": 0.9897959183673469,
+          "conditional_run_mean": 0.99,
+          "conditional_run_std": 0.022360679774997918,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": 0.00990099009900991,
+          "n_floor": 98,
+          "run_values": [
+            1.0,
+            0.95,
+            1.0,
+            1.0,
+            1.0
+          ]
+        }
+      },
+      "(0.0, 10.0)": {
+        "p2p_d0.5": {
+          "conditional": 0.9285714285714286,
+          "conditional_run_mean": 0.9294737750172531,
+          "conditional_run_std": 0.022090371605149414,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.900990099009901,
+          "drop_from_floor": 0.06930693069306926,
+          "n_floor": 98,
+          "run_values": [
+            0.9375,
+            0.9,
+            0.9444444444444444,
+            0.9130434782608695,
+            0.9523809523809523
+          ]
+        },
+        "p2p_d1.0": {
+          "conditional": 0.9285714285714286,
+          "conditional_run_mean": 0.9294737750172531,
+          "conditional_run_std": 0.022090371605149414,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.900990099009901,
+          "drop_from_floor": 0.06930693069306926,
+          "n_floor": 98,
+          "run_values": [
+            0.9375,
+            0.9,
+            0.9444444444444444,
+            0.9130434782608695,
+            0.9523809523809523
+          ]
+        },
+        "p2p_d2.0": {
+          "conditional": 0.9285714285714286,
+          "conditional_run_mean": 0.9294737750172531,
+          "conditional_run_std": 0.022090371605149414,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.900990099009901,
+          "drop_from_floor": 0.06930693069306926,
+          "n_floor": 98,
+          "run_values": [
+            0.9375,
+            0.9,
+            0.9444444444444444,
+            0.9130434782608695,
+            0.9523809523809523
+          ]
+        },
+        "df_v50_untrunc": {
+          "conditional": 0.9896907216494846,
+          "conditional_run_mean": 0.9913043478260869,
+          "conditional_run_std": 0.019444069369563378,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9504950495049505,
+          "drop_from_floor": 0.00990099009900991,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            0.9565217391304348,
+            1.0
+          ]
+        },
+        "df_v100_untrunc": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": -0.00990099009900991,
+          "n_floor": 96,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v200_untrunc": {
+          "conditional": 0.9896907216494846,
+          "conditional_run_mean": 0.9913043478260869,
+          "conditional_run_std": 0.019444069369563378,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9504950495049505,
+          "drop_from_floor": 0.00990099009900991,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            0.9565217391304348,
+            1.0
+          ]
+        },
+        "df_v50_mu5v": {
+          "conditional": 0.9795918367346939,
+          "conditional_run_mean": 0.9817805383022774,
+          "conditional_run_std": 0.024990943067505444,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.9504950495049505,
+          "drop_from_floor": 0.01980198019801982,
+          "n_floor": 98,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            0.9565217391304348,
+            0.9523809523809523
+          ]
+        }
+      },
+      "(0.0, 15.0)": {
+        "p2p_d0.5": {
+          "conditional": 0.9183673469387755,
+          "conditional_run_mean": 0.918010697032436,
+          "conditional_run_std": 0.04312546359275143,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.8910891089108911,
+          "drop_from_floor": 0.07920792079207917,
+          "n_floor": 98,
+          "run_values": [
+            0.9375,
+            0.95,
+            0.8888888888888888,
+            0.9565217391304348,
+            0.8571428571428571
+          ]
+        },
+        "p2p_d1.0": {
+          "conditional": 0.9285714285714286,
+          "conditional_run_mean": 0.9299499654934438,
+          "conditional_run_std": 0.01993341753680348,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.900990099009901,
+          "drop_from_floor": 0.06930693069306926,
+          "n_floor": 98,
+          "run_values": [
+            0.9375,
+            0.95,
+            0.9444444444444444,
+            0.9130434782608695,
+            0.9047619047619048
+          ]
+        },
+        "p2p_d2.0": {
+          "conditional": 0.9387755102040817,
+          "conditional_run_mean": 0.9424499654934438,
+          "conditional_run_std": 0.0376102341527732,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.9108910891089109,
+          "drop_from_floor": 0.05940594059405935,
+          "n_floor": 98,
+          "run_values": [
+            1.0,
+            0.95,
+            0.9444444444444444,
+            0.9130434782608695,
+            0.9047619047619048
+          ]
+        },
+        "df_v50_untrunc": {
+          "conditional": 0.9896907216494846,
+          "conditional_run_mean": 0.9913043478260869,
+          "conditional_run_std": 0.019444069369563378,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9504950495049505,
+          "drop_from_floor": 0.00990099009900991,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            0.9565217391304348,
+            1.0
+          ]
+        },
+        "df_v100_untrunc": {
+          "conditional": 1.0,
+          "conditional_run_mean": 1.0,
+          "conditional_run_std": 0.0,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.9603960396039604,
+          "drop_from_floor": -0.00990099009900991,
+          "n_floor": 96,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ]
+        },
+        "df_v200_untrunc": {
+          "conditional": 0.979381443298969,
+          "conditional_run_mean": 0.9817805383022774,
+          "conditional_run_std": 0.024990943067505444,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9405940594059405,
+          "drop_from_floor": 0.01980198019801982,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            0.9565217391304348,
+            0.9523809523809523
+          ]
+        },
+        "df_v50_mu5v": {
+          "conditional": 0.8775510204081632,
+          "conditional_run_mean": 0.87364044168392,
+          "conditional_run_std": 0.06614952102872988,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.8514851485148515,
+          "drop_from_floor": 0.1188118811881188,
+          "n_floor": 98,
+          "run_values": [
+            0.875,
+            0.85,
+            0.7777777777777778,
+            0.9130434782608695,
+            0.9523809523809523
+          ]
+        }
+      },
+      "(0.0, 20.0)": {
+        "p2p_d0.5": {
+          "conditional": 0.7346938775510204,
+          "conditional_run_mean": 0.7327122153209109,
+          "conditional_run_std": 0.044127497620841435,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.7128712871287128,
+          "drop_from_floor": 0.25742574257425743,
+          "n_floor": 98,
+          "run_values": [
+            0.75,
+            0.75,
+            0.6666666666666666,
+            0.782608695652174,
+            0.7142857142857143
+          ]
+        },
+        "p2p_d1.0": {
+          "conditional": 0.826530612244898,
+          "conditional_run_mean": 0.828228088336784,
+          "conditional_run_std": 0.04370675949301925,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.801980198019802,
+          "drop_from_floor": 0.16831683168316824,
+          "n_floor": 98,
+          "run_values": [
+            0.8125,
+            0.8,
+            0.8888888888888888,
+            0.782608695652174,
+            0.8571428571428571
+          ]
+        },
+        "p2p_d2.0": {
+          "conditional": 0.826530612244898,
+          "conditional_run_mean": 0.828228088336784,
+          "conditional_run_std": 0.04370675949301925,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.801980198019802,
+          "drop_from_floor": 0.16831683168316824,
+          "n_floor": 98,
+          "run_values": [
+            0.8125,
+            0.8,
+            0.8888888888888888,
+            0.782608695652174,
+            0.8571428571428571
+          ]
+        },
+        "df_v50_untrunc": {
+          "conditional": 0.9587628865979382,
+          "conditional_run_mean": 0.9601431114016925,
+          "conditional_run_std": 0.022757294853942827,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9207920792079208,
+          "drop_from_floor": 0.03960396039603953,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            0.9473684210526315,
+            0.9444444444444444,
+            0.9565217391304348,
+            0.9523809523809523
+          ]
+        },
+        "df_v100_untrunc": {
+          "conditional": 0.96875,
+          "conditional_run_mean": 0.9702741702741703,
+          "conditional_run_std": 0.027395183825198975,
+          "floor": 0.9504950495049505,
+          "unconditional": 0.9405940594059405,
+          "drop_from_floor": 0.00990099009900991,
+          "n_floor": 96,
+          "run_values": [
+            1.0,
+            1.0,
+            0.9444444444444444,
+            0.9545454545454546,
+            0.9523809523809523
+          ]
+        },
+        "df_v200_untrunc": {
+          "conditional": 0.9690721649484536,
+          "conditional_run_mean": 0.9722567287784679,
+          "conditional_run_std": 0.042166955256649166,
+          "floor": 0.9603960396039604,
+          "unconditional": 0.9306930693069307,
+          "drop_from_floor": 0.02970297029702962,
+          "n_floor": 97,
+          "run_values": [
+            1.0,
+            1.0,
+            1.0,
+            0.9565217391304348,
+            0.9047619047619048
+          ]
+        },
+        "df_v50_mu5v": {
+          "conditional": 0.673469387755102,
+          "conditional_run_mean": 0.6648447204968944,
+          "conditional_run_std": 0.09846667693256866,
+          "floor": 0.9702970297029703,
+          "unconditional": 0.6534653465346535,
+          "drop_from_floor": 0.3168316831683168,
+          "n_floor": 98,
+          "run_values": [
+            0.5,
+            0.7,
+            0.6666666666666666,
+            0.6956521739130435,
+            0.7619047619047619
+          ]
+        },
+        "paired_p_df_v50_untrunc_vs_p2p_d0.5": 0.00025733324722167835,
+        "paired_p_df_v50_untrunc_vs_p2p_d2.0": 0.005980554343637519,
+        "paired_p_df_v100_untrunc_vs_p2p_d2.0": 0.007366144162388537
+      }
+    }
   }
 }
