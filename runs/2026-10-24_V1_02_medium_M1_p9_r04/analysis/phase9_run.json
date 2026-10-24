@@ -1,0 +1,33 @@
+{
+  "run": "2026-10-24_V1_02_medium_M1_p9_r04",
+  "sequence": "V1_02_medium",
+  "method": "M1",
+  "resets": {
+    "run": "2026-10-24_V1_02_medium_M1_p9_r04",
+    "duration_s": 85.45,
+    "first_tracking_s": 5.3500000000000005,
+    "tracking_lost": 1,
+    "relocalised": 0,
+    "n_resets": 1,
+    "reset_times_s": [
+      51.4
+    ],
+    "all_resets_early": false,
+    "final_reinit_tracking_s": 51.75,
+    "classification": "(iii) exclude (mid-flight reset)"
+  },
+  "failed": true,
+  "failure_reason": "reset",
+  "ate_4dof_m": 0.057687186119599936,
+  "rel_disp_m_mean": 0.07716648979429656,
+  "frames_dropped_pct": 0.0,
+  "frontend_ms_mean": 9.294208492511851,
+  "frontend_rtf": 0.185884169850237,
+  "backend_output_latency_ms_median": 50.527215003967285,
+  "map_frame_ate_m": 0.08986929797296205,
+  "bag_duration_s": 88.12078213691711,
+  "rtf_playback": 1.0986644660572127,
+  "cpu_svo_node_pct_mean": 74.03488372093024,
+  "cpu_reg_node_pct_mean": null,
+  "cpu_system_busy_pct_mean": 7.651162790697675
+}

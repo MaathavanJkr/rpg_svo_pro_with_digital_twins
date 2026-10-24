@@ -1,0 +1,18 @@
+{
+  "published": 416,
+  "processed": 416,
+  "dropped_by_queue": 0,
+  "accepted": 0,
+  "rejected": 416,
+  "received_by_svo": 0,
+  "branches": {},
+  "added": 0,
+  "added_lines_in_rosout": 0,
+  "unmatched_added_lines": 0,
+  "runtime_ms_median": {
+    "preproc": 1.3055400049779564,
+    "icp": 1.5331030008383095,
+    "info": NaN,
+    "total": 2.8603690152522177
+  }
+}

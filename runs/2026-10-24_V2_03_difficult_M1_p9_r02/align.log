@@ -1,0 +1,53 @@
+{
+  "alignment": {
+    "sequence": "V2_03_difficult",
+    "t0": 1413394888.9557605,
+    "rule": "D1(B): 4-DoF LSQ fit of VIO to GT positions from t0 over the first L m of GT path",
+    "window_length_m": 2.0,
+    "window": {
+      "n_samples": 82,
+      "t_end": 1413394893.0057604,
+      "duration_s": 4.049999952316284,
+      "gt_path_length_m": 2.0239687942829496
+    },
+    "yaw_deg": 142.826358326375,
+    "T_M_W": [
+      [
+        -0.796807973250226,
+        -0.6042326156083161,
+        0.0,
+        5.298168930036486
+      ],
+      [
+        0.6042326156083161,
+        -0.796807973250226,
+        0.0,
+        0.18751774360004936
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.09306313264019428
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "t0_rule": "first KF with backend+scale init and GT bracket <= 10 ms",
+    "yaw_source": "gt"
+  },
+  "map_frame_ate_m": {
+    "rmse": 14934.945861051498,
+    "mean": 10085.50361588772,
+    "median": 5484.775939724141,
+    "max": 37068.67080015706,
+    "final": 37068.67080015706,
+    "n": 1676,
+    "window_start": 1413394893.0557604,
+    "window_s": 104.55000019073486
+  }
+}

@@ -1,0 +1,36 @@
+<!-- FYP M1: VIO only (mono-inertial, cam0 + /imu0) on EuRoC bags.
+     Based on svo_ros/launch/Default/euroc_vio_mono.launch (original untouched). Differences:
+       1. Paths fixed: the original references param/calib/euroc_mono.yaml, param/gp_settings.yaml,
+          param/vio_mono.yaml and rviz_config_vio.rviz, which do not exist. Copies live in param/fyp/euroc/
+          (euroc_mono.yaml and vio_mono.yaml are unmodified copies of param/Default/).
+       2. use_global_measurements=false AND use_map_registration=false (VIO only). Both settings files
+          are still passed, because svo_node always constructs both handlers and aborts without them
+          (copies of the Oerlikon files; unused in M1).
+       3. glog verbosity v=0 instead of v=2 (logging only). Note: no double hyphen allowed in XML comments.
+       4. RViz optional (default off).
+       6. svo_node output line-buffered (stdbuf), I/O only (Phase 5a).
+       5. FYP frame-event log (log only, default off): log_frame_events:=true frame_event_log_file:=<csv>.
+     Usage: roslaunch svo_ros euroc_m1.launch [rviz:=true] [log_frame_events:=true frame_event_log_file:=...] -->
+<launch>
+  <arg name="param_dir" default="$(find svo_ros)/param/fyp/euroc"/>
+  <arg name="rviz" default="false"/>
+  <arg name="log_frame_events" default="false"/>
+  <arg name="frame_event_log_file" default="/tmp/svo_frame_events.csv"/>
+
+  <node pkg="svo_ros" type="svo_node" name="svo" clear_params="true" output="screen" args="--v=0" launch-prefix="stdbuf -oL -eL">
+    <param name="cam0_topic" value="/cam0/image_raw" type="str" />
+    <param name="imu_topic" value="/imu0" type="str" />
+    <param name="calib_file" value="$(arg param_dir)/euroc_mono.yaml" />
+    <rosparam file="$(arg param_dir)/vio_mono.yaml" />
+
+    <param name="use_global_measurements" value="false" />
+    <param name="gp_settings_file" value="$(arg param_dir)/gp_settings.yaml" />
+    <param name="use_map_registration" value="false" />
+    <param name="map_reg_settings_file" value="$(arg param_dir)/gpose_settings.yaml" />
+
+    <param name="log_frame_events" value="$(arg log_frame_events)" />
+    <param name="frame_event_log_file" value="$(arg frame_event_log_file)" />
+  </node>
+
+  <node if="$(arg rviz)" name="vis" pkg="rviz" type="rviz" args=" -d $(find svo_ros)/RVIZ/rviz_config_digital_twins.rviz" />
+</launch>

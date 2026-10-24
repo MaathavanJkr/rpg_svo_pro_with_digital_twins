@@ -1,0 +1,34 @@
+{
+  "run": "2026-10-24_V2_03_difficult_M1_p9_r03",
+  "sequence": "V2_03_difficult",
+  "method": "M1",
+  "resets": {
+    "run": "2026-10-24_V2_03_difficult_M1_p9_r03",
+    "duration_s": 116.65,
+    "first_tracking_s": 7.0,
+    "tracking_lost": 15,
+    "relocalised": 13,
+    "n_resets": 2,
+    "reset_times_s": [
+      64.8,
+      94.4
+    ],
+    "all_resets_early": false,
+    "final_reinit_tracking_s": 94.85000000000001,
+    "classification": "(iii) exclude (mid-flight reset)"
+  },
+  "failed": true,
+  "failure_reason": "reset",
+  "ate_4dof_m": 0.3585087382063758,
+  "rel_disp_m_mean": 0.3562884482812424,
+  "frames_dropped_pct": 0.10405827263267886,
+  "frontend_ms_mean": 4.317175982426609,
+  "frontend_rtf": 0.08634351964853218,
+  "backend_output_latency_ms_median": 34.462928771972656,
+  "map_frame_ate_m": 1.1838259622691445,
+  "bag_duration_s": 116.808429479599,
+  "rtf_playback": 1.018209176930784,
+  "cpu_svo_node_pct_mean": 43.41880341880342,
+  "cpu_reg_node_pct_mean": null,
+  "cpu_system_busy_pct_mean": 3.7435897435897436
+}

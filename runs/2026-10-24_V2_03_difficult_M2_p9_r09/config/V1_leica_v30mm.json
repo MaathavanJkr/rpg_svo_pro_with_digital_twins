@@ -1,0 +1,42 @@
+{
+  "source": "dataset/derived/asl_meta/V1_01_easy/mav0/pointcloud0/data.ply",
+  "source_md5": "26a6853527acf0a1b921e9683bf15570",
+  "source_points": 3199068,
+  "crop": {
+    "rule": "per-axis [p0.1 - 0.2, p99.9 + 0.2] of raw points",
+    "box_min": [
+      -4.5758,
+      -3.683,
+      -0.2262
+    ],
+    "box_max": [
+      3.8886,
+      5.167,
+      4.3123
+    ],
+    "removed": 380,
+    "kept": 3198688
+  },
+  "voxel_m": 0.03,
+  "points_after_downsample": 402142,
+  "normals": {
+    "method": "Open3D KDTreeSearchParamHybrid",
+    "radius_m": 0.1,
+    "max_nn": 30,
+    "oriented": false,
+    "floor_abs_nz_median": 0.9999291278895597
+  },
+  "bbox_min": [
+    -4.5716,
+    -3.5018,
+    -0.1397
+  ],
+  "bbox_max": [
+    3.8881,
+    5.1649,
+    4.2486
+  ],
+  "frame": "R = V (pointcloud0/sensor.yaml T_WR = I)",
+  "output": "dataset/derived/euroc_twin/V1_leica_v30mm.ply",
+  "output_md5": "8fc20009837a56090259b9c5da31724c"
+}

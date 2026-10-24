@@ -1,0 +1,54 @@
+{
+  "run": "2026-10-24_V2_03_difficult_M3_p9_r04",
+  "sequence": "V2_03_difficult",
+  "method": "M3",
+  "resets": {
+    "run": "2026-10-24_V2_03_difficult_M3_p9_r04",
+    "duration_s": 116.65,
+    "first_tracking_s": 7.0,
+    "tracking_lost": 7,
+    "relocalised": 5,
+    "n_resets": 2,
+    "reset_times_s": [
+      65.9,
+      102.1
+    ],
+    "all_resets_early": false,
+    "final_reinit_tracking_s": 102.85000000000001,
+    "classification": "(iii) exclude (mid-flight reset)"
+  },
+  "failed": true,
+  "failure_reason": "reset",
+  "ate_4dof_m": 0.33694245214021773,
+  "rel_disp_m_mean": 0.4004519648146065,
+  "frames_dropped_pct": 0.10405827263267886,
+  "frontend_ms_mean": 4.259319273705842,
+  "frontend_rtf": 0.08518638547411683,
+  "backend_output_latency_ms_median": 34.54029560089111,
+  "map_frame_ate_m": 0.5230504170888349,
+  "d1_yaw_offline_deg": 76.88993608105322,
+  "d1_yaw_online_minus_offline_deg": 1.9342216717177507e-06,
+  "bag_duration_s": 116.808429479599,
+  "rtf_playback": 1.0171747600180805,
+  "cpu_svo_node_pct_mean": 43.88793103448276,
+  "cpu_reg_node_pct_mean": 5.982758620689655,
+  "cpu_system_busy_pct_mean": 4.387931034482759,
+  "published": 235,
+  "processed": 235,
+  "dropped_by_queue": 0,
+  "accepted": 147,
+  "rejected": 88,
+  "added": 146,
+  "callback_ms": {
+    "n": 235,
+    "median": 26.506,
+    "p90": 34.977599999999995
+  },
+  "registration_load": 0.040925659400590814,
+  "df_iterations_median": 26.0,
+  "latency_ms": {
+    "n": 147,
+    "median": 32.280803999999996,
+    "p90": 39.0774126
+  }
+}

@@ -1,0 +1,20 @@
+run_id: 2026-10-24_V2_03_difficult_M1_p9_r09
+sequence: V2_03_difficult
+date: 2026-10-25T00:02:03+05:30
+git_commit: 9f48f77323f706f6a1136a37eacc7d4d027f6802
+git_dirty: 1 tracked files modified
+launch: svo_ros/launch/fyp/euroc_m1.launch log_frame_events:=true
+input_bag: /home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/dataset/vicon_room2/V2_03_difficult/V2_03_difficult.bag (rosbag play, rate 1, no --clock)
+svo_node binary: /home/alpha/Desktop/twinforge/catkin_ws/devel/.private/svo_ros/lib/svo_ros/svo_node 2026-10-23 20:20:24.063852306 +0530
+libsvo_ros: 2026-10-23 20:20:17.727757873 +0530 md5 c49078a025f0
+svo_node md5: 78ea5c215845
+fyp_df.cpython-38-x86_64-linux-gnu.so md5: 733ca174f570
+online_registration_fyp.py md5: d6ed76768001
+online_registration_m3.py md5: a01a41542559
+loadavg_before: 2.26 1.40 1.22 1/1482 467082
+nproc: 12
+nodes ready after ~2s, svo_node pid 467158, registration node pid none
+play_wall_seconds: 118.845359561
+loadavg_after: 1.24 1.23 1.18 1/1464 468136
+ros_run_id: 359a28f2-cfd9-11f1-b723-bd52899a295f
+done
