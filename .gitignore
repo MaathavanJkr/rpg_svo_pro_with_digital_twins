@@ -21,3 +21,7 @@ runs/_failed/
 
 # Phase 6 per-keyframe event dumps (large; manifests are committed instead)
 runs/*/reg_events/
+
+# Phase 8 C++ module build outputs (rebuild with svo_registration/df_cpp/build.sh)
+svo_registration/df_cpp/build/
+svo_registration/scripts/fyp_df.*.so

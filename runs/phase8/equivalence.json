@@ -1,0 +1,129 @@
+{
+  "grid": "dataset/derived/euroc_twin/df/V1_leica_v30mm_udf_v50mm.bin",
+  "runs": [
+    "2026-10-23_V1_01_easy_M2_p6_r01",
+    "2026-10-23_V1_01_easy_M2_p6_r02",
+    "2026-10-23_V1_01_easy_M2_p6_r03",
+    "2026-10-23_V1_01_easy_M2_p6_r04",
+    "2026-10-23_V1_01_easy_M2_p6_r05"
+  ],
+  "tolerances": {
+    "t_m": 1e-06,
+    "r_deg": 1e-06,
+    "info_rel": 1e-06
+  },
+  "query_mu_None": {
+    "n": 200000,
+    "n_valid": 174785,
+    "max_abs_D": 0.0,
+    "max_abs_G": 0.0
+  },
+  "query_mu_0.25": {
+    "n": 200000,
+    "n_valid": 174785,
+    "max_abs_D": 0.0,
+    "max_abs_G": 0.0
+  },
+  "corrupt_payload_rejected": "grid: checksum mismatch",
+  "wrong_size_rejected": "grid: size mismatch (dims, header bytes, file size)",
+  "udf_v50_untrunc": {
+    "n_kf": 922,
+    "n_valid_py": 920,
+    "n_valid_cpp": 920,
+    "dt_m": {
+      "max": 4.9312254126968964e-15,
+      "median": 8.365770412286457e-16
+    },
+    "dr_deg": {
+      "max": 1.095241410720356e-13,
+      "median": 9.717474126881678e-15
+    },
+    "cost_rel": {
+      "max": 3.386396981078844e-14,
+      "median": 1.0091516868785294e-15
+    },
+    "sigma2_rel": {
+      "max": 2.6769792914425778e-14,
+      "median": 1.153712041152314e-15
+    },
+    "fitness_diff": {
+      "max": 0.0,
+      "median": 0.0
+    },
+    "rmse_diff": {
+      "max": 1.1796119636642288e-15,
+      "median": 4.163336342344337e-17
+    },
+    "info_h_rel": {
+      "max": 5.0855855792747224e-14,
+      "median": 2.2543674702946802e-15
+    },
+    "info_H_rel": {
+      "max": 6.881899452871857e-14,
+      "median": 3.012621393333396e-15
+    },
+    "info_H_cpp_fn_rel": {
+      "max": 0.0,
+      "median": 0.0
+    },
+    "iterations_equal": 922,
+    "lookups_equal": 922,
+    "verdict_equal": 922,
+    "n_valid_equal": 922,
+    "pass": true,
+    "runtime_in_loop_median_s": {
+      "py": 0.04111433347861748,
+      "cpp": 0.0011275285
+    }
+  },
+  "tsdf_v50_mu5v": {
+    "n_kf": 922,
+    "n_valid_py": 921,
+    "n_valid_cpp": 921,
+    "dt_m": {
+      "max": 7.538082330901515e-15,
+      "median": 8.257597874215095e-16
+    },
+    "dr_deg": {
+      "max": 1.0481162820207358e-13,
+      "median": 9.676498392366801e-15
+    },
+    "cost_rel": {
+      "max": 1.7133200594147536e-14,
+      "median": 1.0866464600915882e-15
+    },
+    "sigma2_rel": {
+      "max": 1.6038713687472155e-14,
+      "median": 1.1734476543088989e-15
+    },
+    "fitness_diff": {
+      "max": 0.0,
+      "median": 0.0
+    },
+    "rmse_diff": {
+      "max": 8.743006318923108e-16,
+      "median": 4.163336342344337e-17
+    },
+    "info_h_rel": {
+      "max": 4.075859767291448e-14,
+      "median": 2.1946456553818843e-15
+    },
+    "info_H_rel": {
+      "max": 3.5619124188002035e-14,
+      "median": 3.1622507845920417e-15
+    },
+    "info_H_cpp_fn_rel": {
+      "max": 0.0,
+      "median": 0.0
+    },
+    "iterations_equal": 922,
+    "lookups_equal": 922,
+    "verdict_equal": 922,
+    "n_valid_equal": 922,
+    "pass": true,
+    "runtime_in_loop_median_s": {
+      "py": 0.042027639006846584,
+      "cpp": 0.0011560975
+    }
+  }
+}

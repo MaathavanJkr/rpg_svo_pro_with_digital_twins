@@ -66,3 +66,9 @@ scripts/build.sh svo_ros --no-deps     # one package
 scripts/build.sh                        # whole workspace
 ```
 Your shell configuration is not changed. The 2026-10-23 13:15 rebuild (frame-event logger) was done with the same commands by hand, before the script existed.
+
+## C++ distance-field module `fyp_df` (Phase 8, 2026-10-24)
+- Sources: `svo_registration/df_cpp/` (library `include/fyp_df/df_registration.h`, `src/df_registration.cpp`; bindings `src/bindings.cpp`). Standalone CMake project, **not** part of the catkin workspace.
+- Build: `svo_registration/df_cpp/build.sh`. It removes Linuxbrew from `PATH`, uses `/usr/bin/g++` 9.4.0, the system Eigen 3.3.7 and the system Python 3.8.10 (the interpreter of the ROS nodes), and copies `fyp_df.cpython-38-x86_64-linux-gnu.so` into `svo_registration/scripts/` (git-ignored, like `df_cpp/build/`). It fails if `-ffast-math` or `-fno-signed-zeros` appears in the compile commands.
+- Flags: plain `-O3 -DNDEBUG` (CMake Release), `-std=gnu++14`, `-fPIC`; the module also gets pybind11's `-fvisibility=hidden -flto`. **No fast-math**, deliberately different from SVO's flags (`SvoSetup.cmake`), which break Eigen's SSE `Matrix4d::inverse` (docs/pipeline_notes.md). The source has `#error` if `__FAST_MATH__` is defined.
+- pybind11 2.13.6 (header-only) installed in the venv (`pip install "pybind11==2.13.6"`); used only at build time. The built module imports in both the system `python3` and the venv (same Python 3.8 ABI).

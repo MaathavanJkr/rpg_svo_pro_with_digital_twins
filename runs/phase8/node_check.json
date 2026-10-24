@@ -1,0 +1,46 @@
+{
+  "n_kf": 922,
+  "n_accept": {
+    "p2p": 899,
+    "df": 920,
+    "df_hess": 920
+  },
+  "p2p_verdict_equal_logged_M2": 922,
+  "p2p_pose_dt_m": {
+    "n": 899,
+    "max": 5.857939004215904e-15,
+    "median": 4.577566798522237e-16
+  },
+  "p2p_pose_dr_deg": {
+    "n": 899,
+    "max": 1.0957640059850167e-13,
+    "median": 2.0137812751106495e-14
+  },
+  "p2p_information_rel": {
+    "n": 899,
+    "max": 3.2125553430676276e-15,
+    "median": 4.762851296143371e-16
+  },
+  "df_filtered_cloud_equal_logged_float32": 922,
+  "df_verdict_equal_prototype": 922,
+  "df_pose_dt_m": {
+    "n": 920,
+    "max": 8.230639722151273e-15,
+    "median": 1.1782217347846123e-15
+  },
+  "df_pose_dr_deg": {
+    "n": 920,
+    "max": 1.3447914782316684e-13,
+    "median": 2.5826024072774922e-14
+  },
+  "df_information_heuristic_rel": {
+    "n": 920,
+    "max": 2.4877492577939458e-14,
+    "median": 2.2171752504272995e-15
+  },
+  "df_information_hessian_rel": {
+    "n": 920,
+    "max": 7.634265206259415e-14,
+    "median": 3.1514905491912765e-15
+  }
+}

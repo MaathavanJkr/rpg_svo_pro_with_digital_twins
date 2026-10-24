@@ -1,0 +1,176 @@
+{
+  "setup": {
+    "core": 3,
+    "OMP_NUM_THREADS": "1",
+    "n_kf": 917,
+    "warmup": 5,
+    "cpu": "model name\t: Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz",
+    "loadavg_end": "1.37 1.39 1.22 1/1468 290777",
+    "open3d": "0.19.0",
+    "fyp_df_so": "/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/svo_registration/scripts/fyp_df.cpython-38-x86_64-linux-gnu.so",
+    "twin_points": 402142,
+    "df_iterations_median": 26.0
+  },
+  "core": {
+    "p2p_icp": {
+      "n": 917,
+      "median_ms": 160.02592301811092,
+      "p90_ms": 167.2964116150979,
+      "mean_ms": 160.91351978586948,
+      "max_ms": 218.66500901523978
+    },
+    "p2p_kdtree_build_only": {
+      "n": 917,
+      "median_ms": 154.04585999203846,
+      "p90_ms": 159.95071639772505,
+      "mean_ms": 155.1555447059383,
+      "max_ms": 217.79879298992455
+    },
+    "df_cpp_call": {
+      "n": 917,
+      "median_ms": 1.1891019821632653,
+      "p90_ms": 1.7259172105696052,
+      "mean_ms": 1.2710433117342013,
+      "max_ms": 3.706037998199463
+    },
+    "df_cpp_internal": {
+      "n": 917,
+      "median_ms": 1.133186,
+      "p90_ms": 1.6633779999999998,
+      "mean_ms": 1.2146315899672846,
+      "max_ms": 3.648826
+    },
+    "speedup_median_p2p_over_df": 134.57712241550965
+  },
+  "end_to_end": {
+    "p2p": {
+      "n": 917,
+      "median_ms": 277.87404198898,
+      "p90_ms": 288.21670179022476,
+      "mean_ms": 278.63336894295566,
+      "max_ms": 326.67209301143885
+    },
+    "df": {
+      "n": 917,
+      "median_ms": 35.685583017766476,
+      "p90_ms": 40.736994397593655,
+      "mean_ms": 35.98519488774934,
+      "max_ms": 60.54392398800701
+    },
+    "df_hess": {
+      "n": 917,
+      "median_ms": 4.6082350017968565,
+      "p90_ms": 5.3872535878326735,
+      "mean_ms": 4.726915273814378,
+      "max_ms": 16.074676997959614
+    }
+  },
+  "node_split": {
+    "p2p": {
+      "preproc": {
+        "n": 917,
+        "median_ms": 84.42399999999999,
+        "p90_ms": 85.6658,
+        "mean_ms": 84.74414721919301,
+        "max_ms": 113.543
+      },
+      "reg": {
+        "n": 917,
+        "median_ms": 159.792,
+        "p90_ms": 167.9792,
+        "mean_ms": 160.84429007633588,
+        "max_ms": 193.65099999999998
+      },
+      "info": {
+        "n": 917,
+        "median_ms": 32.080999999999996,
+        "p90_ms": 36.5372,
+        "mean_ms": 31.792793893129772,
+        "max_ms": 85.952
+      }
+    },
+    "df": {
+      "preproc": {
+        "n": 917,
+        "median_ms": 1.986,
+        "p90_ms": 2.1924,
+        "mean_ms": 2.0001101417666303,
+        "max_ms": 4.804
+      },
+      "reg": {
+        "n": 917,
+        "median_ms": 1.453,
+        "p90_ms": 2.0014,
+        "mean_ms": 1.5431494002181025,
+        "max_ms": 4.0489999999999995
+      },
+      "info": {
+        "n": 917,
+        "median_ms": 30.925,
+        "p90_ms": 35.476,
+        "mean_ms": 31.2235092693566,
+        "max_ms": 55.978
+      }
+    },
+    "df_hess": {
+      "preproc": {
+        "n": 917,
+        "median_ms": 1.984,
+        "p90_ms": 2.1804,
+        "mean_ms": 2.007131952017448,
+        "max_ms": 11.315999999999999
+      },
+      "reg": {
+        "n": 917,
+        "median_ms": 1.445,
+        "p90_ms": 1.9732,
+        "mean_ms": 1.519701199563795,
+        "max_ms": 4.078
+      },
+      "info": {
+        "n": 917,
+        "median_ms": 0.10500000000000001,
+        "p90_ms": 0.12539999999999998,
+        "mean_ms": 0.11013958560523447,
+        "max_ms": 0.357
+      }
+    }
+  },
+  "memory": {
+    "df": {
+      "grid_bytes": 23408340,
+      "rss_delta_kB": 23056,
+      "peak_delta_kB": 23056,
+      "note": "re-measured after the loader fix (payload read straight into the grid buffer); the timing run's loader peaked at 47772 kB because of an intermediate copy. Solver unchanged."
+    },
+    "p2p": {
+      "points": 402142,
+      "rss_delta_twin_kB": 19416,
+      "rss_delta_kdtree_kB": 16688,
+      "peak_delta_kB": 38220
+    }
+  },
+  "per_iteration": {
+    "n_matched": 912,
+    "p2p_iterations_median": 9.0,
+    "p2p_iter_ge25": 239,
+    "p2p_solve_excl_kdtree_ms": {
+      "median": 5.198630009545013,
+      "p90": 12.076381003134884
+    },
+    "p2p_per_iteration_ms": {
+      "median": 0.4596170079561749,
+      "p90": 1.076701739414906,
+      "n": 673
+    },
+    "p2p_per_point_iteration_us": 1.2983362541745493,
+    "df_iterations_median": 26.0,
+    "df_per_iteration_ms": {
+      "median": 0.04331524317617866,
+      "p90": 0.05156501613793104
+    },
+    "df_per_lookup_us": 0.053830091438071485,
+    "n_points_median": 350.0,
+    "note": "P2P solve = registration_icp time minus the KD-tree build timed alone on the same target (difference, indirect). P2P iterations from Phase 7 (accuracy_p2p_d0.5.csv, cap 100; M2 cap 25). DF per-iteration includes rejected LM trial evaluations; per-lookup = internal time / grid lookups. P2P per-iteration only over KFs with < 25 Phase 7 iterations (same count under both caps)."
+  }
+}
