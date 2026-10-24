@@ -54,6 +54,7 @@ Ceres estimator: PoseError(T_vio_B_meas, information) on the KF whose stamp matc
 | Topics | sub `/svo/w_backend_pose_points`; pub `/svo/w_registrated_pose`, `/svo/w_backend_points_registered`, `/city_twin` (latched); service `/visualize_city_twin` | [43-49](../svo_registration/scripts/online_registration.py#L43-L49) |
 
 Remarks:
+- **RViz caveat (user check, 2026-10-24, Phase 9 smoke run):** RViz draws the `covariance` field of `/svo/w_registrated_pose` (display `/svo/global_pose_registrated`) as a covariance ellipsoid. That field carries the INFORMATION matrix (scaled up to 81 on the position diagonal by the scale factors), so the ellipsoid appears huge where the measurement is actually tight. This holds for **both M2 and M3** (and for M3's Hessian option); the display is misleading for this topic and must not be read as uncertainty. Ignore it or disable the covariance display.
 - **The information matrix is heuristic, not a Hessian-based covariance.** The rotational Jacobian row is normalised to unit length, which drops the lever-arm magnitude. `aᵢ` are absolute map-frame coordinates, so the rotation is about the map origin. The result is normalised by its largest entry, so its absolute scale is set by the two scale factors, not by the data. M3 must output information in the same convention (§6, open decision D4).
 - `aᵢ × nᵢ = 0` (a point parallel to its normal) would divide by zero. This is unlikely, but not guarded.
 - The rotation-angle check uses `arccos` without clipping. A trace slightly above 3 gives NaN, and NaN comparisons pass the check.
