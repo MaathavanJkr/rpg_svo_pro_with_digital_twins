@@ -93,3 +93,8 @@ The first timing run measured a peak of +47.8 MB for the grid load, because the 
 - The C++ module reproduces the prototype to ~1e-13 on every logged V1_01 keyframe, so the Phase 7 offline accuracy, jitter and basin results carry over to the C++ module unchanged (for these inputs).
 - The M3 node's M2 path is the M2 node (identical outputs to the logged online runs), and its DF path equals the prototype; M2 and M3 therefore differ only in the registration step.
 - Timing is offline, single-threaded, and excludes ROS transport. Online CPU use (Open3D multi-threaded in M2) is measured in Phase 9. Nothing here says anything about closed-loop accuracy (Phase 9).
+
+## 7. Hypothesis status after Phase 8 and report wording (approved 2026-10-24)
+- **Solver (report wording):** "Levenberg–Marquardt on SE(3) in C++/Eigen, verified against the prototype to ~1e-13."
+- **H2 (speed), headline:** per iteration **~10×** faster (DF 0.043 ms vs P2P 0.46 ms median; the P2P per-iteration figure is **indirect**: ICP time minus the separately timed KD-tree build, divided by Phase 7 iteration counts, on the 673 KFs that converged in < 25 iterations), and the overall solve **without the KD-tree rebuild ~4–5×** faster (1.13 vs ~5.2 ms median; DF needs ~3× more iterations). **The 135× figure (160 vs 1.19 ms) is a property of M2's implementation** (Open3D rebuilds the KD-tree of the whole twin on every call) and is reported only with that label, never as the algorithmic speed-up. Status: supported (offline, single core).
+- **H4 (memory), reworded:** "At room scale the DF grid (23 MB, v = 0.05 m) is comparable to and slightly smaller than P2P's map + KD-tree (~36 MB). Memory grows with volume × (1/v)³; city-scale extrapolation and sparse storage are Phase 10."

@@ -3,6 +3,7 @@
 # Usage: analysis/run_euroc.sh <run_id> <sequence> <launch_file_in_svo_ros> [extra roslaunch args...]
 #   e.g. analysis/run_euroc.sh 2026-10-23_MH_01_easy_M1_r01 MH_01_easy euroc_m1.launch
 # Output: runs/<run_id>/{meta.txt, launch/, config/, svo.log, run.bag, cpu.csv[, frame_events.csv]}
+# cpu.csv: system busy %, svo_node % of one core, registration node % of one core (empty for M1).
 # The frame-event log path is always set to runs/<run_id>/frame_events.csv; it is only written if
 # log_frame_events:=true is passed.
 # Must be run WITHOUT the analysis venv active.
@@ -43,12 +44,16 @@ fi
   echo "input_bag: $INPUT_BAG (rosbag play, rate 1, no --clock)"
   echo "svo_node binary: $(readlink -f "$WS/devel/lib/svo_ros/svo_node") $(stat -c %y "$(readlink -f "$WS/devel/lib/svo_ros/svo_node")")"
   LIB="$WS/devel/.private/svo_ros/lib/libsvo_ros.so"; echo "libsvo_ros: $(stat -c %y "$LIB") md5 $(md5sum "$LIB" | cut -c1-12)"
+  echo "svo_node md5: $(md5sum "$(readlink -f "$WS/devel/lib/svo_ros/svo_node")" | cut -c1-12)"
+  for f in "$REPO"/svo_registration/scripts/fyp_df.cpython-38-*.so "$REPO"/svo_registration/scripts/online_registration_fyp.py "$REPO"/svo_registration/scripts/online_registration_m3.py; do
+    [ -e "$f" ] && echo "$(basename "$f") md5: $(md5sum "$f" | cut -c1-12)"
+  done
   echo "loadavg_before: $(cat /proc/loadavg)"
   echo "nproc: $(nproc)"
 } > "$RUN/meta.txt"
 cp "$LAUNCH_PATH" "$RUN/launch/"
 cp "$REPO"/svo_ros/param/fyp/euroc/*.yaml "$RUN/config/"
-cp "$REPO"/svo_registration/config/euroc_v1.yaml "$REPO"/dataset/derived/euroc_twin/*.json "$RUN/config/" 2>/dev/null
+cp "$REPO"/svo_registration/config/euroc_*.yaml "$REPO"/dataset/derived/euroc_twin/*.json "$RUN/config/" 2>/dev/null
 
 roslaunch svo_ros "$LAUNCH" "${EXTRA[@]}" "$@" > "$RUN/svo.log" 2>&1 &
 LAUNCH_PID=$!
@@ -62,23 +67,33 @@ SVO_PID=""
 for c in $(pgrep -P $LAUNCH_PID) $LAUNCH_PID; do
   p="$(pgrep -P "$c" -x svo_node | head -1)"; [ -n "$p" ] && SVO_PID="$p" && break
 done
-echo "nodes ready after ~${i}s, svo_node pid ${SVO_PID}" >> "$RUN/meta.txt"
+# Registration node (M2/M3) of THIS roslaunch, if any.
+REG_PID=""
+for c in $(pgrep -P $LAUNCH_PID) $LAUNCH_PID; do
+  p="$(pgrep -P "$c" -f 'online_registration' | head -1)"; [ -n "$p" ] && REG_PID="$p" && break
+done
+echo "nodes ready after ~${i}s, svo_node pid ${SVO_PID}, registration node pid ${REG_PID:-none}" >> "$RUN/meta.txt"
 if [ -z "$SVO_PID" ]; then
   echo "ABORT: svo_node did not start within 60 s (see svo.log)" | tee -a "$RUN/meta.txt" >&2
   kill -INT $LAUNCH_PID 2>/dev/null; wait $LAUNCH_PID 2>/dev/null; exit 1
 fi
 
-# CPU sampler: 1 Hz, system-wide busy % and svo_node % of one core.
+# CPU sampler: 1 Hz, system-wide busy %, svo_node and registration node % of one core.
 (
-  echo "wall_time,sys_busy_pct,svo_node_pct_one_core"
+  echo "wall_time,sys_busy_pct,svo_node_pct_one_core,reg_node_pct_one_core"
   read -r _ a b c d e f g _ < /proc/stat; prev_tot=$((a+b+c+d+e+f+g)); prev_idle=$((d+e))
   prev_p=$(awk '{print $14+$15}' /proc/$SVO_PID/stat 2>/dev/null || echo 0)
+  prev_r=$( [ -n "$REG_PID" ] && awk '{print $14+$15}' /proc/$REG_PID/stat 2>/dev/null || echo 0)
   hz=$(getconf CLK_TCK)
   while kill -0 "$SVO_PID" 2>/dev/null; do
     sleep 1
     read -r _ a b c d e f g _ < /proc/stat; tot=$((a+b+c+d+e+f+g)); idle=$((d+e))
     p=$(awk '{print $14+$15}' /proc/$SVO_PID/stat 2>/dev/null || echo "$prev_p")
-    echo "$(date +%s.%N),$(( 100*((tot-prev_tot)-(idle-prev_idle))/(tot-prev_tot) )),$(( 100*(p-prev_p)/hz ))"
+    rc=""
+    if [ -n "$REG_PID" ]; then
+      r=$(awk '{print $14+$15}' /proc/$REG_PID/stat 2>/dev/null || echo "$prev_r"); rc=$(( 100*(r-prev_r)/hz )); prev_r=$r
+    fi
+    echo "$(date +%s.%N),$(( 100*((tot-prev_tot)-(idle-prev_idle))/(tot-prev_tot) )),$(( 100*(p-prev_p)/hz )),$rc"
     prev_tot=$tot; prev_idle=$idle; prev_p=$p
   done
 ) > "$RUN/cpu.csv" &

@@ -146,7 +146,7 @@ def main():
                                                   p95=1e3 * float(np.percentile(lat, 95))))
     cpu_path = os.path.join(args.run, "cpu.csv")
     if os.path.exists(cpu_path):
-        c = np.loadtxt(cpu_path, delimiter=",", skiprows=1, ndmin=2)
+        c = np.loadtxt(cpu_path, delimiter=",", skiprows=1, ndmin=2, usecols=(0, 1, 2))  # col 3 (reg node) may be empty
         busy = c[c[:, 2] > 5]  # samples while svo_node was active
         runtime["cpu"] = dict(svo_node_pct_one_core_mean=float(busy[:, 2].mean()),
                               system_busy_pct_mean=float(busy[:, 1].mean()), samples=int(len(busy)))

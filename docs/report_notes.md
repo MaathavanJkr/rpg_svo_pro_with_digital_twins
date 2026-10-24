@@ -7,4 +7,6 @@
 - **A4. Identical measurement weighting (main comparison).** M3 reports its information matrix in M2's heuristic convention (normalised ∇D in place of the surface normal). A Hessian-based covariance for both is an ablation (2×2). *(Decision D4.)*
 
 ## Facts worth citing
+- M3 solver (Phase 8): "Levenberg–Marquardt on SE(3) in C++/Eigen, verified against the prototype to ~1e-13" (docs/phase8_cpp.md).
+- H2 headline: ~10× per iteration (P2P figure indirect) and ~4–5× per solve without M2's per-call KD-tree rebuild; 135× only as a labelled property of M2's implementation (docs/phase8_cpp.md §7).
 - The original pipeline only activates map registration after a GPS-based 4-DoF alignment. Registered poses enter the Ceres window as absolute pose priors (Huber δ = 50) on the keyframe with a matching stamp (±1 ms). *(docs/pipeline_notes.md)*
