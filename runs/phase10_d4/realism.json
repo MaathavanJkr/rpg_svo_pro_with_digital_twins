@@ -1,0 +1,352 @@
+{
+  "inputs": "Phase 9 M2 runs p9 r01-r10 (logged cloud_filtered), accepted KFs per method",
+  "p2p_verdict_equals_logged_M2": "6658/6658",
+  "results": {
+    "P2P/V1_01_easy": {
+      "n_accepted": 1806,
+      "empirical_pos_rms_per_axis_m": 0.06541990355484592,
+      "mean_error_vector_m": [
+        0.04027056644205015,
+        0.004004383870838805,
+        -0.0038764508057216175
+      ],
+      "mean_error_norm_m": 0.04065440299153081,
+      "sensitivity_bias_removed": {
+        "empirical_pos_rms_per_axis_m": 0.061064203536873744,
+        "hess_nees_mean_over_3": 53.55441021212001,
+        "hess_nees_median": 62.50173763750625
+      },
+      "empirical_err_median_m": 0.07592545025646447,
+      "empirical_yaw_noise_deg": 0.4377634039765935,
+      "heur": {
+        "n": 1806,
+        "implied_pos_rms_per_axis_m": 0.40046071710189673,
+        "ratio_pos_implied_over_empirical": 6.121389597680521,
+        "nees_mean": 0.19271431484951465,
+        "nees_mean_over_3": 0.06423810494983821,
+        "nees_median": 0.08121217253418195,
+        "frac_nees_below_chi2_95": 1.0,
+        "implied_yaw_median_deg": 70.72016291043619,
+        "ratio_yaw_implied_over_empirical": 161.5488235609057
+      },
+      "hess": {
+        "n": 1806,
+        "implied_pos_rms_per_axis_m": 0.014369087525489967,
+        "ratio_pos_implied_over_empirical": 0.21964397293009444,
+        "nees_mean": 200.18869937036587,
+        "nees_mean_over_3": 66.72956645678862,
+        "nees_median": 82.14159015909135,
+        "frac_nees_below_chi2_95": 0.048726467331118496,
+        "implied_yaw_median_deg": 0.21978733477514667,
+        "ratio_yaw_implied_over_empirical": 0.5020687722605939
+      },
+      "hessbody": {
+        "n": 1806,
+        "implied_pos_rms_per_axis_m": 0.009936173432590624,
+        "ratio_pos_implied_over_empirical": 0.15188303394945332,
+        "nees_mean": 302.13778827029074,
+        "nees_mean_over_3": 100.71259609009691,
+        "nees_median": 97.024645981165,
+        "frac_nees_below_chi2_95": 0.03433001107419712,
+        "implied_yaw_median_deg": 0.21978733477514664,
+        "ratio_yaw_implied_over_empirical": 0.5020687722605938
+      }
+    },
+    "P2P/V1_02_medium": {
+      "n_accepted": 2003,
+      "empirical_pos_rms_per_axis_m": 0.04776688704605826,
+      "mean_error_vector_m": [
+        0.003661581682436683,
+        0.0014837037881325068,
+        0.0038514104940443428
+      ],
+      "mean_error_norm_m": 0.0055174196996158895,
+      "sensitivity_bias_removed": {
+        "empirical_pos_rms_per_axis_m": 0.047660551731562924,
+        "hess_nees_mean_over_3": 25.096826956163678,
+        "hess_nees_median": 37.97472487401701
+      },
+      "empirical_err_median_m": 0.05963166808241627,
+      "empirical_yaw_noise_deg": 0.3736165618141008,
+      "heur": {
+        "n": 2003,
+        "implied_pos_rms_per_axis_m": 0.35020906975140464,
+        "ratio_pos_implied_over_empirical": 7.331628485936766,
+        "nees_mean": 0.12608723777547826,
+        "nees_mean_over_3": 0.04202907925849275,
+        "nees_median": 0.05685676705428146,
+        "frac_nees_below_chi2_95": 1.0,
+        "implied_yaw_median_deg": 59.086310741392786,
+        "ratio_yaw_implied_over_empirical": 158.14692596735628
+      },
+      "hess": {
+        "n": 2003,
+        "implied_pos_rms_per_axis_m": 0.015960167980269262,
+        "ratio_pos_implied_over_empirical": 0.33412619007137706,
+        "nees_mean": 77.3253749711693,
+        "nees_mean_over_3": 25.775124990389767,
+        "nees_median": 39.211463601401825,
+        "frac_nees_below_chi2_95": 0.15526709935097355,
+        "implied_yaw_median_deg": 0.18689187115939274,
+        "ratio_yaw_implied_over_empirical": 0.5002237327273086
+      },
+      "hessbody": {
+        "n": 2003,
+        "implied_pos_rms_per_axis_m": 0.011395996681088795,
+        "ratio_pos_implied_over_empirical": 0.2385752429313728,
+        "nees_mean": 131.59971689137754,
+        "nees_mean_over_3": 43.86657229712585,
+        "nees_median": 52.77309098954426,
+        "frac_nees_below_chi2_95": 0.07139291063404893,
+        "implied_yaw_median_deg": 0.18689187115939274,
+        "ratio_yaw_implied_over_empirical": 0.5002237327273086
+      }
+    },
+    "P2P/V2_02_medium": {
+      "n_accepted": 2706,
+      "empirical_pos_rms_per_axis_m": 0.04939808157036833,
+      "mean_error_vector_m": [
+        -0.009503405223464746,
+        0.0029606389025811845,
+        0.005506418607443909
+      ],
+      "mean_error_norm_m": 0.011375444581784867,
+      "sensitivity_bias_removed": {
+        "empirical_pos_rms_per_axis_m": 0.048959543329382446,
+        "hess_nees_mean_over_3": 20.756785710160926,
+        "hess_nees_median": 28.700341791618527
+      },
+      "empirical_err_median_m": 0.05562992793778001,
+      "empirical_yaw_noise_deg": 0.503506249037273,
+      "heur": {
+        "n": 2706,
+        "implied_pos_rms_per_axis_m": 0.3266210102522475,
+        "ratio_pos_implied_over_empirical": 6.612018116269774,
+        "nees_mean": 0.15822866421284695,
+        "nees_mean_over_3": 0.052742888070948984,
+        "nees_median": 0.05788670949216511,
+        "frac_nees_below_chi2_95": 1.0,
+        "implied_yaw_median_deg": 62.082530969288705,
+        "ratio_yaw_implied_over_empirical": 123.30041799479817
+      },
+      "hess": {
+        "n": 2706,
+        "implied_pos_rms_per_axis_m": 0.015194821505994088,
+        "ratio_pos_implied_over_empirical": 0.30759942538150653,
+        "nees_mean": 65.24766102065446,
+        "nees_mean_over_3": 21.749220340218155,
+        "nees_median": 29.630023158970502,
+        "frac_nees_below_chi2_95": 0.1662971175166297,
+        "implied_yaw_median_deg": 0.24342586002078948,
+        "ratio_yaw_implied_over_empirical": 0.4834614475713675
+      },
+      "hessbody": {
+        "n": 2706,
+        "implied_pos_rms_per_axis_m": 0.012695903658222018,
+        "ratio_pos_implied_over_empirical": 0.2570120793079081,
+        "nees_mean": 98.21363358109781,
+        "nees_mean_over_3": 32.737877860365934,
+        "nees_median": 42.994781798619904,
+        "frac_nees_below_chi2_95": 0.10384331116038432,
+        "implied_yaw_median_deg": 0.2434258600207896,
+        "ratio_yaw_implied_over_empirical": 0.4834614475713677
+      }
+    },
+    "DF/V1_01_easy": {
+      "n_accepted": 1838,
+      "empirical_pos_rms_per_axis_m": 0.06223980548251169,
+      "mean_error_vector_m": [
+        0.03738761626633611,
+        0.003476904966433169,
+        -0.0018676529221019907
+      ],
+      "mean_error_norm_m": 0.03759535670347928,
+      "sensitivity_bias_removed": {
+        "empirical_pos_rms_per_axis_m": 0.05833229326836847,
+        "hess_nees_mean_over_3": 36.12912282329274,
+        "hess_nees_median": 44.1170640982987
+      },
+      "empirical_err_median_m": 0.06972086371254874,
+      "empirical_yaw_noise_deg": 0.3479459282578983,
+      "heur": {
+        "n": 1838,
+        "implied_pos_rms_per_axis_m": 0.33414983921122104,
+        "ratio_pos_implied_over_empirical": 5.368748128641105,
+        "nees_mean": 0.21870132210708784,
+        "nees_mean_over_3": 0.07290044070236261,
+        "nees_median": 0.09828793164940719,
+        "frac_nees_below_chi2_95": 1.0,
+        "implied_yaw_median_deg": 63.460069698243416,
+        "ratio_yaw_implied_over_empirical": 182.38486082011764
+      },
+      "hess": {
+        "n": 1838,
+        "implied_pos_rms_per_axis_m": 0.016149999869404245,
+        "ratio_pos_implied_over_empirical": 0.25948024329770947,
+        "nees_mean": 128.79272928756095,
+        "nees_mean_over_3": 42.930909762520315,
+        "nees_median": 48.82019798421567,
+        "frac_nees_below_chi2_95": 0.07671381936887922,
+        "implied_yaw_median_deg": 0.247753343871371,
+        "ratio_yaw_implied_over_empirical": 0.7120455327982331
+      },
+      "hessbody": {
+        "n": 1838,
+        "implied_pos_rms_per_axis_m": 0.01154353901375583,
+        "ratio_pos_implied_over_empirical": 0.18546875145680466,
+        "nees_mean": 200.6885801863014,
+        "nees_mean_over_3": 66.8961933954338,
+        "nees_median": 62.41729995431112,
+        "frac_nees_below_chi2_95": 0.0544069640914037,
+        "implied_yaw_median_deg": 0.24775334387137116,
+        "ratio_yaw_implied_over_empirical": 0.7120455327982337
+      }
+    },
+    "DF/V1_02_medium": {
+      "n_accepted": 2003,
+      "empirical_pos_rms_per_axis_m": 0.041624656046869754,
+      "mean_error_vector_m": [
+        0.0014766865772933928,
+        -0.0028821076704030764,
+        0.004764485684948608
+      ],
+      "mean_error_norm_m": 0.005760856855836199,
+      "sensitivity_bias_removed": {
+        "empirical_pos_rms_per_axis_m": 0.041491559388013674,
+        "hess_nees_mean_over_3": 16.878004480878012,
+        "hess_nees_median": 21.170397633569046
+      },
+      "empirical_err_median_m": 0.04624804182244157,
+      "empirical_yaw_noise_deg": 0.2611073879316559,
+      "heur": {
+        "n": 2003,
+        "implied_pos_rms_per_axis_m": 0.3102766267500104,
+        "ratio_pos_implied_over_empirical": 7.45415472984656,
+        "nees_mean": 0.11359980763933293,
+        "nees_mean_over_3": 0.03786660254644431,
+        "nees_median": 0.04800924458027461,
+        "frac_nees_below_chi2_95": 1.0,
+        "implied_yaw_median_deg": 56.221873000402944,
+        "ratio_yaw_implied_over_empirical": 215.3208817481597
+      },
+      "hess": {
+        "n": 2003,
+        "implied_pos_rms_per_axis_m": 0.017144887443478155,
+        "ratio_pos_implied_over_empirical": 0.4118925913567394,
+        "nees_mean": 52.371472067426744,
+        "nees_mean_over_3": 17.457157355808913,
+        "nees_median": 22.527887075808195,
+        "frac_nees_below_chi2_95": 0.254618072890664,
+        "implied_yaw_median_deg": 0.19956068550676434,
+        "ratio_yaw_implied_over_empirical": 0.7642858637113661
+      },
+      "hessbody": {
+        "n": 2003,
+        "implied_pos_rms_per_axis_m": 0.012382956690960999,
+        "ratio_pos_implied_over_empirical": 0.29749090724059496,
+        "nees_mean": 92.03794081789167,
+        "nees_mean_over_3": 30.679313605963888,
+        "nees_median": 29.955502953222876,
+        "frac_nees_below_chi2_95": 0.16874687968047927,
+        "implied_yaw_median_deg": 0.19956068550676423,
+        "ratio_yaw_implied_over_empirical": 0.7642858637113656
+      }
+    },
+    "DF/V2_02_medium": {
+      "n_accepted": 2721,
+      "empirical_pos_rms_per_axis_m": 0.0406816134082806,
+      "mean_error_vector_m": [
+        -0.00875356660587576,
+        0.0023969991011647345,
+        0.007405528537453669
+      ],
+      "mean_error_norm_m": 0.011713769074620198,
+      "sensitivity_bias_removed": {
+        "empirical_pos_rms_per_axis_m": 0.04011553573770334,
+        "hess_nees_mean_over_3": 13.915610715590473,
+        "hess_nees_median": 15.29325835166012
+      },
+      "empirical_err_median_m": 0.04436997740672865,
+      "empirical_yaw_noise_deg": 0.30468825157921664,
+      "heur": {
+        "n": 2721,
+        "implied_pos_rms_per_axis_m": 0.3050201810252711,
+        "ratio_pos_implied_over_empirical": 7.4977405139783695,
+        "nees_mean": 0.126377391104088,
+        "nees_mean_over_3": 0.042125797034695996,
+        "nees_median": 0.03807461619551636,
+        "frac_nees_below_chi2_95": 1.0,
+        "implied_yaw_median_deg": 60.7173920287918,
+        "ratio_yaw_implied_over_empirical": 199.27710278978623
+      },
+      "hess": {
+        "n": 2721,
+        "implied_pos_rms_per_axis_m": 0.01630899567352388,
+        "ratio_pos_implied_over_empirical": 0.4008935316760136,
+        "nees_mean": 43.1199577165599,
+        "nees_mean_over_3": 14.3733192388533,
+        "nees_median": 15.605670213025899,
+        "frac_nees_below_chi2_95": 0.31201764057331866,
+        "implied_yaw_median_deg": 0.26130355555784096,
+        "ratio_yaw_implied_over_empirical": 0.8576095540392177
+      },
+      "hessbody": {
+        "n": 2721,
+        "implied_pos_rms_per_axis_m": 0.013163809506334724,
+        "ratio_pos_implied_over_empirical": 0.3235813037753138,
+        "nees_mean": 67.77311013016897,
+        "nees_mean_over_3": 22.591036710056326,
+        "nees_median": 26.43889861525574,
+        "frac_nees_below_chi2_95": 0.21940463065049615,
+        "implied_yaw_median_deg": 0.26130355555784096,
+        "ratio_yaw_implied_over_empirical": 0.8576095540392177
+      }
+    }
+  },
+  "calibrated_hessian_proposal": {
+    "P2P": {
+      "k_squared_fitted_on_V1_01": 66.72956645678862,
+      "k": 8.168816710931187,
+      "V1_01_easy": {
+        "nees_mean_over_3_after": 1.0,
+        "ratio_pos_after": 1.7942313565266728,
+        "ratio_yaw_after": 4.101307776879044,
+        "frac_nees_below_chi2_95_after": 0.907530454042082
+      },
+      "V1_02_medium": {
+        "nees_mean_over_3_after": 0.3862624374621211,
+        "ratio_pos_after": 2.729415605014835,
+        "ratio_yaw_after": 4.086235987107214,
+        "frac_nees_below_chi2_95_after": 0.9900149775336995
+      },
+      "V2_02_medium": {
+        "nees_mean_over_3_after": 0.32593079042858875,
+        "ratio_pos_after": 2.512723326329281,
+        "ratio_yaw_after": 3.949307952011969,
+        "frac_nees_below_chi2_95_after": 0.9892830746489283
+      }
+    },
+    "DF": {
+      "k_squared_fitted_on_V1_01": 42.930909762520315,
+      "k": 6.552168325258465,
+      "V1_01_easy": {
+        "nees_mean_over_3_after": 1.0,
+        "ratio_pos_after": 1.700158231165612,
+        "ratio_yaw_after": 4.6654421861423705,
+        "frac_nees_below_chi2_95_after": 0.9085963003264418
+      },
+      "V1_02_medium": {
+        "nees_mean_over_3_after": 0.40663376230264325,
+        "ratio_pos_after": 2.6987895904962564,
+        "ratio_yaw_after": 5.007729627652421,
+        "frac_nees_below_chi2_95_after": 0.9850224663005491
+      },
+      "V2_02_medium": {
+        "nees_mean_over_3_after": 0.33480117981104474,
+        "ratio_pos_after": 2.6267219000485773,
+        "ratio_yaw_after": 5.6192021554148,
+        "frac_nees_below_chi2_95_after": 0.9849320102903344
+      }
+    }
+  }
+}
