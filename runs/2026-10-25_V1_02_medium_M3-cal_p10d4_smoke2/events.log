@@ -1,0 +1,21 @@
+{
+  "published": 281,
+  "processed": 281,
+  "dropped_by_queue": 0,
+  "accepted": 232,
+  "rejected": 49,
+  "received_by_svo": 232,
+  "branches": {
+    "initial_discard": 1,
+    "to_handler": 231
+  },
+  "added": 231,
+  "added_lines_in_rosout": 231,
+  "unmatched_added_lines": 0,
+  "runtime_ms_median": {
+    "preproc": 1.4885470154695213,
+    "icp": 1.4689050149172544,
+    "info": 0.23713050177320838,
+    "total": 3.202070016413927
+  }
+}
