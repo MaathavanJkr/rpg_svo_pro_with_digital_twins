@@ -14,6 +14,10 @@ Queue-drop flag (pre-registered): a sequence is flagged if M2's mean dropped_by_
 A test needs >= 2 non-failed runs in both groups, otherwise it is reported as not computable.
 Usage (venv): python analysis/phase9_aggregate.py [--pattern '*_p9_r[0-9][0-9]']
 Output: runs/phase9/aggregate.json, runs/phase9/table.md
+Phase 10 throughput control (same statistics, other groups):
+  python analysis/phase9_aggregate.py --pattern '*_p10tc_r[0-9][0-9]' --seqs V1_02_medium V2_02_medium \
+      --methods M2F M3 --primary M2F M3 --out runs/phase10_tc
+  (primary = the given pair, Holm across the given sequences; the drop flag compares the same pair.)
 """
 import argparse
 import glob
@@ -70,9 +74,13 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--pattern", default="*_p9_r[0-9][0-9]")
     ap.add_argument("--out", default=os.path.join(REPO, "runs/phase9"))
+    ap.add_argument("--seqs", nargs="+", default=SEQS)
+    ap.add_argument("--methods", nargs="+", default=METHODS)
+    ap.add_argument("--primary", nargs=2, default=["M2", "M3"])
     args = ap.parse_args()
+    seqs, methods, (pa, pb) = args.seqs, args.methods, args.primary
     runs = [json.load(open(f)) for f in sorted(glob.glob(os.path.join(REPO, "runs", args.pattern, "analysis/phase9_run.json")))]
-    G = {(s, m): [r for r in runs if r["sequence"] == s and r["method"] == m] for s in SEQS for m in METHODS}
+    G = {(s, m): [r for r in runs if r["sequence"] == s and r["method"] == m] for s in seqs for m in methods}
     ok = {k: [r for r in v if not r["failed"]] for k, v in G.items()}
     col = lambda k, key: [r.get(key) for r in ok[k]]
 
@@ -92,32 +100,33 @@ def main():
 
     primary = {}
     for key in PRIMARY:
-        tests = [welch(col((s, "M2"), key), col((s, "M3"), key)) for s in SEQS]
+        tests = [welch(col((s, pa), key), col((s, pb), key)) for s in seqs]
         adj = holm([t.get("p") if t["computable"] else None for t in tests])
-        for s, t, a in zip(SEQS, tests, adj):
+        for s, t, a in zip(seqs, tests, adj):
             t["p_holm"] = a
             t["significant_holm_0.05"] = bool(a is not None and a < 0.05)
-        primary[key] = dict(zip(SEQS, tests))
+        primary[key] = dict(zip(seqs, tests))
 
     secondary = {}
-    for s in SEQS:
+    for s in seqs:
         sec = {}
-        for key in PRIMARY + SECONDARY:
-            sec[f"{key}: M2 vs M1"] = welch(col((s, "M1"), key), col((s, "M2"), key))
-            sec[f"{key}: M3 vs M1"] = welch(col((s, "M1"), key), col((s, "M3"), key))
-        sec["rel_disp_m_mean: M3 vs M2"] = welch(col((s, "M2"), "rel_disp_m_mean"), col((s, "M3"), "rel_disp_m_mean"))
+        if "M1" in methods:
+            for key in PRIMARY + SECONDARY:
+                sec[f"{key}: {pa} vs M1"] = welch(col((s, "M1"), key), col((s, pa), key))
+                sec[f"{key}: {pb} vs M1"] = welch(col((s, "M1"), key), col((s, pb), key))
+        sec[f"rel_disp_m_mean: {pb} vs {pa}"] = welch(col((s, pa), "rel_disp_m_mean"), col((s, pb), "rel_disp_m_mean"))
         for key in ("accepted", "added", "dropped_by_queue"):
-            sec[f"{key}: M3 vs M2"] = welch(col((s, "M2"), key), col((s, "M3"), key))
+            sec[f"{key}: {pb} vs {pa}"] = welch(col((s, pa), key), col((s, pb), key))
         secondary[s] = sec
 
     flags = {}
-    for s in SEQS:
-        d2, d3 = per[f"{s}/M2"]["drop_fraction"], per[f"{s}/M3"]["drop_fraction"]
+    for s in seqs:
+        d2, d3 = per[f"{s}/{pa}"]["drop_fraction"], per[f"{s}/{pb}"]["drop_fraction"]
         f2, f3 = (d2 or {}).get("mean"), (d3 or {}).get("mean")
-        flags[s] = dict(m2_drop_fraction=f2, m3_drop_fraction=f3,
-                        flag=bool(f2 is not None and f3 is not None and f2 >= 0.05 and f2 > 2 * f3))
+        flags[s] = {f"{pa.lower()}_drop_fraction": f2, f"{pb.lower()}_drop_fraction": f3,
+                    "flag": bool(f2 is not None and f3 is not None and f2 >= 0.05 and f2 > 2 * f3)}
 
-    out = dict(n_runs=len(runs), per_sequence_method=per, primary_M2_vs_M3=primary,
+    out = dict(n_runs=len(runs), per_sequence_method=per, **{f"primary_{pa}_vs_{pb}": primary},
                secondary_exploratory_uncorrected=secondary, queue_drop_flags=flags)
     os.makedirs(args.out, exist_ok=True)
     json.dump(out, open(os.path.join(args.out, "aggregate.json"), "w"), indent=2)
@@ -125,16 +134,16 @@ def main():
     f = lambda e: "–" if not e else (f"{e['mean']:.3f} ± {e['std']:.3f}" if e["std"] is not None else f"{e['mean']:.3f}")
     L = ["| Sequence | Method | runs (failed) | map-frame ATE [m] | 4-DoF ATE [m] | rel. disp. [m] | accepted / published | dropped | latency [ms] |",
          "|---|---|---|---|---|---|---|---|---|"]
-    for s in SEQS:
-        for m in METHODS:
+    for s in seqs:
+        for m in methods:
             e = per[f"{s}/{m}"]
             reg = "–" if m == "M1" else f"{f(e['accepted'])} / {f(e['published'])}"
             L.append(f"| {s} | {m} | {e['runs']} ({e['failed']}) | {f(e['map_frame_ate_m'])} | {f(e['ate_4dof_m'])} | "
                      f"{f(e['rel_disp_m_mean'])} | {reg} | {'–' if m == 'M1' else f(e['dropped_by_queue'])} | "
                      f"{'–' if m == 'M1' else f(e['latency_ms_median'])} |")
-    L += ["", "| Primary: M3 − M2 | metric | diff [m] (95 % CI) | p (Welch) | p (Holm, 4 seq.) |", "|---|---|---|---|---|"]
+    L += ["", f"| Primary: {pb} − {pa} | metric | diff [m] (95 % CI) | p (Welch) | p (Holm, 4 seq.) |", "|---|---|---|---|---|"]
     for key in PRIMARY:
-        for s in SEQS:
+        for s in seqs:
             t = primary[key][s]
             L.append(f"| {s} | {key} | " + (f"{t['diff']:+.4f} [{t['ci95'][0]:+.4f}, {t['ci95'][1]:+.4f}] | {t['p']:.3g} | {t['p_holm']:.3g} |"
                                             if t["computable"] else "not computable | – | – |"))

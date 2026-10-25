@@ -6,13 +6,13 @@ Failure (pre-registered reset rule + harness checks), first matching reason wins
   harness   : meta.txt has a FAILED line or no "done" line (node died, external session, abort)
   reset     : any SVO full reset (stage Relocalization -> Paused) in frame_events.csv
   no_map    : no map-frame ATE could be computed (no D1 alignment / map_frame_ate.json missing)
-  M2/M3 only, no_online_d1: the online D1 alignment did not fire (d1_alignment.csv missing or empty)
+  registration methods only (M2, M2F, M3), no_online_d1: the online D1 alignment did not fire (d1_alignment.csv missing or empty)
 Failed runs are counted per method and sequence and excluded from ATE / RPE / drift statistics.
 
 Metrics written to runs/<run>/analysis/phase9_run.json:
   ATE 4-DoF (eval_vio), map-frame ATE (initial_alignment, t > t_end), relative displacement error
   (mean over the RPE segment lengths), D1 online-vs-offline yaw difference (M2/M3).
-  Registration (M2/M3): published / processed / dropped_by_queue / accepted / rejected / added
+  Registration (M2, M2F, M3): published / processed / dropped_by_queue / accepted / rejected / added
   (phase6_events), callback time per KF (registration.csv: preprocessing + registration + information;
   median, p90), latency per accepted KF = svo_node receipt wall time of the registered pose
   (registration_events.csv) - wall time at which rosbag record received the keyframe cloud (run.bag;
@@ -21,7 +21,7 @@ Metrics written to runs/<run>/analysis/phase9_run.json:
   Real-time factors: rtf_playback = play wall time / bag duration (rate 1.0, a check that playback was
   not slowed); frontend_rtf = mean frontend time / 50 ms (eval_vio); registration_load = sum of
   registration callback times / bag duration; frames_dropped_pct (eval_vio).
-Usage (venv + ROS): python analysis/phase9_run_metrics.py runs/<run_id> <sequence> <M1|M2|M3>
+Usage (venv + ROS): python analysis/phase9_run_metrics.py runs/<run_id> <sequence> <M1|M2|M2F|M3>
 """
 import csv
 import json
@@ -63,7 +63,7 @@ def main(run, seq, method):
         reason = "reset" if rs else "no frame_events.csv"
     elif mfa is None or summ is None:
         reason = "no_map"
-    elif method in ("M2", "M3") and d1_online is None:
+    elif method != "M1" and d1_online is None:
         reason = "no_online_d1"
     out["failed"] = reason is not None
     out["failure_reason"] = reason
@@ -101,7 +101,7 @@ def main(run, seq, method):
         out["cpu_reg_node_pct_mean"] = float(np.mean(reg)) if reg else None
         out["cpu_system_busy_pct_mean"] = float(np.mean([float(r["sys_busy_pct"]) for r in act])) if act else None
 
-    if method in ("M2", "M3"):
+    if method != "M1":
         ev = load(os.path.join(an, "events_summary.json"))
         if ev:
             out.update({k: ev[k] for k in ("published", "processed", "dropped_by_queue", "accepted", "rejected", "added")})

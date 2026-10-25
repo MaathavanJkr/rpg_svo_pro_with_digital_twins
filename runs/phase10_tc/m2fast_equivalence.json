@@ -1,0 +1,163 @@
+{
+  "tolerances": {
+    "T": 1e-12,
+    "rmse": 1e-12,
+    "pose": 1e-12,
+    "info_rel": 1e-12
+  },
+  "groups": {
+    "V1_01_easy": [
+      "2026-10-23_V1_01_easy_M2_p6_r0*",
+      "2026-10-24_V1_01_easy_M2_p9_r*"
+    ],
+    "V1_02_medium": [
+      "2026-10-24_V1_02_medium_M2_p9_r*"
+    ],
+    "V2_02_medium": [
+      "2026-10-24_V2_02_medium_M2_p9_r*"
+    ],
+    "V2_03_difficult": [
+      "2026-10-24_V2_03_difficult_M2_p9_r*"
+    ]
+  },
+  "V1_01_easy": {
+    "n_kf": 2775,
+    "verdict_equal": 2775,
+    "n_target_equal": 2775,
+    "fitness_equal": 2775,
+    "ncorr_equal": 2775,
+    "tree_rebuilt": 0,
+    "accepted": 2713,
+    "T_icp_maxabs": {
+      "max": 6.938893903907228e-15,
+      "median": 7.216449660063518e-16
+    },
+    "rmse_abs": {
+      "max": 6.38378239159465e-16,
+      "median": 3.469446951953614e-17
+    },
+    "pose_maxabs": {
+      "max": 8.215650382226158e-15,
+      "median": 8.881784197001252e-16
+    },
+    "info_rel": {
+      "max": 3.827983957850253e-15,
+      "median": 4.638270007086889e-16
+    },
+    "callback_ms_median_indicative": 77.79579900670797,
+    "pass": true
+  },
+  "V1_02_medium": {
+    "n_kf": 2003,
+    "verdict_equal": 2003,
+    "n_target_equal": 2003,
+    "fitness_equal": 2003,
+    "ncorr_equal": 2003,
+    "tree_rebuilt": 0,
+    "accepted": 2003,
+    "T_icp_maxabs": {
+      "max": 9.769962616701378e-15,
+      "median": 8.673617379884035e-16
+    },
+    "rmse_abs": {
+      "max": 7.494005416219807e-16,
+      "median": 4.163336342344337e-17
+    },
+    "pose_maxabs": {
+      "max": 9.325873406851315e-15,
+      "median": 8.881784197001252e-16
+    },
+    "info_rel": {
+      "max": 3.669200812152177e-15,
+      "median": 5.882734861096435e-16
+    },
+    "callback_ms_median_indicative": 83.47344299545512,
+    "pass": true
+  },
+  "V2_02_medium": {
+    "n_kf": 2811,
+    "verdict_equal": 2811,
+    "n_target_equal": 2811,
+    "fitness_equal": 2811,
+    "ncorr_equal": 2811,
+    "tree_rebuilt": 0,
+    "accepted": 2706,
+    "T_icp_maxabs": {
+      "max": 9.665879208142769e-15,
+      "median": 7.077671781985373e-16
+    },
+    "rmse_abs": {
+      "max": 7.632783294297951e-16,
+      "median": 4.163336342344337e-17
+    },
+    "pose_maxabs": {
+      "max": 9.43689570931383e-15,
+      "median": 8.881784197001252e-16
+    },
+    "info_rel": {
+      "max": 3.5630049412184876e-15,
+      "median": 7.606912118909619e-16
+    },
+    "callback_ms_median_indicative": 80.02036600373685,
+    "pass": true
+  },
+  "V2_03_difficult": {
+    "n_kf": 1970,
+    "verdict_equal": 1970,
+    "n_target_equal": 1970,
+    "fitness_equal": 1970,
+    "ncorr_equal": 1970,
+    "tree_rebuilt": 2,
+    "accepted": 191,
+    "T_icp_maxabs": {
+      "max": 23.63755283910612,
+      "median": 1.205632815803881e-15
+    },
+    "rmse_abs": {
+      "max": 8.604228440844963e-16,
+      "median": 5.551115123125783e-17
+    },
+    "pose_maxabs": {
+      "max": 3.9968028886505635e-15,
+      "median": 9.992007221626409e-16
+    },
+    "info_rel": {
+      "max": 2.3084401546369627e-15,
+      "median": 5.633962906589659e-16
+    },
+    "callback_ms_median_indicative": 64.27176199213136,
+    "pass": false
+  },
+  "all": {
+    "n_kf": 9559,
+    "verdict_equal": 9559,
+    "n_target_equal": 9559,
+    "fitness_equal": 9559,
+    "ncorr_equal": 9559,
+    "tree_rebuilt": 2,
+    "accepted": 7613,
+    "T_icp_maxabs": {
+      "max": 23.63755283910612,
+      "median": 8.344019919448442e-16
+    },
+    "rmse_abs": {
+      "max": 8.604228440844963e-16,
+      "median": 4.163336342344337e-17
+    },
+    "pose_maxabs": {
+      "max": 9.43689570931383e-15,
+      "median": 8.881784197001252e-16
+    },
+    "info_rel": {
+      "max": 3.827983957850253e-15,
+      "median": 5.962574908738014e-16
+    },
+    "callback_ms_median_indicative": 78.19268500315957,
+    "pass": false
+  },
+  "n_reason_rows": {
+    "V1": 4778,
+    "V2": 4781
+  },
+  "note_V2_03": "V2_03 fails only the T_icp tolerance, on 2 KFs of the failed run M2_p9_r03 (VIO diverged outside the room: kf_1413394894255760500, n_target 402036, and kf_1413394894405760500, n_target 321169) that have ZERO correspondences (fitness 0, rejected for fitness; nothing published). Open3D 0.19's point-to-plane ICP returns an undefined transform in that case (it solves an all-zero 6x6 system): the logged online T_icp translations (-12.5, -1.7, 13.3 m) and (302.6, -252.3, -2.0 m) differ from offline Open3D replays of the same inputs (-137.4, -1.6, -1.7 m) and (2.4, -351.0, 0.7 m). M2-fast returns the identity there. Verdict, fitness, rmse, correspondences, n_target and all published outputs are identical on all 9559 KFs. The crop fallback (tree_rebuilt) ran on exactly the 2 KFs whose crop removed twin points (kf_1413394894405760500, kf_1413394894705760500); the second has correspondences and matches M2 within 1e-12."
+}
