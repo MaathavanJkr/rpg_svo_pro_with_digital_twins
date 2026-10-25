@@ -32,5 +32,24 @@ Secondary (4-DoF ATE, same test, labelled secondary): V1_02 −0.0026 [−0.0107
 - On V2_02, M2F's run-to-run spread is much larger than M3's (std 0.024 vs 0.004 m; M2F runs range 0.062–0.143 m, M3 0.067–0.079 m). M3 was similarly consistent in Phase 9 (0.081 ± 0.006). The point estimate still favours M3 by 20 mm, but with n = 9–10 and this unequal spread the difference does not survive Holm. A test of the variances was not pre-registered and is not claimed.
 - Speed: M2F's callback (81–85 ms) is 3.5× shorter than M2's but still ~2.3× M3's (35–37 ms); the remaining M2F cost is the Python ICP loop plus M2's information heuristic (~31 ms, shared with M3).
 
-## 4. What this means for H3
-Phase 9 wording stays: "M3 matched M2 within ±1.4 cm (95 % CI) on V1_01 and V1_02, and was 14 mm lower on V2_02 (Holm p = 0.016); attribution to the algorithm pending the throughput control." **Throughput control outcome: inconclusive on V2_02** (and V1_02): with throughput equalised, M3 is still lower on average (−20 mm, unadjusted 95 % CI excludes 0) but not significantly after Holm, and the data cannot rule out an effect as large as Phase 9's. Neither attribution (algorithm or throughput) is supported by the pre-registered rule.
+## 4. What this means for H3 (report wording, approved 2026-10-25)
+"Throughput control inconclusive under the pre-registered rule: with throughput equalised, point-to-plane's mean was unchanged (0.094 vs 0.095 m), and M3 remained 20 mm lower on V2_02 (unadjusted 95% CI [−38, −2] mm; Holm p = 0.073)."
+The Phase 9 sentence stays as written. The rule is applied as written; no change to the rule.
+
+## 5. EXPLORATORY (not pre-registered; requested after the checkpoint; no claims)
+Script `analysis/phase10_tc_exploratory.py`, output `runs/phase10_tc/exploratory.json`, figure `docs/img/phase10_tc_v2_02_r05.png`.
+
+**Run-to-run variability, M2F vs M3** (valid runs; Brown-Forsythe = Levene with median centring):
+| Sequence | metric | std M2F / M3 [m] | ratio | Brown-Forsythe W, p |
+|---|---|---|---|---|
+| V1_02 | map-frame ATE | 0.0121 / 0.0149 | 0.81 | 0.27, 0.61 |
+| V1_02 | 4-DoF ATE | 0.0077 / 0.0088 | 0.88 | 0.40, 0.54 |
+| V2_02 | map-frame ATE | 0.0237 / 0.0045 | 5.3 | 6.18, 0.024 |
+| V2_02 | 4-DoF ATE | 0.0133 / 0.0046 | 2.9 | 6.73, 0.019 |
+On V2_02 M2F varies more from run to run than M3 (p ≈ 0.02 for both metrics, uncorrected, exploratory); on V1_02 the spreads are similar. Not a confirmatory finding.
+
+**Worst M2F run on V2_02 (r05, map-frame ATE 0.143 m), descriptive:**
+- Its map-frame error exceeds the other M2F runs' 90th percentile from ~2 s after the D1 window and stays above it for 61 % of the time; it peaks at 0.31 m at ~17 s, then converges to the other runs' level after ~45 s.
+- In the first 20 s its registrations measure a consistent heading offset: mean correction yaw −3.4° (every other valid M2F and M3 run on V2_02: within ±1.0°). Over the whole run its accepted corrections are larger (median 0.116 m / 2.4° vs 0.089 m / 1.4° pooled over the other M2F runs) while fitness (median 1.0) and inlier RMSE (0.080 vs 0.077 m) are normal, and the registered poses themselves are about as accurate vs GT as in the other runs (median 0.061 vs 0.056 m). Reading: the run started with a ~3° heading mismatch between the VIO and map frames (D1 window and/or early VIO yaw drift); the registrations detected it, and the backend absorbed it only gradually. Poor-fitness or large-correction outliers do not explain the early excursion.
+- A second, shorter excursion at ~40 s coincides with a burst of accepted registrations whose poses are 0.3–0.6 m from GT; a smaller bump at the same time is visible in most M2F and M3 runs (a common section of the flight).
+- Nothing was changed as a result of this diagnosis.

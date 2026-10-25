@@ -54,6 +54,7 @@ Each phase ends at a GATE. Do not start the next phase until the user approves.
 3. **Initial-alignment robustness** (yaw offsets {0, 2, 5, 10}°, refine_T_WL off/on; see the Phase 10 experiment above).
 4. **City-scale memory extrapolation** (H4, Oerlikon bounding volume, dense vs sparse; see the Phase 10 item above).
 5. Optional: voxel-size/truncation ablations online, V2_01 with a re-alignment hook, Oerlikon M3, embedded profiling.
+   - Optional (added 2026-10-25): **fresh V2_02 replication** M2-fast vs M3 with a pre-registered sample size (e.g. 20 runs each), single test, new runs only (no topping up of the existing throughput-control runs).
 - **Sequences and limitations (Phase 9 decision):** V2_03 joins V1_03 as a limitation, reported descriptively only (failure counts 9 / 8 / 5 of 10 for M1 / M2 / M3, same reset times for all methods; acceptance limits derived on V1 and not retuned, so M2 ran effectively VIO-only on V2_03).
 
 ## Phase 10 throughput control pre-registration (written 2026-10-25, BEFORE any run of this experiment)

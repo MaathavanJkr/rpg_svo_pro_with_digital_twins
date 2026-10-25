@@ -7,6 +7,7 @@
 - **A4. Identical measurement weighting (main comparison).** M3 reports its information matrix in M2's heuristic convention (normalised ∇D in place of the surface normal). A Hessian-based covariance for both is an ablation (2×2). *(Decision D4.)*
 
 ## Facts worth citing
+- H3 throughput control (Phase 10, report wording): "Throughput control inconclusive under the pre-registered rule: with throughput equalised, point-to-plane's mean was unchanged (0.094 vs 0.095 m), and M3 remained 20 mm lower on V2_02 (unadjusted 95% CI [−38, −2] mm; Holm p = 0.073)." (docs/phase10_throughput.md)
 - H3 (Phase 9, report wording): "M3 matched M2 within ±1.4 cm (95 % CI) on V1_01 and V1_02, and was 14 mm lower on V2_02 (Holm p = 0.016); attribution to the algorithm pending the throughput control." On V1_02 M2 dropped 28 % of clouds yet matched M3. M1 vs digital twin (pre-registered secondary): p ≤ 6e-5 on V1_02 and V2_02 (survives any correction); V1_01 local-consistency cost in the discussion. V2_03: limitation with V1_03, descriptive only (docs/phase9_online.md).
 - M3 solver (Phase 8): "Levenberg–Marquardt on SE(3) in C++/Eigen, verified against the prototype to ~1e-13" (docs/phase8_cpp.md).
 - H2 headline: ~10× per iteration (P2P figure indirect) and ~4–5× per solve without M2's per-call KD-tree rebuild; 135× only as a labelled property of M2's implementation (docs/phase8_cpp.md §7).
