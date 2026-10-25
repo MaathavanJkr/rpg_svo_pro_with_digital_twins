@@ -1,0 +1,64 @@
+<!-- FYP M3: distance-field digital-twin registration on EuRoC (Vicon Room 1), Phase 8.
+     Identical to euroc_m2.launch (svo_node, D1(B), gpose_settings_m2.yaml, twin) except the registration
+     node: online_registration_m3.py (copy of online_registration_fyp.py differing only in the
+     registration step) with svo_registration/config/euroc_v1_m3.yaml (registration_method:
+     distance_field) and the distance grid passed as df_grid (built by analysis/df_grid.py; header and
+     twin md5 verified by the node). Needs svo_registration/scripts/fyp_df.*.so
+     (svo_registration/df_cpp/build.sh). registration_config:=.../euroc_v1.yaml would run the M2 path.
+     Text of euroc_m2.launch, for reference:
+     svo_node configuration identical to euroc_m1.launch (same calibration, same VIO params) except:
+       1. use_global_measurements=true AND use_map_registration=true: registered poses only reach the
+          backend in this combination (docs/pipeline_notes.md section 3). No GPS topic is published, so
+          the GPS handler stays idle (gp_topic points to an unused name).
+       2. D1(B) one-time initial alignment from GT positions over the first 2 m of flight (d1_alignment,
+          svo_ros FYP code) replaces the GPS alignment; refine_T_WL is false (gpose_settings_m2.yaml), so T_w_vio stays fixed.
+       3. Registration node: online_registration_fyp.py (parameterised copy, defaults = original) with
+          svo_registration/config/euroc_v1.yaml and the preprocessed Leica twin (decision D3).
+     Output line-buffered (stdbuf / python3 -u); I/O only.
+     Usage: roslaunch svo_ros euroc_m3.launch [rviz:=true] [log_frame_events:=true]
+            (d1_gt_file defaults to V1_01_easy ground truth; override it for other sequences) -->
+<launch>
+  <arg name="param_dir" default="$(find svo_ros)/param/fyp/euroc"/>
+  <arg name="reference_map" default="$(find svo_ros)/../dataset/derived/euroc_twin/V1_leica_v30mm.ply"/>
+  <arg name="registration_config" default="$(find svo_registration)/config/euroc_v1_m3.yaml"/>
+  <arg name="df_grid" default="$(find svo_ros)/../dataset/derived/euroc_twin/df/V1_leica_v30mm_udf_v50mm.bin"/>
+  <arg name="d1_gt_file" default="$(find svo_ros)/../dataset/derived/asl_meta/V1_01_easy/mav0/state_groundtruth_estimate0/data.csv"/>
+  <arg name="d1_log_file" default="/tmp/svo_d1_alignment.csv"/>
+  <arg name="d1_window_length" default="2.0"/>
+  <arg name="registration_log_file" default="/tmp/svo_registration.csv"/>
+  <arg name="registration_event_dir" default="none"/>  <!-- Phase 6 per-KF .npz dump; "none" = off -->
+  <arg name="log_registration_events" default="false"/>
+  <arg name="registration_event_log_file" default="/tmp/svo_registration_events.csv"/>
+  <arg name="rviz" default="false"/>
+  <arg name="log_frame_events" default="false"/>
+  <arg name="frame_event_log_file" default="/tmp/svo_frame_events.csv"/>
+
+  <node pkg="svo_ros" type="svo_node" name="svo" clear_params="true" output="screen" args="--v=0" launch-prefix="stdbuf -oL -eL">
+    <param name="cam0_topic" value="/cam0/image_raw" type="str" />
+    <param name="imu_topic" value="/imu0" type="str" />
+    <param name="calib_file" value="$(arg param_dir)/euroc_mono.yaml" />
+    <rosparam file="$(arg param_dir)/vio_mono.yaml" />
+
+    <param name="use_global_measurements" value="true" />
+    <param name="gp_topic" value="/fyp_unused_gps" type="str" />
+    <param name="gp_settings_file" value="$(arg param_dir)/gp_settings.yaml" />
+    <param name="use_map_registration" value="true" />
+    <param name="map_alignement_T_w_b" value="/svo/w_registrated_pose" type="str" />
+    <param name="map_reg_settings_file" value="$(arg param_dir)/gpose_settings_m2.yaml" />
+
+    <param name="d1_alignment" value="true" />
+    <param name="d1_gt_file" value="$(arg d1_gt_file)" />
+    <param name="d1_log_file" value="$(arg d1_log_file)" />
+    <param name="d1_window_length" value="$(arg d1_window_length)" type="double" />
+
+    <param name="log_registration_events" value="$(arg log_registration_events)" />
+    <param name="registration_event_log_file" value="$(arg registration_event_log_file)" />
+    <param name="log_frame_events" value="$(arg log_frame_events)" />
+    <param name="frame_event_log_file" value="$(arg frame_event_log_file)" />
+  </node>
+
+  <node pkg="svo_registration" type="online_registration_m3.py" name="online_registration" output="screen" launch-prefix="python3 -u"
+        args="--config-file $(arg registration_config) --reference-map $(arg reference_map) --log-file $(arg registration_log_file) --event-dir $(arg registration_event_dir) --df-grid $(arg df_grid)"/>
+
+  <node if="$(arg rviz)" name="vis" pkg="rviz" type="rviz" args=" -d $(find svo_ros)/RVIZ/rviz_config_digital_twins.rviz" />
+</launch>

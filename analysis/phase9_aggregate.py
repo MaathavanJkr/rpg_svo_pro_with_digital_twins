@@ -141,7 +141,7 @@ def main():
             L.append(f"| {s} | {m} | {e['runs']} ({e['failed']}) | {f(e['map_frame_ate_m'])} | {f(e['ate_4dof_m'])} | "
                      f"{f(e['rel_disp_m_mean'])} | {reg} | {'–' if m == 'M1' else f(e['dropped_by_queue'])} | "
                      f"{'–' if m == 'M1' else f(e['latency_ms_median'])} |")
-    L += ["", f"| Primary: {pb} − {pa} | metric | diff [m] (95 % CI) | p (Welch) | p (Holm, 4 seq.) |", "|---|---|---|---|---|"]
+    L += ["", f"| Primary: {pb} − {pa} | metric | diff [m] (95 % CI) | p (Welch) | p (Holm, {len(seqs)} seq.) |", "|---|---|---|---|---|"]
     for key in PRIMARY:
         for s in seqs:
             t = primary[key][s]
