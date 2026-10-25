@@ -7,7 +7,8 @@ are driven with the rebuilt message (as analysis/phase8_node_timing.py; publishe
 computed with the step 1 functions (analysis/phase10_d4_realism.py) on the node's own filtered cloud:
   P2P: p2p_icp_persistent ICP, p2p_offline.information_heuristic / information_hessian;
   DF : fyp_df.register, df_register.validate / information_heuristic / information_hessian;
-  calibrated: S H S with the factors in runs/phase10_d4/calibration.json.
+  Hessian options re-expressed about the body pose (D4 deviation 2026-10-25): A_body = T^T H_wv T, implemented here
+  independently of the nodes; calibrated: S A_body S with the factors in runs/phase10_d4/calibration.json.
 Tolerances (fixed before running): verdict equal; published pose max |dT| <= 1e-12; published information
 max |dA| / max |A| <= 1e-12.
 Usage (system python3, catkin sourced): python3 analysis/phase10_d4_node_check.py <sequence>   (one process per sequence)
@@ -40,6 +41,17 @@ def published(obj):
     T[:3, :3] = t3d.quaternions.quat2mat([o.w, o.x, o.y, o.z])
     T[:3, 3] = [p.x, p.y, p.z]
     return T, np.array(m.pose.covariance).reshape(6, 6)
+
+
+def to_body(A_pr, p):
+    """Independent implementation for the check: [v, w] Hessian about the map origin -> information about the body."""
+    perm = [3, 4, 5, 0, 1, 2]
+    H_wv = A_pr[np.ix_(perm, perm)]
+    T = np.zeros((6, 6))
+    T[0:3, 3:6] = np.eye(3)
+    T[3:6, 0:3] = np.eye(3)
+    T[3, 4], T[3, 5], T[4, 3], T[4, 5], T[5, 3], T[5, 4] = -p[2], p[1], p[2], -p[0], -p[1], p[0]
+    return T.T @ H_wv @ T
 
 
 def run(seq):
@@ -92,12 +104,12 @@ def run(seq):
         ok = not (r.fitness < cfg["fitness_threshold"] or r.inlier_rmse > cfg["inliers_rmse_thr"]
                   or np.linalg.norm(T[:3, 3]) > cfg["max_translation_distance"] or ang > cfg["max_rotation_distance"])
         res = dict(correspondences=r.correspondence_set, inlier_rmse=r.inlier_rmse, T_c=T)
-        H = p2p.information_hessian(pts, res, tw_P, tw_N) if ok else None
+        H = to_body(p2p.information_hessian(pts, res, tw_P, tw_N), (T @ Ti)[:3, 3]) if ok else None
         exp["P2P"] = (ok, T @ Ti, {"heuristic": p2p.information_heuristic(pts, res, tw_N) if ok else None, "hessian": H,
                                    "hessian_calibrated": H * np.outer(S["P2P"], S["P2P"]) if ok else None})
         d = fyp_df.register(g, pts, mu=None, delta=0.05, max_iter=100)
         v = dfr.validate(d)
-        Hd = dfr.information_hessian(d) if v["valid"] else None
+        Hd = to_body(dfr.information_hessian(d), (d["T_c"] @ Ti)[:3, 3]) if v["valid"] else None
         exp["DF"] = (v["valid"], d["T_c"] @ Ti, {"heuristic": dfr.information_heuristic(pts, d, v["inliers"]) if v["valid"] else None,
                                                  "hessian": Hd, "hessian_calibrated": Hd * np.outer(S["DF"], S["DF"]) if v["valid"] else None})
         for (m, o), node in nodes.items():
@@ -124,7 +136,7 @@ def run(seq):
 
 def summary():
     out = {}
-    for f in sorted(glob.glob(os.path.join(OUT, "node_check_*_*.json"))):
+    for f in sorted(glob.glob(os.path.join(OUT, "node_check_[VM]*_*.json"))):
         d = json.load(open(f))
         out[d["sequence"]] = d
     out["all_pass"] = all(s["pass"] for d in out.values() if isinstance(d, dict) for s in d["results"].values())

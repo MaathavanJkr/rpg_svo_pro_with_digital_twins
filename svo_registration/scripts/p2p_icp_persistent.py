@@ -116,3 +116,18 @@ def hessian_information(points, result, tgt_points, tgt_normals):
     s2 = float(np.sum(r ** 2) / max(len(r) - 6, 1))
     P = np.zeros((6, 6)); P[:3, 3:] = np.eye(3); P[3:, :3] = np.eye(3)
     return P @ (H / max(s2, 1e-12)) @ P.T
+
+
+def body_information(A_pr, p_body):
+    """Phase 10 D4 fix (docs/PLAN.md deviation 2026-10-25): Hessian information as computed ([pos = v, rot = w] of the
+    left perturbation (w, v) of the correction about the map origin) re-expressed about the body pose, the backend's
+    convention ([body position, body rotation]): A_body = Jinv^T H_wv Jinv with Jinv: [dp; dtheta] -> (w = dtheta,
+    v = dp + [p_body]x dtheta), i.e. the inverse of dp = v - [p_body]x w, dtheta = w."""
+    P = np.zeros((6, 6)); P[:3, 3:] = np.eye(3); P[3:, :3] = np.eye(3)
+    H_wv = P.T @ A_pr @ P
+    p = np.asarray(p_body, dtype=np.float64)
+    Jinv = np.zeros((6, 6))
+    Jinv[:3, 3:] = np.eye(3)
+    Jinv[3:, :3] = np.eye(3)
+    Jinv[3:, 3:] = np.array([[0, -p[2], p[1]], [p[2], 0, -p[0]], [-p[1], p[0], 0]])
+    return Jinv.T @ H_wv @ Jinv

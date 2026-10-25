@@ -1,109 +1,110 @@
 {
   "definition": "docs/phase10_d4_realism.md, 'Calibrated Hessian: definition' (recorded 2026-10-25T17:45:23+05:30)",
+  "hessian_convention": "body-centred (D4 deviation 2026-10-25T20:49:46+05:30)",
   "P2P": {
-    "k_p": 8.168816710931187,
-    "k_p_squared": 66.72956645678862,
-    "k_r": 1.9917590084271561,
-    "k_r_squared": 3.9671039476507284,
+    "k_p": 10.035566555511299,
+    "k_p_squared": 100.71259609009691,
+    "k_r": 1.9917590084271564,
+    "k_r_squared": 3.9671039476507293,
     "fit": {
-      "mean_nees_v1_01": 200.18869937036587,
+      "mean_nees_v1_01": 302.13778827029074,
       "empirical_yaw_noise_v1_01_deg": 0.4377634039765935,
-      "median_implied_yaw_v1_01_deg": 0.21978733477514667
+      "median_implied_yaw_v1_01_deg": 0.21978733477514664
     },
     "V1_01_easy": {
       "in_sample": true,
       "n": 1806,
-      "nees_mean_over_3": 1.0000000000000002,
-      "nees_median": 1.2309624431964943,
-      "frac_nees_below_chi2_95": 0.907530454042082,
-      "implied_pos_rms_per_axis_m": 0.11737844229905531,
-      "ratio_pos": 1.794231356526673,
+      "nees_mean_over_3": 1.0,
+      "nees_median": 0.9633814413280272,
+      "frac_nees_below_chi2_95": 0.8964562569213732,
+      "implied_pos_rms_per_axis_m": 0.09971512978986637,
+      "ratio_pos": 1.5242322958527208,
       "implied_yaw_median_deg": 0.4377634039765935,
       "ratio_yaw": 1.0
     },
     "V1_02_medium": {
       "in_sample": false,
       "n": 2003,
-      "nees_mean_over_3": 0.3862624374621211,
-      "nees_median": 0.5876175387231624,
-      "frac_nees_below_chi2_95": 0.9900149775336995,
-      "implied_pos_rms_per_axis_m": 0.1303756869064924,
-      "ratio_pos": 2.729415605014835,
+      "nees_mean_over_3": 0.43556192571863667,
+      "nees_median": 0.5239969282723459,
+      "frac_nees_below_chi2_95": 0.9770344483275087,
+      "implied_pos_rms_per_axis_m": 0.11436528315945246,
+      "ratio_pos": 2.3942377289350683,
       "implied_yaw_median_deg": 0.3722435679835279,
       "ratio_yaw": 0.9963251258886751
     },
     "V2_02_medium": {
       "in_sample": false,
       "n": 2706,
-      "nees_mean_over_3": 0.3259307904285886,
-      "nees_median": 0.4440314051516836,
-      "frac_nees_below_chi2_95": 0.9892830746489283,
-      "implied_pos_rms_per_axis_m": 0.12412371183778109,
-      "ratio_pos": 2.5127233263292816,
-      "implied_yaw_median_deg": 0.48484564958053533,
-      "ratio_yaw": 0.9629386934275044
+      "nees_mean_over_3": 0.3250623966745811,
+      "nees_median": 0.426905704626629,
+      "frac_nees_below_chi2_95": 0.9878048780487805,
+      "implied_pos_rms_per_axis_m": 0.12741058614444645,
+      "ratio_pos": 2.57926182746486,
+      "implied_yaw_median_deg": 0.4848456495805356,
+      "ratio_yaw": 0.9629386934275049
     },
     "sensitivity_median_based_k_p": {
-      "k_p_squared": 34.71787693919465,
-      "k_p": 5.892187788860319,
+      "k_p_squared": 41.00833344860919,
+      "k_p": 6.403774937379451,
       "nees_mean_over_3": {
-        "V1_01_easy": 1.9220520475275507,
-        "V1_02_medium": 0.7424165088070523,
-        "V2_02_medium": 0.626455943095542
+        "V1_01_easy": 2.455905607973752,
+        "V1_02_medium": 1.0696989759922466,
+        "V2_02_medium": 0.7983225629344917
       },
       "note": "offline sensitivity only; not an online arm"
     }
   },
   "DF": {
-    "k_p": 6.552168325258465,
-    "k_p_squared": 42.930909762520315,
-    "k_r": 1.404404569564742,
-    "k_r_squared": 1.9723521950143283,
+    "k_p": 8.179009316257916,
+    "k_p_squared": 66.8961933954338,
+    "k_r": 1.404404569564741,
+    "k_r_squared": 1.9723521950143252,
     "fit": {
-      "mean_nees_v1_01": 128.79272928756095,
+      "mean_nees_v1_01": 200.6885801863014,
       "empirical_yaw_noise_v1_01_deg": 0.3479459282578983,
-      "median_implied_yaw_v1_01_deg": 0.247753343871371
+      "median_implied_yaw_v1_01_deg": 0.24775334387137116
     },
     "V1_01_easy": {
       "in_sample": true,
       "n": 1838,
-      "nees_mean_over_3": 1.0,
-      "nees_median": 1.1371806061011278,
-      "frac_nees_below_chi2_95": 0.9085963003264418,
-      "implied_pos_rms_per_axis_m": 0.10581751759723883,
-      "ratio_pos": 1.7001582311656118,
+      "nees_mean_over_3": 1.0000000000000002,
+      "nees_median": 0.933047110548619,
+      "frac_nees_below_chi2_95": 0.8879216539717084,
+      "implied_pos_rms_per_axis_m": 0.09441471313609566,
+      "ratio_pos": 1.5169506460399296,
       "implied_yaw_median_deg": 0.3479459282578983,
       "ratio_yaw": 1.0
     },
     "V1_02_medium": {
       "in_sample": false,
       "n": 2003,
-      "nees_mean_over_3": 0.4066337623026433,
-      "nees_median": 0.5247474884745063,
-      "frac_nees_below_chi2_95": 0.9850224663005491,
-      "implied_pos_rms_per_axis_m": 0.11233618844727913,
-      "ratio_pos": 2.698789590496256,
-      "implied_yaw_median_deg": 0.2802639386311722,
-      "ratio_yaw": 1.0733665594499782
+      "nees_mean_over_3": 0.45861075270178236,
+      "nees_median": 0.4477908447817239,
+      "frac_nees_below_chi2_95": 0.9695456814777833,
+      "implied_pos_rms_per_axis_m": 0.10128031813818832,
+      "ratio_pos": 2.433180901822846,
+      "implied_yaw_median_deg": 0.2802639386311718,
+      "ratio_yaw": 1.0733665594499766
     },
     "V2_02_medium": {
       "in_sample": false,
       "n": 2721,
-      "nees_mean_over_3": 0.3348011798110448,
-      "nees_median": 0.36350662726113514,
-      "frac_nees_below_chi2_95": 0.9849320102903344,
-      "implied_pos_rms_per_axis_m": 0.1068592848688405,
-      "ratio_pos": 2.6267219000485773,
-      "implied_yaw_median_deg": 0.36697590746894626,
-      "ratio_yaw": 1.204430776595058
+      "nees_mean_over_3": 0.33770287311442654,
+      "nees_median": 0.3952227663982508,
+      "frac_nees_below_chi2_95": 0.9886071297317163,
+      "implied_pos_rms_per_axis_m": 0.10766692058975623,
+      "ratio_pos": 2.646574498145174,
+      "implied_yaw_median_deg": 0.366975907468946,
+      "ratio_yaw": 1.204430776595057
     },
     "sensitivity_median_based_k_p": {
-      "k_p_squared": 20.63429284093942,
-      "k_p": 4.542498524043725,
+      "k_p_squared": 26.38122946601774,
+      "k_p": 5.136266101558382,
       "nees_mean_over_3": {
-        "V1_01_easy": 2.080561233353408,
-        "V1_02_medium": 0.846026442019524,
-        "V2_02_medium": 0.6965743555958434
+        "V1_01_easy": 2.5357496503945844,
+        "V1_02_medium": 1.1629220558307416,
+        "V2_02_medium": 0.8563299424371541
       },
       "note": "offline sensitivity only; not an online arm"
     }

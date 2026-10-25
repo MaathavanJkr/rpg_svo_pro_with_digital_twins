@@ -43,3 +43,13 @@ Transfer to the held-out sequences is imperfect: the V1_01 factor makes the Hess
 - **k_r:** chosen so that the median implied yaw σ on V1_01 equals the empirical per-KF yaw noise on V1_01 (KF-to-KF yaw jitter / √2, Phase 7 definition, median over runs); k_r = empirical yaw noise / median implied yaw σ (uncalibrated).
 - One pair (k_p, k_r) **per method** (P2P, DF), fitted on **V1_01 ONLY** (the logged Phase 9 M2 keyframes, as in step 1); applied unchanged to V1_02 and V2_02. V1_01 is in-sample.
 - **Rejected alternative:** a single factor for position and rotation (step 1 proposal above). Rejected because it cannot fit yaw (step 1: with the position-fitted single factor, yaw becomes underconfident by ×3.9–5.6). No online result of any D4 arm existed when this choice was made.
+
+## Deviation (2026-10-25T20:49:46+05:30, docs/PLAN.md): body-centred Hessian, refitted factors
+Two technical smoke runs with the frozen calibrated arms (map-origin Hessian) degraded on V1_02 (M2F-cal map-frame 0.229 m, M3-cal 0.382 m; the only online outcomes seen). Exactly one fix was made, decided by the user and recorded before any change: **both Hessian arms (`hessian`, `hessian_calibrated`, M2F and M3) are re-expressed about the body pose**, the backend's convention (PoseError on [body position, body rotation]): A_body = J⁻ᵀ H_wv J⁻¹, J⁻¹: [δp; δθ] → (w = δθ, v = δp + [p_body]× δθ). This is the "Hessian re-expressed at the body" diagnostic above, now used as the published matrix. **The heuristic arm is unchanged**: it is the faithful original M2 formula and keeps its map-origin convention (its rotational rows are normalised and its weights are weak, so the mismatch matters little there).
+
+Refit on V1_01 only, same pre-committed definitions (`runs/phase10_d4/calibration.json`; map-origin factors kept as `calibration_mapframe_superseded.json`):
+| | k_p (k_p²) | k_r | V1_01 NEES/3 (in-sample) | V1_02 NEES/3 | V2_02 NEES/3 | position ratio V1_01 / V1_02 / V2_02 | yaw ratio V1_01 / V1_02 / V2_02 |
+|---|---|---|---|---|---|---|---|
+| P2P | 10.04 (100.7) | 1.99 | 1.00 | 0.44 | 0.33 | 1.52 / 2.39 / 2.58 | 1.00 / 1.00 / 0.96 |
+| DF | 8.18 (66.9) | 1.40 | 1.00 | 0.46 | 0.34 | 1.52 / 2.43 / 2.65 | 1.00 / 1.07 / 1.20 |
+k_r is unchanged by the re-expression (the rotation block is the same); k_p grows because the body-centred Hessian is more overconfident in position. Median-based sensitivity (offline only, not an arm): k_p² = 41.0 (P2P), 26.4 (DF).

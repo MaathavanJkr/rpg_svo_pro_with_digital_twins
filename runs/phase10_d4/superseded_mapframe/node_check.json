@@ -1,0 +1,195 @@
+{
+  "V1_01_easy": {
+    "sequence": "V1_01_easy",
+    "n_kf": 1853,
+    "tolerances": {
+      "pose": 1e-12,
+      "info_rel": 1e-12
+    },
+    "results": {
+      "P2P/heuristic": {
+        "n": 1853,
+        "verdict_equal": 1853,
+        "accepted": 1814,
+        "pose_max": 2.7755575615628914e-15,
+        "info_rel_max": 0.0,
+        "info_rel_median": 0.0,
+        "pass": true
+      },
+      "P2P/hessian": {
+        "n": 1853,
+        "verdict_equal": 1853,
+        "accepted": 1814,
+        "pose_max": 2.7755575615628914e-15,
+        "info_rel_max": 0.0,
+        "info_rel_median": 0.0,
+        "pass": true
+      },
+      "P2P/hessian_calibrated": {
+        "n": 1853,
+        "verdict_equal": 1853,
+        "accepted": 1814,
+        "pose_max": 2.7755575615628914e-15,
+        "info_rel_max": 0.0,
+        "info_rel_median": 0.0,
+        "pass": true
+      },
+      "DF/heuristic": {
+        "n": 1853,
+        "verdict_equal": 1853,
+        "accepted": 1846,
+        "pose_max": 2.886579864025407e-15,
+        "info_rel_max": 0.0,
+        "info_rel_median": 0.0,
+        "pass": true
+      },
+      "DF/hessian": {
+        "n": 1853,
+        "verdict_equal": 1853,
+        "accepted": 1846,
+        "pose_max": 2.886579864025407e-15,
+        "info_rel_max": 0.0,
+        "info_rel_median": 0.0,
+        "pass": true
+      },
+      "DF/hessian_calibrated": {
+        "n": 1853,
+        "verdict_equal": 1853,
+        "accepted": 1846,
+        "pose_max": 2.886579864025407e-15,
+        "info_rel_max": 0.0,
+        "info_rel_median": 0.0,
+        "pass": true
+      }
+    }
+  },
+  "V1_02_medium": {
+    "sequence": "V1_02_medium",
+    "n_kf": 2003,
+    "tolerances": {
+      "pose": 1e-12,
+      "info_rel": 1e-12
+    },
+    "results": {
+      "P2P/heuristic": {
+        "n": 2003,
+        "verdict_equal": 2003,
+        "accepted": 2003,
+        "pose_max": 2.6645352591003757e-15,
+        "info_rel_max": 0.0,
+        "info_rel_median": 0.0,
+        "pass": true
+      },
+      "P2P/hessian": {
+        "n": 2003,
+        "verdict_equal": 2003,
+        "accepted": 2003,
+        "pose_max": 2.6645352591003757e-15,
+        "info_rel_max": 0.0,
+        "info_rel_median": 0.0,
+        "pass": true
+      },
+      "P2P/hessian_calibrated": {
+        "n": 2003,
+        "verdict_equal": 2003,
+        "accepted": 2003,
+        "pose_max": 2.6645352591003757e-15,
+        "info_rel_max": 0.0,
+        "info_rel_median": 0.0,
+        "pass": true
+      },
+      "DF/heuristic": {
+        "n": 2003,
+        "verdict_equal": 2003,
+        "accepted": 2003,
+        "pose_max": 2.55351295663786e-15,
+        "info_rel_max": 0.0,
+        "info_rel_median": 0.0,
+        "pass": true
+      },
+      "DF/hessian": {
+        "n": 2003,
+        "verdict_equal": 2003,
+        "accepted": 2003,
+        "pose_max": 2.55351295663786e-15,
+        "info_rel_max": 0.0,
+        "info_rel_median": 0.0,
+        "pass": true
+      },
+      "DF/hessian_calibrated": {
+        "n": 2003,
+        "verdict_equal": 2003,
+        "accepted": 2003,
+        "pose_max": 2.55351295663786e-15,
+        "info_rel_max": 0.0,
+        "info_rel_median": 0.0,
+        "pass": true
+      }
+    }
+  },
+  "V2_02_medium": {
+    "sequence": "V2_02_medium",
+    "n_kf": 2811,
+    "tolerances": {
+      "pose": 1e-12,
+      "info_rel": 1e-12
+    },
+    "results": {
+      "P2P/heuristic": {
+        "n": 2811,
+        "verdict_equal": 2811,
+        "accepted": 2706,
+        "pose_max": 2.4424906541753444e-15,
+        "info_rel_max": 0.0,
+        "info_rel_median": 0.0,
+        "pass": true
+      },
+      "P2P/hessian": {
+        "n": 2811,
+        "verdict_equal": 2811,
+        "accepted": 2706,
+        "pose_max": 2.4424906541753444e-15,
+        "info_rel_max": 0.0,
+        "info_rel_median": 0.0,
+        "pass": true
+      },
+      "P2P/hessian_calibrated": {
+        "n": 2811,
+        "verdict_equal": 2811,
+        "accepted": 2706,
+        "pose_max": 2.4424906541753444e-15,
+        "info_rel_max": 0.0,
+        "info_rel_median": 0.0,
+        "pass": true
+      },
+      "DF/heuristic": {
+        "n": 2811,
+        "verdict_equal": 2811,
+        "accepted": 2721,
+        "pose_max": 4.9960036108132044e-15,
+        "info_rel_max": 0.0,
+        "info_rel_median": 0.0,
+        "pass": true
+      },
+      "DF/hessian": {
+        "n": 2811,
+        "verdict_equal": 2811,
+        "accepted": 2721,
+        "pose_max": 4.9960036108132044e-15,
+        "info_rel_max": 0.0,
+        "info_rel_median": 0.0,
+        "pass": true
+      },
+      "DF/hessian_calibrated": {
+        "n": 2811,
+        "verdict_equal": 2811,
+        "accepted": 2721,
+        "pose_max": 4.9960036108132044e-15,
+        "info_rel_max": 0.0,
+        "info_rel_median": 0.0,
+        "pass": true
+      }
+    }
+  },
+  "all_pass": true
+}

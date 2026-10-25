@@ -59,7 +59,8 @@ registration_settings:
   df_max_iter: 100
   df_information: heuristic             # hessian = D4 ablation
 
-  # Phase 10 D4 (information convention; calibrated = S H S, S = diag(1/info_k_p I3, 1/info_k_r I3))
+  # Phase 10 D4 (information convention; calibrated = S H S, S = diag(1/info_k_p I3, 1/info_k_r I3); H = Hessian
+  # re-expressed about the body pose, factors refitted on V1_01 after the D4 deviation of 2026-10-25, see docs/PLAN.md)
   information: heuristic
-  info_k_p: 6.552168325258465
-  info_k_r: 1.404404569564742
+  info_k_p: 8.179009316257916
+  info_k_r: 1.404404569564741

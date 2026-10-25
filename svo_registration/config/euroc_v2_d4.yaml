@@ -49,7 +49,8 @@ registration_settings:
   twin_voxel_size: 0
   twin_min_z: null
 
-  # Phase 10 D4 (information convention; calibrated = S H S, S = diag(1/info_k_p I3, 1/info_k_r I3))
+  # Phase 10 D4 (information convention; calibrated = S H S, S = diag(1/info_k_p I3, 1/info_k_r I3); H = Hessian
+  # re-expressed about the body pose, factors refitted on V1_01 after the D4 deviation of 2026-10-25, see docs/PLAN.md)
   information: heuristic
-  info_k_p: 8.168816710931187
-  info_k_r: 1.9917590084271561
+  info_k_p: 10.035566555511299
+  info_k_r: 1.9917590084271564

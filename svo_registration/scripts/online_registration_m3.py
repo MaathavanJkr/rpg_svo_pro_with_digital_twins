@@ -16,6 +16,9 @@
 # heuristic | hessian | hessian_calibrated (S H S, S = diag(1/info_k_p I3, 1/info_k_r I3), factors fitted on V1_01
 # only, docs/phase10_d4_realism.md); a non-finite matrix is rejected with reason "information"; the CSV log adds
 # the column information.
+# D4 fix (docs/PLAN.md deviation 2026-10-25): both Hessian options are re-expressed about the body pose
+# (body_information below, same as p2p_icp_persistent.body_information), the backend's convention; the heuristic
+# keeps M2's map-origin convention.
 # Information option df_information: heuristic (M2 formula, main) | hessian (J^T W J / sigma^2,
 # [pos, rot], published as is; D4 ablation). Logging adds the columns method and iterations
 # (iterations empty for point_to_plane: Open3D does not report them).
@@ -58,6 +61,19 @@ from std_srvs.srv import Empty, EmptyResponse
 
 DEFAULT_VOXEL_SIZE = 0.1
 WORLD_FRAME_ID = "world"
+
+def body_information(A_pr, p_body):
+    """Hessian information ([pos = v, rot = w] of the correction about the map origin) re-expressed about the body
+    pose: A_body = Jinv^T H_wv Jinv, Jinv: [dp; dtheta] -> (w = dtheta, v = dp + [p_body]x dtheta)."""
+    P = np.zeros((6, 6)); P[:3, 3:] = np.eye(3); P[3:, :3] = np.eye(3)
+    H_wv = P.T @ A_pr @ P
+    p = np.asarray(p_body, dtype=np.float64)
+    Jinv = np.zeros((6, 6))
+    Jinv[:3, 3:] = np.eye(3)
+    Jinv[3:, :3] = np.eye(3)
+    Jinv[3:, 3:] = np.array([[0, -p[2], p[1]], [p[2], 0, -p[0]], [-p[1], p[0], 0]])
+    return Jinv.T @ H_wv @ Jinv
+
 
 def calibrate_information(A, k_p, k_r):
     """S A S with S = diag(1/k_p I3, 1/k_r I3) in [pos, rot] order."""
@@ -345,7 +361,7 @@ class CityMapRegistrator:
                 if df_res is not None and self.df_information in ('hessian', 'hessian_calibrated'):
                     # D4 ablation: J^T W J / sigma^2 in [pos, rot], published without the heuristic's
                     # normalisation and scale factors (raw = uncalibrated), optionally calibrated.
-                    A_pn = self.fyp_df.information_hessian(df_res["H_wv"], df_res["sigma2"])
+                    A_pn = body_information(self.fyp_df.information_hessian(df_res["H_wv"], df_res["sigma2"]), reg_T_WB[:3, 3])
                     A_raw = A_pn.copy()
                     if self.df_information == 'hessian_calibrated':
                         A_pn = calibrate_information(A_pn, self.info_k_p, self.info_k_r)

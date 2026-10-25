@@ -6,7 +6,8 @@
 # freeze file runs/phase10_d4/.
 # Usage (WITHOUT the analysis venv active; no other ROS session may run):
 #   analysis/run_phase10_d4.sh freeze                 write runs/phase10_d4/build_freeze.txt (once)
-#   analysis/run_phase10_d4.sh smoke                  M2F-cal and M3-cal on V1_02_medium (technical check, not in the statistics)
+#   analysis/run_phase10_d4.sh smoke                  M2F-hess, M2F-cal, M3-hess, M3-cal on V1_02_medium (technical check after
+#                                                     the D4 deviation of 2026-10-25, not in the statistics; run ids ..._smoke2)
 #   analysis/run_phase10_d4.sh batch [first] [last]   rounds first..last (default 1..10); per round, per sequence:
 #                                                     M2F-heur, M2F-hess, M2F-cal, M3-heur, M3-hess, M3-cal
 # Before every run the frozen build is verified (checksums of binaries, module, nodes, configs, launch
@@ -88,9 +89,11 @@ case "${1:-}" in
     { echo "# Phase 10 D4 ablation frozen build: git $(git -C "$REPO" rev-parse HEAD), $(date -Iseconds)"; checksums; } > "$FREEZE"
     cat "$FREEZE" ;;
   smoke)
-    one_run "${D}_V1_02_medium_M2F-cal_p10d4_smoke" V1_02_medium M2F hessian_calibrated M2F-cal
-    one_run "${D}_V1_02_medium_M3-cal_p10d4_smoke" V1_02_medium M3 hessian_calibrated M3-cal
-    cat "$REPO"/runs/${D}_V1_02_medium_M*-cal_p10d4_smoke/phase9_metrics.log ;;
+    for m in M2F M3; do
+      one_run "${D}_V1_02_medium_${m}-hess_p10d4_smoke2" V1_02_medium "$m" hessian "${m}-hess"
+      one_run "${D}_V1_02_medium_${m}-cal_p10d4_smoke2" V1_02_medium "$m" hessian_calibrated "${m}-cal"
+    done
+    cat "$REPO"/runs/${D}_V1_02_medium_M*_p10d4_smoke2/phase9_metrics.log ;;
   batch)
     first="${2:-1}"; last="${3:-10}"
     for r in $(seq "$first" "$last"); do

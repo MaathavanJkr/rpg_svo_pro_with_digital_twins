@@ -14,6 +14,8 @@
 # factors fitted on V1_01 only, docs/phase10_d4_realism.md). The Hessian options are published without the
 # heuristic's normalisation and scale factors; a non-finite matrix (< 7 correspondences) is rejected with
 # reason "information" instead of being published. The CSV log adds the column information.
+# D4 fix (docs/PLAN.md deviation 2026-10-25): both Hessian options are re-expressed about the body pose
+# (p2p_icp_persistent.body_information), the backend's convention; the heuristic keeps M2's map-origin convention.
 # Origin of online_registration_fyp.py (FYP copy of online_registration.py, original untouched; D3):
 # Differences from the original:
 #   1. Parameters (read from registration_settings, defaults = the original hard-coded values):
@@ -49,7 +51,7 @@ import os
 import yaml
 from svo_msgs.msg import PoseWithCloud
 from std_srvs.srv import Empty, EmptyResponse
-from p2p_icp_persistent import PersistentPointToPlaneICP, hessian_information
+from p2p_icp_persistent import PersistentPointToPlaneICP, hessian_information, body_information
 
 DEFAULT_VOXEL_SIZE = 0.1
 WORLD_FRAME_ID = "world"
@@ -326,7 +328,8 @@ class CityMapRegistrator:
                     A_pn[3:6,:3] *= self.scale_factor_rotation*self.scale_factor_position
                 else:
                     # D4: Hessian information (raw = uncalibrated), optionally calibrated.
-                    A_pn = hessian_information(filtered_points, icp_result, tgt_points, tgt_normals)
+                    A_pn = body_information(hessian_information(filtered_points, icp_result, tgt_points, tgt_normals),
+                                            reg_T_WB[:3, 3])
                     A_raw = A_pn.copy()
                     if self.information == 'hessian_calibrated':
                         A_pn = calibrate_information(A_pn, self.info_k_p, self.info_k_r)

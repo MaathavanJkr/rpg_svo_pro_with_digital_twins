@@ -1,0 +1,111 @@
+{
+  "definition": "docs/phase10_d4_realism.md, 'Calibrated Hessian: definition' (recorded 2026-10-25T17:45:23+05:30)",
+  "P2P": {
+    "k_p": 8.168816710931187,
+    "k_p_squared": 66.72956645678862,
+    "k_r": 1.9917590084271561,
+    "k_r_squared": 3.9671039476507284,
+    "fit": {
+      "mean_nees_v1_01": 200.18869937036587,
+      "empirical_yaw_noise_v1_01_deg": 0.4377634039765935,
+      "median_implied_yaw_v1_01_deg": 0.21978733477514667
+    },
+    "V1_01_easy": {
+      "in_sample": true,
+      "n": 1806,
+      "nees_mean_over_3": 1.0000000000000002,
+      "nees_median": 1.2309624431964943,
+      "frac_nees_below_chi2_95": 0.907530454042082,
+      "implied_pos_rms_per_axis_m": 0.11737844229905531,
+      "ratio_pos": 1.794231356526673,
+      "implied_yaw_median_deg": 0.4377634039765935,
+      "ratio_yaw": 1.0
+    },
+    "V1_02_medium": {
+      "in_sample": false,
+      "n": 2003,
+      "nees_mean_over_3": 0.3862624374621211,
+      "nees_median": 0.5876175387231624,
+      "frac_nees_below_chi2_95": 0.9900149775336995,
+      "implied_pos_rms_per_axis_m": 0.1303756869064924,
+      "ratio_pos": 2.729415605014835,
+      "implied_yaw_median_deg": 0.3722435679835279,
+      "ratio_yaw": 0.9963251258886751
+    },
+    "V2_02_medium": {
+      "in_sample": false,
+      "n": 2706,
+      "nees_mean_over_3": 0.3259307904285886,
+      "nees_median": 0.4440314051516836,
+      "frac_nees_below_chi2_95": 0.9892830746489283,
+      "implied_pos_rms_per_axis_m": 0.12412371183778109,
+      "ratio_pos": 2.5127233263292816,
+      "implied_yaw_median_deg": 0.48484564958053533,
+      "ratio_yaw": 0.9629386934275044
+    },
+    "sensitivity_median_based_k_p": {
+      "k_p_squared": 34.71787693919465,
+      "k_p": 5.892187788860319,
+      "nees_mean_over_3": {
+        "V1_01_easy": 1.9220520475275507,
+        "V1_02_medium": 0.7424165088070523,
+        "V2_02_medium": 0.626455943095542
+      },
+      "note": "offline sensitivity only; not an online arm"
+    }
+  },
+  "DF": {
+    "k_p": 6.552168325258465,
+    "k_p_squared": 42.930909762520315,
+    "k_r": 1.404404569564742,
+    "k_r_squared": 1.9723521950143283,
+    "fit": {
+      "mean_nees_v1_01": 128.79272928756095,
+      "empirical_yaw_noise_v1_01_deg": 0.3479459282578983,
+      "median_implied_yaw_v1_01_deg": 0.247753343871371
+    },
+    "V1_01_easy": {
+      "in_sample": true,
+      "n": 1838,
+      "nees_mean_over_3": 1.0,
+      "nees_median": 1.1371806061011278,
+      "frac_nees_below_chi2_95": 0.9085963003264418,
+      "implied_pos_rms_per_axis_m": 0.10581751759723883,
+      "ratio_pos": 1.7001582311656118,
+      "implied_yaw_median_deg": 0.3479459282578983,
+      "ratio_yaw": 1.0
+    },
+    "V1_02_medium": {
+      "in_sample": false,
+      "n": 2003,
+      "nees_mean_over_3": 0.4066337623026433,
+      "nees_median": 0.5247474884745063,
+      "frac_nees_below_chi2_95": 0.9850224663005491,
+      "implied_pos_rms_per_axis_m": 0.11233618844727913,
+      "ratio_pos": 2.698789590496256,
+      "implied_yaw_median_deg": 0.2802639386311722,
+      "ratio_yaw": 1.0733665594499782
+    },
+    "V2_02_medium": {
+      "in_sample": false,
+      "n": 2721,
+      "nees_mean_over_3": 0.3348011798110448,
+      "nees_median": 0.36350662726113514,
+      "frac_nees_below_chi2_95": 0.9849320102903344,
+      "implied_pos_rms_per_axis_m": 0.1068592848688405,
+      "ratio_pos": 2.6267219000485773,
+      "implied_yaw_median_deg": 0.36697590746894626,
+      "ratio_yaw": 1.204430776595058
+    },
+    "sensitivity_median_based_k_p": {
+      "k_p_squared": 20.63429284093942,
+      "k_p": 4.542498524043725,
+      "nees_mean_over_3": {
+        "V1_01_easy": 2.080561233353408,
+        "V1_02_medium": 0.846026442019524,
+        "V2_02_medium": 0.6965743555958434
+      },
+      "note": "offline sensitivity only; not an online arm"
+    }
+  }
+}
