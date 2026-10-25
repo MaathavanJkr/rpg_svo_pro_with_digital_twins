@@ -47,3 +47,11 @@ Each phase ends at a GATE. Do not start the next phase until the user approves.
 - **Queue-drop flag (pre-registered threshold):** a sequence is flagged at the gate if M2's mean dropped/published fraction is > 2× M3's **and** ≥ 5 %. A flag triggers the Phase 10 variant "M2 with a persistent KD-tree", to separate implementation from algorithm.
 - **Aggregation:** `analysis/phase9_aggregate.py` → `runs/phase9/aggregate.json`, `table.md` (mean ± sample std over non-failed runs). Each run is appended to runs/RUNLOG.md.
 - **Order:** one M3 smoke run on V1_01 (`run_phase9.sh smoke`, not part of the statistics) → user check in RViz → full batch → Phase 9 gate.
+
+## Phase 10 order (decided 2026-10-25, after the Phase 9 gate)
+1. **Throughput control (first):** "M2-fast" = the M2 node with a persistent KD-tree of the twin (built once at start-up), otherwise identical; verified offline against logged M2 outputs (pose, information, verdict, ~1e-12); then online on V1_02 and V2_02, M2-fast vs M3 (pre-registration section written before running). Checkpoint with results incl. drop counts and latencies.
+2. **D4 Hessian-weighting ablation** (2 × 2: {M2, M3} × {heuristic, Hessian information}).
+3. **Initial-alignment robustness** (yaw offsets {0, 2, 5, 10}°, refine_T_WL off/on; see the Phase 10 experiment above).
+4. **City-scale memory extrapolation** (H4, Oerlikon bounding volume, dense vs sparse; see the Phase 10 item above).
+5. Optional: voxel-size/truncation ablations online, V2_01 with a re-alignment hook, Oerlikon M3, embedded profiling.
+- **Sequences and limitations (Phase 9 decision):** V2_03 joins V1_03 as a limitation, reported descriptively only (failure counts 9 / 8 / 5 of 10 for M1 / M2 / M3, same reset times for all methods; acceptance limits derived on V1 and not retuned, so M2 ran effectively VIO-only on V2_03).
