@@ -1,0 +1,4 @@
+2026-10-25T20:00:09+05:30 start 2026-10-25_V1_02_medium_M2F-cal_p10d4_smoke
+2026-10-25T20:02:14+05:30 end   2026-10-25_V1_02_medium_M2F-cal_p10d4_smoke harness_rc=0 failed=False reason=None map=0.22858929617741794 4dof=0.19835536337141216
+2026-10-25T20:02:24+05:30 start 2026-10-25_V1_02_medium_M3-cal_p10d4_smoke
+2026-10-25T20:04:30+05:30 end   2026-10-25_V1_02_medium_M3-cal_p10d4_smoke harness_rc=0 failed=False reason=None map=0.38200907970584896 4dof=0.3024311065274238
