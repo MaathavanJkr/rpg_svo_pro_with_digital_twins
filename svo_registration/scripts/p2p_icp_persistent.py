@@ -90,3 +90,29 @@ class PersistentPointToPlaneICP:
             if abs(fit0 - fit) < rel_fitness and abs(rmse0 - rmse) < rel_rmse:
                 break
         return RegistrationResult(T, fit, rmse, corr), tgt, nrm, rebuilt
+
+
+def _skew_rows(p):
+    z = np.zeros(len(p))
+    return np.stack([np.stack([z, -p[:, 2], p[:, 1]], 1),
+                     np.stack([p[:, 2], z, -p[:, 0]], 1),
+                     np.stack([-p[:, 1], p[:, 0], z], 1)], 1)
+
+
+def hessian_information(points, result, tgt_points, tgt_normals):
+    """Phase 10 D4: point-to-plane Hessian information J^T J / sigma^2 at the solution, [pos, rot] order
+    (same formula and operation order as analysis/p2p_offline.py:information_hessian). points: the uncorrected
+    source cloud; J_i = n_i^T [-[q_i]x | I] with q_i the corrected point (left perturbation (w, v) about the
+    map origin, as the heuristic); sigma^2 = sum r_i^2 / (n - 6). NaN if fewer than 7 correspondences."""
+    c = np.asarray(result.correspondence_set)
+    if len(c) < 7:
+        return np.full((6, 6), np.nan)
+    T = result.transformation
+    q = points[c[:, 0]] @ T[:3, :3].T + T[:3, 3]
+    n = tgt_normals[c[:, 1]]
+    r = np.einsum("ij,ij->i", n, q - tgt_points[c[:, 1]])
+    J = np.concatenate([np.einsum("ni,nij->nj", n, -_skew_rows(q)), n], axis=1)  # (w, v)
+    H = J.T @ J
+    s2 = float(np.sum(r ** 2) / max(len(r) - 6, 1))
+    P = np.zeros((6, 6)); P[:3, 3:] = np.eye(3); P[3:, :3] = np.eye(3)
+    return P @ (H / max(s2, 1e-12)) @ P.T

@@ -12,6 +12,10 @@
 # corrected point) for inliers with |grad D| > 1e-9. Validity checks, the information heuristic and its
 # normalisation/scale factors, topics, outputs and logging are the M2 code. The twin is still loaded
 # (published on /city_twin for RViz) but not cropped, because no target cloud is needed.
+# Phase 10 D4: registration_settings.information (falls back to df_information; CLI --information overrides):
+# heuristic | hessian | hessian_calibrated (S H S, S = diag(1/info_k_p I3, 1/info_k_r I3), factors fitted on V1_01
+# only, docs/phase10_d4_realism.md); a non-finite matrix is rejected with reason "information"; the CSV log adds
+# the column information.
 # Information option df_information: heuristic (M2 formula, main) | hessian (J^T W J / sigma^2,
 # [pos, rot], published as is; D4 ablation). Logging adds the columns method and iterations
 # (iterations empty for point_to_plane: Open3D does not report them).
@@ -55,6 +59,12 @@ from std_srvs.srv import Empty, EmptyResponse
 DEFAULT_VOXEL_SIZE = 0.1
 WORLD_FRAME_ID = "world"
 
+def calibrate_information(A, k_p, k_r):
+    """S A S with S = diag(1/k_p I3, 1/k_r I3) in [pos, rot] order."""
+    s = np.r_[np.full(3, 1.0 / k_p), np.full(3, 1.0 / k_r)]
+    return A * np.outer(s, s)
+
+
 class DFRegistrationResult:
     """The fields of Open3D's RegistrationResult that the node uses, for the distance-field branch."""
 
@@ -67,11 +77,15 @@ class DFRegistrationResult:
 
 class CityMapRegistrator:
 
-    def __init__(self, config_file, reference_map, df_grid=None):
+    def __init__(self, config_file, reference_map, df_grid=None, information=None):
         self.lock = Lock()
         print(f"READING FROM {reference_map}")
         self.df_grid_file = df_grid
         self.load_config(config_file,reference_map)
+        if information:
+            self.df_information = information
+        if self.df_information not in ('heuristic', 'hessian', 'hessian_calibrated'):
+            raise ValueError(f"unknown information {self.df_information}")
         self.init_ros_nodes()
         self.republish_service = rospy.Service('/visualize_city_twin', Empty, self.republish_city_twin)
         self.registration_estimate = np.eye(4)
@@ -125,7 +139,7 @@ class CityMapRegistrator:
         if self.log_file:
             self.log = open(self.log_file, 'w', buffering=1)
             self.log.write("stamp,n_raw,n_filtered,n_target,fitness,inlier_rmse,corr_t_m,corr_rot_deg,"
-                           "valid,reject_reason,t_preproc_s,t_icp_s,t_info_s,method,iterations\n")
+                           "valid,reject_reason,t_preproc_s,t_icp_s,t_info_s,method,iterations,information\n")
 
         # M3 settings (Phase 8); defaults select the unchanged M2 path.
         self.registration_method = config.get('registration_method', 'point_to_plane')
@@ -133,9 +147,9 @@ class CityMapRegistrator:
             raise ValueError(f"unknown registration_method {self.registration_method}")
         self.df_huber_delta = config.get('df_huber_delta', 0.05)
         self.df_max_iter = config.get('df_max_iter', 100)
-        self.df_information = config.get('df_information', 'heuristic')
-        if self.df_information not in ('heuristic', 'hessian'):
-            raise ValueError(f"unknown df_information {self.df_information}")
+        self.df_information = config.get('information', config.get('df_information', 'heuristic'))
+        self.info_k_p = config.get('info_k_p', 1.0)
+        self.info_k_r = config.get('info_k_r', 1.0)
         if self.registration_method == 'distance_field':
             import fyp_df
             self.fyp_df = fyp_df
@@ -324,16 +338,20 @@ class CityMapRegistrator:
             A_raw = np.full((6, 6), np.nan)
             A_final = np.full((6, 6), np.nan)
 
+            filtered_points = np.asarray(current_vio_pointcloud.points).copy()
             if self.valid:
                 reg_T_WB = icp_result.transformation @ T_world_body
-                filtered_points = np.asarray(current_vio_pointcloud.points).copy()
 
-                if df_res is not None and self.df_information == 'hessian':
+                if df_res is not None and self.df_information in ('hessian', 'hessian_calibrated'):
                     # D4 ablation: J^T W J / sigma^2 in [pos, rot], published without the heuristic's
-                    # normalisation and scale factors.
+                    # normalisation and scale factors (raw = uncalibrated), optionally calibrated.
                     A_pn = self.fyp_df.information_hessian(df_res["H_wv"], df_res["sigma2"])
                     A_raw = A_pn.copy()
+                    if self.df_information == 'hessian_calibrated':
+                        A_pn = calibrate_information(A_pn, self.info_k_p, self.info_k_r)
                     current_vio_pointcloud.transform(icp_result.transformation)
+                    if not np.all(np.isfinite(A_pn)):
+                        self.valid, reason = False, "information"
                 else:
                     matched_target_indices = [tgt for _, tgt in icp_result.correspondence_set]
                     target_normals = np.asarray(target_point_cloud.normals)[matched_target_indices]
@@ -351,16 +369,17 @@ class CityMapRegistrator:
                     A_pn[3:6,:3] *= self.scale_factor_rotation*self.scale_factor_position
                 t_info = time.perf_counter() - t_icp
                 A_final = A_pn.copy()
-                pose_msg_w_b = self.create_pose_with_covariance_stamped(reg_T_WB, A_pn, msg.header.stamp)
+                if self.valid:
+                    pose_msg_w_b = self.create_pose_with_covariance_stamped(reg_T_WB, A_pn, msg.header.stamp)
 
-                self.registration_T_w_b_pub.publish(pose_msg_w_b)
-                registrated_pointcloud = self.pc_to_ros_pointcloud2(current_vio_pointcloud)
-                registrated_pointcloud.header.stamp = msg.header.stamp
-                registrated_pointcloud.header.frame_id = WORLD_FRAME_ID
-                self.registered_point_cloud_pub.publish(registrated_pointcloud)
+                    self.registration_T_w_b_pub.publish(pose_msg_w_b)
+                    registrated_pointcloud = self.pc_to_ros_pointcloud2(current_vio_pointcloud)
+                    registrated_pointcloud.header.stamp = msg.header.stamp
+                    registrated_pointcloud.header.frame_id = WORLD_FRAME_ID
+                    self.registered_point_cloud_pub.publish(registrated_pointcloud)
 
             if self.event_dir:
-                filtered = filtered_points if self.valid else np.asarray(current_vio_pointcloud.points).copy()
+                filtered = filtered_points
                 self.event_queue.put(dict(
                     msg=msg, cloud_filtered=filtered.astype(np.float64),
                     n_target=np.int64(n_target), registration_method=self.registration_method,
@@ -382,7 +401,7 @@ class CityMapRegistrator:
                                f"{len(current_vio_pointcloud.points)},{n_target},"
                                f"{icp_result.fitness:.6f},{icp_result.inlier_rmse:.6f},{np.linalg.norm(T[:3, 3]):.6f},"
                                f"{ang:.4f},{int(self.valid)},{reason},{t_pre - t_start:.6f},{t_icp - t_pre:.6f},{t_info:.6f},"
-                               f"{self.registration_method},{df_res['iterations'] if df_res is not None else ''}\n")
+                               f"{self.registration_method},{df_res['iterations'] if df_res is not None else ''},{self.df_information}\n")
 
     def register_distance_field(self, cloud):
         """M3 registration step. Returns (icp_result-like object, cloud holding the gradient normals,
@@ -437,10 +456,12 @@ if __name__ == '__main__':
     parser.add_argument('--log-file', type=str, default=None)
     parser.add_argument('--event-dir', type=str, default=None)
     parser.add_argument('--df-grid', type=str, default=None, help="distance grid .bin (registration_method distance_field)")
+    parser.add_argument('--information', type=str, default=None, help="heuristic | hessian | hessian_calibrated (overrides the config)")
     # args = parser.parse_args()
     args, unknown = parser.parse_known_args()
 
-    processor = CityMapRegistrator(args.config_file, args.reference_map, args.df_grid)
+    processor = CityMapRegistrator(args.config_file, args.reference_map, args.df_grid,
+                                   None if args.information in (None, "", "config") else args.information)
     processor.event_dir = None if args.event_dir in (None, "none") else args.event_dir
     if processor.event_dir:
         os.makedirs(processor.event_dir, exist_ok=True)
@@ -450,7 +471,7 @@ if __name__ == '__main__':
     if args.log_file and processor.log is None:
         processor.log = open(args.log_file, 'w', buffering=1)
         processor.log.write("stamp,n_raw,n_filtered,n_target,fitness,inlier_rmse,corr_t_m,corr_rot_deg,"
-                            "valid,reject_reason,t_preproc_s,t_icp_s,t_info_s,method,iterations\n")
+                            "valid,reject_reason,t_preproc_s,t_icp_s,t_info_s,method,iterations,information\n")
     rospy.loginfo("CityMapRegistrator node started. Waiting for messages...")
     try:
         pointcloud_thread = threading.Thread(target=processor.publish_city_twin)

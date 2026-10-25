@@ -12,3 +12,8 @@
 - M3 solver (Phase 8): "Levenberg–Marquardt on SE(3) in C++/Eigen, verified against the prototype to ~1e-13" (docs/phase8_cpp.md).
 - H2 headline: ~10× per iteration (P2P figure indirect) and ~4–5× per solve without M2's per-call KD-tree rebuild; 135× only as a labelled property of M2's implementation (docs/phase8_cpp.md §7).
 - The original pipeline only activates map registration after a GPS-based 4-DoF alignment. Registered poses enter the Ceres window as absolute pose priors (Huber δ = 50) on the keyframe with a matching stamp (±1 ms). *(docs/pipeline_notes.md)*
+
+## Limitations (draft)
+- **Validity checks do not reliably detect wrong registrations.** In the worst throughput-control run (V2_02 M2F r05, docs/phase10_throughput.md §5) registrations whose poses were ~0.6 m from GT were accepted with fitness ≈ 1: fitness (fraction of points within the 0.5 m correspondence radius) and inlier RMSE stay normal when the cloud locks onto the wrong but nearby surfaces. This is the room-scale counterpart of the Phase 3 note (5a) that fitness is uninformative when the correspondence radius is large relative to the scene. Applies to M2 and M3 (same checks).
+- V1_03 and V2_03: SVO full resets (limitation, descriptive only; docs/phase9_online.md).
+- Acceptance limits (5°, 0.75 m) were derived on V1 and not retuned for V2 (M2 effectively VIO-only on V2_03).

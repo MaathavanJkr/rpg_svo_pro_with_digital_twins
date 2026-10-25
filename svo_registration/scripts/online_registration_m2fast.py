@@ -8,6 +8,12 @@
 # as M2 does (counted in the log column tree_rebuilt). The cropped twin is held as NumPy arrays instead
 # of an Open3D point cloud (same values). ICP settings, validity checks, information heuristic, topics,
 # outputs and logging are M2's; the CSV log adds the column tree_rebuilt, the event dump the key tree_rebuilt.
+# Phase 10 D4: information convention selected by registration_settings.information (CLI --information
+# overrides): heuristic (default; M2's formula, unchanged) | hessian (J^T J / sigma^2 at the solution, [pos, rot],
+# p2p_icp_persistent.hessian_information) | hessian_calibrated (S H S, S = diag(1/info_k_p I3, 1/info_k_r I3),
+# factors fitted on V1_01 only, docs/phase10_d4_realism.md). The Hessian options are published without the
+# heuristic's normalisation and scale factors; a non-finite matrix (< 7 correspondences) is rejected with
+# reason "information" instead of being published. The CSV log adds the column information.
 # Origin of online_registration_fyp.py (FYP copy of online_registration.py, original untouched; D3):
 # Differences from the original:
 #   1. Parameters (read from registration_settings, defaults = the original hard-coded values):
@@ -43,10 +49,16 @@ import os
 import yaml
 from svo_msgs.msg import PoseWithCloud
 from std_srvs.srv import Empty, EmptyResponse
-from p2p_icp_persistent import PersistentPointToPlaneICP
+from p2p_icp_persistent import PersistentPointToPlaneICP, hessian_information
 
 DEFAULT_VOXEL_SIZE = 0.1
 WORLD_FRAME_ID = "world"
+
+def calibrate_information(A, k_p, k_r):
+    """S A S with S = diag(1/k_p I3, 1/k_r I3) in [pos, rot] order."""
+    s = np.r_[np.full(3, 1.0 / k_p), np.full(3, 1.0 / k_r)]
+    return A * np.outer(s, s)
+
 
 class TargetCloud:
     """Cropped twin as arrays (points, normals): the two attributes of the Open3D target the node reads."""
@@ -58,10 +70,14 @@ class TargetCloud:
 
 class CityMapRegistrator:
 
-    def __init__(self, config_file, reference_map):
+    def __init__(self, config_file, reference_map, information=None):
         self.lock = Lock()
         print(f"READING FROM {reference_map}")
         self.load_config(config_file,reference_map)
+        if information:
+            self.information = information
+        if self.information not in ('heuristic', 'hessian', 'hessian_calibrated'):
+            raise ValueError(f"unknown information {self.information}")
         self.init_ros_nodes()
         self.republish_service = rospy.Service('/visualize_city_twin', Empty, self.republish_city_twin)
         self.registration_estimate = np.eye(4)
@@ -109,13 +125,16 @@ class CityMapRegistrator:
         self.twin_voxel_size = config.get('twin_voxel_size', 1.0)
         self.twin_min_z = config.get('twin_min_z', 0.0)
         self.fitness_threshold = config.get('fitness_threshold', 0.75)
+        self.information = config.get('information', 'heuristic')
+        self.info_k_p = config.get('info_k_p', 1.0)
+        self.info_k_r = config.get('info_k_r', 1.0)
         self.log_file = config.get('log_file', None)
         self.event_dir = None
         self.log = None
         if self.log_file:
             self.log = open(self.log_file, 'w', buffering=1)
             self.log.write("stamp,n_raw,n_filtered,n_target,fitness,inlier_rmse,corr_t_m,corr_rot_deg,"
-                           "valid,reject_reason,t_preproc_s,t_icp_s,t_info_s,tree_rebuilt\n")
+                           "valid,reject_reason,t_preproc_s,t_icp_s,t_info_s,tree_rebuilt,information\n")
 
         self.city_twin = self.load_and_filter_point_cloud(reference_map)
         if self.twin_voxel_size:
@@ -286,36 +305,47 @@ class CityMapRegistrator:
             A_raw = np.full((6, 6), np.nan)
             A_final = np.full((6, 6), np.nan)
 
+            filtered_points = np.asarray(current_vio_pointcloud.points).copy()
             if self.valid:
                 reg_T_WB = icp_result.transformation @ T_world_body
 
-                matched_target_indices = [tgt for _, tgt in icp_result.correspondence_set]
-                target_normals = np.asarray(target_point_cloud.normals)[matched_target_indices]
-                source_indices = [src for src, _ in icp_result.correspondence_set]
-                source_points = np.asarray(current_vio_pointcloud.points)[source_indices]
+                if self.information == 'heuristic':
+                    matched_target_indices = [tgt for _, tgt in icp_result.correspondence_set]
+                    target_normals = np.asarray(target_point_cloud.normals)[matched_target_indices]
+                    source_indices = [src for src, _ in icp_result.correspondence_set]
+                    source_points = np.asarray(current_vio_pointcloud.points)[source_indices]
 
-                filtered_points = np.asarray(current_vio_pointcloud.points).copy()
-                A_pn = self.calculate_information_matrix(source_points, target_normals)
-                A_raw = A_pn.copy()
-                current_vio_pointcloud.transform(icp_result.transformation)
+                    A_pn = self.calculate_information_matrix(source_points, target_normals)
+                    A_raw = A_pn.copy()
+                    current_vio_pointcloud.transform(icp_result.transformation)
 
-                A_pn = (A_pn/np.max(A_pn))* np.exp(-0.9 * icp_result.inlier_rmse)
-                A_pn[:3,:3] *= self.scale_factor_position*self.scale_factor_position
-                A_pn[3:6, 3:6] *= self.scale_factor_rotation*self.scale_factor_rotation
-                A_pn[:3, 3:6] *= self.scale_factor_rotation*self.scale_factor_position
-                A_pn[3:6,:3] *= self.scale_factor_rotation*self.scale_factor_position
+                    A_pn = (A_pn/np.max(A_pn))* np.exp(-0.9 * icp_result.inlier_rmse)
+                    A_pn[:3,:3] *= self.scale_factor_position*self.scale_factor_position
+                    A_pn[3:6, 3:6] *= self.scale_factor_rotation*self.scale_factor_rotation
+                    A_pn[:3, 3:6] *= self.scale_factor_rotation*self.scale_factor_position
+                    A_pn[3:6,:3] *= self.scale_factor_rotation*self.scale_factor_position
+                else:
+                    # D4: Hessian information (raw = uncalibrated), optionally calibrated.
+                    A_pn = hessian_information(filtered_points, icp_result, tgt_points, tgt_normals)
+                    A_raw = A_pn.copy()
+                    if self.information == 'hessian_calibrated':
+                        A_pn = calibrate_information(A_pn, self.info_k_p, self.info_k_r)
+                    current_vio_pointcloud.transform(icp_result.transformation)
+                    if not np.all(np.isfinite(A_pn)):
+                        self.valid, reason = False, "information"
                 t_info = time.perf_counter() - t_icp
                 A_final = A_pn.copy()
-                pose_msg_w_b = self.create_pose_with_covariance_stamped(reg_T_WB, A_pn, msg.header.stamp)
+                if self.valid:
+                    pose_msg_w_b = self.create_pose_with_covariance_stamped(reg_T_WB, A_pn, msg.header.stamp)
 
-                self.registration_T_w_b_pub.publish(pose_msg_w_b)
-                registrated_pointcloud = self.pc_to_ros_pointcloud2(current_vio_pointcloud)
-                registrated_pointcloud.header.stamp = msg.header.stamp
-                registrated_pointcloud.header.frame_id = WORLD_FRAME_ID
-                self.registered_point_cloud_pub.publish(registrated_pointcloud)
+                    self.registration_T_w_b_pub.publish(pose_msg_w_b)
+                    registrated_pointcloud = self.pc_to_ros_pointcloud2(current_vio_pointcloud)
+                    registrated_pointcloud.header.stamp = msg.header.stamp
+                    registrated_pointcloud.header.frame_id = WORLD_FRAME_ID
+                    self.registered_point_cloud_pub.publish(registrated_pointcloud)
 
             if self.event_dir:
-                filtered = filtered_points if self.valid else np.asarray(current_vio_pointcloud.points).copy()
+                filtered = filtered_points
                 self.event_queue.put(dict(
                     msg=msg, cloud_filtered=filtered.astype(np.float64),
                     n_target=np.int64(len(target_point_cloud.points)),
@@ -325,7 +355,7 @@ class CityMapRegistrator:
                     fitness=icp_result.fitness, inlier_rmse=icp_result.inlier_rmse,
                     n_correspondences=np.int64(len(icp_result.correspondence_set)),
                     information_raw=A_raw, information_final=A_final,
-                    valid=bool(self.valid), reject_reason=reason, tree_rebuilt=bool(tree_rebuilt),
+                    valid=bool(self.valid), reject_reason=reason, tree_rebuilt=bool(tree_rebuilt), information=self.information,
                     t_preproc_s=t_pre - t_start, t_icp_s=t_icp - t_pre, t_info_s=t_info))
 
             if self.log:
@@ -335,7 +365,7 @@ class CityMapRegistrator:
                                f"{len(current_vio_pointcloud.points)},{len(target_point_cloud.points)},"
                                f"{icp_result.fitness:.6f},{icp_result.inlier_rmse:.6f},{np.linalg.norm(T[:3, 3]):.6f},"
                                f"{ang:.4f},{int(self.valid)},{reason},{t_pre - t_start:.6f},{t_icp - t_pre:.6f},{t_info:.6f},"
-                               f"{int(tree_rebuilt)}\n")
+                               f"{int(tree_rebuilt)},{self.information}\n")
 
     def validate_icp_result(self, icp_result):
         reasons = []
@@ -371,10 +401,11 @@ if __name__ == '__main__':
     parser.add_argument('--reference-map', type=str)
     parser.add_argument('--log-file', type=str, default=None)
     parser.add_argument('--event-dir', type=str, default=None)
+    parser.add_argument('--information', type=str, default=None, help="heuristic | hessian | hessian_calibrated (overrides the config)")
     # args = parser.parse_args()
     args, unknown = parser.parse_known_args()
 
-    processor = CityMapRegistrator(args.config_file, args.reference_map)
+    processor = CityMapRegistrator(args.config_file, args.reference_map, None if args.information in (None, "", "config") else args.information)
     processor.event_dir = None if args.event_dir in (None, "none") else args.event_dir
     if processor.event_dir:
         os.makedirs(processor.event_dir, exist_ok=True)
@@ -384,7 +415,7 @@ if __name__ == '__main__':
     if args.log_file and processor.log is None:
         processor.log = open(args.log_file, 'w', buffering=1)
         processor.log.write("stamp,n_raw,n_filtered,n_target,fitness,inlier_rmse,corr_t_m,corr_rot_deg,"
-                            "valid,reject_reason,t_preproc_s,t_icp_s,t_info_s,tree_rebuilt\n")
+                            "valid,reject_reason,t_preproc_s,t_icp_s,t_info_s,tree_rebuilt,information\n")
     rospy.loginfo("CityMapRegistrator node started. Waiting for messages...")
     try:
         pointcloud_thread = threading.Thread(target=processor.publish_city_twin)
