@@ -24,5 +24,6 @@ All four batches point the same way; the confirmatory estimate (−10 mm) is the
 - Run-to-run spread: std 0.016 (M2F) vs 0.014 m (M3). The large spread difference seen in the throughput control (0.024 vs 0.004 m, exploratory Brown-Forsythe p 0.02) did not recur here.
 - Registrations: accepted 327 vs 330 of ~344 published, dropped 0 / 0; callback 81 vs 34 ms; latency 83 vs 36 ms (median, mean over runs).
 
-## Report wording (proposal)
-"In a pre-registered confirmatory replication on V2_02 (20 runs per method, throughput equalised), the distance-field registration gave a lower map-frame ATE than point-to-plane: −9.9 mm (95 % CI −19.7 to −0.1 mm, Welch p = 0.047). The effect is small and its lower end is compatible with no practical difference; three earlier batches showed the same direction (−13 to −20 mm). No difference was found on V1_01 and V1_02."
+## Report wording (approved 2026-10-26)
+"In a pre-registered confirmatory replication on V2_02 (20 runs per method, throughput equalised), the distance-field registration gave a lower map-frame ATE than point-to-plane on V2_02: −9.9 mm (≈ 11 % of point-to-plane's 92 mm; 95 % CI −19.7 to −0.1 mm, Welch p = 0.047). The effect is small and its lower end is compatible with no practical difference; three earlier batches showed the same direction (−13 to −20 mm). No difference was found on V1_01 and V1_02."
+**Headline H3 result:** "No difference on V1_01 and V1_02; a small, replicated improvement on V2_02 (pre-registered confirmatory test)." All batches are reported; none are pooled for inference.
