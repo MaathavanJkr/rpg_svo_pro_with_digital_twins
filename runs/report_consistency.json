@@ -1,4 +1,79 @@
 {
+  "docs/report/consistency_notes.md": [
+    {
+      "line": 5,
+      "n_numbers": 0,
+      "unmatched": [],
+      "sources": [
+        "runs/report_consistency.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 8,
+      "n_numbers": 3,
+      "unmatched": [
+        "2e-4"
+      ],
+      "sources": [
+        "runs/phase10_d4/aggregate.json",
+        "runs/phase10_d4/mechanism.json",
+        "runs/phase10_d4/outliers.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 9,
+      "n_numbers": 12,
+      "unmatched": [
+        "290",
+        "300",
+        "300",
+        "370"
+      ],
+      "sources": [
+        "runs/phase9/aggregate.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 10,
+      "n_numbers": 2,
+      "unmatched": [],
+      "sources": [
+        "runs/phase10_tc/exploratory_heading.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 11,
+      "n_numbers": 3,
+      "unmatched": [
+        "6.8e-4",
+        "1.8e-3"
+      ],
+      "sources": [
+        "runs/phase10_align/threshold.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 14,
+      "n_numbers": 9,
+      "unmatched": [
+        "917",
+        "7589",
+        "2775",
+        "2811",
+        "64.8",
+        "6658"
+      ],
+      "sources": [
+        "runs/phase7/study/report.json"
+      ],
+      "missing_sources": []
+    }
+  ],
   "docs/report/methodology.md": [
     {
       "line": 13,
@@ -148,7 +223,17 @@
       "missing_sources": []
     },
     {
-      "line": 15,
+      "line": 14,
+      "n_numbers": 7,
+      "unmatched": [],
+      "sources": [
+        "runs/phase10_align/aggregate.json",
+        "runs/phase10_align/threshold.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 16,
       "n_numbers": 4,
       "unmatched": [],
       "sources": [
@@ -158,22 +243,13 @@
       "missing_sources": []
     },
     {
-      "line": 19,
+      "line": 20,
       "n_numbers": 13,
       "unmatched": [
         "51.4",
         "64.8",
         "17.7"
       ],
-      "sources": [
-        "runs/phase9/aggregate.json"
-      ],
-      "missing_sources": []
-    },
-    {
-      "line": 21,
-      "n_numbers": 1,
-      "unmatched": [],
       "sources": [
         "runs/phase9/aggregate.json"
       ],
@@ -190,7 +266,7 @@
     },
     {
       "line": 23,
-      "n_numbers": 0,
+      "n_numbers": 1,
       "unmatched": [],
       "sources": [
         "runs/phase9/aggregate.json"
@@ -199,7 +275,7 @@
     },
     {
       "line": 24,
-      "n_numbers": 7,
+      "n_numbers": 0,
       "unmatched": [],
       "sources": [
         "runs/phase9/aggregate.json"
@@ -279,7 +355,16 @@
       "missing_sources": []
     },
     {
-      "line": 34,
+      "line": 33,
+      "n_numbers": 7,
+      "unmatched": [],
+      "sources": [
+        "runs/phase9/aggregate.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 35,
       "n_numbers": 13,
       "unmatched": [],
       "sources": [
@@ -288,7 +373,7 @@
       "missing_sources": []
     },
     {
-      "line": 36,
+      "line": 37,
       "n_numbers": 16,
       "unmatched": [],
       "sources": [
@@ -297,7 +382,7 @@
       "missing_sources": []
     },
     {
-      "line": 38,
+      "line": 39,
       "n_numbers": 15,
       "unmatched": [],
       "sources": [
@@ -306,7 +391,7 @@
       "missing_sources": []
     },
     {
-      "line": 42,
+      "line": 43,
       "n_numbers": 20,
       "unmatched": [],
       "sources": [
@@ -318,7 +403,7 @@
       "missing_sources": []
     },
     {
-      "line": 46,
+      "line": 47,
       "n_numbers": 18,
       "unmatched": [],
       "sources": [
@@ -330,7 +415,7 @@
       "missing_sources": []
     },
     {
-      "line": 58,
+      "line": 59,
       "n_numbers": 23,
       "unmatched": [
         "6658"
@@ -343,7 +428,7 @@
       "missing_sources": []
     },
     {
-      "line": 60,
+      "line": 61,
       "n_numbers": 22,
       "unmatched": [],
       "sources": [
@@ -354,7 +439,7 @@
       "missing_sources": []
     },
     {
-      "line": 62,
+      "line": 63,
       "n_numbers": 8,
       "unmatched": [],
       "sources": [
@@ -365,12 +450,21 @@
       "missing_sources": []
     },
     {
-      "line": 66,
-      "n_numbers": 7,
-      "unmatched": [
-        "10"
-      ],
+      "line": 67,
+      "n_numbers": 19,
+      "unmatched": [],
       "sources": [
+        "runs/phase10_align/aggregate.json",
+        "runs/phase10_align/threshold.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 69,
+      "n_numbers": 42,
+      "unmatched": [],
+      "sources": [
+        "runs/phase10_align/aggregate.json",
         "runs/phase10_align/threshold.json"
       ],
       "missing_sources": []
