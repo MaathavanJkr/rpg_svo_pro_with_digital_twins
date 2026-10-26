@@ -1,0 +1,138 @@
+{
+  "source": "dataset/Oerlikon.ply (3 111 643 points), bbox + 1 m margin",
+  "extent_m": [
+    314.0030201575199,
+    193.78949633266214,
+    120.43897489674745
+  ],
+  "occupied_voxels": {
+    "0.25": 1962330,
+    "0.5": 776539,
+    "1.0": 203434
+  },
+  "surface_area_estimate_m2": {
+    "0.25": 122645.625,
+    "0.5": 194134.75,
+    "1.0": 203434.0
+  },
+  "surface_area_used_m2": 194134.75,
+  "grids": {
+    "v0.05": {
+      "dims": [
+        6282,
+        3877,
+        2410
+      ],
+      "dense_voxels": 58696306740,
+      "dense_GB": 234.78522696,
+      "sparse_band": {
+        "mu_2v": {
+          "voxels": 310615599.99999994,
+          "memory_GB": 1.8928138124999996
+        },
+        "mu_5v": {
+          "voxels": 776538999.9999998,
+          "memory_GB": 4.732034531249997
+        }
+      }
+    },
+    "v0.1": {
+      "dims": [
+        3142,
+        1939,
+        1206
+      ],
+      "dense_voxels": 7347359628,
+      "dense_GB": 29.389438512,
+      "sparse_band": {
+        "mu_2v": {
+          "voxels": 77653899.99999999,
+          "memory_GB": 0.4732034531249999
+        },
+        "mu_5v": {
+          "voxels": 194134749.99999994,
+          "memory_GB": 1.1830086328124993
+        }
+      }
+    },
+    "v0.2": {
+      "dims": [
+        1572,
+        970,
+        604
+      ],
+      "dense_voxels": 921003360,
+      "dense_GB": 3.68401344,
+      "sparse_band": {
+        "mu_2v": {
+          "voxels": 19413474.999999996,
+          "memory_GB": 0.11830086328124997
+        },
+        "mu_5v": {
+          "voxels": 48533687.499999985,
+          "memory_GB": 0.29575215820312484
+        }
+      }
+    },
+    "v0.5": {
+      "dims": [
+        630,
+        389,
+        242
+      ],
+      "dense_voxels": 59306940,
+      "dense_GB": 0.23722776,
+      "sparse_band": {
+        "mu_2v": {
+          "voxels": 3106156.0,
+          "memory_GB": 0.018928138125
+        },
+        "mu_5v": {
+          "voxels": 7765390.0,
+          "memory_GB": 0.047320345312500005
+        }
+      }
+    },
+    "v1.0": {
+      "dims": [
+        316,
+        195,
+        122
+      ],
+      "dense_voxels": 7517640,
+      "dense_GB": 0.03007056,
+      "sparse_band": {
+        "mu_2v": {
+          "voxels": 776539.0,
+          "memory_GB": 0.00473203453125
+        },
+        "mu_5v": {
+          "voxels": 1941347.5,
+          "memory_GB": 0.011830086328125001
+        }
+      }
+    }
+  },
+  "p2p_full_twin": {
+    "points": 3111643,
+    "twin_MB": 149.358864,
+    "kdtree_MB_est": 129.2191268258476
+  },
+  "p2p_original_1m_downsampled_twin": {
+    "points": 203434,
+    "twin_MB": 9.764832,
+    "kdtree_MB_est": 8.448129765107847
+  },
+  "room_reference": {
+    "grid_v005_MB": 23.4,
+    "twin_points": 402142,
+    "twin_MB_float64_with_normals": 19.302816,
+    "kdtree_MB_measured": 16.7
+  },
+  "assumptions": [
+    "dense float32 grid covering the bbox + 1 m",
+    "sparse: truncation band +-mu around the surface, 8^3 blocks, 1.5x block fill overhead, 32 B per block index",
+    "surface area from occupancy at 0.5 m (the twin is too coarse to count surface voxels below ~0.25 m)",
+    "KD-tree bytes per point taken from the room measurement (Open3D, 41.5 B/pt)"
+  ]
+}
