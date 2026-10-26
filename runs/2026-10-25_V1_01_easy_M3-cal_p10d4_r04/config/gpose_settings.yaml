@@ -1,0 +1,6 @@
+gpose_settings:
+  # threshold on the variance of the yaw angle for the alignement to be considered successful
+  alignement_threshold: 3.0e-4 
+  max_num_residuals: 1
+  initial_orientation_known: false
+  refine_T_WL: true

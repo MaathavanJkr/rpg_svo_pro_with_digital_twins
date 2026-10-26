@@ -31,3 +31,5 @@ runs/*_p9_*/analysis/gt.tum
 runs/*_p9_*/rosout.log
 runs/*_p10tc_*/analysis/gt.tum
 runs/*_p10tc_*/rosout.log
+runs/*_p10d4_*/analysis/gt.tum
+runs/*_p10d4_*/rosout.log

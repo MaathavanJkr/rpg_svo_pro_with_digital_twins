@@ -1,0 +1,8 @@
+{
+  "run": "2026-10-25_V1_01_easy_M2F-heur_p10d4_r08",
+  "accepted_with_gt": 178,
+  "accepted_without_gt": 1,
+  "n_beyond_3sigma": 0,
+  "frac_beyond_3sigma": 0.0,
+  "frac_err_gt_0p2": 0.12359550561797752
+}

@@ -1,0 +1,8 @@
+{
+  "run": "2026-10-25_V2_02_medium_M3-cal_p10d4_r10",
+  "accepted_with_gt": 324,
+  "accepted_without_gt": 0,
+  "n_beyond_3sigma": 11,
+  "frac_beyond_3sigma": 0.033950617283950615,
+  "frac_err_gt_0p2": 0.08950617283950617
+}

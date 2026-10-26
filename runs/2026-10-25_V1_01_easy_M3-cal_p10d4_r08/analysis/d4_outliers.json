@@ -1,0 +1,8 @@
+{
+  "run": "2026-10-25_V1_01_easy_M3-cal_p10d4_r08",
+  "accepted_with_gt": 171,
+  "accepted_without_gt": 1,
+  "n_beyond_3sigma": 33,
+  "frac_beyond_3sigma": 0.19298245614035087,
+  "frac_err_gt_0p2": 0.09941520467836257
+}

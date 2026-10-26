@@ -1,0 +1,44 @@
+# FYP: registration settings for EuRoC Vicon Room 1 (M2 = original point-to-plane ICP, via
+# online_registration_fyp.py). Room scale: about 8.5 x 8.8 x 4.4 m. Starting values, to be revisited
+# only with evidence from logged runs (Phase 6/7). Oerlikon values in brackets for reference.
+registration_settings:
+  # Weights of the heuristic information matrix: kept equal to Oerlikon so that only the
+  # geometry-dependent thresholds change in the port. Their absolute effect on the backend is a
+  # tuning question for later ablations, not part of the port. [9, 2, 1]
+  scale_factor_position: 9
+  scale_factor_rotation: 2
+  information_matrix_power: 1
+
+  # ICP correspondence radius. M1 (VIO only) map-frame error on V1_01 after the D1 alignment:
+  # median ~0.22 m, max 0.44-0.46 m (5 runs). The radius must cover that misalignment plus landmark
+  # noise, while staying well below the room size so that fitness stays informative (at 8 m every
+  # landmark in the room would count as an inlier; Phase 3 note 5a). [8 m]
+  max_correspondence_distance: 0.5
+
+  # Accept only if the inlier RMSE is small: good registrations of SVO landmarks against planar
+  # walls should leave mostly landmark noise (few cm to ~0.1 m for mono depth). 0.15 m is 30 % of
+  # the correspondence radius (Oerlikon: 1.6 / 8 = 20 %). [1.6 m]
+  inliers_rmse_thr: 0.15
+
+  # Fraction of landmarks with a correspondence within 0.5 m. Kept at the original value; it is now
+  # meaningful because the radius is room scale. [0.75 hard-coded]
+  fitness_threshold: 0.75
+
+  # Plausibility limits on the ICP correction (the VIO is assumed "close"). Translation: 0.75 m,
+  # about 1.6x the largest M1 map-frame error seen; a larger correction than the correspondence
+  # radius can hardly be a converged solution. Rotation: 5 deg covers the D1 yaw uncertainty
+  # (~2 deg GT-orientation effect, docs/phase4_m1.md) plus VIO yaw drift over V1_01 (~1-2 deg).
+  # [20 m, 15 deg]
+  max_translation_distance: 0.75
+  max_rotation_distance: 5
+
+  # Box around the current body position used to crop the local cloud and the twin. 10 m keeps the
+  # whole room (no crop); the cropping exists for city-scale maps. [350 m]
+  size_bounding_box: 10
+
+  # Twin handling. The twin is preprocessed once offline (dataset/derived/euroc_twin/V1_leica_v30mm.ply:
+  # crop, 3 cm voxels, normals; decision D3), so the node must not downsample it again (original:
+  # 1 m voxels, far too coarse for a room) and must keep the floor (original drops z < 0; the
+  # V1 floor lies at z = -0.14 ... 0).
+  twin_voxel_size: 0
+  twin_min_z: null

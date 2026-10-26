@@ -1,0 +1,2009 @@
+[0m[INFO] [1792969832.574276597]: Found parameter: pipeline_is_stereo, value: 0[0m
+[33m[WARN] [1792969832.575737694]: Cannot find value for parameter: set_initial_attitude_from_gravity, assigning default: 1[0m
+[0m[INFO] [1792969832.576933638]: Found parameter: automatic_reinitialization, value: 1[0m
+[0m[INFO] [1792969832.578190775]: Found parameter: calib_file, value: /home/alpha/Desktop/twinforge/catkin_ws/src/rpg_svo_pro_with_digital_twins/svo_ros/param/fyp/euroc/euroc_mono.yaml[0m
+load pinhole camera with fisheye distortion started
+distortion_parameters:   -0.283408
+  0.0739591
+0.000193595
+1.76187e-05
+load pinhole camera with fisheye distortion finished
+
+  name = cam0
+  size = [752, 480]
+  Projection = Pinhole
+  Focal length = (458.655, 457.297)
+  Principal point = (367.216, 248.375)
+  Distortion: RadTan(-0.283408, 0.0739591, 0.000193595, 1.76187e-05)
+[33m[WARN] [1792969832.580508759]: Cannot find value for parameter: klt_max_level, assigning default: 4[0m
+[33m[WARN] [1792969832.580965780]: Cannot find value for parameter: klt_min_level, assigning default: 0[0m
+[0m[INFO] [1792969832.582283367]: Found parameter: reprojector_max_n_kfs, value: 5[0m
+[0m[INFO] [1792969832.583480234]: Found parameter: max_fts, value: 180[0m
+[0m[INFO] [1792969832.584655504]: Found parameter: grid_size, value: 25[0m
+[0m[INFO] [1792969832.585863557]: Found parameter: reproject_unconverged_seeds, value: 1[0m
+[0m[INFO] [1792969832.588092020]: Found parameter: max_unconverged_seeds_ratio, value: 0.2[0m
+[0m[INFO] [1792969832.590856142]: Found parameter: quality_min_fts, value: 40[0m
+[0m[INFO] [1792969832.592312072]: Found parameter: seed_convergence_sigma2_thresh, value: 200[0m
+[0m[INFO] [1792969832.593498018]: Found parameter: reprojector_affine_est_offset, value: 1[0m
+[0m[INFO] [1792969832.594806170]: Found parameter: reprojector_affine_est_gain, value: 0[0m
+[33m[WARN] [1792969832.595265277]: Cannot find value for parameter: reprojector_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969832.595712287]: Cannot find value for parameter: reprojector_max_n_global_kfs, assigning default: 20[0m
+[33m[WARN] [1792969832.596158494]: Cannot find value for parameter: reprojector_use_kfs_from_global_map, assigning default: 0[0m
+[33m[WARN] [1792969832.596640581]: Cannot find value for parameter: reprojector_fixed_lm_grid_size, assigning default: 50[0m
+[0m[INFO] [1792969832.597833427]: Found parameter: init_min_features, value: 60[0m
+[33m[WARN] [1792969832.598419194]: Cannot find value for parameter: init_min_tracked, assigning default: 80[0m
+[33m[WARN] [1792969832.598886869]: Cannot find value for parameter: init_min_inliers, assigning default: 70[0m
+[0m[INFO] [1792969832.600081384]: Found parameter: init_min_disparity, value: 30[0m
+[33m[WARN] [1792969832.600561766]: Cannot find value for parameter: init_min_features_factor, assigning default: 2[0m
+[33m[WARN] [1792969832.601004562]: Cannot find value for parameter: reproj_err_thresh, assigning default: 2[0m
+[33m[WARN] [1792969832.601456926]: Cannot find value for parameter: init_disparity_pivot_ratio, assigning default: 0.5[0m
+[33m[WARN] [1792969832.602010217]: Cannot find value for parameter: init_method, assigning default: FivePoint[0m
+[0m[INFO] [1792969832.603204386]: Found parameter: grid_size, value: 25[0m
+[0m[INFO] [1792969832.604358659]: Found parameter: n_pyr_levels, value: 3[0m
+[0m[INFO] [1792969832.605529170]: Found parameter: detector_threshold_primary, value: 10[0m
+[0m[INFO] [1792969832.606825784]: Found parameter: detector_threshold_secondary, value: 200[0m
+[0m[INFO] [1792969832.608027196]: Found parameter: detector_threshold_shitomasi, value: 50[0m
+[33m[WARN] [1792969832.608490793]: Cannot find value for parameter: use_edgelets, assigning default: 1[0m
+[0m[INFO] [1792969832.609785561]: Found parameter: n_pyr_levels, value: 3[0m
+[33m[WARN] [1792969832.610366564]: Cannot find value for parameter: use_threaded_depthfilter, assigning default: 1[0m
+[0m[INFO] [1792969832.611657709]: Found parameter: seed_convergence_sigma2_thresh, value: 200[0m
+[0m[INFO] [1792969832.612977465]: Found parameter: mappoint_convergence_sigma2_thresh, value: 500[0m
+[0m[INFO] [1792969832.614515846]: Found parameter: scan_epi_unit_sphere, value: 0[0m
+[0m[INFO] [1792969832.615763744]: Found parameter: depth_filter_affine_est_offset, value: 1[0m
+[0m[INFO] [1792969832.617083573]: Found parameter: depth_filter_affine_est_gain, value: 0[0m
+[0m[INFO] [1792969832.618489474]: Found parameter: max_fts, value: 180[0m
+[33m[WARN] [1792969832.618942252]: Cannot find value for parameter: max_seeds_ratio, assigning default: 3[0m
+[0m[INFO] [1792969832.620154803]: Found parameter: max_map_fts, value: 300[0m
+[33m[WARN] [1792969832.620607774]: Cannot find value for parameter: depth_filter_extra_map_points, assigning default: 0[0m
+[0m[INFO] [1792969832.626018653]: Found parameter: runlc, value: 0[0m
+[0m[INFO] [1792969832.634040180]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969832.635290559]: Found parameter: use_imu, value: 1[0m
+[33m[WARN] [1792969832.655108770]: Cannot find value for parameter: trace_dir, assigning default: /home/alpha/Desktop/twinforge/catkin_ws/src/rpg_svo_pro_with_digital_twins/svo/trace[0m
+[0m[INFO] [1792969832.655927261]: Found parameter: quality_min_fts, value: 40[0m
+[33m[WARN] [1792969832.656232405]: Cannot find value for parameter: quality_max_drop_fts, assigning default: 40[0m
+[0m[INFO] [1792969832.657003525]: Found parameter: relocalization_max_trials, value: 5[0m
+[0m[INFO] [1792969832.657792547]: Found parameter: poseoptim_prior_lambda, value: 0[0m
+[0m[INFO] [1792969832.658623055]: Found parameter: poseoptim_using_unit_sphere, value: 0[0m
+[0m[INFO] [1792969832.659414760]: Found parameter: img_align_prior_lambda_rot, value: 0.5[0m
+[0m[INFO] [1792969832.660264635]: Found parameter: img_align_prior_lambda_trans, value: 0[0m
+[33m[WARN] [1792969832.660636262]: Cannot find value for parameter: structure_optimization_max_pts, assigning default: 20[0m
+[0m[INFO] [1792969832.661436773]: Found parameter: map_scale, value: 1.5[0m
+[0m[INFO] [1792969832.662336210]: Found parameter: kfselect_criterion, value: FORWARD[0m
+[33m[WARN] [1792969832.662635719]: Cannot find value for parameter: kfselect_min_dist, assigning default: 0.12[0m
+[0m[INFO] [1792969832.663416348]: Found parameter: kfselect_numkfs_upper_thresh, value: 140[0m
+[0m[INFO] [1792969832.664185657]: Found parameter: kfselect_numkfs_lower_thresh, value: 100[0m
+[0m[INFO] [1792969832.665007340]: Found parameter: kfselect_min_dist_metric, value: 0.1[0m
+[0m[INFO] [1792969832.665783117]: Found parameter: kfselect_min_angle, value: 20[0m
+[0m[INFO] [1792969832.666679607]: Found parameter: kfselect_min_disparity, value: 40[0m
+[33m[WARN] [1792969832.666976308]: Cannot find value for parameter: kfselect_min_num_frames_between_kfs, assigning default: 2[0m
+[33m[WARN] [1792969832.667280978]: Cannot find value for parameter: kfselect_backend_max_time_sec, assigning default: 3[0m
+[0m[INFO] [1792969832.668067036]: Found parameter: img_align_max_level, value: 4[0m
+[0m[INFO] [1792969832.668836313]: Found parameter: img_align_min_level, value: 2[0m
+[33m[WARN] [1792969832.669131554]: Cannot find value for parameter: img_align_robustification, assigning default: 0[0m
+[33m[WARN] [1792969832.669432050]: Cannot find value for parameter: img_align_use_distortion_jacobian, assigning default: 0[0m
+[0m[INFO] [1792969832.670328638]: Found parameter: img_align_est_illumination_gain, value: 1[0m
+[0m[INFO] [1792969832.671124669]: Found parameter: img_align_est_illumination_offset, value: 1[0m
+[0m[INFO] [1792969832.671902840]: Found parameter: poseoptim_thresh, value: 2[0m
+[0m[INFO] [1792969832.672745702]: Found parameter: update_seeds_with_old_keyframes, value: 1[0m
+[0m[INFO] [1792969832.673644488]: Found parameter: use_async_reprojectors, value: 0[0m
+[33m[WARN] [1792969832.674001099]: Cannot find value for parameter: trace_statistics, assigning default: 0[0m
+[0m[INFO] [1792969832.675087891]: Found parameter: backend_scale_stable_thresh, value: 0.02[0m
+[33m[WARN] [1792969832.675440781]: Cannot find value for parameter: global_map_timeout_sec, assigning default: 2[0m
+[0m[INFO] [1792969832.675589113]: DepthFilter: created.[0m
+[0m[INFO] [1792969832.675636607]: DepthFilter: Start thread.[0m
+Parameter T_world_imuinit/tx was not set. Using default value: 0
+Parameter T_world_imuinit/ty was not set. Using default value: 0
+Parameter T_world_imuinit/tz was not set. Using default value: 0
+[0m[INFO] [1792969832.677749344]: Found parameter: T_world_imuinit/qw, value: 1[0m
+[0m[INFO] [1792969832.678758350]: Found parameter: T_world_imuinit/qx, value: 0[0m
+[0m[INFO] [1792969832.679624994]: Found parameter: T_world_imuinit/qy, value: 0[0m
+[0m[INFO] [1792969832.680497579]: Found parameter: T_world_imuinit/qz, value: 0[0m
+[0m[INFO] [1792969832.681595277]: Found parameter: T_world_imuinit/qz, value: 0[0m
+[0m[INFO] [1792969832.682892147]: Found parameter: T_world_imuinit/qy, value: 0[0m
+[0m[INFO] [1792969832.684085645]: Found parameter: T_world_imuinit/qx, value: 0[0m
+[0m[INFO] [1792969832.685273502]: Found parameter: T_world_imuinit/qw, value: 1[0m
+[33m[WARN] [1792969832.685719924]: Cannot find value for parameter: publish_img_pyr_level, assigning default: 0[0m
+[33m[WARN] [1792969832.686288265]: Cannot find value for parameter: publish_every_nth_img, assigning default: 1[0m
+[0m[INFO] [1792969832.687350257]: Found parameter: publish_every_nth_dense_input, value: 5[0m
+[33m[WARN] [1792969832.687764956]: Cannot find value for parameter: publish_image_caption_str, assigning default: 0[0m
+[33m[WARN] [1792969832.688781354]: Cannot find value for parameter: publish_world_in_cam_frame, assigning default: 1[0m
+[33m[WARN] [1792969832.689178438]: Cannot find value for parameter: publish_map_every_frame, assigning default: 0[0m
+[33m[WARN] [1792969832.689535184]: Cannot find value for parameter: publish_point_display_time, assigning default: 0[0m
+[33m[WARN] [1792969832.689938180]: Cannot find value for parameter: publish_seeds, assigning default: 1[0m
+[33m[WARN] [1792969832.690353431]: Cannot find value for parameter: publish_seeds_uncertainty, assigning default: 0[0m
+[0m[INFO] [1792969832.691416161]: Found parameter: publish_active_kfs, value: 1[0m
+[33m[WARN] [1792969832.691788014]: Cannot find value for parameter: trace_pointcloud, assigning default: 0[0m
+[0m[INFO] [1792969832.692711368]: Found parameter: publish_marker_scale, value: 0.5[0m
+[0m[INFO] [1792969832.736974514]: Found parameter: use_imu, value: 1[0m
+[0m[INFO] [1792969832.737951858]: Found parameter: calib_file, value: /home/alpha/Desktop/twinforge/catkin_ws/src/rpg_svo_pro_with_digital_twins/svo_ros/param/fyp/euroc/euroc_mono.yaml[0m
+Loaded IMU Calibration
+  delay_imu_cam = 0
+  sigma_omega_c = 0.0012
+  sigma_acc_c = 0.008
+  sigma_integration_c = 0
+  sigma_omega_bias_c = 0.03
+  sigma_acc_bias_c = 0.1
+  g = 9.8082
+  coriolis = 0 0 0
+Loaded IMU Initialization
+  velocity = 0 0 0
+  omega_bias = 0 0 0
+  acc_bias = 0 0 0
+  velocity_sigma = 2
+  omega_bias_sigma = 0.01
+  acc_bias_sigma = 0.1
+[33m[WARN] [1792969832.740133768]: Cannot find value for parameter: imu_temporal_stationary_check, assigning default: 0[0m
+[33m[WARN] [1792969832.740509567]: Cannot find value for parameter: imu_temporal_window_length_sec, assigning default: 0.5[0m
+[33m[WARN] [1792969832.740905579]: Cannot find value for parameter: stationary_acc_sigma_thresh, assigning default: 0[0m
+[33m[WARN] [1792969832.741296477]: Cannot find value for parameter: stationary_gyr_sigma_thresh, assigning default: 0[0m
+[0m[INFO] [1792969832.742370435]: Found parameter: gp_settings_file, value: /home/alpha/Desktop/twinforge/catkin_ws/src/rpg_svo_pro_with_digital_twins/svo_ros/param/fyp/euroc/gp_settings.yaml[0m
+Loaded Global Positions Settings
+cov = 900   0   0
+  0 900   0
+  0   0 900
+B_t_PB = 0
+0
+0
+max_num_residuals = 1
+initial_orientation_known = 0
+[0m[INFO] [1792969832.743742647]: Found parameter: use_global_measurements, value: 1[0m
+[33m[WARN] [1792969832.744087576]: Cannot find value for parameter: estimate_world_vio_transform, assigning default: 1[0m
+[0m[INFO] [1792969832.744142218]: Using Global Position Measurements[0m
+[0m[INFO] [1792969832.745165304]: Found parameter: map_reg_settings_file, value: /home/alpha/Desktop/twinforge/catkin_ws/src/rpg_svo_pro_with_digital_twins/svo_ros/param/fyp/euroc/gpose_settings_m2.yaml[0m
+Loaded Global Pose (map alignement) Settings
+cov = 1 0 0 0 0 0
+0 1 0 0 0 0
+0 0 1 0 0 0
+0 0 0 1 0 0
+0 0 0 0 1 0
+0 0 0 0 0 1
+B_t_PB = 0
+0
+0
+max_num_residuals = 1
+initial_orientation_known = 0
+[0m[INFO] [1792969832.746677637]: Found parameter: use_map_registration, value: 1[0m
+[0m[INFO] [1792969832.746719504]: Using Map registration  Global Pose Measurements[0m
+[0m[INFO] [1792969832.747767780]: Found parameter: use_ceres_backend, value: 1[0m
+[0m[INFO] [1792969832.748752374]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969832.749656837]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969832.750620164]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969832.750949787]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969832.751832605]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969832.752739642]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969832.753676856]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969832.754076718]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969832.754421502]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969832.754753132]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969832.755085196]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969832.755423026]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969832.755784569]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969832.756617574]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969832.757578958]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969832.758635047]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969832.759539822]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969832.760434387]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969832.760733329]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969832.761025158]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969832.761348018]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969832.761667845]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969832.762017582]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969832.762912446]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969832.763869667]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969832.764835022]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969832.765717815]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969832.766638645]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969832.767041645]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969832.770996792]: Found parameter: runlc, value: 0[0m
+[33m[WARN] [1792969832.771353695]: Cannot find value for parameter: use_global_map, assigning default: 0[0m
+[0m[INFO] [1792969832.772284227]: Found parameter: log_frame_events, value: 1[0m
+[0m[INFO] [1792969832.773185742]: Found parameter: frame_event_log_file, value: /home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-25_V2_02_medium_M3-hess_p10d4_r09/frame_events.csv[0m
+[0m[INFO] [1792969832.773639183]: Logging frame events to /home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-25_V2_02_medium_M3-hess_p10d4_r09/frame_events.csv[0m
+[0m[INFO] [1792969832.774689757]: Found parameter: log_registration_events, value: 1[0m
+[0m[INFO] [1792969832.775652095]: Found parameter: registration_event_log_file, value: /home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-25_V2_02_medium_M3-hess_p10d4_r09/registration_events.csv[0m
+[0m[INFO] [1792969832.775716259]: Logging registration events to /home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-25_V2_02_medium_M3-hess_p10d4_r09/registration_events.csv[0m
+[0m[INFO] [1792969832.776668280]: Found parameter: d1_alignment, value: 1[0m
+[0m[INFO] [1792969832.777603210]: Found parameter: d1_gt_file, value: /home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/dataset/derived/asl_meta/V2_02_medium/mav0/state_groundtruth_estimate0/data.csv[0m
+[0m[INFO] [1792969832.778698864]: Found parameter: d1_log_file, value: /home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-25_V2_02_medium_M3-hess_p10d4_r09/d1_alignment.csv[0m
+[0m[INFO] [1792969832.779761763]: Found parameter: d1_window_length, value: 2[0m
+[0m[INFO] [1792969832.810236522]: D1 alignment enabled: 23091 GT samples from /home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/dataset/derived/asl_meta/V2_02_medium/mav0/state_groundtruth_estimate0/data.csv[0m
+[0m[INFO] [1792969832.811701115]: SvoNode: Started IMU loop.[0m
+[0m[INFO] [1792969832.814144054]: Found parameter: imu_topic, value: /imu0[0m
+READING FROM /home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/dataset/derived/euroc_twin/V2_leica_v30mm.ply
+[0m[INFO] [1792969835.812259919]: SvoNode: Started Global Positions loop.[0m
+[0m[INFO] [1792969835.812745715]: SvoNode: Started Global Positions loop.[0m
+[0m[INFO] [1792969835.812841830]: SvoNode: Started Image loop.[0m
+[33m[WARN] [1792969835.812961752]: Cannot find value for parameter: remote_key_topic, assigning default: svo/remote_key[0m
+[0m[INFO] [1792969835.814402795]: Found parameter: gp_topic, value: /fyp_unused_gps[0m
+[0m[INFO] [1792969835.814830692]: Found parameter: map_alignement_T_w_b, value: /svo/w_registrated_pose[0m
+[0m[INFO] [1792969835.817209752]: Found parameter: cam0_topic, value: /cam0/image_raw[0m
+[INFO] [1792969836.028596]: CityMapRegistrator node started. Waiting for messages...
+[0m[INFO] [1792969840.675718152]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969844.426342065]: Init: Triangulated 136 points[0m
+[33m[WARN] [1792969844.473937525]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969844.474085726]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969844.720894363]: D1: t0 = 1413393890055760500 ns (bundle 81)[0m
+[0m[INFO] [1792969847.387585083]: D1: T_M_W set (window 54 samples, 2.01993 m, t_end 1413393892705760500 ns), yaw -11.3048 deg, t = -1.33065 0.502607  1.36639[0m
+[0m[INFO] [1792969847.675790446]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969848.177368036]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969848.625457821]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969848.815150623]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969849.375584425]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969849.774179655]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969850.275256071]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969850.525404808]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969850.675129054]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969850.828215509]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969850.975886138]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969851.175189508]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969851.525724291]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969851.874856289]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969852.114894004]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969852.265730579]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969852.825645768]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969852.965224997]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969853.114266263]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969853.325059804]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969853.474717665]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969853.672569239]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969854.014261191]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969854.174875208]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969854.323208932]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969854.463662663]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969854.613930141]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969856.184444834]: ... registrated pose added to the optimization![0m
+[33m[WARN] [1792969856.525951781]: Lost 45 features![0m
+[33m[WARN] [1792969856.564165248]: update seed with ref frame[0m
+[33m[WARN] [1792969856.566807990]: Lost 50 features![0m
+[0m[INFO] [1792969857.375643081]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969857.989560657]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969860.667928349]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969866.666628345]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969868.664190099]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969868.763661420]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969869.524374585]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969870.366696643]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969870.913152765]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969871.274271502]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969871.514640247]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969871.663297758]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969871.863127015]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969872.112587220]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969872.414067793]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969872.713013218]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969872.912824127]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969873.114626309]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969873.263234835]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969874.472883713]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969874.611002962]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969874.761996218]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969874.924733797]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969875.162295297]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969875.373470993]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969875.661878118]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969875.914175899]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969876.962764579]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969877.162710591]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969877.877501312]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969878.074427290]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969878.320303423]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969878.462576151]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969878.624755315]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969878.873275462]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969879.023155374]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969879.276529851]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969879.414515302]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969879.514772720]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969879.674584380]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969879.863722363]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969879.990117558]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969880.174533279]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969880.262280121]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969880.422145559]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969880.623319543]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969880.773540085]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969881.022452241]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969881.424385510]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969881.614663494]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969881.826053560]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969882.213303612]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969882.363755879]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969882.512713002]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969882.662283921]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792969882.817023957]: ... registrated pose added to the optimization![0m
+[33m[WARN] [1792969934.471655877]: Not enough matched features: 0[0m
+[0m[INFO] [1792969934.711920479]: DepthFilter: RESET.[0m
+E1026 04:42:14.711964 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969934.773042266]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969934.773879757]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969934.774821866]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969934.775278123]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969934.776170452]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969934.777067688]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969934.778000535]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969934.778378681]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969934.778737166]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969934.779096690]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969934.779413416]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969934.779791807]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969934.780148620]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969934.781099797]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969934.781906780]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969934.782760109]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969934.783524863]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969934.784338623]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969934.784685673]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969934.784987998]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969934.785331127]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969934.785679302]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969934.786029220]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969934.786923686]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969934.787782120]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969934.788572600]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969934.789393429]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969934.790245720]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969934.790636255]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969934.791401159]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969934.866612195]: Init: Triangulated 270 points[0m
+[33m[WARN] [1792969934.924504054]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969934.924591303]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969934.973111219]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969934.973188410]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969935.012725782]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969935.012806774]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969935.074742420]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969935.074807079]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969935.126101983]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969935.126164427]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969935.172808208]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969935.172921557]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969935.173145921]: DepthFilter: RESET.[0m
+E1026 04:42:15.173207 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969935.224117847]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969935.224965065]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969935.225793869]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969935.226221162]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969935.227090479]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969935.227906594]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969935.228743693]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969935.229099193]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969935.229453746]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969935.229857840]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969935.230267638]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969935.230660902]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969935.231014829]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969935.231947816]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969935.232779834]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969935.233608002]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969935.234557563]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969935.235390040]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969935.235751472]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969935.236101998]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969935.236458127]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969935.236900970]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969935.237258330]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969935.238166062]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969935.239050329]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969935.239944483]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969935.240822641]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969935.241705006]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969935.242228857]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969935.242762053]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969935.431464897]: Init: Triangulated 123 points[0m
+[33m[WARN] [1792969935.464264695]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969935.464368318]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969935.508902957]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969935.509000591]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969935.509091581]: Not enough matched features: 0[0m
+[33m[WARN] [1792969935.574274267]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969935.574386015]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969935.610891807]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969935.610992462]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969935.671781352]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969935.671907045]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969935.723175222]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969935.723299316]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969935.723544307]: DepthFilter: RESET.[0m
+E1026 04:42:15.723639 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969935.763898717]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969935.764837589]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969935.765723394]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969935.766221114]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969935.767413497]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969935.768560796]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969935.769784595]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969935.770301154]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969935.770748287]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969935.771227468]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969935.771725872]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969935.772196364]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969935.772739143]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969935.773980074]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969935.775219768]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969935.776455289]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969935.777545322]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969935.778702641]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969935.779114138]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969935.779572445]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969935.780086826]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969935.780549211]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969935.781066116]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969935.782245508]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969935.783340511]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969935.784473980]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969935.785591812]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969935.786913951]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969935.787381931]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969935.787901981]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969936.064357749]: Init: Triangulated 249 points[0m
+[33m[WARN] [1792969936.112611993]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969936.112756485]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969936.166333665]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969936.166478366]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969936.222349849]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969936.222493503]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969936.271895906]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969936.272043118]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969936.321367979]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969936.321543026]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969936.371200130]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969936.371322846]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969936.371501493]: DepthFilter: RESET.[0m
+E1026 04:42:16.371589 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969936.424118538]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969936.425103360]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969936.426196600]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969936.426617321]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969936.427776087]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969936.428994395]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969936.430171776]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969936.430664434]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969936.431109630]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969936.431610108]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969936.432099736]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969936.432551375]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969936.433098416]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969936.434296280]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969936.435454997]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969936.436626440]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969936.437728610]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969936.438869192]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969936.439291143]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969936.439771961]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969936.440223171]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969936.440692739]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969936.441161741]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969936.442404188]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969936.443550790]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969936.444813214]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969936.445908749]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969936.447035178]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969936.447463162]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969936.447935522]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969936.723152234]: Init: Triangulated 267 points[0m
+[33m[WARN] [1792969936.776401072]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969936.776516961]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969936.776600502]: Not enough matched features: 0[0m
+[33m[WARN] [1792969936.819014220]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969936.819111034]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969936.870404632]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969936.870499823]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969936.920515517]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969936.920660626]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969936.971741241]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969936.971866110]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969937.020175593]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969937.020325236]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969937.020536093]: DepthFilter: RESET.[0m
+E1026 04:42:17.020633 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969937.074342441]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969937.075459408]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969937.076444435]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969937.076831640]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969937.077902535]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969937.079050697]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969937.080133230]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969937.080532309]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969937.080997352]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969937.081452589]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969937.081929564]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969937.082373974]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969937.082817864]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969937.083865176]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969937.085020184]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969937.086168290]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969937.087354540]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969937.088550762]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969937.089014678]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969937.089480518]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969937.089976358]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969937.090433167]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969937.090890646]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969937.091961634]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969937.093085816]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969937.094186438]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969937.095303360]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969937.096534537]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969937.096981443]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969937.097462114]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969937.174660550]: Init: Triangulated 340 points[0m
+[33m[WARN] [1792969937.221373530]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969937.221514540]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969937.258321894]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969937.258474781]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969937.308798870]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969937.308944748]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969937.371181056]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969937.371348025]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969937.421878067]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969937.421987303]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969937.471538810]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969937.471681539]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969937.471870106]: DepthFilter: RESET.[0m
+E1026 04:42:17.471946 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969937.522722187]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969937.523746925]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969937.524751922]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969937.525175417]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969937.526406921]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969937.527491842]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969937.528524465]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969937.528967930]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969937.529385602]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969937.529868733]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969937.530309182]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969937.530770580]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969937.531210424]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969937.532332884]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969937.533375591]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969937.534424057]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969937.535505981]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969937.536623906]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969937.537101865]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969937.537518282]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969937.537950459]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969937.538372948]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969937.538847935]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969937.539970244]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969937.541044016]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969937.542083006]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969937.543104847]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969937.544091554]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969937.544700027]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969937.545265398]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969937.623097896]: Init: Triangulated 275 points[0m
+[33m[WARN] [1792969937.660337269]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969937.660437398]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969937.719670870]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969937.719760579]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969937.769456463]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969937.769513622]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969937.808301206]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969937.808361480]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969937.808459879]: Not enough matched features: 0[0m
+[33m[WARN] [1792969937.869767030]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969937.869904883]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969937.920491298]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969937.920645962]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969937.920816195]: DepthFilter: RESET.[0m
+E1026 04:42:17.920864 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969937.960493818]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969937.961534440]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969937.962482309]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969937.962875600]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969937.963877002]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969937.964943715]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969937.966154100]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969937.966537919]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969937.966923911]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969937.967298827]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969937.967716505]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969937.968145920]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969937.968558115]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969937.969661456]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969937.970715953]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969937.971843481]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969937.972972658]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969937.974157831]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969937.974589670]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969937.975015184]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969937.975455364]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969937.975894955]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969937.976267311]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969937.977304007]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969937.978454618]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969937.979485289]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969937.980468142]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969937.981469414]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969937.981865054]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969937.982341802]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969938.074937282]: Init: Triangulated 229 points[0m
+[33m[WARN] [1792969938.109754563]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969938.109873612]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969938.169549462]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969938.169676309]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969938.219237482]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969938.219364334]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969938.270195473]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969938.270307493]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969938.307991923]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969938.308099709]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969938.372796594]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969938.372882761]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969938.373044396]: DepthFilter: RESET.[0m
+E1026 04:42:18.373101 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969938.424318159]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969938.425286374]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969938.426306884]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969938.426669887]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969938.427593955]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969938.428567792]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969938.429490499]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969938.429896240]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969938.430254986]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969938.430647592]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969938.431008737]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969938.431380280]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969938.431745139]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969938.432694322]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969938.433635267]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969938.434642366]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969938.435556565]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969938.436520652]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969938.436994703]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969938.437350568]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969938.437746505]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969938.438187066]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969938.438548975]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969938.439528245]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969938.440509636]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969938.441457464]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969938.442417819]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969938.443476502]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969938.443950916]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969938.444612702]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969938.525986440]: Init: Triangulated 220 points[0m
+[33m[WARN] [1792969938.559478933]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969938.559561023]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969938.625027575]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969938.625116354]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969938.670517330]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969938.670575242]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969938.722672564]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969938.722751862]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969938.771935803]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969938.771999740]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969938.822466598]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969938.822532264]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969938.822599328]: Not enough matched features: 0[0m
+[0m[INFO] [1792969938.822755100]: DepthFilter: RESET.[0m
+E1026 04:42:18.822803 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969938.871758957]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969938.872689505]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969938.873610219]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969938.873981764]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969938.874978808]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969938.875882280]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969938.876816300]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969938.877174585]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969938.877530465]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969938.877899828]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969938.878253487]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969938.878615180]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969938.878967204]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969938.879903468]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969938.880851886]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969938.881787398]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969938.882735445]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969938.883688828]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969938.884043953]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969938.884397691]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969938.884759693]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969938.885124762]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969938.885481409]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969938.886429879]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969938.887441500]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969938.888371825]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969938.889304786]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969938.890239174]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969938.890601901]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969938.891057792]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969938.970121205]: Init: Triangulated 204 points[0m
+[33m[WARN] [1792969939.056435176]: Cannot set scene depth. Frame has no point-observations![0m
+[33m[WARN] [1792969939.114804838]: Cannot set scene depth. Frame has no point-observations![0m
+[33m[WARN] [1792969939.166162783]: Cannot set scene depth. Frame has no point-observations![0m
+[33m[WARN] [1792969939.206187446]: Cannot set scene depth. Frame has no point-observations![0m
+[33m[WARN] [1792969939.271723015]: Cannot set scene depth. Frame has no point-observations![0m
+[0m[INFO] [1792969939.271959376]: DepthFilter: RESET.[0m
+E1026 04:42:19.272045 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969939.317101065]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969939.318095177]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969939.319033089]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969939.319409841]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969939.320339895]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969939.321275913]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969939.322244776]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969939.322658071]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969939.323033784]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969939.323417731]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969939.323804042]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969939.324180445]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969939.324560055]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969939.325523401]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969939.326508949]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969939.327426111]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969939.328345371]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969939.329306940]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969939.329729537]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969939.330164828]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969939.330546928]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969939.330970739]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969939.331354866]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969939.332320899]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969939.333311716]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969939.334296614]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969939.335264652]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969939.336238585]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969939.336656941]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969939.337127223]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969939.421178365]: Init: Triangulated 157 points[0m
+[33m[WARN] [1792969939.465915471]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969939.465999523]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969939.514400223]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969939.514529472]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969939.564660540]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969939.564736907]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969939.614227535]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969939.614346031]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969939.664290952]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969939.664421949]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969939.715403695]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969939.715533970]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969939.715721826]: DepthFilter: RESET.[0m
+E1026 04:42:19.715801 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969939.758805762]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969939.759799260]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969939.760764632]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969939.761173314]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969939.762329631]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969939.763294055]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969939.764271485]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969939.764693903]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969939.765097735]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969939.765531960]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969939.766003979]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969939.766442359]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969939.766869907]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969939.767928226]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969939.769029982]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969939.770025830]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969939.770964888]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969939.772028304]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969939.772424308]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969939.772806409]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969939.773240800]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969939.773653791]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969939.774121742]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969939.775154018]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969939.776273905]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969939.777381634]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969939.778471247]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969939.779467236]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969939.779891901]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969939.780358165]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969939.919026632]: Init: Triangulated 143 points[0m
+[33m[WARN] [1792969939.958278200]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969939.958570789]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969939.959122551]: Not enough matched features: 0[0m
+[33m[WARN] [1792969940.006904770]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969940.007074339]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969940.064374853]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969940.064535315]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969940.114479852]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969940.114647299]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969940.166316647]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969940.166489570]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969940.205820274]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969940.206005676]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969940.206235929]: DepthFilter: RESET.[0m
+E1026 04:42:20.206333 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969940.265867069]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969940.266978812]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969940.267920033]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969940.268316478]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969940.269396429]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969940.270500084]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969940.271505566]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969940.271914376]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969940.272308830]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969940.272765926]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969940.273220676]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969940.273651202]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969940.274086271]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969940.275155091]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969940.276315567]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969940.277470223]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969940.278410622]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969940.279381712]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969940.279791470]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969940.280247406]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969940.280715936]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969940.281181158]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969940.281640112]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969940.282808067]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969940.284033792]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969940.285152845]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969940.286320584]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969940.288738541]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969940.289184386]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969940.289710369]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969940.418730049]: Init: Triangulated 138 points[0m
+[33m[WARN] [1792969940.463504458]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969940.463651410]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969940.504318034]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969940.504447150]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969940.559520198]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969940.559661665]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969940.611432130]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969940.611616683]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969940.660557535]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969940.660716228]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969940.703169214]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969940.703340585]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969940.703529088]: DepthFilter: RESET.[0m
+E1026 04:42:20.703631 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969940.757872739]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969940.758830577]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969940.759762719]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969940.760137684]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969940.761070894]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969940.762030498]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969940.762989383]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969940.763371144]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969940.763776398]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969940.764161456]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969940.764540862]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969940.764939433]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969940.765327967]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969940.766334580]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969940.767311484]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969940.768269176]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969940.769203516]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969940.770220984]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969940.770612995]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969940.770998570]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969940.771395030]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969940.771797093]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969940.772182990]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969940.773174155]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969940.774227021]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969940.775193600]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969940.776159403]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969940.777118541]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969940.777522391]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969940.778024837]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969940.915426700]: Init: Triangulated 134 points[0m
+[33m[WARN] [1792969940.962826511]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969940.962967475]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969940.963060733]: Not enough matched features: 0[0m
+[33m[WARN] [1792969941.011899799]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969941.012040989]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969941.062163155]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969941.062309795]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969941.113393933]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969941.113560685]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969941.163057762]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969941.163157565]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969941.213600435]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969941.213700277]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969941.213848760]: DepthFilter: RESET.[0m
+E1026 04:42:21.213948 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969941.260640558]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969941.261671176]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969941.262586683]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969941.263016746]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969941.264164723]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969941.265141208]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969941.266116268]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969941.266516012]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969941.266962486]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969941.267408704]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969941.267854449]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969941.268289702]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969941.268726434]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969941.269742385]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969941.270858881]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969941.271856841]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969941.272927100]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969941.274030781]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969941.274449117]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969941.274877989]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969941.275279074]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969941.275654782]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969941.276117451]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969941.277227432]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969941.278254009]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969941.279235967]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969941.280225824]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969941.281322684]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969941.281752058]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969941.282208133]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969941.366284880]: Init: Triangulated 229 points[0m
+[33m[WARN] [1792969941.415007171]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969941.415090370]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969941.463234204]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969941.463314766]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969941.514077069]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969941.514224847]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969941.562778525]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969941.562920514]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969941.604547989]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969941.604700599]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969941.654465764]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969941.654602668]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969941.654832177]: DepthFilter: RESET.[0m
+E1026 04:42:21.654953 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969941.706353852]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969941.707518820]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969941.708561498]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969941.709105345]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969941.710358447]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969941.711496049]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969941.712562726]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969941.713112615]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969941.713658317]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969941.714272081]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969941.714726915]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969941.715224219]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969941.715672421]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969941.716747431]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969941.717874363]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969941.718967349]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969941.719945140]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969941.721036438]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969941.721467044]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969941.721876575]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969941.722303045]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969941.722743016]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969941.723190506]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969941.724337025]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969941.725456852]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969941.726448843]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969941.727538786]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969941.728656836]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969941.729083982]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969941.729550749]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969942.624838088]: Init: Triangulated 106 points[0m
+[33m[WARN] [1792969942.671232473]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969942.671348422]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969942.671431486]: Not enough matched features: 0[0m
+[33m[WARN] [1792969942.719385035]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969942.719502236]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969942.770246648]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969942.770362088]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969942.808065450]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969942.808179010]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969942.873276642]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969942.873426283]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969942.924038174]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969942.924156904]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969942.924349598]: DepthFilter: RESET.[0m
+E1026 04:42:22.924414 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969942.961137910]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969942.962078502]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969942.962932354]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969942.963262405]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969942.964238279]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969942.965241223]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969942.966213158]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969942.966557164]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969942.966899853]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969942.967232954]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969942.967610320]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969942.967967975]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969942.968328561]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969942.969208084]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969942.970163686]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969942.971142146]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969942.972031793]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969942.972882866]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969942.973214798]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969942.973548996]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969942.973983709]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969942.974365262]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969942.974763894]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969942.975672233]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969942.976563638]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969942.977441574]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969942.978432389]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969942.979389794]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969942.979785815]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969942.980367926]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969943.426241308]: Init: Triangulated 88 points[0m
+[33m[WARN] [1792969943.476669036]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969943.476751218]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969943.522293487]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969943.522374459]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969943.561203629]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969943.561283295]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969943.610475321]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969943.610595638]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969943.671609564]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969943.671704638]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969943.671760762]: Not enough matched features: 0[0m
+[33m[WARN] [1792969943.710733085]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969943.710841170]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969943.710952929]: DepthFilter: RESET.[0m
+E1026 04:42:23.711009 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969943.762705270]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969943.763745243]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969943.764653060]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969943.765004866]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969943.766070243]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969943.767042122]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969943.768003005]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969943.768374556]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969943.768757151]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969943.769176397]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969943.769590238]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969943.770046220]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969943.770476297]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969943.771512162]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969943.772490757]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969943.773402979]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969943.774356486]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969943.775337603]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969943.775689074]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969943.776048148]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969943.776405516]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969943.776753452]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969943.777106884]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969943.778103142]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969943.779188916]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969943.780286992]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969943.781320742]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969943.782211709]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969943.782525112]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969943.782993744]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969944.017010984]: Init: Triangulated 122 points[0m
+[33m[WARN] [1792969944.062328195]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969944.062440842]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969944.126005828]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969944.126107693]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969944.173668348]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969944.173795442]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969944.211902113]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969944.211996819]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969944.260677326]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969944.260792857]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969944.317456766]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969944.317553460]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969944.317691792]: DepthFilter: RESET.[0m
+E1026 04:42:24.317751 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969944.372060213]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969944.373039524]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969944.374115258]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969944.374501715]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969944.375459758]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969944.376389494]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969944.377376698]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969944.377757546]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969944.378153397]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969944.378537493]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969944.378949460]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969944.379358071]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969944.379746626]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969944.380762773]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969944.381725669]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969944.382763691]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969944.383713355]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969944.384665089]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969944.385053057]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969944.385462334]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969944.385865261]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969944.386274449]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969944.386668055]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969944.387654122]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969944.388666799]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969944.389594371]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969944.390667525]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969944.391598269]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969944.392021539]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969944.392455266]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969944.676001797]: Init: Triangulated 122 points[0m
+[33m[WARN] [1792969944.725055630]: Not enough matched features: 0[0m
+[33m[WARN] [1792969944.774147198]: Cannot set scene depth. Frame has no point-observations![0m
+[33m[WARN] [1792969944.826191913]: Cannot set scene depth. Frame has no point-observations![0m
+[33m[WARN] [1792969944.826512033]: update seed with ref frame[0m
+[33m[WARN] [1792969944.859850493]: Cannot set scene depth. Frame has no point-observations![0m
+[33m[WARN] [1792969944.921010173]: Cannot set scene depth. Frame has no point-observations![0m
+[33m[WARN] [1792969944.973112993]: Cannot set scene depth. Frame has no point-observations![0m
+[0m[INFO] [1792969944.973476858]: DepthFilter: RESET.[0m
+E1026 04:42:24.973519 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969945.023012200]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969945.023932866]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969945.024805241]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969945.025160949]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969945.026087124]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969945.026957636]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969945.027986896]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969945.028362028]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969945.028736706]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969945.029105976]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969945.029481249]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969945.029877259]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969945.030238866]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969945.031199598]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969945.032312539]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969945.033346034]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969945.034507361]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969945.035601411]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969945.036021761]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969945.036391013]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969945.036817732]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969945.037234344]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969945.037597660]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969945.038638489]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969945.039729642]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969945.040683469]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969945.041617659]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969945.042588436]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969945.043018535]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969945.043484736]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969945.124978905]: Init: Triangulated 221 points[0m
+[33m[WARN] [1792969945.172862441]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969945.172940349]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969945.221302942]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969945.221412226]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969945.283376858]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969945.283461671]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969945.328838037]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969945.328906021]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969945.360697571]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969945.360769120]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969945.422466777]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969945.422542065]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969945.422783869]: DepthFilter: RESET.[0m
+E1026 04:42:25.422852 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969945.474446754]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969945.475399496]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969945.476359305]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969945.476705448]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969945.477810075]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969945.478867617]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969945.479996616]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969945.480424539]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969945.480834654]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969945.481211538]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969945.481645040]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969945.482094697]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969945.482606280]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969945.483673472]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969945.484644085]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969945.485618704]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969945.486811432]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969945.487771787]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969945.488234894]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969945.488647358]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969945.489036269]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969945.489440493]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969945.489898570]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969945.490971566]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969945.491951877]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969945.493099569]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969945.494108559]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969945.495038755]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969945.495413588]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969945.495878718]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969945.572086029]: Init: Triangulated 232 points[0m
+[33m[WARN] [1792969945.620745215]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969945.620836396]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969945.673906960]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969945.674026038]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969945.722154883]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969945.722231383]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969945.770768327]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969945.770834556]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969945.770877890]: Not enough matched features: 0[0m
+[33m[WARN] [1792969945.810985143]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969945.811064927]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969945.872201847]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969945.872293267]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969945.872445267]: DepthFilter: RESET.[0m
+E1026 04:42:25.872509 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969945.924404162]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969945.925359985]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969945.926412565]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969945.926759526]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969945.927811523]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969945.928733552]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969945.929703051]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969945.930108800]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969945.930493365]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969945.930952571]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969945.931361108]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969945.931781906]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969945.932188810]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969945.933210254]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969945.934157459]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969945.935202104]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969945.936385214]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969945.937507657]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969945.937882417]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969945.938242146]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969945.938619632]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969945.939033286]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969945.939436520]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969945.940567326]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969945.941544250]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969945.942511543]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969945.943484480]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969945.944358713]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969945.944778019]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969945.945266859]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969946.024942166]: Init: Triangulated 223 points[0m
+[33m[WARN] [1792969946.070091845]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969946.070192109]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969946.108124181]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969946.108205172]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969946.157872484]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969946.158007961]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969946.221073311]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969946.221177418]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969946.264987856]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969946.265092645]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969946.309634117]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969946.309755929]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969946.310031999]: DepthFilter: RESET.[0m
+E1026 04:42:26.310127 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969946.379668343]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969946.380732150]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969946.381674783]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969946.382122740]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969946.383198000]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969946.384306624]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969946.385406575]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969946.385804958]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969946.386231825]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969946.386690240]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969946.387125030]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969946.387553696]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969946.388017894]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969946.389140850]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969946.390263645]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969946.391459199]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969946.392477717]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969946.393545019]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969946.394099080]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969946.394607631]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969946.395078648]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969946.395483544]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969946.395894915]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969946.396909484]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969946.397820337]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969946.398931112]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969946.399986630]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969946.400975188]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969946.401336141]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969946.401766699]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969946.671881192]: Init: Triangulated 155 points[0m
+[33m[WARN] [1792969946.714825044]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969946.714931113]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969946.769499478]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969946.769629577]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969946.819615659]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969946.819729279]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969946.819810262]: Not enough matched features: 0[0m
+[33m[WARN] [1792969946.869714169]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969946.869816783]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969946.919064543]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969946.919166939]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969946.969393498]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969946.969572454]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969946.969758615]: DepthFilter: RESET.[0m
+E1026 04:42:26.969838 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969947.010242795]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969947.011348815]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969947.012446512]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969947.012866344]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969947.013858000]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969947.014815695]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969947.015798968]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969947.016205313]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969947.016576467]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969947.016995829]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969947.017413514]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969947.017803379]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969947.018258677]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969947.019298190]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969947.020261561]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969947.021392687]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969947.022490714]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969947.023601779]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969947.024027691]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969947.024461567]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969947.024835792]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969947.025249193]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969947.025644695]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969947.026734195]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969947.027831338]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969947.028829188]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969947.029778077]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969947.030803906]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969947.031203535]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969947.031631672]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969947.129044274]: Init: Triangulated 176 points[0m
+[33m[WARN] [1792969947.161433578]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969947.161515546]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969947.221366197]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969947.221425087]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969947.270534461]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969947.270649485]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969947.320283585]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969947.320338630]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969947.372402040]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969947.372474824]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969947.418302480]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969947.418432461]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969947.418573429]: DepthFilter: RESET.[0m
+E1026 04:42:27.418612 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969947.468478356]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969947.469475549]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969947.470404618]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969947.470723485]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969947.471746320]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969947.472726640]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969947.473703235]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969947.474037421]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969947.474380991]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969947.474734002]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969947.475076841]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969947.475476319]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969947.475809717]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969947.476849701]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969947.477733888]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969947.478651050]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969947.479540619]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969947.480411708]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969947.480757821]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969947.481134751]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969947.481474945]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969947.481800825]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969947.482174323]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969947.483292310]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969947.484400280]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969947.485352254]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969947.486184925]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969947.487160264]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969947.487519367]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969947.487978551]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969947.726101675]: Init: Triangulated 147 points[0m
+[33m[WARN] [1792969947.761136679]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969947.761227013]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969947.822710622]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969947.822770246]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969947.822804263]: Not enough matched features: 0[0m
+[33m[WARN] [1792969947.872225140]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969947.872280673]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969947.909722158]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969947.909789614]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969947.959348629]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969947.959476277]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969948.022429127]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969948.022493516]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969948.022607100]: DepthFilter: RESET.[0m
+E1026 04:42:28.022668 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969948.062120317]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969948.063106679]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969948.064031789]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969948.064352582]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969948.065190451]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969948.066078590]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969948.067062383]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969948.067416809]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969948.067792311]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969948.068149178]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969948.068510161]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969948.068932880]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969948.069306189]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969948.070361006]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969948.071293509]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969948.072162854]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969948.073062147]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969948.074104996]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969948.074470774]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969948.074835085]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969948.075149769]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969948.075542759]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969948.075967405]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969948.077006492]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969948.078034405]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969948.078993303]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969948.080013921]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969948.081049960]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969948.081418546]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969948.081875268]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969948.225890385]: Init: Triangulated 255 points[0m
+[33m[WARN] [1792969948.264050197]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969948.264151197]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969948.309744029]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969948.309849868]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969948.360780960]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969948.360866086]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969948.414285532]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969948.414344176]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969948.470722787]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969948.470855346]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969948.518044713]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969948.518217088]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969948.518449044]: DepthFilter: RESET.[0m
+E1026 04:42:28.518533 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969948.572116132]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969948.573120626]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969948.574060441]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969948.574409404]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969948.575512256]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969948.576574663]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969948.577720938]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969948.578233426]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969948.578661120]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969948.579150672]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969948.579706872]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969948.580130506]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969948.580559116]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969948.581745221]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969948.582777171]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969948.583810574]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969948.584889679]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969948.586078555]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969948.586501688]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969948.586974909]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969948.587433228]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969948.587897261]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969948.588397788]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969948.589512018]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969948.590684753]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969948.591760110]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969948.592866576]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969948.594237616]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969948.594756659]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969948.595199024]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969948.721729970]: Init: Triangulated 286 points[0m
+[33m[WARN] [1792969948.769488616]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969948.769596150]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969948.817899148]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969948.817980565]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969948.869290326]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969948.869352065]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969948.869386286]: Not enough matched features: 0[0m
+[33m[WARN] [1792969948.917415813]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969948.917491252]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969948.958086061]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969948.958149359]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969949.017838368]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969949.017952716]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969949.018144893]: DepthFilter: RESET.[0m
+E1026 04:42:29.018182 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969949.070250242]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969949.071265719]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969949.072244112]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969949.072656000]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969949.073710594]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969949.074721374]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969949.075681707]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969949.076046353]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969949.076425459]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969949.076853829]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969949.077264681]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969949.077712209]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969949.078159908]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969949.079182747]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969949.080125144]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969949.081066560]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969949.082123023]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969949.083141811]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969949.083573454]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969949.083981045]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969949.084372762]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969949.084747193]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969949.085142393]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969949.086164983]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969949.087103161]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969949.088039596]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969949.089069212]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969949.089989533]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969949.090388367]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969949.090808645]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969949.112059547]: Init: Triangulated 237 points[0m
+[33m[WARN] [1792969949.159224841]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969949.159281186]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969949.218343385]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969949.218401296]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969949.261869614]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969949.261940527]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969949.309803398]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969949.309875039]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969949.369094623]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969949.369163006]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969949.417302793]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969949.417358717]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969949.417475512]: DepthFilter: RESET.[0m
+E1026 04:42:29.417507 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969949.459222515]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969949.460196839]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969949.461097392]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969949.461422140]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969949.462405659]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969949.463420743]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969949.464418276]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969949.464760808]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969949.465094825]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969949.465485794]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969949.465846085]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969949.466291027]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969949.466698447]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969949.467702296]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969949.468571371]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969949.469493537]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969949.470317240]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969949.471204454]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969949.471530682]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969949.471997115]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969949.472342019]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969949.472751447]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969949.473148172]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969949.474201662]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969949.475132687]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969949.476038631]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969949.476963883]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969949.477891448]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969949.478298143]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969949.478727293]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969949.573531396]: Init: Triangulated 188 points[0m
+[33m[WARN] [1792969949.608173646]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969949.608230456]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969949.668927042]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969949.668984179]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969949.709375541]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969949.709430004]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969949.758147398]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969949.758199919]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969949.832868467]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969949.832952048]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969949.862226352]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969949.862318674]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969949.862489984]: DepthFilter: RESET.[0m
+E1026 04:42:29.862531 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969949.913817385]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969949.914846204]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969949.915818367]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969949.916147900]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969949.917118328]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969949.918141691]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969949.919190125]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969949.919541687]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969949.919902317]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969949.920298637]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969949.920698960]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969949.921093754]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969949.921450311]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969949.922455416]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969949.923346296]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969949.924244107]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969949.925113131]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969949.926023982]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969949.926375500]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969949.926719849]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969949.927056813]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969949.927387815]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969949.927722049]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969949.928598845]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969949.929507903]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969949.930391337]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969949.931268552]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969949.932141814]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969949.932473890]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969949.932875644]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969950.074651411]: Init: Triangulated 254 points[0m
+[33m[WARN] [1792969950.124300005]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969950.124357862]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969950.124391632]: Not enough matched features: 0[0m
+[33m[WARN] [1792969950.171606110]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969950.171665209]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969950.221067311]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969950.221161791]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969950.274978715]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969950.275057372]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969950.320203456]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969950.320260265]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969950.370796906]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969950.370858661]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969950.371026533]: DepthFilter: RESET.[0m
+E1026 04:42:30.371074 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969950.421824829]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969950.422826440]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969950.423838917]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969950.424240610]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969950.425352047]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969950.426414240]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969950.427488000]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969950.427907430]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969950.428380077]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969950.428841859]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969950.429241862]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969950.429744174]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969950.430214864]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969950.431330818]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969950.432430642]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969950.433461410]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969950.434450227]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969950.435555216]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969950.435999222]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969950.436433817]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969950.436839074]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969950.437277836]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969950.437765732]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969950.438736586]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969950.439823131]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969950.440788644]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969950.441744235]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969950.442721892]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969950.443108421]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969950.443703374]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969950.523691469]: Init: Triangulated 200 points[0m
+[33m[WARN] [1792969950.573453587]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969950.573549841]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969950.609595343]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969950.609676539]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969950.670463059]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969950.670522774]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969950.720999760]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969950.721122195]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969950.770398140]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969950.770494280]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969950.820312937]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969950.820398330]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969950.820536627]: DepthFilter: RESET.[0m
+E1026 04:42:30.820569 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969950.864804305]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969950.865844067]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969950.866824664]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969950.867189599]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969950.868282910]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969950.869242210]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969950.870275154]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969950.870661429]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969950.871056131]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969950.871496478]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969950.871882286]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969950.872245089]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969950.872635755]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969950.873681564]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969950.874774191]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969950.875784110]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969950.876741644]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969950.877727596]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969950.878143502]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969950.878545738]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969950.878925244]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969950.879325198]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969950.879728284]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969950.880885483]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969950.881925802]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969950.882870549]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969950.883821905]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969950.884786442]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969950.885157062]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969950.885598014]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969951.025772333]: Init: Triangulated 168 points[0m
+[33m[WARN] [1792969951.071150951]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969951.071208588]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969951.121463797]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969951.121525097]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969951.159971819]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969951.160027393]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969951.160062581]: Not enough matched features: 0[0m
+[33m[WARN] [1792969951.225237589]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969951.225324364]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969951.262340244]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969951.262414543]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969951.312774077]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969951.312852266]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969951.313004050]: DepthFilter: RESET.[0m
+E1026 04:42:31.313042 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969951.376637324]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969951.377653611]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969951.378660934]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969951.379052301]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969951.380012663]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969951.380974769]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969951.381983972]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969951.382376933]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969951.382771200]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969951.383153197]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969951.383556344]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969951.383952999]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969951.384384506]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969951.385440423]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969951.386524670]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969951.387523721]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969951.388665235]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969951.389639141]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969951.390053828]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969951.390455230]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969951.390857412]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969951.391232407]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969951.391614024]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969951.392543138]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969951.393516827]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969951.394775429]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969951.395795576]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969951.396777267]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969951.397148032]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969951.397569330]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969953.162076145]: Init: Triangulated 121 points[0m
+[33m[WARN] [1792969953.223136536]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969953.223221496]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969953.223264934]: Not enough matched features: 0[0m
+[33m[WARN] [1792969953.259619029]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969953.259671025]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969953.313004882]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969953.313067667]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969953.370520650]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969953.370716227]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969953.411353464]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969953.411410276]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969953.460672821]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969953.460725749]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969953.461054536]: DepthFilter: RESET.[0m
+E1026 04:42:33.461091 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969953.515238807]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969953.516222886]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969953.517163228]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969953.517551321]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969953.518669217]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969953.519604138]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969953.520594465]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969953.520994525]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969953.521409137]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969953.521811950]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969953.522232938]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969953.522664254]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969953.523085015]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969953.524131763]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969953.525084047]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969953.526088926]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969953.527034575]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969953.527982736]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969953.528369636]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969953.528831578]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969953.529233306]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969953.529659597]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969953.530116283]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969953.531097676]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969953.532041894]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969953.533012184]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969953.534138494]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969953.535126543]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969953.535521464]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969953.536026066]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969953.967785094]: Init: Triangulated 158 points[0m
+[33m[WARN] [1792969954.021454048]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969954.021540457]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969954.059210436]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969954.059271921]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969954.115405442]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969954.115470196]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969954.161708700]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969954.161889001]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969954.212435455]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969954.212509638]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969954.273617358]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969954.273682524]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969954.273733153]: Not enough matched features: 0[0m
+[0m[INFO] [1792969954.273896060]: DepthFilter: RESET.[0m
+E1026 04:42:34.273941 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969954.313206288]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969954.314175732]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969954.315207729]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969954.315603044]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969954.316635858]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969954.317501877]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969954.318397161]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969954.318727006]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969954.319045621]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969954.319426331]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969954.319759330]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969954.320079509]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969954.320400212]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969954.321268094]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969954.322325563]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969954.323263566]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969954.324132243]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969954.324969006]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969954.325259371]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969954.325552719]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969954.325893113]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969954.326243019]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969954.326548881]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969954.327603752]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969954.328661663]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969954.329535334]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969954.330411139]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969954.331345034]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969954.331685167]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969954.332120164]: DepthFilter: RESET.[0m
+[0m[INFO] [1792969954.877212404]: Init: Triangulated 89 points[0m
+[33m[WARN] [1792969954.910915449]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969954.910975730]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969954.959528288]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969954.959597898]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969955.009735112]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969955.009840027]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969955.066164719]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969955.066228232]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969955.110191905]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969955.110250683]: SparseImgAlign: no features to track![0m
+[33m[WARN] [1792969955.157503776]: Cannot set scene depth. Frame has no point-observations![0m
+[31m[ERROR] [1792969955.157558720]: SparseImgAlign: no features to track![0m
+[0m[INFO] [1792969955.157671855]: DepthFilter: RESET.[0m
+E1026 04:42:35.157759 952959 ceres_backend_interface.cpp:812] Resetting ceres backend not implemented
+[0m[INFO] [1792969955.219784418]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792969955.220949753]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792969955.222094056]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792969955.222524968]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792969955.223655053]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792969955.224783679]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792969955.225867088]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792969955.226330318]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969955.226781454]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792969955.227217243]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792969955.227639822]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792969955.228098145]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792969955.228558744]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792969955.229780793]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792969955.230976136]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792969955.232101457]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792969955.233140713]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792969955.234156967]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792969955.234572429]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792969955.235028316]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792969955.235446269]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792969955.235852877]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792969955.236236533]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792969955.237312695]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792969955.238480778]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792969955.239516012]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792969955.240694566]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792969955.241805999]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792969955.242332914]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792969955.242820671]: DepthFilter: RESET.[0m
+FYP frame event log: 2348 rows, mean 5.49042 us, max 288.701 us per frame
+... logging to /home/alpha/.ros/log/4693228a-d0c9-11f1-b723-bd52899a295f/roslaunch-alpha-952805.log
+Checking log directory for disk usage. This may take a while.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/svo_ros/launch/fyp/euroc_m3.launch
+[1mstarted roslaunch server http://alpha:33427/[0m
+
+SUMMARY
+========
+
+CLEAR PARAMETERS
+ * /svo/
+
+PARAMETERS
+ * /rosdistro: noetic
+ * /rosversion: 1.17.4
+ * /svo/T_world_imuinit/qw: 1
+ * /svo/T_world_imuinit/qx: 0
+ * /svo/T_world_imuinit/qy: 0
+ * /svo/T_world_imuinit/qz: 0
+ * /svo/automatic_reinitialization: True
+ * /svo/backend_only_use_corners: False
+ * /svo/backend_scale_stable_thresh: 0.02
+ * /svo/backend_use_zero_motion_detection: True
+ * /svo/backend_zero_motion_check_n_frames: 5
+ * /svo/calib_file: /home/alpha/Deskt...
+ * /svo/cam0_topic: /cam0/image_raw
+ * /svo/ceres_marginalize: True
+ * /svo/ceres_max_iteration_time: 0.04
+ * /svo/ceres_num_imu_frames: 3
+ * /svo/ceres_num_iterations: 3
+ * /svo/ceres_verbose: False
+ * /svo/d1_alignment: True
+ * /svo/d1_gt_file: /home/alpha/Deskt...
+ * /svo/d1_log_file: /home/alpha/Deskt...
+ * /svo/d1_window_length: 2.0
+ * /svo/depth_filter_affine_est_gain: False
+ * /svo/depth_filter_affine_est_offset: True
+ * /svo/detector_threshold_primary: 10
+ * /svo/detector_threshold_secondary: 200
+ * /svo/detector_threshold_shitomasi: 50
+ * /svo/frame_event_log_file: /home/alpha/Deskt...
+ * /svo/gp_settings_file: /home/alpha/Deskt...
+ * /svo/gp_topic: /fyp_unused_gps
+ * /svo/grid_size: 25
+ * /svo/img_align_est_illumination_gain: True
+ * /svo/img_align_est_illumination_offset: True
+ * /svo/img_align_max_level: 4
+ * /svo/img_align_min_level: 2
+ * /svo/img_align_prior_lambda_rot: 0.5
+ * /svo/img_align_prior_lambda_trans: 0.0
+ * /svo/imu_topic: /imu0
+ * /svo/init_min_disparity: 30
+ * /svo/init_min_features: 60
+ * /svo/kfselect_criterion: FORWARD
+ * /svo/kfselect_min_angle: 20
+ * /svo/kfselect_min_disparity: 40
+ * /svo/kfselect_min_dist_metric: 0.1
+ * /svo/kfselect_numkfs_lower_thresh: 100
+ * /svo/kfselect_numkfs_upper_thresh: 140
+ * /svo/log_frame_events: True
+ * /svo/log_registration_events: True
+ * /svo/map_alignement_T_w_b: /svo/w_registrate...
+ * /svo/map_reg_settings_file: /home/alpha/Deskt...
+ * /svo/map_scale: 1.5
+ * /svo/mappoint_convergence_sigma2_thresh: 500
+ * /svo/max_depth_inv: 0.05
+ * /svo/max_fts: 180
+ * /svo/max_map_fts: 300
+ * /svo/max_n_kfs: 10
+ * /svo/max_unconverged_seeds_ratio: 0.2
+ * /svo/mean_depth_inv: 0.3
+ * /svo/min_depth_inv: 1.0
+ * /svo/n_pyr_levels: 3
+ * /svo/outlier_rejection_px_threshold: 2.0
+ * /svo/pipeline_is_stereo: False
+ * /svo/poseoptim_prior_lambda: 0.0
+ * /svo/poseoptim_thresh: 2.0
+ * /svo/poseoptim_using_unit_sphere: False
+ * /svo/publish_active_kfs: True
+ * /svo/publish_every_nth_dense_input: 5
+ * /svo/publish_marker_scale: 0.5
+ * /svo/publish_marker_scale_backend: 0.5
+ * /svo/quality_min_fts: 40
+ * /svo/ransac3d_inlier_percent: 35
+ * /svo/registration_event_log_file: /home/alpha/Deskt...
+ * /svo/relocalization_max_trials: 5
+ * /svo/reproject_unconverged_seeds: True
+ * /svo/reprojector_affine_est_gain: False
+ * /svo/reprojector_affine_est_offset: True
+ * /svo/reprojector_max_n_kfs: 5
+ * /svo/runlc: False
+ * /svo/scan_epi_unit_sphere: False
+ * /svo/seed_convergence_sigma2_thresh: 200
+ * /svo/update_seeds_with_old_keyframes: True
+ * /svo/use_async_reprojectors: False
+ * /svo/use_ceres_backend: True
+ * /svo/use_global_measurements: True
+ * /svo/use_imu: True
+ * /svo/use_map_registration: True
+ * /svo/use_outlier_rejection: True
+ * /svo/zero_motion_max_features_to_check: 15
+ * /svo/zero_motion_min_number_correspondences: 5
+ * /svo/zero_motion_px_diff_threshold: 0.2
+ * /svo/zero_motion_ratio_moving_pixels_threshold: 0.1
+ * /svo/zero_motion_sigma: 0.1
+
+NODES
+  /
+    online_registration (svo_registration/online_registration_m3.py)
+    svo (svo_ros/svo_node)
+
+auto-starting new master
+[1mprocess[master]: started with pid [952842][0m
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/svo_ros/launch/fyp/euroc_m3.launch http://localhost:11311
+[1msetting /run_id to 4693228a-d0c9-11f1-b723-bd52899a295f[0m
+[1mprocess[rosout-1]: started with pid [952882][0m
+started core service [/rosout]
+[1mprocess[svo-2]: started with pid [952891][0m
+[1mprocess[online_registration-3]: started with pid [952892][0m
+[online_registration-3] killing on exit
+[svo-2] killing on exit
+[rosout-1] killing on exit
+[master] killing on exit
+shutting down processing monitor...
+... shutting down processing monitor complete
+[1mdone[0m

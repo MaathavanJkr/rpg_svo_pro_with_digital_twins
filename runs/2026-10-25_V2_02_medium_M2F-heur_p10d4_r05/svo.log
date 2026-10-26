@@ -1,0 +1,683 @@
+[0m[INFO] [1792957448.792496750]: Found parameter: pipeline_is_stereo, value: 0[0m
+[33m[WARN] [1792957448.794094050]: Cannot find value for parameter: set_initial_attitude_from_gravity, assigning default: 1[0m
+[0m[INFO] [1792957448.795421117]: Found parameter: automatic_reinitialization, value: 1[0m
+[0m[INFO] [1792957448.796752156]: Found parameter: calib_file, value: /home/alpha/Desktop/twinforge/catkin_ws/src/rpg_svo_pro_with_digital_twins/svo_ros/param/fyp/euroc/euroc_mono.yaml[0m
+load pinhole camera with fisheye distortion started
+distortion_parameters:   -0.283408
+  0.0739591
+0.000193595
+1.76187e-05
+load pinhole camera with fisheye distortion finished
+
+  name = cam0
+  size = [752, 480]
+  Projection = Pinhole
+  Focal length = (458.655, 457.297)
+  Principal point = (367.216, 248.375)
+  Distortion: RadTan(-0.283408, 0.0739591, 0.000193595, 1.76187e-05)
+[33m[WARN] [1792957448.799083762]: Cannot find value for parameter: klt_max_level, assigning default: 4[0m
+[33m[WARN] [1792957448.799565350]: Cannot find value for parameter: klt_min_level, assigning default: 0[0m
+[0m[INFO] [1792957448.800891887]: Found parameter: reprojector_max_n_kfs, value: 5[0m
+[0m[INFO] [1792957448.802195760]: Found parameter: max_fts, value: 180[0m
+[0m[INFO] [1792957448.803480343]: Found parameter: grid_size, value: 25[0m
+[0m[INFO] [1792957448.804748604]: Found parameter: reproject_unconverged_seeds, value: 1[0m
+[0m[INFO] [1792957448.806189969]: Found parameter: max_unconverged_seeds_ratio, value: 0.2[0m
+[0m[INFO] [1792957448.807474057]: Found parameter: quality_min_fts, value: 40[0m
+[0m[INFO] [1792957448.808750047]: Found parameter: seed_convergence_sigma2_thresh, value: 200[0m
+[0m[INFO] [1792957448.810131212]: Found parameter: reprojector_affine_est_offset, value: 1[0m
+[0m[INFO] [1792957448.811405078]: Found parameter: reprojector_affine_est_gain, value: 0[0m
+[33m[WARN] [1792957448.811875118]: Cannot find value for parameter: reprojector_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792957448.812340440]: Cannot find value for parameter: reprojector_max_n_global_kfs, assigning default: 20[0m
+[33m[WARN] [1792957448.812824595]: Cannot find value for parameter: reprojector_use_kfs_from_global_map, assigning default: 0[0m
+[33m[WARN] [1792957448.813301919]: Cannot find value for parameter: reprojector_fixed_lm_grid_size, assigning default: 50[0m
+[0m[INFO] [1792957448.814748804]: Found parameter: init_min_features, value: 60[0m
+[33m[WARN] [1792957448.815224614]: Cannot find value for parameter: init_min_tracked, assigning default: 80[0m
+[33m[WARN] [1792957448.815691074]: Cannot find value for parameter: init_min_inliers, assigning default: 70[0m
+[0m[INFO] [1792957448.817008058]: Found parameter: init_min_disparity, value: 30[0m
+[33m[WARN] [1792957448.817486455]: Cannot find value for parameter: init_min_features_factor, assigning default: 2[0m
+[33m[WARN] [1792957448.818114743]: Cannot find value for parameter: reproj_err_thresh, assigning default: 2[0m
+[33m[WARN] [1792957448.818611965]: Cannot find value for parameter: init_disparity_pivot_ratio, assigning default: 0.5[0m
+[33m[WARN] [1792957448.819107173]: Cannot find value for parameter: init_method, assigning default: FivePoint[0m
+[0m[INFO] [1792957448.820436646]: Found parameter: grid_size, value: 25[0m
+[0m[INFO] [1792957448.823261436]: Found parameter: n_pyr_levels, value: 3[0m
+[0m[INFO] [1792957448.826080277]: Found parameter: detector_threshold_primary, value: 10[0m
+[0m[INFO] [1792957448.827649996]: Found parameter: detector_threshold_secondary, value: 200[0m
+[0m[INFO] [1792957448.828893023]: Found parameter: detector_threshold_shitomasi, value: 50[0m
+[33m[WARN] [1792957448.829383584]: Cannot find value for parameter: use_edgelets, assigning default: 1[0m
+[0m[INFO] [1792957448.830633079]: Found parameter: n_pyr_levels, value: 3[0m
+[33m[WARN] [1792957448.831119404]: Cannot find value for parameter: use_threaded_depthfilter, assigning default: 1[0m
+[0m[INFO] [1792957448.832359160]: Found parameter: seed_convergence_sigma2_thresh, value: 200[0m
+[0m[INFO] [1792957448.833657436]: Found parameter: mappoint_convergence_sigma2_thresh, value: 500[0m
+[0m[INFO] [1792957448.834929979]: Found parameter: scan_epi_unit_sphere, value: 0[0m
+[0m[INFO] [1792957448.836161282]: Found parameter: depth_filter_affine_est_offset, value: 1[0m
+[0m[INFO] [1792957448.837394515]: Found parameter: depth_filter_affine_est_gain, value: 0[0m
+[0m[INFO] [1792957448.838626715]: Found parameter: max_fts, value: 180[0m
+[33m[WARN] [1792957448.839112158]: Cannot find value for parameter: max_seeds_ratio, assigning default: 3[0m
+[0m[INFO] [1792957448.840317747]: Found parameter: max_map_fts, value: 300[0m
+[33m[WARN] [1792957448.840788918]: Cannot find value for parameter: depth_filter_extra_map_points, assigning default: 0[0m
+[0m[INFO] [1792957448.842017625]: Found parameter: runlc, value: 0[0m
+[0m[INFO] [1792957448.843237968]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792957448.844429804]: Found parameter: use_imu, value: 1[0m
+[33m[WARN] [1792957448.866200005]: Cannot find value for parameter: trace_dir, assigning default: /home/alpha/Desktop/twinforge/catkin_ws/src/rpg_svo_pro_with_digital_twins/svo/trace[0m
+[0m[INFO] [1792957448.867520602]: Found parameter: quality_min_fts, value: 40[0m
+[33m[WARN] [1792957448.867885258]: Cannot find value for parameter: quality_max_drop_fts, assigning default: 40[0m
+[0m[INFO] [1792957448.868818609]: Found parameter: relocalization_max_trials, value: 5[0m
+[0m[INFO] [1792957448.869775956]: Found parameter: poseoptim_prior_lambda, value: 0[0m
+[0m[INFO] [1792957448.870722872]: Found parameter: poseoptim_using_unit_sphere, value: 0[0m
+[0m[INFO] [1792957448.871654624]: Found parameter: img_align_prior_lambda_rot, value: 0.5[0m
+[0m[INFO] [1792957448.872580567]: Found parameter: img_align_prior_lambda_trans, value: 0[0m
+[33m[WARN] [1792957448.872917265]: Cannot find value for parameter: structure_optimization_max_pts, assigning default: 20[0m
+[0m[INFO] [1792957448.873906382]: Found parameter: map_scale, value: 1.5[0m
+[0m[INFO] [1792957448.874798156]: Found parameter: kfselect_criterion, value: FORWARD[0m
+[33m[WARN] [1792957448.875148462]: Cannot find value for parameter: kfselect_min_dist, assigning default: 0.12[0m
+[0m[INFO] [1792957448.876080240]: Found parameter: kfselect_numkfs_upper_thresh, value: 140[0m
+[0m[INFO] [1792957448.877037087]: Found parameter: kfselect_numkfs_lower_thresh, value: 100[0m
+[0m[INFO] [1792957448.878064883]: Found parameter: kfselect_min_dist_metric, value: 0.1[0m
+[0m[INFO] [1792957448.878931983]: Found parameter: kfselect_min_angle, value: 20[0m
+[0m[INFO] [1792957448.879806389]: Found parameter: kfselect_min_disparity, value: 40[0m
+[33m[WARN] [1792957448.880143558]: Cannot find value for parameter: kfselect_min_num_frames_between_kfs, assigning default: 2[0m
+[33m[WARN] [1792957448.880477121]: Cannot find value for parameter: kfselect_backend_max_time_sec, assigning default: 3[0m
+[0m[INFO] [1792957448.881344140]: Found parameter: img_align_max_level, value: 4[0m
+[0m[INFO] [1792957448.882333982]: Found parameter: img_align_min_level, value: 2[0m
+[33m[WARN] [1792957448.882665584]: Cannot find value for parameter: img_align_robustification, assigning default: 0[0m
+[33m[WARN] [1792957448.882989822]: Cannot find value for parameter: img_align_use_distortion_jacobian, assigning default: 0[0m
+[0m[INFO] [1792957448.883850624]: Found parameter: img_align_est_illumination_gain, value: 1[0m
+[0m[INFO] [1792957448.884724631]: Found parameter: img_align_est_illumination_offset, value: 1[0m
+[0m[INFO] [1792957448.885592711]: Found parameter: poseoptim_thresh, value: 2[0m
+[0m[INFO] [1792957448.886466388]: Found parameter: update_seeds_with_old_keyframes, value: 1[0m
+[0m[INFO] [1792957448.887328497]: Found parameter: use_async_reprojectors, value: 0[0m
+[33m[WARN] [1792957448.887755518]: Cannot find value for parameter: trace_statistics, assigning default: 0[0m
+[0m[INFO] [1792957448.888630591]: Found parameter: backend_scale_stable_thresh, value: 0.02[0m
+[33m[WARN] [1792957448.888947104]: Cannot find value for parameter: global_map_timeout_sec, assigning default: 2[0m
+[0m[INFO] [1792957448.889064024]: DepthFilter: created.[0m
+[0m[INFO] [1792957448.889098416]: DepthFilter: Start thread.[0m
+Parameter T_world_imuinit/tx was not set. Using default value: 0
+Parameter T_world_imuinit/ty was not set. Using default value: 0
+Parameter T_world_imuinit/tz was not set. Using default value: 0
+[0m[INFO] [1792957448.890933534]: Found parameter: T_world_imuinit/qw, value: 1[0m
+[0m[INFO] [1792957448.891813887]: Found parameter: T_world_imuinit/qx, value: 0[0m
+[0m[INFO] [1792957448.892749732]: Found parameter: T_world_imuinit/qy, value: 0[0m
+[0m[INFO] [1792957448.893739741]: Found parameter: T_world_imuinit/qz, value: 0[0m
+[0m[INFO] [1792957448.894645610]: Found parameter: T_world_imuinit/qz, value: 0[0m
+[0m[INFO] [1792957448.895520559]: Found parameter: T_world_imuinit/qy, value: 0[0m
+[0m[INFO] [1792957448.896445135]: Found parameter: T_world_imuinit/qx, value: 0[0m
+[0m[INFO] [1792957448.897382613]: Found parameter: T_world_imuinit/qw, value: 1[0m
+[33m[WARN] [1792957448.897733507]: Cannot find value for parameter: publish_img_pyr_level, assigning default: 0[0m
+[33m[WARN] [1792957448.898122846]: Cannot find value for parameter: publish_every_nth_img, assigning default: 1[0m
+[0m[INFO] [1792957448.899057690]: Found parameter: publish_every_nth_dense_input, value: 5[0m
+[33m[WARN] [1792957448.899400742]: Cannot find value for parameter: publish_image_caption_str, assigning default: 0[0m
+[33m[WARN] [1792957448.900264225]: Cannot find value for parameter: publish_world_in_cam_frame, assigning default: 1[0m
+[33m[WARN] [1792957448.900659332]: Cannot find value for parameter: publish_map_every_frame, assigning default: 0[0m
+[33m[WARN] [1792957448.901039161]: Cannot find value for parameter: publish_point_display_time, assigning default: 0[0m
+[33m[WARN] [1792957448.901389988]: Cannot find value for parameter: publish_seeds, assigning default: 1[0m
+[33m[WARN] [1792957448.901735682]: Cannot find value for parameter: publish_seeds_uncertainty, assigning default: 0[0m
+[0m[INFO] [1792957448.902759819]: Found parameter: publish_active_kfs, value: 1[0m
+[33m[WARN] [1792957448.903165549]: Cannot find value for parameter: trace_pointcloud, assigning default: 0[0m
+[0m[INFO] [1792957448.904122929]: Found parameter: publish_marker_scale, value: 0.5[0m
+[0m[INFO] [1792957448.944644688]: Found parameter: use_imu, value: 1[0m
+[0m[INFO] [1792957448.945613431]: Found parameter: calib_file, value: /home/alpha/Desktop/twinforge/catkin_ws/src/rpg_svo_pro_with_digital_twins/svo_ros/param/fyp/euroc/euroc_mono.yaml[0m
+Loaded IMU Calibration
+  delay_imu_cam = 0
+  sigma_omega_c = 0.0012
+  sigma_acc_c = 0.008
+  sigma_integration_c = 0
+  sigma_omega_bias_c = 0.03
+  sigma_acc_bias_c = 0.1
+  g = 9.8082
+  coriolis = 0 0 0
+Loaded IMU Initialization
+  velocity = 0 0 0
+  omega_bias = 0 0 0
+  acc_bias = 0 0 0
+  velocity_sigma = 2
+  omega_bias_sigma = 0.01
+  acc_bias_sigma = 0.1
+[33m[WARN] [1792957448.948039093]: Cannot find value for parameter: imu_temporal_stationary_check, assigning default: 0[0m
+[33m[WARN] [1792957448.948452609]: Cannot find value for parameter: imu_temporal_window_length_sec, assigning default: 0.5[0m
+[33m[WARN] [1792957448.948883761]: Cannot find value for parameter: stationary_acc_sigma_thresh, assigning default: 0[0m
+[33m[WARN] [1792957448.949299575]: Cannot find value for parameter: stationary_gyr_sigma_thresh, assigning default: 0[0m
+[0m[INFO] [1792957448.950456185]: Found parameter: gp_settings_file, value: /home/alpha/Desktop/twinforge/catkin_ws/src/rpg_svo_pro_with_digital_twins/svo_ros/param/fyp/euroc/gp_settings.yaml[0m
+Loaded Global Positions Settings
+cov = 900   0   0
+  0 900   0
+  0   0 900
+B_t_PB = 0
+0
+0
+max_num_residuals = 1
+initial_orientation_known = 0
+[0m[INFO] [1792957448.952370161]: Found parameter: use_global_measurements, value: 1[0m
+[33m[WARN] [1792957448.952784232]: Cannot find value for parameter: estimate_world_vio_transform, assigning default: 1[0m
+[0m[INFO] [1792957448.952886412]: Using Global Position Measurements[0m
+[0m[INFO] [1792957448.954063823]: Found parameter: map_reg_settings_file, value: /home/alpha/Desktop/twinforge/catkin_ws/src/rpg_svo_pro_with_digital_twins/svo_ros/param/fyp/euroc/gpose_settings_m2.yaml[0m
+Loaded Global Pose (map alignement) Settings
+cov = 1 0 0 0 0 0
+0 1 0 0 0 0
+0 0 1 0 0 0
+0 0 0 1 0 0
+0 0 0 0 1 0
+0 0 0 0 0 1
+B_t_PB = 0
+0
+0
+max_num_residuals = 1
+initial_orientation_known = 0
+[0m[INFO] [1792957448.955949293]: Found parameter: use_map_registration, value: 1[0m
+[0m[INFO] [1792957448.956054710]: Using Map registration  Global Pose Measurements[0m
+[0m[INFO] [1792957448.957120569]: Found parameter: use_ceres_backend, value: 1[0m
+[0m[INFO] [1792957448.958221318]: Found parameter: ceres_verbose, value: 0[0m
+[0m[INFO] [1792957448.959230781]: Found parameter: ceres_marginalize, value: 1[0m
+[0m[INFO] [1792957448.960135376]: Found parameter: ceres_num_iterations, value: 3[0m
+[33m[WARN] [1792957448.960528404]: Cannot find value for parameter: ceres_num_threads, assigning default: 2[0m
+[0m[INFO] [1792957448.961471192]: Found parameter: ceres_num_imu_frames, value: 3[0m
+[0m[INFO] [1792957448.962440679]: Found parameter: max_n_kfs, value: 10[0m
+[0m[INFO] [1792957448.963453856]: Found parameter: ceres_max_iteration_time, value: 0.04[0m
+[33m[WARN] [1792957448.963836862]: Cannot find value for parameter: ceres_remove_marginalization_term_after_loop, assigning default: 0[0m
+[33m[WARN] [1792957448.964209228]: Cannot find value for parameter: ceres_recalculate_imu_terms_after_loop, assigning default: 0[0m
+[33m[WARN] [1792957448.964622334]: Cannot find value for parameter: ceres_remove_fixation_min_num_fixed_points, assigning default: 10[0m
+[33m[WARN] [1792957448.965036548]: Cannot find value for parameter: ceres_max_fixed_landmarks, assigning default: 50[0m
+[33m[WARN] [1792957448.965442142]: Cannot find value for parameter: backend_min_num_obs, assigning default: 2[0m
+[33m[WARN] [1792957448.965837887]: Cannot find value for parameter: backend_min_parallax_deg, assigning default: 2[0m
+[0m[INFO] [1792957448.966813612]: Found parameter: backend_only_use_corners, value: 0[0m
+[0m[INFO] [1792957448.967794419]: Found parameter: backend_use_zero_motion_detection, value: 1[0m
+[0m[INFO] [1792957448.968685804]: Found parameter: backend_zero_motion_check_n_frames, value: 5[0m
+[0m[INFO] [1792957448.969619682]: Found parameter: use_outlier_rejection, value: 1[0m
+[0m[INFO] [1792957448.970555529]: Found parameter: outlier_rejection_px_threshold, value: 2[0m
+[33m[WARN] [1792957448.970976188]: Cannot find value for parameter: skip_optimization_when_tracking_bad, assigning default: 0[0m
+[33m[WARN] [1792957448.971418821]: Cannot find value for parameter: skip_optim_min_obs, assigning default: 20[0m
+[33m[WARN] [1792957448.971852773]: Cannot find value for parameter: backend_refine_extrinsics, assigning default: 0[0m
+[33m[WARN] [1792957448.972353461]: Cannot find value for parameter: backend_extrinsics_pos_sigma_meter, assigning default: 0.05[0m
+[33m[WARN] [1792957448.972775591]: Cannot find value for parameter: backend_extrinsics_rot_sigma_deg, assigning default: 5[0m
+[0m[INFO] [1792957448.973821971]: Found parameter: zero_motion_px_diff_threshold, value: 0.2[0m
+[0m[INFO] [1792957448.974872075]: Found parameter: zero_motion_ratio_moving_pixels_threshold, value: 0.1[0m
+[0m[INFO] [1792957448.975869555]: Found parameter: zero_motion_min_number_correspondences, value: 5[0m
+[0m[INFO] [1792957448.976801345]: Found parameter: zero_motion_max_features_to_check, value: 15[0m
+[0m[INFO] [1792957448.977746448]: Found parameter: zero_motion_sigma, value: 0.1[0m
+[33m[WARN] [1792957448.978202857]: Cannot find value for parameter: ba_parallelized, assigning default: 1[0m
+[0m[INFO] [1792957448.982078394]: Found parameter: runlc, value: 0[0m
+[33m[WARN] [1792957448.982518117]: Cannot find value for parameter: use_global_map, assigning default: 0[0m
+[0m[INFO] [1792957448.983435815]: Found parameter: log_frame_events, value: 1[0m
+[0m[INFO] [1792957448.984350538]: Found parameter: frame_event_log_file, value: /home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-25_V2_02_medium_M2F-heur_p10d4_r05/frame_events.csv[0m
+[0m[INFO] [1792957448.984970074]: Logging frame events to /home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-25_V2_02_medium_M2F-heur_p10d4_r05/frame_events.csv[0m
+[0m[INFO] [1792957448.985945906]: Found parameter: log_registration_events, value: 1[0m
+[0m[INFO] [1792957448.986952445]: Found parameter: registration_event_log_file, value: /home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-25_V2_02_medium_M2F-heur_p10d4_r05/registration_events.csv[0m
+[0m[INFO] [1792957448.987148994]: Logging registration events to /home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-25_V2_02_medium_M2F-heur_p10d4_r05/registration_events.csv[0m
+[0m[INFO] [1792957448.988306743]: Found parameter: d1_alignment, value: 1[0m
+[0m[INFO] [1792957448.989330176]: Found parameter: d1_gt_file, value: /home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/dataset/derived/asl_meta/V2_02_medium/mav0/state_groundtruth_estimate0/data.csv[0m
+[0m[INFO] [1792957448.990323880]: Found parameter: d1_log_file, value: /home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-25_V2_02_medium_M2F-heur_p10d4_r05/d1_alignment.csv[0m
+[0m[INFO] [1792957448.991234818]: Found parameter: d1_window_length, value: 2[0m
+[0m[INFO] [1792957449.021831259]: D1 alignment enabled: 23091 GT samples from /home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/dataset/derived/asl_meta/V2_02_medium/mav0/state_groundtruth_estimate0/data.csv[0m
+[0m[INFO] [1792957449.022909044]: SvoNode: Started IMU loop.[0m
+[0m[INFO] [1792957449.024874111]: Found parameter: imu_topic, value: /imu0[0m
+READING FROM /home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/dataset/derived/euroc_twin/V2_leica_v30mm.ply
+[0m[INFO] [1792957452.023286793]: SvoNode: Started Global Positions loop.[0m
+[0m[INFO] [1792957452.023389404]: SvoNode: Started Global Positions loop.[0m
+[0m[INFO] [1792957452.023497108]: SvoNode: Started Image loop.[0m
+[33m[WARN] [1792957452.023858041]: Cannot find value for parameter: remote_key_topic, assigning default: svo/remote_key[0m
+[0m[INFO] [1792957452.026138338]: Found parameter: gp_topic, value: /fyp_unused_gps[0m
+[0m[INFO] [1792957452.030130003]: Found parameter: map_alignement_T_w_b, value: /svo/w_registrated_pose[0m
+[0m[INFO] [1792957452.030374080]: Found parameter: cam0_topic, value: /cam0/image_raw[0m
+[INFO] [1792957452.217726]: CityMapRegistrator node started. Waiting for messages...
+[0m[INFO] [1792957456.926598161]: DepthFilter: RESET.[0m
+[0m[INFO] [1792957460.678364927]: Init: Triangulated 131 points[0m
+[0m[INFO] [1792957460.970368874]: D1: t0 = 1413393890055760500 ns (bundle 81)[0m
+[0m[INFO] [1792957463.637709735]: D1: T_M_W set (window 54 samples, 2.01993 m, t_end 1413393892705760500 ns), yaw -10.6965 deg, t = -1.31262 0.519391   1.3693[0m
+[0m[INFO] [1792957464.066430524]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957464.527719202]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957464.915463824]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957465.115771787]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957465.715637572]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957466.130461033]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957466.631208918]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957466.876584058]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957467.038943767]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957467.182754753]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957467.328654140]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957467.523090345]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957467.836996787]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957468.125919924]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957468.365653755]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957468.515430015]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957469.018437739]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957469.214667722]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957469.365116772]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957469.527492060]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957469.725567153]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957469.874599930]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957470.327777966]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957470.476190445]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957470.625444694]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957470.825644965]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957470.964484101]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957471.126137282]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957471.272712250]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957471.426785758]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957471.574547671]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957471.777320952]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957472.178359720]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957472.325517875]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957472.434336770]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957472.724540560]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957472.926676972]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957473.225695214]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957473.525805229]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957474.017700170]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957474.239279848]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957474.414402833]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957474.615040464]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957474.813806240]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957475.675202276]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957475.874657700]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957476.024222162]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957476.171006966]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957476.418071395]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957476.717760357]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957476.917797367]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957477.568895320]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957478.268621835]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957479.668989390]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957480.726097254]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957480.964513067]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957481.315914480]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957482.376996844]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957482.687165862]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957483.064850194]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957483.375625601]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957483.514459584]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957483.662607606]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957483.824853740]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957484.074536759]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957484.476976091]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957484.727622620]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957484.964356250]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957485.114405538]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957485.264187663]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957485.414765373]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957485.564278284]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957485.713976647]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957485.914061484]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957486.125604057]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957486.426504861]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957486.865322267]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957487.375743675]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957487.613935006]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957487.863794149]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957488.063628402]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957488.224385159]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957488.468307266]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957488.814438007]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957489.063944953]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957489.277800710]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957489.541353998]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957489.723433081]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957489.870504036]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957490.026451970]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957490.161626655]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957490.274596985]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957490.472827959]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957490.580655243]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957490.784473043]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957490.924641398]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957491.075919821]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957491.227423044]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957491.474732393]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957491.774001740]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957492.013953365]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957492.275014118]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957493.275495298]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957493.516017068]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957494.214431438]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957494.475636405]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957494.673947260]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957494.829713958]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957494.988003535]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957495.213372956]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957495.364613737]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957495.578807462]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957495.714363435]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957495.864953713]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957496.031239018]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957496.166614623]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957496.287505822]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957496.472498468]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957496.625877566]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957496.772946220]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957496.974436772]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957497.123496297]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957497.424630967]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957497.775185989]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957497.979036094]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957498.126010559]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957498.575193393]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957498.713727332]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957498.864941333]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957499.024840954]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957499.163653701]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957499.426693182]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957499.618465451]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957499.774403823]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957500.174603967]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957500.424467010]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957500.625723709]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957500.826144710]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957501.063916823]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957501.375242739]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957502.035054346]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957502.425728875]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957502.726550480]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957503.179143184]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957503.474980335]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957503.928655421]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957504.222831515]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957504.623975529]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957504.911107634]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957505.272955689]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957505.574329543]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957505.862677013]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957506.074023454]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957506.263464258]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957506.390071720]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957506.614745422]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957507.224865413]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957507.413736974]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957507.623214422]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957507.769360697]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957507.911428986]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957508.110681251]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957508.361081071]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957508.618622241]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957509.519228985]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957509.887112063]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957510.122620216]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957510.369864850]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957510.510486178]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957510.670122021]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957511.320430450]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957511.876131683]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957513.111698733]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957513.318586462]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957513.818434880]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957514.320284118]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957514.961195581]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957515.260652887]: ... registrated pose added to the optimization![0m
+[33m[WARN] [1792957515.312695117]: Lost 41 features![0m
+[33m[WARN] [1792957515.361031785]: update seed with ref frame[0m
+[33m[WARN] [1792957515.364153572]: Lost 92 features![0m
+[0m[INFO] [1792957515.618161755]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957516.010666344]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957516.260979346]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957516.410653529]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957516.560823600]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957516.864028560]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957517.214096254]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957519.072191826]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957519.171610132]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957519.572161501]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957519.871723004]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957520.315246355]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957521.171806502]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957521.367907284]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957521.624456777]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957521.922229773]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957522.322622698]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957522.784267516]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957523.222159177]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957523.972579016]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957524.424409563]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957524.810270142]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957525.724721874]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957526.074515892]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957526.310980577]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957526.521186598]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957526.673172325]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957526.921736732]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957527.373783899]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957527.561745454]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957527.926413144]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957528.275641286]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957528.574714745]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957528.724347626]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957528.913122880]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957529.112885904]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957529.864166589]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957530.263699115]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957530.813746099]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957531.918047973]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957532.113871102]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957532.364654914]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957533.462460362]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957533.825506404]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957533.963205770]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957534.073671038]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957534.262217282]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957534.426208397]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957534.673494231]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957534.823855880]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957535.073311944]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957535.310462932]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957535.435155916]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957535.661094937]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957535.922794890]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957536.074273379]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957536.223115624]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957536.380348340]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957536.563464200]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957536.722750795]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957536.936142216]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957537.409337417]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957537.616277676]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957537.764916984]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957538.120482202]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957538.622085511]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957538.960970779]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957539.172184245]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957540.171287387]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957540.609608221]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957541.221066271]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957542.310635688]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957542.470976983]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957542.760270787]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957542.970317838]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957543.309153007]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957543.566710947]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957544.419473354]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957544.810165217]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957545.009078563]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957545.161007173]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957545.310317708]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957545.562778997]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957545.668398279]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957546.210725779]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957546.670397838]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957547.021731266]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957547.622252180]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957548.022955247]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957549.521950908]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957550.073106332]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957550.571253046]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957550.809942036]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957551.071361912]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957551.265167904]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957551.423493545]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957551.671779696]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957552.473657378]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957553.070385931]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957553.560212472]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957553.824362820]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957553.970232427]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957554.122419664]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957554.273117793]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957554.421827456]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957554.625738973]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957554.716251197]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957554.876350585]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957555.024294113]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957555.217099625]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957555.307130323]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957555.457353013]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957555.607765597]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957555.765323407]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957555.915999138]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957556.257568881]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957556.417596345]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957556.664045847]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957556.863236590]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957557.113011920]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957557.414257225]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957557.714421245]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957557.955492224]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957559.124741714]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957559.772935424]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957559.922752072]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957560.122365105]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957560.462776693]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957560.620851804]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957561.110191989]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957561.372856265]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957561.673756175]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957562.022710878]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957562.173440569]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957562.318294189]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957564.410833785]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957564.819931211]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957565.118748842]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957565.819479250]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957566.921550493]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957567.072032808]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957567.272435600]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957567.514062517]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957567.673502732]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957568.168341222]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957568.771432627]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957569.810548314]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957570.524650584]: ... registrated pose added to the optimization![0m
+[0m[INFO] [1792957570.811407678]: ... registrated pose added to the optimization![0m
+FYP frame event log: 2348 rows, mean 7.09234 us, max 239.338 us per frame
+... logging to /home/alpha/.ros/log/7147a518-d0ac-11f1-b723-bd52899a295f/roslaunch-alpha-800493.log
+Checking log directory for disk usage. This may take a while.
+Press Ctrl-C to interrupt
+Done checking log file disk usage. Usage is <1GB.
+]2;/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/svo_ros/launch/fyp/euroc_m2fast.launch
+[1mstarted roslaunch server http://alpha:37773/[0m
+
+SUMMARY
+========
+
+CLEAR PARAMETERS
+ * /svo/
+
+PARAMETERS
+ * /rosdistro: noetic
+ * /rosversion: 1.17.4
+ * /svo/T_world_imuinit/qw: 1
+ * /svo/T_world_imuinit/qx: 0
+ * /svo/T_world_imuinit/qy: 0
+ * /svo/T_world_imuinit/qz: 0
+ * /svo/automatic_reinitialization: True
+ * /svo/backend_only_use_corners: False
+ * /svo/backend_scale_stable_thresh: 0.02
+ * /svo/backend_use_zero_motion_detection: True
+ * /svo/backend_zero_motion_check_n_frames: 5
+ * /svo/calib_file: /home/alpha/Deskt...
+ * /svo/cam0_topic: /cam0/image_raw
+ * /svo/ceres_marginalize: True
+ * /svo/ceres_max_iteration_time: 0.04
+ * /svo/ceres_num_imu_frames: 3
+ * /svo/ceres_num_iterations: 3
+ * /svo/ceres_verbose: False
+ * /svo/d1_alignment: True
+ * /svo/d1_gt_file: /home/alpha/Deskt...
+ * /svo/d1_log_file: /home/alpha/Deskt...
+ * /svo/d1_window_length: 2.0
+ * /svo/depth_filter_affine_est_gain: False
+ * /svo/depth_filter_affine_est_offset: True
+ * /svo/detector_threshold_primary: 10
+ * /svo/detector_threshold_secondary: 200
+ * /svo/detector_threshold_shitomasi: 50
+ * /svo/frame_event_log_file: /home/alpha/Deskt...
+ * /svo/gp_settings_file: /home/alpha/Deskt...
+ * /svo/gp_topic: /fyp_unused_gps
+ * /svo/grid_size: 25
+ * /svo/img_align_est_illumination_gain: True
+ * /svo/img_align_est_illumination_offset: True
+ * /svo/img_align_max_level: 4
+ * /svo/img_align_min_level: 2
+ * /svo/img_align_prior_lambda_rot: 0.5
+ * /svo/img_align_prior_lambda_trans: 0.0
+ * /svo/imu_topic: /imu0
+ * /svo/init_min_disparity: 30
+ * /svo/init_min_features: 60
+ * /svo/kfselect_criterion: FORWARD
+ * /svo/kfselect_min_angle: 20
+ * /svo/kfselect_min_disparity: 40
+ * /svo/kfselect_min_dist_metric: 0.1
+ * /svo/kfselect_numkfs_lower_thresh: 100
+ * /svo/kfselect_numkfs_upper_thresh: 140
+ * /svo/log_frame_events: True
+ * /svo/log_registration_events: True
+ * /svo/map_alignement_T_w_b: /svo/w_registrate...
+ * /svo/map_reg_settings_file: /home/alpha/Deskt...
+ * /svo/map_scale: 1.5
+ * /svo/mappoint_convergence_sigma2_thresh: 500
+ * /svo/max_depth_inv: 0.05
+ * /svo/max_fts: 180
+ * /svo/max_map_fts: 300
+ * /svo/max_n_kfs: 10
+ * /svo/max_unconverged_seeds_ratio: 0.2
+ * /svo/mean_depth_inv: 0.3
+ * /svo/min_depth_inv: 1.0
+ * /svo/n_pyr_levels: 3
+ * /svo/outlier_rejection_px_threshold: 2.0
+ * /svo/pipeline_is_stereo: False
+ * /svo/poseoptim_prior_lambda: 0.0
+ * /svo/poseoptim_thresh: 2.0
+ * /svo/poseoptim_using_unit_sphere: False
+ * /svo/publish_active_kfs: True
+ * /svo/publish_every_nth_dense_input: 5
+ * /svo/publish_marker_scale: 0.5
+ * /svo/publish_marker_scale_backend: 0.5
+ * /svo/quality_min_fts: 40
+ * /svo/ransac3d_inlier_percent: 35
+ * /svo/registration_event_log_file: /home/alpha/Deskt...
+ * /svo/relocalization_max_trials: 5
+ * /svo/reproject_unconverged_seeds: True
+ * /svo/reprojector_affine_est_gain: False
+ * /svo/reprojector_affine_est_offset: True
+ * /svo/reprojector_max_n_kfs: 5
+ * /svo/runlc: False
+ * /svo/scan_epi_unit_sphere: False
+ * /svo/seed_convergence_sigma2_thresh: 200
+ * /svo/update_seeds_with_old_keyframes: True
+ * /svo/use_async_reprojectors: False
+ * /svo/use_ceres_backend: True
+ * /svo/use_global_measurements: True
+ * /svo/use_imu: True
+ * /svo/use_map_registration: True
+ * /svo/use_outlier_rejection: True
+ * /svo/zero_motion_max_features_to_check: 15
+ * /svo/zero_motion_min_number_correspondences: 5
+ * /svo/zero_motion_px_diff_threshold: 0.2
+ * /svo/zero_motion_ratio_moving_pixels_threshold: 0.1
+ * /svo/zero_motion_sigma: 0.1
+
+NODES
+  /
+    online_registration (svo_registration/online_registration_m2fast.py)
+    svo (svo_ros/svo_node)
+
+auto-starting new master
+[1mprocess[master]: started with pid [800528][0m
+[1mROS_MASTER_URI=http://localhost:11311[0m
+]2;/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/svo_ros/launch/fyp/euroc_m2fast.launch http://localhost:11311
+[1msetting /run_id to 7147a518-d0ac-11f1-b723-bd52899a295f[0m
+[1mprocess[rosout-1]: started with pid [800549][0m
+started core service [/rosout]
+[1mprocess[svo-2]: started with pid [800577][0m
+[1mprocess[online_registration-3]: started with pid [800578][0m
+[online_registration-3] killing on exit
+[svo-2] killing on exit
+[rosout-1] killing on exit
+[master] killing on exit
+shutting down processing monitor...
+... shutting down processing monitor complete
+[1mdone[0m

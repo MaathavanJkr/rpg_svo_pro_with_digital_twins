@@ -1,0 +1,8 @@
+{
+  "run": "2026-10-25_V2_02_medium_M3-hess_p10d4_r01",
+  "accepted_with_gt": 101,
+  "accepted_without_gt": 0,
+  "n_beyond_3sigma": 100,
+  "frac_beyond_3sigma": 0.9900990099009901,
+  "frac_err_gt_0p2": 0.27722772277227725
+}

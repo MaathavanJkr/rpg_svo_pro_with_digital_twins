@@ -1,0 +1,10 @@
+[0m[INFO] [1792950778.566136698]: Subscribing to /imu0[0m
+[0m[INFO] [1792950778.568847771]: Subscribing to /svo/info[0m
+[0m[INFO] [1792950778.570953471]: Subscribing to /svo/pose_imu[0m
+[0m[INFO] [1792950778.572897390]: Subscribing to /svo/vio_backend_pose_imu[0m
+[0m[INFO] [1792950778.574816707]: Subscribing to /svo/w_backend_points_registered[0m
+[0m[INFO] [1792950778.576665555]: Subscribing to /svo/w_backend_pose_imu[0m
+[0m[INFO] [1792950778.578618140]: Subscribing to /svo/w_backend_pose_points[0m
+[0m[INFO] [1792950778.580439245]: Subscribing to /svo/w_registrated_pose[0m
+[0m[INFO] [1792950778.582309136]: Subscribing to /tf_static[0m
+[0m[INFO] [1792950778.584574015]: Recording to '/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-25_V1_02_medium_M2F-heur_p10d4_r03/run.bag'.[0m

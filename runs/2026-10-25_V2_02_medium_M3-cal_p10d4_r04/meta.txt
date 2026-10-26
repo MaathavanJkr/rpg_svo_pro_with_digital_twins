@@ -1,0 +1,20 @@
+run_id: 2026-10-25_V2_02_medium_M3-cal_p10d4_r04
+sequence: V2_02_medium
+date: 2026-10-26T00:38:34+05:30
+git_commit: e284205deca3639b27612234a25757920acf004a
+git_dirty: 1 tracked files modified
+launch: svo_ros/launch/fyp/euroc_m3.launch log_frame_events:=true registration_config:=/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/svo_registration/config/euroc_v2_m3_d4.yaml reference_map:=/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/dataset/derived/euroc_twin/V2_leica_v30mm.ply df_grid:=/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/dataset/derived/euroc_twin/df/V2_leica_v30mm_udf_v50mm.bin information:=hessian_calibrated
+input_bag: /home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/dataset/vicon_room2/V2_02_medium/V2_02_medium.bag (rosbag play, rate 1, no --clock)
+svo_node binary: /home/alpha/Desktop/twinforge/catkin_ws/devel/.private/svo_ros/lib/svo_ros/svo_node 2026-10-23 20:20:24.063852306 +0530
+libsvo_ros: 2026-10-23 20:20:17.727757873 +0530 md5 c49078a025f0
+svo_node md5: 78ea5c215845
+fyp_df.cpython-38-x86_64-linux-gnu.so md5: 733ca174f570
+online_registration_fyp.py md5: d6ed76768001
+online_registration_m3.py md5: 9b152df6be1f
+loadavg_before: 0.44 0.71 0.89 1/1440 774383
+nproc: 12
+nodes ready after ~2s, svo_node pid 774472, registration node pid 774473
+play_wall_seconds: 119.775056680
+loadavg_after: 0.58 0.68 0.86 1/1441 775855
+ros_run_id: 79c9d12a-d0a7-11f1-b723-bd52899a295f
+done

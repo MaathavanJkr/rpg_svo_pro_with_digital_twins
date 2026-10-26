@@ -1,0 +1,41 @@
+{
+  "sequence": "V2_02_medium",
+  "t0": 1413393890.0557604,
+  "rule": "D1(B): 4-DoF LSQ fit of VIO to GT positions from t0 over the first L m of GT path",
+  "window_length_m": 2.0,
+  "window": {
+    "n_samples": 54,
+    "t_end": 1413393892.7057605,
+    "duration_s": 2.6500000953674316,
+    "gt_path_length_m": 2.0199342782755454
+  },
+  "yaw_deg": -8.57752556968162,
+  "T_M_W": [
+    [
+      0.9888149606375014,
+      0.14914748948425666,
+      0.0,
+      -1.344434793325315
+    ],
+    [
+      -0.14914748948425666,
+      0.9888149606375014,
+      0.0,
+      0.4789575143486935
+    ],
+    [
+      0.0,
+      0.0,
+      1.0,
+      1.362113108579226
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "t0_rule": "first KF with backend+scale init and GT bracket <= 10 ms",
+  "yaw_source": "gt"
+}
