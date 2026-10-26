@@ -128,3 +128,40 @@ Each phase ends at a GATE. Do not start the next phase until the user approves.
 - **Smoke (technical):** one run per arm at δ = 20° on V1_02 (M2F05, M3, M2F20; refine-off arms at their only offset, 10°); checks as before **plus: refinement fires in the refine-on runs**.
 - **Stop rule:** if this redesign hits another blocker that cannot be fixed without changing the experiment's design again, stop immediately and report; the project then switches to option 4 (offline H1 only + the scale-dependence finding), with no further redesign.
 - **Threshold computed (rule above, `runs/phase10_align/threshold.json`):** τ = **0.0052 rad²** (yaw std ≈ 4.1°; original 3e-4). On the 38 valid δ = 0 Phase 9 runs (V1_02 + V2_02, M2 + M3) the criterion would fire at a pooled median of 20.0 s after the D1 window; V1_02 median 17.6 s (range 16.8–20.1 s), V2_02 median 20.7 s (20.0–21.1 s); every run fires. Final variance at the end of the sequence (median) 1.6e-3 (V1_02), 8.2e-4 (V2_02), i.e. still 3–5× above the original threshold. Config `svo_ros/param/fyp/euroc/gpose_settings_align.yaml` (refine on, τ = 0.0052), used by all refine-on arms; the stopped batch's freeze record is kept as `runs/phase10_align/build_freeze_stopped_p10al.txt`.
+
+## Publication track (DESIGN PROPOSALS ONLY, written 2026-10-26; nothing below is pre-registered or approved; no runs)
+Goal: a conference paper in addition to the FYP report. All project rules apply (pre-registration, frozen builds, no tuning on outcomes, honest negatives). Literature check: docs/related_work.md.
+
+### P1. Calibrated weighting + consistency gating
+- **Question:** does χ²-gating of each registration (its correction tested against its calibrated covariance) remove the wrong-but-accepted registrations that made the calibrated Hessian fail in D4, so that realistic weighting beats the heuristic?
+- **Method:** gate statistic g = ξᵀ Σ_cal⁻¹ ξ for the registration correction ξ (6-DoF, body-centred calibrated covariance from D4; calibration fitted on V1_01 only, as in D4); reject if g > χ²₆(1 − α), α fixed in advance (e.g. 0.01 → 16.81); the gate is added to the validity checks, the weighting is the calibrated Hessian. Note: with the correction as statistic, the gate tests consistency of the registration with the current VIO estimate (prior uncertainty must be included; definition of Σ to be fixed before running).
+- **Offline first (logged D4 and Phase 9 keyframes, no runs):** per method and sequence, how many registrations the gate rejects, split into wrong (|e| > 0.2 m vs GT) and correct ones (rejection rate of correct registrations = cost), on the open-loop data and on the logged calibrated-arm runs (closed-loop states).
+- **Online (if offline shows a useful separation):** {M2F, M3} × {heuristic, calibrated + gate} on V1_02 and V2_02, 10 runs per cell = 80 runs, ≈ 3.5 h. Primary: calibrated+gate vs heuristic, map-frame ATE, Welch, Holm over 4.
+- **Pre-registration needs:** gate statistic and Σ definition, α, calibration (frozen from D4), primary family, failure rule.
+- **Value / effort:** χ² gating is standard (Huang et al. 2019 use it for SDF factors), so novelty is limited; value is in closing the D4 story ("realistic weights need gating"). Effort moderate (node change + offline analysis 1–2 days; online 1 night).
+
+### P2. Digital-twin imperfection and tampering robustness (DF vs P2P)
+- **Question:** how do distance-field and point-to-plane registration degrade when the twin is imperfect (noise, missing regions, changed scene) or deliberately tampered, and can a tampered twin bias the trajectory without being flagged by the validity checks?
+- **Conditions (twins derived from the preprocessed Leica twin, fixed recipes, seeds recorded):** (i) Gaussian noise σ ∈ {1, 3, 5} cm on points (normals re-estimated); (ii) missing regions: remove 10 / 30 % of the wall/floor area in contiguous patches; (iii) changed scene: add box-shaped objects (synthetic furniture) covering 5 / 15 % of the floor area, and remove existing furniture; (iv) tampering: a wall segment shifted by 0.2 / 0.5 m, or a rigid 1–2° rotation of one room half (designed to induce a consistent bias). DF grids rebuilt per condition.
+- **Offline first:** on the logged Phase 9 / D4 keyframes (identical inputs), per condition: acceptance, registration error vs GT, bias direction, validity-check outcomes (do the checks flag tampering?), information matrices; DF vs P2P (M2F). Cheap (CPU minutes per condition).
+- **Online, key conditions only (chosen in advance from the offline ranking rule, e.g. the two conditions with the largest offline degradation plus one tampering condition):** {M2F, M3} × 3 conditions × V1_02, V2_02 × 10 runs = 120 runs, ≈ 5.5 h.
+- **Pre-registration needs:** twin recipes and seeds, condition selection rule, primary metric (map-frame ATE degradation vs clean twin), detection metric for tampering.
+- **Value / effort:** highest novelty in the literature check (no source found on tampered prior maps for VIO map localisation; also the security angle of the department requirement). Effort moderate: twin generation + offline 2–3 days, online 1 night.
+
+### P3. Oerlikon at city scale
+- **Question:** does M3 work in the original paper's setting, and what do memory and runtime look like at city scale (H4)?
+- **Memory fact (computed 2026-10-26 from `dataset/Oerlikon.ply`, 3.11 M points, extent 312 × 192 × 118 m + 1 m margin):** a dense float32 grid needs 235 GB at v = 0.05 m, 29 GB at 0.10 m, 3.7 GB at 0.20 m, 0.24 GB at 0.5 m and 0.03 GB at 1.0 m. The original pipeline downsamples this twin to 1 m voxels, so a dense grid at v = 0.5–1.0 m is feasible without sparse storage; v ≤ 0.2 m needs sparse (block-hashed, truncated) storage (see the H4 extrapolation document).
+- **Method:** DF grid at v matched to the twin resolution (0.5 m and 1.0 m, rule fixed in advance), untruncated dense; measured memory and runtime (Phase 8 protocol); online M2 vs M3 with the official Oerlikon configuration (refinement on, GPS alignment as original). Runs: 10 per method (the Phase 3 baseline had a std of 0.12 m on 1.95 m; detecting a 0.15 m difference at 80 % power needs ~10–12 per group) → 20 runs × ~8 min ≈ 2.7 h.
+- **Pre-registration needs:** voxel rule, primary metric (ATE_P post-refinement, the official Phase 3 metric), n.
+- **Value / effort:** medium-high (original domain, H4 at scale, shows M3 in the authors' own setting). Effort moderate (grid build + configs 1–2 days; sparse storage only if v ≤ 0.2 m is wanted, then +3–5 days).
+
+### P4. Optional: second dataset with a prior map, and stereo VIO
+- **Candidate:** Hilti-Oxford 2022 (released terrestrial laser scans, cameras + IMU, survey-point ground truth, CC BY-NC-SA 3.0). Newer College is unsuitable for map-frame claims (its GT is derived from the map).
+- **Effort:** high: new calibration and SVO parameters, twin preprocessing from .e57, sparse-GT evaluation protocol, initial alignment without dense GT (D1 cannot be reused as is); stereo VIO adds a second front-end configuration. ≥ 1–2 weeks before the first valid run.
+- **Value:** high for generality (reviewers will ask for a second environment), but the largest effort and risk.
+
+### Ranking by expected paper value vs effort (proposal)
+1. **P2** (twin imperfection / tampering): clearest gap in the literature, directly comparable DF vs P2P property, cheap offline-first design, fits the security requirement.
+2. **P3** (Oerlikon): original setting, answers H4 at scale; dense grids are feasible at the twin's own resolution.
+3. **P1** (gating): completes the D4 story; limited novelty (χ² gating is standard).
+4. **P4** (second dataset / stereo): highest generality, highest effort; only if time remains.
