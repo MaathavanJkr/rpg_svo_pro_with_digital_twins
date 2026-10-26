@@ -153,6 +153,7 @@ public:
   // because SVO's visualizer already makes vio a child of cam_pos).
   bool d1_enabled_ = false;
   double d1_window_length_ = 2.0;
+  double d1_yaw_offset_deg_ = 0.0;  // FYP Phase 10: injected heading error after D1 (0 = off)
 
   // FYP Phase 6: optional registration-event log (param log_registration_events, default off):
   // one row per registered pose received in globalposeCallback (wall time, stamp, branch taken).

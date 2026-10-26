@@ -25,6 +25,8 @@
   <arg name="log_registration_events" default="false"/>
   <arg name="registration_event_log_file" default="/tmp/svo_registration_events.csv"/>
   <arg name="information" default="config"/>  <!-- Phase 10 D4: heuristic | hessian | hessian_calibrated; "config" = registration config -->
+  <arg name="gpose_settings" default="gpose_settings_m2.yaml"/>  <!-- Phase 10 alignment robustness: gpose_settings.yaml = refine_T_WL on -->
+  <arg name="d1_yaw_offset_deg" default="0.0"/>  <!-- Phase 10 alignment robustness: injected heading error after D1 [deg] -->
   <arg name="rviz" default="false"/>
   <arg name="log_frame_events" default="false"/>
   <arg name="frame_event_log_file" default="/tmp/svo_frame_events.csv"/>
@@ -40,12 +42,13 @@
     <param name="gp_settings_file" value="$(arg param_dir)/gp_settings.yaml" />
     <param name="use_map_registration" value="true" />
     <param name="map_alignement_T_w_b" value="/svo/w_registrated_pose" type="str" />
-    <param name="map_reg_settings_file" value="$(arg param_dir)/gpose_settings_m2.yaml" />
+    <param name="map_reg_settings_file" value="$(arg param_dir)/$(arg gpose_settings)" />
 
     <param name="d1_alignment" value="true" />
     <param name="d1_gt_file" value="$(arg d1_gt_file)" />
     <param name="d1_log_file" value="$(arg d1_log_file)" />
     <param name="d1_window_length" value="$(arg d1_window_length)" type="double" />
+    <param name="d1_yaw_offset_deg" value="$(arg d1_yaw_offset_deg)" type="double" />
 
     <param name="log_registration_events" value="$(arg log_registration_events)" />
     <param name="registration_event_log_file" value="$(arg registration_event_log_file)" />

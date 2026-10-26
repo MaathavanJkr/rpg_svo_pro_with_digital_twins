@@ -225,6 +225,7 @@ SvoInterface::SvoInterface(
     const std::string gt_file = vk::param<std::string>(pnh_, "d1_gt_file", "");
     d1_log_file_ = vk::param<std::string>(pnh_, "d1_log_file", "/tmp/svo_d1_alignment.csv");
     d1_window_length_ = vk::param<double>(pnh_, "d1_window_length", 2.0);
+    d1_yaw_offset_deg_ = vk::param<double>(pnh_, "d1_yaw_offset_deg", 0.0);
     std::ifstream in(gt_file);
     CHECK(in.good()) << "d1_alignment: cannot open d1_gt_file '" << gt_file << "'";
     std::string line;
@@ -677,7 +678,21 @@ void SvoInterface::d1TryAlign()
   Eigen::Matrix4d T = Eigen::Matrix4d::Identity();
   T.block<3, 3>(0, 0) = Eigen::AngleAxisd(psi, Eigen::Vector3d::UnitZ()).toRotationMatrix();
   T.block<3, 1>(0, 3) = mg - T.block<3, 3>(0, 0) * me;
-  const Transformation T_w_vio(T);
+
+  // FYP Phase 10 (initial-alignment robustness, docs/PLAN.md): optional injected heading error, flag-guarded by
+  // d1_yaw_offset_deg (default 0 = off). T_applied = T(p_end) Rz(delta) T(-p_end) T, with p_end the body position
+  // (map frame, D1 fit) at the end of the window, so the error is a pure heading error about the body at t_end.
+  // delta == 0 skips this block: T_applied is then T bitwise.
+  Eigen::Matrix4d T_applied = T;
+  if (d1_yaw_offset_deg_ != 0.0)
+  {
+    const Eigen::Matrix3d R_d =
+        Eigen::AngleAxisd(d1_yaw_offset_deg_ * M_PI / 180.0, Eigen::Vector3d::UnitZ()).toRotationMatrix();
+    const Eigen::Vector3d p_end = T.block<3, 3>(0, 0) * pe.back() + T.block<3, 1>(0, 3);
+    T_applied.block<3, 3>(0, 0) = R_d * T.block<3, 3>(0, 0);
+    T_applied.block<3, 1>(0, 3) = R_d * (T.block<3, 1>(0, 3) - p_end) + p_end;
+  }
+  const Transformation T_w_vio(T_applied);
 
   // Same effect as a successful GPS alignment in globalpositionsCallback.
   globalpose_handler_->setT_w_vio(T_w_vio);
@@ -693,8 +708,8 @@ void SvoInterface::d1TryAlign()
   // of "vio" (transform T_vio_world = T_M_W^-1) instead of making it the parent of "vio".
   // Rigid inverse written out explicitly: Eigen's Matrix4d::inverse() returned wrong values in this
   // build (Phase 5 TF smoke test), so it is not used.
-  const Eigen::Matrix3d R_MW = T.block<3, 3>(0, 0);
-  const Eigen::Vector3d t_WM = -(R_MW.transpose() * T.block<3, 1>(0, 3));
+  const Eigen::Matrix3d R_MW = T_applied.block<3, 3>(0, 0);
+  const Eigen::Vector3d t_WM = -(R_MW.transpose() * T_applied.block<3, 1>(0, 3));
   const Eigen::Quaterniond q_WM = Eigen::Quaterniond(R_MW).conjugate().normalized();
   geometry_msgs::TransformStamped tf_msg;
   tf_msg.header.stamp.fromNSec(t_end_ns);
@@ -715,15 +730,24 @@ void SvoInterface::d1TryAlign()
   for (int r = 0; r < 4; ++r)
     for (int c = 0; c < 4; ++c)
       log << ",T_M_W_" << r << c;
+  log << ",yaw_offset_deg";  // FYP Phase 10: T_M_W_* above = D1 fit; T_applied_* = what was applied
+  for (int r = 0; r < 4; ++r)
+    for (int c = 0; c < 4; ++c)
+      log << ",T_applied_" << r << c;
   log << "\n" << d1_t0_ns_ << ',' << t_end_ns << ',' << pe.size() << ',' << s << ','
       << d1_window_length_ << ',' << psi * 180.0 / M_PI;
   for (int r = 0; r < 4; ++r)
     for (int c = 0; c < 4; ++c)
       log << ',' << T(r, c);
+  log << ',' << d1_yaw_offset_deg_;
+  for (int r = 0; r < 4; ++r)
+    for (int c = 0; c < 4; ++c)
+      log << ',' << T_applied(r, c);
   log << "\n";
   const Eigen::Vector3d t_MW = T.block<3, 1>(0, 3);
   SVO_INFO_STREAM("D1: T_M_W set (window " << pe.size() << " samples, " << s << " m, t_end "
-                  << t_end_ns << " ns), yaw " << psi * 180.0 / M_PI << " deg, t = " << t_MW.transpose());
+                  << t_end_ns << " ns), yaw " << psi * 180.0 / M_PI << " deg, t = " << t_MW.transpose()
+                  << ", injected yaw offset " << d1_yaw_offset_deg_ << " deg");
 }
 
 // FYP D1: receives the backend's own published poses (/svo/vio_backend_pose_imu), so the VIO pose at
