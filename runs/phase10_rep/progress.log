@@ -1,0 +1,81 @@
+2026-10-26T13:15:40+05:30 start 2026-10-26_V2_02_medium_M2F-heur_p10rep_r01
+2026-10-26T13:18:10+05:30 end   2026-10-26_V2_02_medium_M2F-heur_p10rep_r01 harness_rc=0 failed=False reason=None map=0.11524622037813158 4dof=0.10281559692321056
+2026-10-26T13:18:21+05:30 start 2026-10-26_V2_02_medium_M3-heur_p10rep_r01
+2026-10-26T13:20:51+05:30 end   2026-10-26_V2_02_medium_M3-heur_p10rep_r01 harness_rc=0 failed=False reason=None map=0.08157565655437897 4dof=0.07484831069078662
+2026-10-26T13:21:01+05:30 start 2026-10-26_V2_02_medium_M2F-heur_p10rep_r02
+2026-10-26T13:23:31+05:30 end   2026-10-26_V2_02_medium_M2F-heur_p10rep_r02 harness_rc=0 failed=False reason=None map=0.10905785687190474 4dof=0.07841285964611004
+2026-10-26T13:23:41+05:30 start 2026-10-26_V2_02_medium_M3-heur_p10rep_r02
+2026-10-26T13:26:11+05:30 end   2026-10-26_V2_02_medium_M3-heur_p10rep_r02 harness_rc=0 failed=False reason=None map=0.08478799236651277 4dof=0.07604310717368717
+2026-10-26T13:26:21+05:30 start 2026-10-26_V2_02_medium_M2F-heur_p10rep_r03
+2026-10-26T13:28:51+05:30 end   2026-10-26_V2_02_medium_M2F-heur_p10rep_r03 harness_rc=0 failed=False reason=None map=0.07635745303318112 4dof=0.07681906845850589
+2026-10-26T13:29:01+05:30 start 2026-10-26_V2_02_medium_M3-heur_p10rep_r03
+2026-10-26T13:31:32+05:30 end   2026-10-26_V2_02_medium_M3-heur_p10rep_r03 harness_rc=0 failed=False reason=None map=0.07254952515212205 4dof=0.07325177415905225
+2026-10-26T13:31:42+05:30 start 2026-10-26_V2_02_medium_M2F-heur_p10rep_r04
+2026-10-26T13:34:12+05:30 end   2026-10-26_V2_02_medium_M2F-heur_p10rep_r04 harness_rc=0 failed=False reason=None map=0.08351097926785017 4dof=0.07354306056150588
+2026-10-26T13:34:22+05:30 start 2026-10-26_V2_02_medium_M3-heur_p10rep_r04
+2026-10-26T13:36:52+05:30 end   2026-10-26_V2_02_medium_M3-heur_p10rep_r04 harness_rc=0 failed=False reason=None map=0.08513667395479083 4dof=0.0700905474617628
+2026-10-26T13:37:02+05:30 start 2026-10-26_V2_02_medium_M2F-heur_p10rep_r05
+2026-10-26T13:39:32+05:30 end   2026-10-26_V2_02_medium_M2F-heur_p10rep_r05 harness_rc=0 failed=False reason=None map=0.09018275926544782 4dof=0.08550139726032299
+2026-10-26T13:39:43+05:30 start 2026-10-26_V2_02_medium_M3-heur_p10rep_r05
+2026-10-26T13:42:12+05:30 end   2026-10-26_V2_02_medium_M3-heur_p10rep_r05 harness_rc=0 failed=False reason=None map=0.0853243245125664 4dof=0.08121671650723614
+2026-10-26T13:42:23+05:30 start 2026-10-26_V2_02_medium_M2F-heur_p10rep_r06
+2026-10-26T13:44:53+05:30 end   2026-10-26_V2_02_medium_M2F-heur_p10rep_r06 harness_rc=0 failed=False reason=None map=0.09531711870907984 4dof=0.08678955428959637
+2026-10-26T13:45:03+05:30 start 2026-10-26_V2_02_medium_M3-heur_p10rep_r06
+2026-10-26T13:47:33+05:30 end   2026-10-26_V2_02_medium_M3-heur_p10rep_r06 harness_rc=0 failed=False reason=None map=0.11147442413989253 4dof=0.0855259273975171
+2026-10-26T13:47:43+05:30 start 2026-10-26_V2_02_medium_M2F-heur_p10rep_r07
+2026-10-26T13:50:13+05:30 end   2026-10-26_V2_02_medium_M2F-heur_p10rep_r07 harness_rc=0 failed=False reason=None map=0.08515470539891576 4dof=0.06778035466116837
+2026-10-26T13:50:23+05:30 start 2026-10-26_V2_02_medium_M3-heur_p10rep_r07
+2026-10-26T13:52:53+05:30 end   2026-10-26_V2_02_medium_M3-heur_p10rep_r07 harness_rc=0 failed=False reason=None map=0.09454125000109728 4dof=0.07955722255729697
+2026-10-26T13:53:03+05:30 start 2026-10-26_V2_02_medium_M2F-heur_p10rep_r08
+2026-10-26T13:55:33+05:30 end   2026-10-26_V2_02_medium_M2F-heur_p10rep_r08 harness_rc=0 failed=False reason=None map=0.09653199868340369 4dof=0.0760947353967104
+2026-10-26T13:55:43+05:30 start 2026-10-26_V2_02_medium_M3-heur_p10rep_r08
+2026-10-26T13:58:13+05:30 end   2026-10-26_V2_02_medium_M3-heur_p10rep_r08 harness_rc=0 failed=False reason=None map=0.07885806065708084 4dof=0.06938307533550146
+2026-10-26T13:58:23+05:30 start 2026-10-26_V2_02_medium_M2F-heur_p10rep_r09
+2026-10-26T14:00:53+05:30 end   2026-10-26_V2_02_medium_M2F-heur_p10rep_r09 harness_rc=0 failed=False reason=None map=0.07673376267392261 4dof=0.06842879342028962
+2026-10-26T14:01:04+05:30 start 2026-10-26_V2_02_medium_M3-heur_p10rep_r09
+2026-10-26T14:03:34+05:30 end   2026-10-26_V2_02_medium_M3-heur_p10rep_r09 harness_rc=0 failed=False reason=None map=0.09349722539344744 4dof=0.08097268160840028
+2026-10-26T14:03:44+05:30 start 2026-10-26_V2_02_medium_M2F-heur_p10rep_r10
+2026-10-26T14:06:14+05:30 end   2026-10-26_V2_02_medium_M2F-heur_p10rep_r10 harness_rc=0 failed=False reason=None map=0.14168496830523802 4dof=0.09146064694542981
+2026-10-26T14:06:24+05:30 start 2026-10-26_V2_02_medium_M3-heur_p10rep_r10
+2026-10-26T14:08:54+05:30 end   2026-10-26_V2_02_medium_M3-heur_p10rep_r10 harness_rc=0 failed=False reason=None map=0.09368897472888203 4dof=0.08176324745581004
+2026-10-26T14:09:04+05:30 start 2026-10-26_V2_02_medium_M2F-heur_p10rep_r11
+2026-10-26T14:11:34+05:30 end   2026-10-26_V2_02_medium_M2F-heur_p10rep_r11 harness_rc=0 failed=False reason=None map=0.10677544200929645 4dof=0.08667600820868383
+2026-10-26T14:11:44+05:30 start 2026-10-26_V2_02_medium_M3-heur_p10rep_r11
+2026-10-26T14:14:14+05:30 end   2026-10-26_V2_02_medium_M3-heur_p10rep_r11 harness_rc=0 failed=False reason=None map=0.10068784975131961 4dof=0.08908479735928833
+2026-10-26T14:14:25+05:30 start 2026-10-26_V2_02_medium_M2F-heur_p10rep_r12
+2026-10-26T14:16:54+05:30 end   2026-10-26_V2_02_medium_M2F-heur_p10rep_r12 harness_rc=0 failed=False reason=None map=0.08482036443449073 4dof=0.0736983635476174
+2026-10-26T14:17:05+05:30 start 2026-10-26_V2_02_medium_M3-heur_p10rep_r12
+2026-10-26T14:19:34+05:30 end   2026-10-26_V2_02_medium_M3-heur_p10rep_r12 harness_rc=0 failed=False reason=None map=0.08459088822959021 4dof=0.07439713903556537
+2026-10-26T14:19:45+05:30 start 2026-10-26_V2_02_medium_M2F-heur_p10rep_r13
+2026-10-26T14:22:15+05:30 end   2026-10-26_V2_02_medium_M2F-heur_p10rep_r13 harness_rc=0 failed=False reason=None map=0.08116335349921862 4dof=0.0738310961331125
+2026-10-26T14:22:25+05:30 start 2026-10-26_V2_02_medium_M3-heur_p10rep_r13
+2026-10-26T14:24:55+05:30 end   2026-10-26_V2_02_medium_M3-heur_p10rep_r13 harness_rc=0 failed=False reason=None map=0.07963340133550477 4dof=0.06991362308730116
+2026-10-26T14:25:05+05:30 start 2026-10-26_V2_02_medium_M2F-heur_p10rep_r14
+2026-10-26T14:27:35+05:30 end   2026-10-26_V2_02_medium_M2F-heur_p10rep_r14 harness_rc=0 failed=False reason=None map=0.07698114323391898 4dof=0.06437626464381277
+2026-10-26T14:27:45+05:30 start 2026-10-26_V2_02_medium_M3-heur_p10rep_r14
+2026-10-26T14:30:15+05:30 end   2026-10-26_V2_02_medium_M3-heur_p10rep_r14 harness_rc=0 failed=False reason=None map=0.0926760558682902 4dof=0.07815670109727957
+2026-10-26T14:30:25+05:30 start 2026-10-26_V2_02_medium_M2F-heur_p10rep_r15
+2026-10-26T14:32:55+05:30 end   2026-10-26_V2_02_medium_M2F-heur_p10rep_r15 harness_rc=0 failed=False reason=None map=0.08771310204384272 4dof=0.07976948597595486
+2026-10-26T14:33:05+05:30 start 2026-10-26_V2_02_medium_M3-heur_p10rep_r15
+2026-10-26T14:35:40+05:30 end   2026-10-26_V2_02_medium_M3-heur_p10rep_r15 harness_rc=0 failed=False reason=None map=0.050467594884109804 4dof=0.05719836025229343
+2026-10-26T14:35:50+05:30 start 2026-10-26_V2_02_medium_M2F-heur_p10rep_r16
+2026-10-26T14:38:20+05:30 end   2026-10-26_V2_02_medium_M2F-heur_p10rep_r16 harness_rc=0 failed=False reason=None map=0.0796971512130697 4dof=0.07160845622058995
+2026-10-26T14:38:31+05:30 start 2026-10-26_V2_02_medium_M3-heur_p10rep_r16
+2026-10-26T14:41:01+05:30 end   2026-10-26_V2_02_medium_M3-heur_p10rep_r16 harness_rc=0 failed=False reason=None map=0.0680677069553871 4dof=0.06635221454625889
+2026-10-26T14:41:11+05:30 start 2026-10-26_V2_02_medium_M2F-heur_p10rep_r17
+2026-10-26T14:43:41+05:30 end   2026-10-26_V2_02_medium_M2F-heur_p10rep_r17 harness_rc=0 failed=False reason=None map=0.07982783049672001 4dof=0.07297952222638611
+2026-10-26T14:43:51+05:30 start 2026-10-26_V2_02_medium_M3-heur_p10rep_r17
+2026-10-26T14:46:21+05:30 end   2026-10-26_V2_02_medium_M3-heur_p10rep_r17 harness_rc=0 failed=False reason=None map=0.05994153981892882 4dof=0.059434104076518966
+2026-10-26T14:46:31+05:30 start 2026-10-26_V2_02_medium_M2F-heur_p10rep_r18
+2026-10-26T14:49:01+05:30 end   2026-10-26_V2_02_medium_M2F-heur_p10rep_r18 harness_rc=0 failed=False reason=None map=0.09339119258708782 4dof=0.0764862987155731
+2026-10-26T14:49:12+05:30 start 2026-10-26_V2_02_medium_M3-heur_p10rep_r18
+2026-10-26T14:51:42+05:30 end   2026-10-26_V2_02_medium_M3-heur_p10rep_r18 harness_rc=0 failed=False reason=None map=0.07359446821645516 4dof=0.06596233778833069
+2026-10-26T14:51:52+05:30 start 2026-10-26_V2_02_medium_M2F-heur_p10rep_r19
+2026-10-26T14:54:22+05:30 end   2026-10-26_V2_02_medium_M2F-heur_p10rep_r19 harness_rc=0 failed=False reason=None map=0.07962246469411419 4dof=0.07009372683876913
+2026-10-26T14:54:32+05:30 start 2026-10-26_V2_02_medium_M3-heur_p10rep_r19
+2026-10-26T14:57:02+05:30 end   2026-10-26_V2_02_medium_M3-heur_p10rep_r19 harness_rc=0 failed=False reason=None map=0.07661750757042561 4dof=0.06881471292074795
+2026-10-26T14:57:12+05:30 start 2026-10-26_V2_02_medium_M2F-heur_p10rep_r20
+2026-10-26T14:59:42+05:30 end   2026-10-26_V2_02_medium_M2F-heur_p10rep_r20 harness_rc=0 failed=False reason=None map=0.10314757664687793 4dof=0.07802228519747596
+2026-10-26T14:59:52+05:30 start 2026-10-26_V2_02_medium_M3-heur_p10rep_r20
+2026-10-26T15:02:22+05:30 end   2026-10-26_V2_02_medium_M3-heur_p10rep_r20 harness_rc=0 failed=False reason=None map=0.07724314026531949 4dof=0.06899296463266527
+2026-10-26T15:02:32+05:30 batch rounds 1..20 complete

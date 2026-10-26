@@ -1,9 +1,49 @@
-# Local-only files to back up externally (not in git), generated 2026-10-26T13:14:54+05:30
-# whole run folders not in git: 0 folders, 0B
+# Local-only files to back up externally (not in git), generated 2026-10-26T15:03:24+05:30
+# whole run folders not in git: 40 folders, 1.1GB
 # rosout logs (in committed run folders): 343 files, 149MB
 # registration event folders: 318 folders, 1.3GB
 # run bags: 389 files, 5.6GB
-# total: 6.9GB
+# total: 8.0GB
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M2F-heur_p10rep_r01
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M2F-heur_p10rep_r02
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M2F-heur_p10rep_r03
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M2F-heur_p10rep_r04
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M2F-heur_p10rep_r05
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M2F-heur_p10rep_r06
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M2F-heur_p10rep_r07
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M2F-heur_p10rep_r08
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M2F-heur_p10rep_r09
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M2F-heur_p10rep_r10
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M2F-heur_p10rep_r11
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M2F-heur_p10rep_r12
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M2F-heur_p10rep_r13
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M2F-heur_p10rep_r14
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M2F-heur_p10rep_r15
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M2F-heur_p10rep_r16
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M2F-heur_p10rep_r17
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M2F-heur_p10rep_r18
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M2F-heur_p10rep_r19
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M2F-heur_p10rep_r20
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M3-heur_p10rep_r01
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M3-heur_p10rep_r02
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M3-heur_p10rep_r03
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M3-heur_p10rep_r04
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M3-heur_p10rep_r05
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M3-heur_p10rep_r06
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M3-heur_p10rep_r07
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M3-heur_p10rep_r08
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M3-heur_p10rep_r09
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M3-heur_p10rep_r10
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M3-heur_p10rep_r11
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M3-heur_p10rep_r12
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M3-heur_p10rep_r13
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M3-heur_p10rep_r14
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M3-heur_p10rep_r15
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M3-heur_p10rep_r16
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M3-heur_p10rep_r17
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M3-heur_p10rep_r18
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M3-heur_p10rep_r19
+/home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-26_V2_02_medium_M3-heur_p10rep_r20
 /home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-24_V1_01_easy_M1_p9_r01/rosout.log
 /home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-24_V1_01_easy_M1_p9_r02/rosout.log
 /home/alpha/Desktop/twinforge/rpg_svo_pro_with_digital_twins/runs/2026-10-24_V1_01_easy_M1_p9_r03/rosout.log
