@@ -10,3 +10,14 @@
 2026-10-26T16:04:47+05:30 end   2026-10-26_V1_02_medium_M3-roff-d10_p10al_smoke harness_rc=0 refined=None recovered=None
 2026-10-26T16:05:27+05:30 start 2026-10-26_V1_02_medium_M2F05-d0_p10al_r01
 2026-10-26T16:06:19+05:30 STOPPED by operator: refine_T_WL criterion (yaw variance < 3e-4) cannot be met at room scale (replay of global_pose_handler.cpp on real KF geometry: final variance 6.8e-4 to 1.8e-3); batch stopped after the first run, which is left to finish; see docs/PLAN.md
+2026-10-26T19:50:50+05:30 start 2026-10-26_V1_02_medium_M2F05-d20_p10al2_smoke
+2026-10-26T19:52:59+05:30 end   2026-10-26_V1_02_medium_M2F05-d20_p10al2_smoke harness_rc=0 refined=True recovered=True
+2026-10-26T19:53:09+05:30 start 2026-10-26_V1_02_medium_M3-d20_p10al2_smoke
+2026-10-26T19:55:19+05:30 end   2026-10-26_V1_02_medium_M3-d20_p10al2_smoke harness_rc=0 refined=True recovered=True
+2026-10-26T19:55:29+05:30 start 2026-10-26_V1_02_medium_M2F20-d20_p10al2_smoke
+2026-10-26T19:57:38+05:30 end   2026-10-26_V1_02_medium_M2F20-d20_p10al2_smoke harness_rc=0 refined=True recovered=True
+2026-10-26T19:57:48+05:30 start 2026-10-26_V1_02_medium_M2F05-roff-d10_p10al2_smoke
+2026-10-26T19:59:56+05:30 end   2026-10-26_V1_02_medium_M2F05-roff-d10_p10al2_smoke harness_rc=0 refined=None recovered=None
+2026-10-26T20:00:07+05:30 start 2026-10-26_V1_02_medium_M3-roff-d10_p10al2_smoke
+2026-10-26T20:02:15+05:30 end   2026-10-26_V1_02_medium_M3-roff-d10_p10al2_smoke harness_rc=0 refined=None recovered=None
+2026-10-26T20:02:47+05:30 start 2026-10-26_V1_02_medium_M2F05-d0_p10al2_r01

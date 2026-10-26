@@ -1,0 +1,379 @@
+{
+  "docs/report/methodology.md": [
+    {
+      "line": 13,
+      "n_numbers": 0,
+      "unmatched": [],
+      "sources": [
+        "runs/phase10_align/threshold.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 37,
+      "n_numbers": 0,
+      "unmatched": [],
+      "sources": [
+        "runs/phase10_align/threshold.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 90,
+      "n_numbers": 7,
+      "unmatched": [],
+      "sources": [
+        "runs/phase7/study/report.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 100,
+      "n_numbers": 11,
+      "unmatched": [
+        "917"
+      ],
+      "sources": [
+        "runs/phase7/study/report.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 102,
+      "n_numbers": 2,
+      "unmatched": [],
+      "sources": [
+        "runs/phase8/equivalence.json",
+        "runs/phase8/node_check.json",
+        "runs/phase8/timing.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 104,
+      "n_numbers": 1,
+      "unmatched": [],
+      "sources": [
+        "runs/phase8/equivalence.json",
+        "runs/phase8/node_check.json",
+        "runs/phase8/timing.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 108,
+      "n_numbers": 0,
+      "unmatched": [],
+      "sources": [
+        "runs/phase10_align/threshold.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 110,
+      "n_numbers": 2,
+      "unmatched": [
+        "7589"
+      ],
+      "sources": [
+        "runs/phase10_tc/aggregate.json",
+        "runs/phase10_tc/exploratory.json",
+        "runs/phase10_tc/exploratory_heading.json",
+        "runs/phase10_tc/m2fast_equivalence.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 115,
+      "n_numbers": 0,
+      "unmatched": [],
+      "sources": [
+        "runs/phase10_align/threshold.json"
+      ],
+      "missing_sources": []
+    }
+  ],
+  "docs/report/results.md": [
+    {
+      "line": 9,
+      "n_numbers": 3,
+      "unmatched": [],
+      "sources": [
+        "runs/phase9/aggregate.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 10,
+      "n_numbers": 1,
+      "unmatched": [],
+      "sources": [
+        "runs/phase10_tc/aggregate.json",
+        "runs/phase10_tc/exploratory.json",
+        "runs/phase10_tc/exploratory_heading.json",
+        "runs/phase10_tc/m2fast_equivalence.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 11,
+      "n_numbers": 3,
+      "unmatched": [],
+      "sources": [
+        "runs/phase10_d4/aggregate.json",
+        "runs/phase10_d4/mechanism.json",
+        "runs/phase10_d4/outliers.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 12,
+      "n_numbers": 2,
+      "unmatched": [],
+      "sources": [
+        "runs/phase10_d4/aggregate.json",
+        "runs/phase10_rep/aggregate.json",
+        "runs/phase10_tc/aggregate.json",
+        "runs/phase9/aggregate.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 13,
+      "n_numbers": 1,
+      "unmatched": [],
+      "sources": [
+        "runs/phase10_align/threshold.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 15,
+      "n_numbers": 4,
+      "unmatched": [],
+      "sources": [
+        "runs/phase10_tc/m2fast_equivalence.json",
+        "runs/phase9/aggregate.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 19,
+      "n_numbers": 13,
+      "unmatched": [
+        "51.4",
+        "64.8",
+        "17.7"
+      ],
+      "sources": [
+        "runs/phase9/aggregate.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 21,
+      "n_numbers": 1,
+      "unmatched": [],
+      "sources": [
+        "runs/phase9/aggregate.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 22,
+      "n_numbers": 1,
+      "unmatched": [],
+      "sources": [
+        "runs/phase9/aggregate.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 23,
+      "n_numbers": 0,
+      "unmatched": [],
+      "sources": [
+        "runs/phase9/aggregate.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 24,
+      "n_numbers": 7,
+      "unmatched": [],
+      "sources": [
+        "runs/phase9/aggregate.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 25,
+      "n_numbers": 7,
+      "unmatched": [],
+      "sources": [
+        "runs/phase9/aggregate.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 26,
+      "n_numbers": 7,
+      "unmatched": [],
+      "sources": [
+        "runs/phase9/aggregate.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 27,
+      "n_numbers": 7,
+      "unmatched": [],
+      "sources": [
+        "runs/phase9/aggregate.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 28,
+      "n_numbers": 7,
+      "unmatched": [],
+      "sources": [
+        "runs/phase9/aggregate.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 29,
+      "n_numbers": 7,
+      "unmatched": [],
+      "sources": [
+        "runs/phase9/aggregate.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 30,
+      "n_numbers": 7,
+      "unmatched": [],
+      "sources": [
+        "runs/phase9/aggregate.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 31,
+      "n_numbers": 7,
+      "unmatched": [],
+      "sources": [
+        "runs/phase9/aggregate.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 32,
+      "n_numbers": 7,
+      "unmatched": [],
+      "sources": [
+        "runs/phase9/aggregate.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 34,
+      "n_numbers": 13,
+      "unmatched": [],
+      "sources": [
+        "runs/phase9/aggregate.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 36,
+      "n_numbers": 16,
+      "unmatched": [],
+      "sources": [
+        "runs/phase9/aggregate.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 38,
+      "n_numbers": 15,
+      "unmatched": [],
+      "sources": [
+        "runs/phase9/aggregate.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 42,
+      "n_numbers": 20,
+      "unmatched": [],
+      "sources": [
+        "runs/phase10_tc/aggregate.json",
+        "runs/phase10_tc/exploratory.json",
+        "runs/phase10_tc/exploratory_heading.json",
+        "runs/phase10_tc/m2fast_equivalence.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 46,
+      "n_numbers": 18,
+      "unmatched": [],
+      "sources": [
+        "runs/phase10_d4/aggregate.json",
+        "runs/phase10_rep/aggregate.json",
+        "runs/phase10_tc/aggregate.json",
+        "runs/phase9/aggregate.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 58,
+      "n_numbers": 23,
+      "unmatched": [
+        "6658"
+      ],
+      "sources": [
+        "runs/phase10_d4/calibration.json",
+        "runs/phase10_d4/calibration_mapframe_superseded.json",
+        "runs/phase10_d4/realism.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 60,
+      "n_numbers": 22,
+      "unmatched": [],
+      "sources": [
+        "runs/phase10_d4/aggregate.json",
+        "runs/phase10_d4/mechanism.json",
+        "runs/phase10_d4/outliers.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 62,
+      "n_numbers": 8,
+      "unmatched": [],
+      "sources": [
+        "runs/phase10_d4/aggregate.json",
+        "runs/phase10_d4/mechanism.json",
+        "runs/phase10_d4/outliers.json"
+      ],
+      "missing_sources": []
+    },
+    {
+      "line": 66,
+      "n_numbers": 7,
+      "unmatched": [
+        "10"
+      ],
+      "sources": [
+        "runs/phase10_align/threshold.json"
+      ],
+      "missing_sources": []
+    }
+  ]
+}

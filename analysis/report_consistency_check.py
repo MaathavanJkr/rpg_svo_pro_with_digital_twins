@@ -24,7 +24,7 @@ import sys
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOC_SOURCES = {
     "phase9_online.md": ["runs/phase9/aggregate.json"],
-    "phase10_throughput.md": ["runs/phase10_tc/aggregate.json", "runs/phase10_tc/exploratory.json", "runs/phase10_tc/m2fast_equivalence.json"],
+    "phase10_throughput.md": ["runs/phase10_tc/aggregate.json", "runs/phase10_tc/exploratory.json", "runs/phase10_tc/exploratory_heading.json", "runs/phase10_tc/m2fast_equivalence.json"],
     "phase10_replication.md": ["runs/phase10_rep/aggregate.json", "runs/phase9/aggregate.json", "runs/phase10_tc/aggregate.json", "runs/phase10_d4/aggregate.json"],
     "phase10_d4_realism.md": ["runs/phase10_d4/realism.json", "runs/phase10_d4/calibration.json", "runs/phase10_d4/calibration_mapframe_superseded.json"],
     "phase10_d4_ablation.md": ["runs/phase10_d4/aggregate.json", "runs/phase10_d4/outliers.json", "runs/phase10_d4/mechanism.json"],
@@ -112,6 +112,8 @@ def check(md):
         vals = [v for s in src for v in load_values(s)]
         clean = re.sub(r"`[^`]*`", "", line)            # ignore paths / code
         clean = re.sub(r"\([^)]*\.md[^)]*\)", "", clean)  # ignore source brackets
+        clean = re.sub(r"(\d)[ \u202f\u2009](\d{3})\b", r"\1\2", clean)  # thousands separators: "6 658" -> "6658"
+        clean = re.sub(r"(?:Phases?|§|Chapter|Table|Fig\.?|Figure)\s*[\d.–,\s]+", " ", clean)  # structural references
         toks = [t for t in NUM.findall(clean) if not skip(t, clean)]
         bad = [t for t in toks if not matches(t, vals)]
         report.append(dict(line=i + 1, n_numbers=len(toks), unmatched=bad, sources=sorted(src), missing_sources=[s for s in src if not os.path.exists(os.path.join(REPO, s))]))

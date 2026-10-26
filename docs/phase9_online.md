@@ -61,7 +61,7 @@ M1 V1_01 on this build: map-frame 0.127 ± 0.015 m, 4-DoF 0.053 ± 0.009 m (hist
 
 ## 6. Hypotheses after Phase 9 (online, closed loop)
 - **H3 (accuracy, map frame):** "M3 matched M2 within ±1.4 cm (95 % CI) on V1_01 and V1_02, and was 14 mm lower on V2_02 (Holm p = 0.016); attribution to the algorithm pending the throughput control." V2_03 not testable. Discussion: on V1_01 both registrations cost local consistency (4-DoF ATE and relative displacement worse than VIO only), as in Phase 6.
-- **H2 (speed), online:** callback 35–40 ms vs 290–300 ms, latency 37–40 ms vs 300–370 ms, registration-node CPU 6–16 % vs 41–87 % of one core; consistent with Phase 8 (implementation-inclusive numbers).
+- **H2 (speed), online:** callback 35–38 ms vs 292–298 ms, latency 37–40 ms vs 298–369 ms, registration-node CPU 6–16 % vs 41–87 % of one core; consistent with Phase 8 (implementation-inclusive numbers).
 - Both digital-twin methods reduce map-frame error relative to VIO only on V1_01, V1_02, V2_02 (exploratory), with a local-accuracy cost on V1_01.
 
 ## 7. What this does not show

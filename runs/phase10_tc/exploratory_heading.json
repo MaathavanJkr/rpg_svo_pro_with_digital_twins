@@ -1,0 +1,100 @@
+{
+  "label": "EXPLORATORY: mean correction yaw per valid V2_02 run, first 20 s after the first registration vs the rest (docs/phase10_throughput.md \u00a75)",
+  "runs": {
+    "2026-10-25_V2_02_medium_M2F_p10tc_r01": {
+      "method": "M2F",
+      "corr_yaw_mean_first20s_deg": -0.6891419962020271,
+      "corr_yaw_mean_rest_deg": 0.6750288593014464
+    },
+    "2026-10-25_V2_02_medium_M2F_p10tc_r02": {
+      "method": "M2F",
+      "corr_yaw_mean_first20s_deg": -0.7412549156316747,
+      "corr_yaw_mean_rest_deg": 0.017467126240574123
+    },
+    "2026-10-25_V2_02_medium_M2F_p10tc_r03": {
+      "method": "M2F",
+      "corr_yaw_mean_first20s_deg": -1.0181898073225788,
+      "corr_yaw_mean_rest_deg": -0.4426355056014156
+    },
+    "2026-10-25_V2_02_medium_M2F_p10tc_r04": {
+      "method": "M2F",
+      "corr_yaw_mean_first20s_deg": -0.9116397445010971,
+      "corr_yaw_mean_rest_deg": 0.3993657591321725
+    },
+    "2026-10-25_V2_02_medium_M2F_p10tc_r05": {
+      "method": "M2F",
+      "corr_yaw_mean_first20s_deg": -3.4254661132500277,
+      "corr_yaw_mean_rest_deg": -1.5210605971777331
+    },
+    "2026-10-25_V2_02_medium_M2F_p10tc_r06": {
+      "method": "M2F",
+      "corr_yaw_mean_first20s_deg": -0.02430991850052849,
+      "corr_yaw_mean_rest_deg": 0.33856866213108583
+    },
+    "2026-10-25_V2_02_medium_M2F_p10tc_r07": {
+      "method": "M2F",
+      "corr_yaw_mean_first20s_deg": -0.08325111988920475,
+      "corr_yaw_mean_rest_deg": 0.5087031843776383
+    },
+    "2026-10-25_V2_02_medium_M2F_p10tc_r08": {
+      "method": "M2F",
+      "corr_yaw_mean_first20s_deg": -0.45199509157413376,
+      "corr_yaw_mean_rest_deg": 0.5250415086849957
+    },
+    "2026-10-25_V2_02_medium_M2F_p10tc_r09": {
+      "method": "M2F",
+      "corr_yaw_mean_first20s_deg": -0.14213922226342537,
+      "corr_yaw_mean_rest_deg": 0.5764941901256744
+    },
+    "2026-10-25_V2_02_medium_M3_p10tc_r01": {
+      "method": "M3",
+      "corr_yaw_mean_first20s_deg": -0.5825419847446053,
+      "corr_yaw_mean_rest_deg": 0.32206827736094096
+    },
+    "2026-10-25_V2_02_medium_M3_p10tc_r02": {
+      "method": "M3",
+      "corr_yaw_mean_first20s_deg": -0.003918282977548485,
+      "corr_yaw_mean_rest_deg": 0.10711408320923188
+    },
+    "2026-10-25_V2_02_medium_M3_p10tc_r03": {
+      "method": "M3",
+      "corr_yaw_mean_first20s_deg": -0.5302410622351164,
+      "corr_yaw_mean_rest_deg": 0.43208098651254145
+    },
+    "2026-10-25_V2_02_medium_M3_p10tc_r04": {
+      "method": "M3",
+      "corr_yaw_mean_first20s_deg": -0.7795422209411732,
+      "corr_yaw_mean_rest_deg": -0.4636564277305479
+    },
+    "2026-10-25_V2_02_medium_M3_p10tc_r05": {
+      "method": "M3",
+      "corr_yaw_mean_first20s_deg": -0.6891236695859443,
+      "corr_yaw_mean_rest_deg": -0.026611824004841255
+    },
+    "2026-10-25_V2_02_medium_M3_p10tc_r06": {
+      "method": "M3",
+      "corr_yaw_mean_first20s_deg": -0.4073922645482311,
+      "corr_yaw_mean_rest_deg": 0.11778509166189781
+    },
+    "2026-10-25_V2_02_medium_M3_p10tc_r07": {
+      "method": "M3",
+      "corr_yaw_mean_first20s_deg": -0.3497290126788628,
+      "corr_yaw_mean_rest_deg": -0.42393963574327614
+    },
+    "2026-10-25_V2_02_medium_M3_p10tc_r08": {
+      "method": "M3",
+      "corr_yaw_mean_first20s_deg": -0.43057510672921406,
+      "corr_yaw_mean_rest_deg": -0.5276157176504549
+    },
+    "2026-10-25_V2_02_medium_M3_p10tc_r09": {
+      "method": "M3",
+      "corr_yaw_mean_first20s_deg": -0.062189856154406156,
+      "corr_yaw_mean_rest_deg": 0.2615922078599525
+    },
+    "2026-10-25_V2_02_medium_M3_p10tc_r10": {
+      "method": "M3",
+      "corr_yaw_mean_first20s_deg": -0.06763562122159131,
+      "corr_yaw_mean_rest_deg": 0.6854879834653745
+    }
+  }
+}
