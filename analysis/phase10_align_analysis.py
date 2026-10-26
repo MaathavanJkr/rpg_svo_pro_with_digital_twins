@@ -5,7 +5,7 @@
 Per run (GT for evaluation only):
   psi_D1        yaw of the D1(B) fit WITHOUT the injected offset (d1_alignment.csv, yaw_deg)
   delta         injected offset (d1_alignment.csv, yaw_offset_deg; 0 if the column is absent)
-  refine_on     refine_T_WL on (launch argument gpose_settings:=gpose_settings.yaml, from meta.txt)
+  refine_on     refine_T_WL on (launch argument gpose_settings:=gpose_settings.yaml or gpose_settings_align.yaml, from meta.txt)
   refined, t_ref  refine on: first registered pose taking the "to_handler" branch (registration_events.csv), time
                 after the end of the D1 window; refine off: not applicable
   heading       yaw of T_w_vio(t) = T_wB(t) T_vioB(t)^-1 from the recorded map-frame (/svo/w_backend_pose_imu) and
@@ -20,7 +20,7 @@ Analysis (arms are method labels "<arm>-d<delta>", arm in M3, M2F05, M2F20, M3-r
   secondary per-sequence Fisher exact tests; Wilson 95 % intervals of every rate; M2F20 arm; delta = 0; continuous
             outcomes (|final heading error|, map-frame ATE, t_ref) M3 vs M2F05, Welch; refine-off block (descriptive)
 Usage (venv + ROS): python analysis/phase10_align_analysis.py run <run_dir> [...]   (per-run outcomes; prints)
-                    python analysis/phase10_align_analysis.py aggregate [--pattern '*_p10al_r[0-9][0-9]']
+                    python analysis/phase10_align_analysis.py aggregate [--pattern '*_p10al2_r[0-9][0-9]']
 Output: runs/<run>/analysis/align_outcome.json; runs/phase10_align/aggregate.json, table.md
 """
 import csv
@@ -79,7 +79,7 @@ def run_outcome(run_dir):
     psi = float(d1["yaw_deg"])
     delta = float(d1.get("yaw_offset_deg") or 0.0)
     t_end = int(d1["t_end_ns"])
-    refine_on = "gpose_settings:=gpose_settings.yaml" in meta
+    refine_on = any(f"gpose_settings:={g}" in meta for g in ("gpose_settings.yaml", "gpose_settings_align.yaml"))
     br = list(csv.DictReader(open(os.path.join(run_dir, "registration_events.csv"))))
     to_h = [int(r["stamp_ns"]) for r in br if r["branch"] == "to_handler"]
     refined = bool(to_h) if refine_on else None
@@ -212,4 +212,4 @@ if __name__ == "__main__":
         for r in sys.argv[2:]:
             print(json.dumps(run_outcome(r)))
     else:
-        aggregate(sys.argv[sys.argv.index("--pattern") + 1] if "--pattern" in sys.argv else "*_p10al_r[0-9][0-9]")
+        aggregate(sys.argv[sys.argv.index("--pattern") + 1] if "--pattern" in sys.argv else "*_p10al2_r[0-9][0-9]")

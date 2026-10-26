@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 # FYP Phase 10 initial-alignment robustness batch driver (pre-registered in docs/PLAN.md, "Phase 10 alignment
-# robustness pre-registration"). Based on analysis/run_phase10_d4.sh. Sequences V1_02, V2_02; injected D1 heading
+# robustness pre-registration" + "DEVIATION / REDESIGN"). Based on analysis/run_phase10_d4.sh. Sequences V1_02, V2_02; injected D1 heading
 # offset (svo_ros d1_yaw_offset_deg, about the body at the end of the D1 window); heuristic information; gates
 # 30 deg / 2.0 m (configs euroc_<room>_align*.yaml). Arms (refine_T_WL on, gpose_settings.yaml):
 #   M2F05 (correspondence 0.5 m) and M3 at delta 0, 10, 20 deg; M2F20 (correspondence 2.0 m, descriptive) at 10, 20 deg.
 # Refine-off block (gpose_settings_m2.yaml, descriptive): M2F05-roff, M3-roff at delta 10 deg in rounds 1-5 only.
-# Run ids ..._<arm>-d<delta>_p10al_rNN; freeze file runs/phase10_align/.
+# Run ids ..._<arm>-d<delta>_p10al2_rNN (redesign; the stopped batch used p10al); freeze file runs/phase10_align/.
+# Redesign (docs/PLAN.md): refine-on arms use gpose_settings_align.yaml (alignement_threshold 0.0052, room scale).
 # Usage (WITHOUT the analysis venv active; no other ROS session may run):
 #   analysis/run_phase10_align.sh freeze                 write runs/phase10_align/build_freeze.txt (once)
 #   analysis/run_phase10_align.sh smoke                  technical smoke on V1_02 (not in the statistics): M2F05, M3, M2F20 at
@@ -69,7 +70,7 @@ one_run() {  # run_id sequence arm(M2F05|M2F20|M3) delta_deg refine(on|off) labe
   local cfg="$REPO/svo_registration/config/euroc_${room,,}"
   local twin="$REPO/dataset/derived/euroc_twin/${room}_leica_v30mm.ply"
   local grid="$REPO/dataset/derived/euroc_twin/df/${room}_leica_v30mm_udf_v50mm.bin"
-  local gp=gpose_settings.yaml
+  local gp=gpose_settings_align.yaml   # redesign: refine on, room-scale alignement_threshold 0.0052
   [ "$refine" = off ] && gp=gpose_settings_m2.yaml
   case "$arm" in
     M2F05) args=(euroc_m2fast.launch registration_config:="${cfg}_align.yaml" reference_map:="$twin") ;;
@@ -95,10 +96,10 @@ case "${1:-}" in
     cat "$FREEZE" ;;
   smoke)
     for arm in M2F05 M3 M2F20; do
-      one_run "${D}_V1_02_medium_${arm}-d20_p10al_smoke" V1_02_medium "$arm" 20.0 on "${arm}-d20"
+      one_run "${D}_V1_02_medium_${arm}-d20_p10al2_smoke" V1_02_medium "$arm" 20.0 on "${arm}-d20"
     done
     for arm in M2F05 M3; do
-      one_run "${D}_V1_02_medium_${arm}-roff-d10_p10al_smoke" V1_02_medium "$arm" 10.0 off "${arm}-roff-d10"
+      one_run "${D}_V1_02_medium_${arm}-roff-d10_p10al2_smoke" V1_02_medium "$arm" 10.0 off "${arm}-roff-d10"
     done ;;
   batch)
     first="${2:-1}"; last="${3:-10}"
@@ -109,12 +110,12 @@ case "${1:-}" in
           arms="M2F05 M3"
           [ "$delta" != 0 ] && arms="M2F05 M3 M2F20"
           for arm in $arms; do
-            one_run "${D}_${seq}_${arm}-d${delta}_p10al_r${rr}" "$seq" "$arm" "${delta}.0" on "${arm}-d${delta}"
+            one_run "${D}_${seq}_${arm}-d${delta}_p10al2_r${rr}" "$seq" "$arm" "${delta}.0" on "${arm}-d${delta}"
           done
         done
         if [ "$r" -le 5 ]; then
           for arm in M2F05 M3; do
-            one_run "${D}_${seq}_${arm}-roff-d10_p10al_r${rr}" "$seq" "$arm" 10.0 off "${arm}-roff-d10"
+            one_run "${D}_${seq}_${arm}-roff-d10_p10al2_r${rr}" "$seq" "$arm" 10.0 off "${arm}-roff-d10"
           done
         fi
       done

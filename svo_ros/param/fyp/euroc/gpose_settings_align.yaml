@@ -1,0 +1,10 @@
+# FYP Phase 10 initial-alignment robustness (redesign, docs/PLAN.md): gpose_settings.yaml (refine_T_WL on) with a
+# room-scale alignement_threshold. 0.0052 rad^2 (yaw std ~4.1 deg) = value at which the original criterion fires at a median of
+# 20 s after the D1 window on the delta = 0 Phase 9 logs (V1_02 + V2_02, M2 + M3), runs/phase10_align/threshold.json.
+# The original 3e-4 is a city-scale setting (never reached within a room-scale sequence). Used only in this experiment.
+gpose_settings:
+  # threshold on the variance of the yaw angle for the alignement to be considered successful
+  alignement_threshold: 0.0052  # room scale (original 3.0e-4, city scale)
+  max_num_residuals: 1
+  initial_orientation_known: false
+  refine_T_WL: true
