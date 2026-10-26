@@ -1,5 +1,6 @@
-# Local-only files to back up externally (not in git), generated 2026-10-26T05:40:54+05:30
-# rosout logs: 343 files, 149MB
+# Local-only files to back up externally (not in git), generated 2026-10-26T13:14:54+05:30
+# whole run folders not in git: 0 folders, 0B
+# rosout logs (in committed run folders): 343 files, 149MB
 # registration event folders: 318 folders, 1.3GB
 # run bags: 389 files, 5.6GB
 # total: 6.9GB

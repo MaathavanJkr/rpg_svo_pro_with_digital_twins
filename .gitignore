@@ -33,3 +33,7 @@ runs/*_p10tc_*/analysis/gt.tum
 runs/*_p10tc_*/rosout.log
 runs/*_p10d4_*/analysis/gt.tum
 runs/*_p10d4_*/rosout.log
+
+# From 2026-10-26: per-run folders are kept local only (backed up externally, see runs/local_only_backup_list.txt);
+# only aggregates, tables, figures and small JSON are committed. Folders committed before that date stay tracked.
+runs/20*/
